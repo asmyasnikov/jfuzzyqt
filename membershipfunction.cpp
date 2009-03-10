@@ -1,5 +1,5 @@
-#include "MembershipFunction.h"
-#include "Value.h"
+#include "membershipfunction.h"
+#include "value.h"
 #include <QDebug>
 
 MembershipFunction::MembershipFunction(MembershipType type)

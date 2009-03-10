@@ -1,4 +1,4 @@
-#include "MembershipFunctionPieceWiseLinear.h"
+#include "membershipfunctionpiecewiselinear.h"
 #include <QDebug>
 
 /*! \brief Default constructor 

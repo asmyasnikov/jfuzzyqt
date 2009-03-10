@@ -1,7 +1,7 @@
 #ifndef MEMBERSHIPFUNCTIONCONTINUOUS_H
 #define MEMBERSHIPFUNCTIONCONTINUOUS_H
 
-#include "MembershipFunction.h"
+#include "membershipfunction.h"
 
 class MembershipFunctionContinuous : public MembershipFunction
 {

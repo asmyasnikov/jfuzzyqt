@@ -1,7 +1,7 @@
 #ifndef MEMBERSHIPFUNCTIONDISCRETE_H
 #define MEMBERSHIPFUNCTIONDISCRETE_H
 
-#include "MembershipFunction.h"
+#include "membershipfunction.h"
 
 class MembershipFunctionDiscrete : public MembershipFunction
 {

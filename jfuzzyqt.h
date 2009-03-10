@@ -4,8 +4,8 @@
 #include "jfuzzyqt_global.h"
 #include <QString>
 #include <QHash>
-
-#include "FunctBlock.h"
+#include "functblock.h"
+#include "ruleexpression.h"
 
 ///<This class is called FIS in JFuzzy
 
@@ -29,6 +29,8 @@ private:
 	void loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name);
 	void loadVarOutput(QTextStream& in, FunctBlock& funcBlock);
 	bool addFunctionBlock(FunctBlock functionBlock);
+	void loadRule(FunctBlock& funcBlock, QString &rule, QString name);
+	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif);
 };
 
 #endif // JFUZZYQT_H

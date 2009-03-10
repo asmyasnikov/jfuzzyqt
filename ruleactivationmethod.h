@@ -2,8 +2,8 @@
 #define RULEACTIVATIONMETHOD_H
 
 #include <QString>
-#include "RuleTerm.h"
-#include "RuleAccumulationMethod.h"
+#include "ruleterm.h"
+#include "ruleaccumulationmethod.h"
 
 class RuleActivationMethod
 {

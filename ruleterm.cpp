@@ -1,4 +1,4 @@
-#include "RuleTerm.h"
+#include "ruleterm.h"
 
 RuleTerm::RuleTerm()
 {
@@ -10,11 +10,11 @@ RuleTerm::~RuleTerm()
 
 }
 
-Variable RuleTerm::getVariable()
+Variable* RuleTerm::getVariable()
 {
 	return this->variable;
 }
-RuleTerm::RuleTerm(Variable variable, QString term, bool negated)
+RuleTerm::RuleTerm(Variable* variable, QString term, bool negated)
 {
 	this->variable = variable;
 	this->termName = term;
@@ -22,7 +22,7 @@ RuleTerm::RuleTerm(Variable variable, QString term, bool negated)
 }
 const MembershipFunction* RuleTerm::getMembershipFunction()
 {
-	return this->variable.getMembershipFunction(this->termName);
+	return this->variable->getMembershipFunction(this->termName);
 }
 QString RuleTerm::getName()
 {

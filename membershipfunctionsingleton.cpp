@@ -1,5 +1,5 @@
-#include "MembershipFunctionSingleton.h"
-#include "Value.h"
+#include "membershipfunctionsingleton.h"
+#include "value.h"
 #include <QDebug>
 
 MembershipFunctionSingleton::MembershipFunctionSingleton(Value valueX):MembershipFunctionDiscrete(FunctionSingleton)

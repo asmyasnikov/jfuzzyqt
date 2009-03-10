@@ -1,9 +1,9 @@
 #ifndef MEMBERSHIPFUNCTIONPIECEWISELINEAR_H
 #define MEMBERSHIPFUNCTIONPIECEWISELINEAR_H
 
-#include "MembershipFunctionContinuous.h"
-#include "Value.h"
 #include <QList>
+#include "membershipfunctionContinuous.h"
+#include "value.h"
 
 class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 {

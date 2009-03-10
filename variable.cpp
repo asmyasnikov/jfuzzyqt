@@ -1,5 +1,5 @@
-#include "Variable.h"
-#include "Defuzzifier.h"
+#include "variable.h"
+#include "defuzzifier.h"
 #include <QDebug>
 
 Variable::Variable()

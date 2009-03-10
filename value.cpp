@@ -1,4 +1,4 @@
-#include "Value.h"
+#include "value.h"
 #include <QDebug>
 
 Value::Value()

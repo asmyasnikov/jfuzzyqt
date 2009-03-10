@@ -1,8 +1,8 @@
 #ifndef VALUE_H
 #define VALUE_H
 
-#include "Variable.h"
 #include <QString>
+#include "variable.h"
 
 class Value
 {

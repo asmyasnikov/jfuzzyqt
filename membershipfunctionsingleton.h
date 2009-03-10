@@ -1,7 +1,7 @@
 #ifndef MEMBERSHIPFUNCTIONSINGLETON_H
 #define MEMBERSHIPFUNCTIONSINGLETON_H
 
-#include "MembershipFunctionDiscrete.h"
+#include "membershipfunctiondiscrete.h"
 
 class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 {

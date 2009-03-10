@@ -2,16 +2,16 @@
 #define RULETERM_H
 
 #include <QString>
-#include "Variable.h"
-#include "MembershipFunction.h"
+#include "variable.h"
+#include "membershipfunction.h"
 
 class RuleTerm
 {
 public:
 	RuleTerm();
-	RuleTerm(Variable variable, QString term, bool negated);
+	RuleTerm(Variable* variable, QString term, bool negated);
 	~RuleTerm();
-	Variable getVariable();
+	Variable* getVariable();
 	const MembershipFunction* getMembershipFunction();
 	QString getName();
 	const bool isNegated() const;
@@ -21,7 +21,7 @@ private:
 	/** RuleTerm's name */
 	QString termName;
 	/** Variable */
-	Variable variable;
+	Variable* variable;
 };
 
 #endif // RULETERM_H

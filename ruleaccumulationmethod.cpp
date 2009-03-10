@@ -1,4 +1,4 @@
-#include "RuleAccumulationMethod.h"
+#include "ruleaccumulationmethod.h"
 
 RuleAccumulationMethod::RuleAccumulationMethod()
 {

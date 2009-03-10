@@ -1,8 +1,8 @@
-#include "LinguisticTerm.h"
-#include "Value.h"
-#include "MembershipFunction.h"
-#include "MembershipFunctionPieceWiseLinear.h"
-#include "MembershipFunctionSingleton.h"
+#include "linguisticterm.h"
+#include "value.h"
+#include "membershipfunction.h"
+#include "membershipfunctionpiecewiseLinear.h"
+#include "membershipfunctionsingleton.h"
 #include <QRegExp>
 #include <QList>
 #include <QDebug>

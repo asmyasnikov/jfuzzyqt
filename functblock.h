@@ -4,10 +4,10 @@
 #include <QString>
 #include <QHash>
 #include <QDebug>
-#include "Variable.h"
+#include "variable.h"
 #include "ruleblock.h"
-#include "Defuzzifier.h"
-#include "DefuzzifierCenterOfGravitySingletons.h"
+#include "defuzzifier.h"
+#include "defuzzifiercenterofgravitysingletons.h"
 
 
 class FunctBlock
@@ -26,6 +26,7 @@ public:
 	double getValue(QString varName);
 	bool addVariable(QString varName,Variable variable);
 	bool setVariable(QString varName,LinguisticTerm lt);
+	Variable* getVariable(QString varName);
 	bool setDefaultValue(const QString varName,const double value);
 	bool setDefuzzifier(QString varName, Defuzzifier* d);
 	bool addRuleBlock(RuleBlock rl);

@@ -1,9 +1,8 @@
-#include "RuleBlock.h"
-
-#include <QDebug>
+#include "ruleblock.h"
 #include "ruleconnectionmethod.h"
 #include "ruleconnectionmethodandmin.h"
 #include "ruleconnectionmethodormax.h"
+#include <QDebug>
 
 RuleBlock::RuleBlock()
 {
@@ -32,12 +31,6 @@ void RuleBlock::evaluate()
 QString RuleBlock::getName()
 {
 	return this->name;
-}
-void RuleBlock::loadFrom(QString str)
-{
-	RuleConnectionMethod *and = new RuleConnectionMethodAndMin(), *or = new RuleConnectionMethodOrMax();
-	QString ruleAccumulationMethodType = "SUM";
-
 }
 void RuleBlock::debug(QString tbs) const
 {

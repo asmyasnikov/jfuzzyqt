@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <QHash>
-#include "LinguisticTerm.h"
-#include "MembershipFunction.h"
+#include "linguisticterm.h"
+#include "membershipfunction.h"
 
 class Defuzzifier;
 class LinguisticTerm;

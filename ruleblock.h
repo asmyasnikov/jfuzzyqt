@@ -16,7 +16,6 @@ public:
 	void reset();
 	void evaluate();
 	QString getName();
-	void loadFrom(QString str);
 	void debug(QString tbs) const;
 private:
 	QString name;

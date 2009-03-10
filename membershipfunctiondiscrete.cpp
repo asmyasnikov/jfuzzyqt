@@ -1,4 +1,4 @@
-#include "MembershipFunctionDiscrete.h"
+#include "membershipfunctiondiscrete.h"
 
 MembershipFunctionDiscrete::MembershipFunctionDiscrete(MembershipType type):MembershipFunction(type)
 {

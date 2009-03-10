@@ -1,4 +1,4 @@
-#include "FunctBlock.h"
+#include "functblock.h"
 
 FunctBlock::FunctBlock()
 {
@@ -50,6 +50,16 @@ bool FunctBlock::setVariable(QString varName,LinguisticTerm lt)
 		qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
 	}
 	return false;
+}
+Variable* FunctBlock::getVariable(QString varName)
+{
+	if ( this->variables.contains(varName) )
+	{
+		return &this->variables[varName];
+	}else
+	{
+		return NULL;
+	}
 }
 bool FunctBlock::setDefaultValue(const QString varName,const double value)
 {

@@ -215,6 +215,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\ruleexpression.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\ruleterm.cpp"
 					>
 				</File>
@@ -248,6 +252,14 @@
 				</File>
 				<File
 					RelativePath=".\ruleconnectionmethodormax.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="FCL"
+				>
+				<File
+					RelativePath=".\fclparser.cpp"
 					>
 				</File>
 			</Filter>
@@ -333,6 +345,32 @@
 					>
 				</File>
 				<File
+					RelativePath=".\ruleexpression.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\ruleterm.h"
 					>
 				</File>
@@ -410,6 +448,36 @@
 				</File>
 				<File
 					RelativePath=".\ruleconnectionmethodormax.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="FCL"
+				>
+				<File
+					RelativePath=".\fclparser.h"
 					>
 					<FileConfiguration
 						Name="Release|Win32"

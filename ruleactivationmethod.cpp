@@ -1,9 +1,9 @@
-#include "RuleActivationMethod.h"
-#include "Variable.h"
-#include "Defuzzifier.h"
-#include "MembershipFunctionDiscrete.h"
-#include "DefuzzifierDiscrete.h"
-#include "DefuzzifierContinuous.h"
+#include "ruleactivationmethod.h"
+#include "variable.h"
+#include "defuzzifier.h"
+#include "membershipfunctiondiscrete.h"
+#include "defuzzifierdiscrete.h"
+#include "defuzzifiercontinuous.h"
 
 RuleActivationMethod::RuleActivationMethod()
 {
@@ -35,8 +35,8 @@ void RuleActivationMethod::setName(QString name)
 */
 void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
 {
-	Variable variable = fuzzyRuleTerm.getVariable();
-	Defuzzifier* defuzzifier = variable.getDefuzzifier();
+	Variable* variable = fuzzyRuleTerm.getVariable();
+	Defuzzifier* defuzzifier = variable->getDefuzzifier();
 	const MembershipFunction* mf = fuzzyRuleTerm.getMembershipFunction();
 	double membership, y, x, aggregated = 0;
 
