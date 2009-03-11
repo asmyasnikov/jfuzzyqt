@@ -9,6 +9,7 @@ Variable::Variable()
 	this->value=0;
 	this->defaultValue=NULL;
 }
+
 Variable::Variable(QString name)
 {
 	this->name=name;

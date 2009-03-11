@@ -16,8 +16,9 @@ public:
 	~Rule();
 	void addAntecedents(RuleExpression *antecedents);
 	void addConsequent(RuleTerm rt);
-
-	Rule operator=(const Rule &rule);
+	const QString Rule::getName()const;
+	RuleExpression* getAntecedents()const;
+	const QLinkedList<RuleTerm> getConsequents()const ;
 private:
 	QString name;
 	RuleExpression* antecedents;

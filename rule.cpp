@@ -11,7 +11,12 @@ Rule::Rule(QObject *parent, QString name)
 {
 	this->name = name;
 }
-
+Rule::Rule(const Rule &rule)
+{
+	this->name = rule.getName();
+	this->addAntecedents( new RuleExpression(*rule.getAntecedents()) );
+	this->consequents = rule.getConsequents();
+}
 Rule::~Rule()
 {
 
@@ -25,11 +30,15 @@ void Rule::addConsequent(RuleTerm rt)
 {
 	this->consequents.append(rt);
 }
-
-Rule::Rule(const Rule &rule){}
-
-Rule Rule::operator=(const Rule &rule)
+const QString Rule::getName()const
 {
-	Rule tmp(NULL,"");
-	return (tmp);
+	return this->name;
+}
+RuleExpression* Rule::getAntecedents()const
+{
+	return antecedents;
+}
+const QLinkedList<RuleTerm> Rule::getConsequents()const
+{
+	return this->consequents;
 }

@@ -10,9 +10,15 @@ RuleTerm::~RuleTerm()
 
 }
 
-Variable* RuleTerm::getVariable()
+Variable* RuleTerm::getVariable()const
 {
 	return this->variable;
+}
+RuleTerm::RuleTerm(const RuleTerm &rt)
+{
+	this->variable = rt.getVariable();
+	this->termName = rt.getName();
+	this->negated = rt.isNegated();
 }
 RuleTerm::RuleTerm(Variable* variable, QString term, bool negated)
 {
@@ -24,7 +30,7 @@ const MembershipFunction* RuleTerm::getMembershipFunction()
 {
 	return this->variable->getMembershipFunction(this->termName);
 }
-QString RuleTerm::getName()
+QString RuleTerm::getName()const
 {
 	return this->termName;
 }

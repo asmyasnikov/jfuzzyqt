@@ -7,6 +7,7 @@ class RuleExpression : public QObject
 {
 public:
 	RuleExpression(QObject *parent);
+	RuleExpression(const RuleExpression &re);
 	~RuleExpression();
 
 private:

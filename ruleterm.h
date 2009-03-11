@@ -9,11 +9,12 @@ class RuleTerm
 {
 public:
 	RuleTerm();
+	RuleTerm(const RuleTerm &rt);
 	RuleTerm(Variable* variable, QString term, bool negated);
 	~RuleTerm();
-	Variable* getVariable();
+	Variable* getVariable()const;
 	const MembershipFunction* getMembershipFunction();
-	QString getName();
+	QString getName()const;
 	const bool isNegated() const;
 private:
 	/** Is it negated? */
