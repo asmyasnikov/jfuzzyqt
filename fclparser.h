@@ -11,6 +11,7 @@ public:
 
 private:
 	FunctBlock* funcBlock;
+	QString readLine(QTextStream &in);
 };
 
 #endif // FCLPARSER_H

@@ -2,17 +2,18 @@
 #define JFUZZYQT_H
 
 #include "jfuzzyqt_global.h"
+#include "ruleexpression.h"
+#include "functblock.h"
+#include <QObject>
 #include <QString>
 #include <QHash>
-#include "functblock.h"
-#include "ruleexpression.h"
 
 ///<This class is called FIS in JFuzzy
 
-class JFuzzyQt
+class JFuzzyQt : public QObject
 {
 public:
-	JFuzzyQt();
+	JFuzzyQt(QObject *parent=NULL);
 	~JFuzzyQt();
 	bool load(QString fileUri);
 	void setVariable(QString varName, double value);

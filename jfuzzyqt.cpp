@@ -2,12 +2,14 @@
 #include "ruleconnectionmethod.h"
 #include "ruleconnectionmethodandmin.h"
 #include "ruleconnectionmethodormax.h"
+#include "fclruletree.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>
 #include <QTextStream>
 
-JFuzzyQt::JFuzzyQt()
+JFuzzyQt::JFuzzyQt(QObject *parent) 
+: QObject(parent)
 {
 }
 
@@ -53,7 +55,7 @@ bool JFuzzyQt::load(QString fileUri)
 	QTextStream in(&file);
 	QString line = in.readLine();
 
-	FunctBlock functionBlock;
+	FunctBlock functionBlock(NULL);
 
 	while (!line.isNull()) { ///<File Cycle (only works for one function block
 		
@@ -110,7 +112,7 @@ bool JFuzzyQt::load(QString fileUri)
 void JFuzzyQt::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
-	QRegExp rxout("END_VAR");
+	QRegExp rxOut("END_VAR");
 
 	QString line = in.readLine();
 	while (!line.isNull()) {
@@ -122,7 +124,7 @@ void JFuzzyQt::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 			//output.append( ";\n" );
 			Variable v( rxlen.cap(1) );
 			funcBlock.addVariable(v.getName(),v);
-		}else if (rxout.indexIn(line) > -1) 
+		}else if (rxOut.indexIn(line) > -1) 
 		{
 			//output.append( "}\n" );
 			break;
@@ -134,7 +136,7 @@ void JFuzzyQt::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 void JFuzzyQt::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
-	QRegExp rxout("END_VAR");
+	QRegExp rxOut("END_VAR");
 
 	QString line = in.readLine();
 	while (!line.isNull()) {
@@ -147,7 +149,7 @@ void JFuzzyQt::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 			Variable v( rxlen.cap(1) );
 			funcBlock.addVariable(v.getName(),v);
 		}
-		if (rxout.indexIn(line) > -1) 
+		if (rxOut.indexIn(line) > -1) 
 		{
 			//output.append( "}\n" );
 			break;
@@ -157,7 +159,7 @@ void JFuzzyQt::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 }
 void JFuzzyQt::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name)
 {
-	QRegExp rxout("END_FUZZIFY");
+	QRegExp rxOut("END_FUZZIFY");
 	QRegExp rxExtra("TERM\\s+(\\w+)\\s*:=(.+);");
 
 	QString line = in.readLine();
@@ -171,7 +173,7 @@ void JFuzzyQt::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name)
 			lt.setTermName( rxExtra.cap(1) );
 			lt.loadFrom( rxExtra.cap(2) );
 			funcBlock.setVariable( rxExtra.cap(1) , lt );
-		}else if (rxout.indexIn(line) > -1) 
+		}else if (rxOut.indexIn(line) > -1) 
 		{
 			break;
 		}
@@ -183,7 +185,7 @@ void JFuzzyQt::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString var
 {
 	QString defuzzificationMethodType = "COG";
 
-	QRegExp rxout("END_DEFUZZIFY");
+	QRegExp rxOut("END_DEFUZZIFY");
 	QRegExp rxMethod("METHOD\\s*:\\s*(\\w+)");
 	QRegExp rxDefault("DEFAULT\\s*:=\\s*(\\w+)");
 	QRegExp rxExtra("TERM\\s+(\\w+)\\s*:=(.+);");
@@ -201,7 +203,7 @@ void JFuzzyQt::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString var
 			lt.loadFrom( rxExtra.cap(2) );
 			funcBlock.setVariable( rxExtra.cap(1) , lt );
 		}
-		else if (rxout.indexIn(line) > -1) 
+		else if (rxOut.indexIn(line) > -1) 
 		{
 			break;
 		}
@@ -224,7 +226,7 @@ void JFuzzyQt::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString nam
 	QString line = in.readLine();
 	///<RULEBLOCK content
 	QRegExp rxlen("RULE\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
-	QRegExp rxout("END_RULEBLOCK");
+	QRegExp rxOut("END_RULEBLOCK");
 	QRegExp rxAND("AND\\s*:\\s*(\\w+)");
 	QRegExp rxACT("ACT\\s*:\\s*(\\w+)");
 	QRegExp rxACCU("ACCU\\s*:\\s*(\\w+)");
@@ -241,10 +243,10 @@ void JFuzzyQt::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString nam
 			//RuleBlock ruleBlock(rxlen.cap(1));
 			///<"And" and "or" must be deffined before
 			//ruleBlock.loadFrom(rxlen.cap(2));
-			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1)); ///< May need and or or pointers
+			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1)); ///< May need pointer to var 'and' or 'or'
 			funcBlock.addRuleBlock(ruleBlock);
 		}
-		if (rxout.indexIn(line) > -1) 
+		if (rxOut.indexIn(line) > -1) 
 		{
 			break;
 		}
@@ -278,18 +280,19 @@ void JFuzzyQt::loadRule(FunctBlock& funcBlock, QString &rule, QString name)
 	QRegExp rxIF("IF\\s+(\\w+[\\s+|\\w+]*)\\s*THEN");
 	QRegExp rxTHEN ("THEN\\s+(\\w+)\\s+IS\\s+(\\w+)\\s*");
 
-	Rule fuzzyRule(name);
-	fuzzyRule.addAntecedents(loadRuleIf(funcBlock,rxIF.cap(0)));
+	Rule fuzzyRule(NULL,name);
+	fuzzyRule.addAntecedents( &loadRuleIf(funcBlock,rxIF.cap(0)));
 	Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
 	RuleTerm rt(v,rxTHEN.cap(2),false);
 	fuzzyRule.addConsequent(rt);
 }
 RuleExpression JFuzzyQt::loadRuleIf(FunctBlock& funcBlock, QString &ruleif)
 {
-	//QRegExp rxAINDANAOSEI ("\\s*(\\w+)\\s+(is|is not)\\s+(\\w+)\\s+(and|or)");
-	//qDebug() << "[JFuzzyQt::loadRuleIF]:no implemented!!";
+	qDebug() << "[JFuzzyQt::loadRuleIF]:no implemented!!";
+	FCLRuleTree tree(NULL);
+	tree.addExpression(ruleif);
 	
-	return RuleExpression();
+	return RuleExpression(NULL);
 }
 bool JFuzzyQt::addFunctionBlock(FunctBlock functionBlock)
 {

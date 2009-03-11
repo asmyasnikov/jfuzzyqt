@@ -1,11 +1,10 @@
 #include "ruleexpression.h"
 
-RuleExpression::RuleExpression()
+RuleExpression::RuleExpression(QObject *parent)
+	: QObject(parent)
 {
-
 }
 
 RuleExpression::~RuleExpression()
 {
-
 }

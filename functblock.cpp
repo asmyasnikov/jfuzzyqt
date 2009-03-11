@@ -1,13 +1,15 @@
 #include "functblock.h"
 
-FunctBlock::FunctBlock()
+FunctBlock::FunctBlock(QObject* parent) : QObject (parent)
 {
 }
-FunctBlock::FunctBlock(QString name)
+FunctBlock::FunctBlock(QObject* parent, QString name) : QObject (parent)
 {
 	this->name = name;
 }
-
+FunctBlock::FunctBlock(const FunctBlock &fb)
+{
+}
 FunctBlock::~FunctBlock()
 {
 
@@ -238,4 +240,10 @@ void FunctBlock::debug(QString tbs)const
 		j.value().debug(nxTbs);
 	}
 	qDebug() << tbs << "}";
+}
+
+FunctBlock FunctBlock::operator=(const FunctBlock &fb)
+{
+	FunctBlock tmp;
+	return tmp;
 }

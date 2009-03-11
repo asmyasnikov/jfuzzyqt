@@ -4,17 +4,19 @@
 #include <QString>
 #include <QHash>
 #include <QDebug>
+#include <QObject>
 #include "variable.h"
 #include "ruleblock.h"
 #include "defuzzifier.h"
 #include "defuzzifiercenterofgravitysingletons.h"
 
 
-class FunctBlock
+class FunctBlock : public QObject
 {
 public:
-	FunctBlock();
-	FunctBlock(QString name);
+	FunctBlock(QObject* parent=NULL);
+	FunctBlock(QObject* parent, QString name);
+	FunctBlock(const FunctBlock &fb);
 	~FunctBlock();
 	
 	QString getName();
@@ -31,6 +33,8 @@ public:
 	bool setDefuzzifier(QString varName, Defuzzifier* d);
 	bool addRuleBlock(RuleBlock rl);
 	void debug(QString tbs) const;
+
+	FunctBlock operator=(const FunctBlock &fb);
 private:
 	/** Function block name */
 	QString name;

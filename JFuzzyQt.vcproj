@@ -262,6 +262,14 @@
 					RelativePath=".\fclparser.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\fclrulenode.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\fclruletree.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -478,6 +486,58 @@
 				>
 				<File
 					RelativePath=".\fclparser.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\fclrulenode.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\fclruletree.h"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
