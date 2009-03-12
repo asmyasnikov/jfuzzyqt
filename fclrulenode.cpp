@@ -57,7 +57,7 @@ bool FCLRuleNode::hasRightMember()
 		return true;
 	}
 }
-QString FCLRuleNode::print()
+QString FCLRuleNode::print()const
 {
 	QString str;
 	str.append("(");
@@ -100,4 +100,39 @@ void FCLRuleNode::insertLeaveValues(QList<QString> &values)
 const QString FCLRuleNode::getOperator()const
 {
 	return this->oper;
+}
+RuleExpression FCLRuleNode::toRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const
+{
+	RuleExpression re(NULL);
+		
+	if( this->left!=NULL )
+	{
+		re.addTerm1Expression(&this->left->toRuleExpression(and,or));
+	}
+	else
+	{
+		re.addTerm1Rule(&this->left->toRuleTerm());
+	}
+	
+	if( this->oper == "and" )
+	{
+		re.setRuleConnectionMethod(and);
+	}
+	else
+	{
+		re.setRuleConnectionMethod(or);
+	}
+	
+	if(this->right!=NULL)
+	{
+		re.addTerm2Expression(&this->right->toRuleExpression(and,or));
+	}else{
+		re.addTerm2Rule(&this->right->toRuleTerm());
+	}
+	return re;
+}
+RuleTerm FCLRuleNode::toRuleTerm()const
+{
+	RuleTerm rt;
+	return rt;
 }

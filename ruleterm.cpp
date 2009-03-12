@@ -1,30 +1,28 @@
 #include "ruleterm.h"
 
-RuleTerm::RuleTerm()
+RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 {
-
 }
-
-RuleTerm::~RuleTerm()
-{
-
-}
-
-Variable* RuleTerm::getVariable()const
-{
-	return this->variable;
-}
-RuleTerm::RuleTerm(const RuleTerm &rt)
+RuleTerm::RuleTerm(QObject* parent, const RuleTerm &rt) : QObject(parent)
 {
 	this->variable = rt.getVariable();
 	this->termName = rt.getName();
 	this->negated = rt.isNegated();
 }
-RuleTerm::RuleTerm(Variable* variable, QString term, bool negated)
+RuleTerm::RuleTerm(QObject* parent, Variable* variable, QString term, bool negated) : QObject(parent)
 {
 	this->variable = variable;
 	this->termName = term;
 	this->negated = negated;
+}
+RuleTerm::RuleTerm(const RuleTerm &rt): QObject()
+{
+	this->variable = rt.getVariable();
+	this->termName = rt.getName();
+	this->negated = rt.isNegated();
+}
+RuleTerm::~RuleTerm()
+{
 }
 const MembershipFunction* RuleTerm::getMembershipFunction()
 {
@@ -37,4 +35,8 @@ QString RuleTerm::getName()const
 const bool RuleTerm::isNegated() const
 {
 	return this->negated;
+}
+Variable* RuleTerm::getVariable()const
+{
+	return this->variable;
 }

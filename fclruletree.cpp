@@ -37,7 +37,6 @@ FCLRuleNode* FCLRuleTree::insertNode(FCLRuleNode* root, FCLRuleNode* node)
 	}else
 	{
 		qDebug() << "[FCLRuleTree::insertNode2]:Insert root";
-		//insere na raiz
 		node->setLeft(root);
 		return node;
 	}
@@ -55,7 +54,7 @@ void FCLRuleTree::insertRight(FCLRuleNode* root, FCLRuleNode* node)
 	}
 }
 
-QString FCLRuleTree::print()
+QString FCLRuleTree::print()const
 {
 	return root->print();
 }
@@ -73,16 +72,17 @@ void FCLRuleTree::addExpression(QString exp)
 	while ((pos = rx.indexIn(exp, pos)) != -1) {
 		qDebug() << rx.cap(1);
 		this->insertNode( new FCLRuleNode(this, rx.cap(1) ) );
-		//list.append( rx.cap(1) );
 		pos += rx.matchedLength();
 	}
 
 	pos = 0;
 	while ((pos = rxMember.indexIn(exp, pos)) != -1) {
-		//qDebug() << rx.cap(0);
 		list.append( rxMember.cap(0) );
 		pos += rxMember.matchedLength();
 	}
 	this->insertLeaveValues(list);
-	//"\\s*(\\w+)\\s+(is|is not)\\s+(\\w+)\\s+(and|or)"
+}
+RuleExpression FCLRuleTree::getRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const
+{
+	return this->root->toRuleExpression(and, or);
 }

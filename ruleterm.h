@@ -1,16 +1,18 @@
 #ifndef RULETERM_H
 #define RULETERM_H
 
+#include <QObject>
 #include <QString>
 #include "variable.h"
 #include "membershipfunction.h"
 
-class RuleTerm
+class RuleTerm : public QObject
 {
 public:
-	RuleTerm();
+	RuleTerm(QObject* parent=NULL);
 	RuleTerm(const RuleTerm &rt);
-	RuleTerm(Variable* variable, QString term, bool negated);
+	RuleTerm(QObject* parent, const RuleTerm &rt);
+	RuleTerm(QObject* parent, Variable* variable, QString term, bool negated);
 	~RuleTerm();
 	Variable* getVariable()const;
 	const MembershipFunction* getMembershipFunction();

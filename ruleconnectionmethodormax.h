@@ -8,7 +8,8 @@ class RuleConnectionMethodOrMax : public RuleConnectionMethod
 public:
 	RuleConnectionMethodOrMax();
 	~RuleConnectionMethodOrMax();
-
+	double connect(double antecedent1, double antecedent2);
+	QString toStringFcl()const;
 private:
 	
 };

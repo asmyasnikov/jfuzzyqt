@@ -240,10 +240,7 @@ void JFuzzyQt::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString nam
 
 		if (rxlen.indexIn(line) > -1) 
 		{	
-			//RuleBlock ruleBlock(rxlen.cap(1));
-			///<"And" and "or" must be deffined before
-			//ruleBlock.loadFrom(rxlen.cap(2));
-			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1)); ///< May need pointer to var 'and' or 'or'
+			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1),and,or); ///< May need pointer to var 'and' or 'or'
 			funcBlock.addRuleBlock(ruleBlock);
 		}
 		if (rxOut.indexIn(line) > -1) 
@@ -275,24 +272,22 @@ void JFuzzyQt::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString nam
 
 }
 
-void JFuzzyQt::loadRule(FunctBlock& funcBlock, QString &rule, QString name)
+void JFuzzyQt::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
 	QRegExp rxIF("IF\\s+(\\w+[\\s+|\\w+]*)\\s*THEN");
 	QRegExp rxTHEN ("THEN\\s+(\\w+)\\s+IS\\s+(\\w+)\\s*");
 
 	Rule fuzzyRule(NULL,name);
-	fuzzyRule.addAntecedents( &loadRuleIf(funcBlock,rxIF.cap(0)));
+	fuzzyRule.addAntecedents( &loadRuleIf(funcBlock,rxIF.cap(0),and,or));
 	Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
-	RuleTerm rt(v,rxTHEN.cap(2),false);
+	RuleTerm rt(this, v, rxTHEN.cap(2), false);
 	fuzzyRule.addConsequent(rt);
 }
-RuleExpression JFuzzyQt::loadRuleIf(FunctBlock& funcBlock, QString &ruleif)
+RuleExpression JFuzzyQt::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
-	qDebug() << "[JFuzzyQt::loadRuleIF]:no implemented!!";
 	FCLRuleTree tree(NULL);
 	tree.addExpression(ruleif);
-	
-	return RuleExpression(NULL);
+	return tree.getRuleExpression(and, or );
 }
 bool JFuzzyQt::addFunctionBlock(FunctBlock functionBlock)
 {

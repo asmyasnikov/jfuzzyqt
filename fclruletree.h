@@ -6,6 +6,7 @@
 #include <QString>
 #include <QList>
 #include "fclrulenode.h"
+#include "ruleexpression.h"
 
 class FCLRuleTree : public QObject
 {
@@ -13,7 +14,8 @@ public:
 	FCLRuleTree(QObject *parent);
 	~FCLRuleTree();
 	void addExpression(QString exp);
-	QString print();
+	QString print()const;
+	RuleExpression getRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const;
 private:
 	FCLRuleNode* root;
 	FCLRuleNode* insertNode(FCLRuleNode* root, FCLRuleNode* node);

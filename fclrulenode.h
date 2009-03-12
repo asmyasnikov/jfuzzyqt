@@ -3,6 +3,11 @@
 
 #include <QString>
 #include <QObject>
+#include "ruleexpression.h"
+#include "ruleterm.h"
+#include "ruleconnectionmethod.h"
+#include "ruleconnectionmethodandmin.h"
+#include "ruleconnectionmethodormax.h"
 
 class FCLRuleNode : public QObject
 {
@@ -15,9 +20,12 @@ public:
 	bool hasRightMember();
 	FCLRuleNode* getRight();
 	void setRight(FCLRuleNode* node);
-	QString print();
+	QString print()const;
 	void insertLeaveValues(QList<QString> &values);
 	const QString getOperator()const;
+	RuleExpression toRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const;
+	RuleTerm toRuleTerm()const;
+
 private:
 	int priority;
 	QString value1;

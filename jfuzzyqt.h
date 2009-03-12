@@ -30,8 +30,8 @@ private:
 	void loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name);
 	void loadVarOutput(QTextStream& in, FunctBlock& funcBlock);
 	bool addFunctionBlock(FunctBlock functionBlock);
-	void loadRule(FunctBlock& funcBlock, QString &rule, QString name);
-	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif);
+	void loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or );
+	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or );
 };
 
 #endif // JFUZZYQT_H
