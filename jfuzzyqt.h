@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QHash>
 
-///<This class is called FIS in JFuzzy
+///<This class is called FIS@jFuzzyLogic
 
 class JFuzzyQt : public QObject
 {

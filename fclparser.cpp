@@ -145,6 +145,7 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 	QRegExp rxAND("AND\\s*:\\s*(\\w+)");
 	QRegExp rxACT("ACT\\s*:\\s*(\\w+)");
 	QRegExp rxACCU("ACCU\\s*:\\s*(\\w+)");
+	QRegExp rxOR("OR\\s*:\\s*(\\w+)");
 
 	RuleConnectionMethod *and = new RuleConnectionMethodAndMin(), *or = new RuleConnectionMethodOrMax();
 	QString ruleAccumulationMethodType = "SUM";
@@ -164,15 +165,52 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 		}
 		if (rxAND.indexIn(line) > -1) 
 		{
-			/*output.append( "and(");
-			output.append( rxAND.cap(1) );
-			output.append( "}\n" );*/
+			QString type = rxAND.cap(1);
+			//---
+			// Which 'AND' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
+			//---
+			if( type == "min")  {
+				delete and;
+				delete or;
+				and = new RuleConnectionMethodAndMin();
+				or = new RuleConnectionMethodOrMax();
+			/*} else if( type == "PROD" ) {
+				and = new RuleConnectionMethodAndProduct();
+				or = new RuleConnectionMethodOrProbOr();
+			} else if( type == "BDIF" ) {
+				and = new RuleConnectionMethodAndBoundedDif();
+				or = new RuleConnectionMethodOrBoundedSum();*/
+			} else{
+				qWarning()<<"Unknown (or unimplemented) 'AND' method: "<<type;
+			}
+
+
+
 		}
 		if (rxACT.indexIn(line) > -1) 
 		{
 			/*output.append( "act(");
 			output.append( rxACT.cap(1) );
 			output.append( "}\n" );*/
+			QString type = rxACT.cap(1);
+			//---
+			// Which 'OR' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
+			//---
+			if( type == "max" ) {
+				delete and;
+				delete or;
+				or = new RuleConnectionMethodOrMax();
+				and = new RuleConnectionMethodAndMin();
+			/*} else if( type.equalsIgnoreCase("asum") ) {
+				or = new RuleConnectionMethodOrProbOr();
+				and = new RuleConnectionMethodAndProduct();
+			} else if( type.equalsIgnoreCase("bsum") ) {
+				or = new RuleConnectionMethodOrBoundedSum();
+				and = new RuleConnectionMethodAndBoundedDif();
+			*/
+			}else{
+				qWarning()<<"Unknown (or unimplemented) 'OR' method: "<<type;
+			}
 		}
 		if (rxACCU.indexIn(line) > -1) 
 		{
