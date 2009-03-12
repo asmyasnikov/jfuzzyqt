@@ -4,8 +4,9 @@
 #include "jfuzzyqt_global.h"
 #include "ruleexpression.h"
 #include "functblock.h"
-#include <QObject>
+#include "fclparser.h"
 #include <QString>
+#include <QObject>
 #include <QHash>
 
 ///<This class is called FIS in JFuzzy
@@ -13,25 +14,25 @@
 class JFuzzyQt : public QObject
 {
 public:
-	JFuzzyQt(QObject *parent=NULL);
+	JFuzzyQt();
+	JFuzzyQt(QObject *parent);
+	JFuzzyQt(const JFuzzyQt& fuzzy);
 	~JFuzzyQt();
 	bool load(QString fileUri);
 	void setVariable(QString varName, double value);
 	void evaluate();
 	double getValue(QString varName);
 	void debug() const;
+	QHash<QString, FunctBlock> getFunctionBlocks()const;
+	QString getDefaultBlockName()const;
+	FCLParser* getFCLParser()const;
+
 private:
 	QHash<QString, FunctBlock> functionBlocks;
 	QString defaultBlockName;
+	FCLParser fclParser;
 
-	void loadVarInput(QTextStream& in, FunctBlock& funcBlock);
-	void loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name);
-	void loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString name);
-	void loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name);
-	void loadVarOutput(QTextStream& in, FunctBlock& funcBlock);
 	bool addFunctionBlock(FunctBlock functionBlock);
-	void loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or );
-	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or );
 };
 
 #endif // JFUZZYQT_H
