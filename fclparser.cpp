@@ -3,9 +3,11 @@
 #include "ruleconnectionmethodandmin.h"
 #include "ruleconnectionmethodormax.h"
 #include "fclruletree.h"
+#include "ruleactivationmethodmin.h"
+#include "ruleactivationmethodproduct.h"
 #include <QRegExp>
 
-FCLParser::FCLParser()
+FCLParser::FCLParser(): QObject ()
 {
 }
 FCLParser::FCLParser(QObject* parent) : QObject (parent)
@@ -35,15 +37,10 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 	while (!line.isNull()) {
 		if (rxlen.indexIn(line) > -1) 
 		{
-			//output.append( rxlen.cap(1) );
-			//output.append( ":" );
-			//output.append( rxlen.cap(2) ); 
-			//output.append( ";\n" );
 			Variable v( rxlen.cap(1) );
 			funcBlock.addVariable(v.getName(),v);
 		}else if (rxOut.indexIn(line) > -1) 
 		{
-			//output.append( "}\n" );
 			break;
 		}
 		line = readLine(in);
@@ -58,16 +55,11 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 	while (!line.isNull()) {
 		if (rxlen.indexIn(line) > -1) 
 		{
-			//output.append( rxlen.cap(1) );
-			//output.append( ":" );
-			//output.append( rxlen.cap(2) );
-			//output.append( ";\n" );
 			Variable v( rxlen.cap(1) );
 			funcBlock.addVariable(v.getName(),v);
 		}
 		if (rxOut.indexIn(line) > -1) 
 		{
-			//output.append( "}\n" );
 			break;
 		}
 		line = readLine(in);
@@ -148,7 +140,8 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 	QRegExp rxOR("OR\\s*:\\s*(\\w+)");
 
 	RuleConnectionMethod *and = new RuleConnectionMethodAndMin(), *or = new RuleConnectionMethodOrMax();
-	QString ruleAccumulationMethodType = "SUM";
+	QString ruleAccumulationMethodType = "sum";
+	QString type;
 
 	RuleBlock ruleBlock(name);
 
@@ -159,13 +152,14 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1),and,or); ///< May need pointer to var 'and' or 'or'
 			funcBlock.addRuleBlock(ruleBlock);
 		}
-		if (rxOut.indexIn(line) > -1) 
+		else if (rxOut.indexIn(line) > -1) 
 		{
+			funcBlock.addRuleBlock(ruleBlock);
 			break;
 		}
-		if (rxAND.indexIn(line) > -1) 
+		else if (rxAND.indexIn(line) > -1) 
 		{
-			QString type = rxAND.cap(1);
+			type = rxAND.cap(1);
 			//---
 			// Which 'AND' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
 			//---
@@ -180,22 +174,38 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 			} else if( type == "BDIF" ) {
 				and = new RuleConnectionMethodAndBoundedDif();
 				or = new RuleConnectionMethodOrBoundedSum();*/
-			} else{
+			}
+			else
+			{
 				qWarning()<<"Unknown (or unimplemented) 'AND' method: "<<type;
 			}
-
-
-
 		}
-		if (rxACT.indexIn(line) > -1) 
+		else if (rxACT.indexIn(line) > -1) 
 		{
-			/*output.append( "act(");
-			output.append( rxACT.cap(1) );
-			output.append( "}\n" );*/
-			QString type = rxACT.cap(1);
+			type = rxACT.cap(1);
+			if( type == "min")
+			{
+				ruleBlock.addRuleActivationMethod (new RuleActivationMethodMin(NULL));
+			}
+			else if( type=="prod" )
+			{
+				ruleBlock.addRuleActivationMethod (new RuleActivationMethodProduct(NULL));
+			}
+			else
+			{
+				qWarning()<<"Unknown (or unimplemented) 'ACT' method: "<<type;
+			}
+		}
+		else if (rxACCU.indexIn(line) > -1) 
+		{
+			ruleAccumulationMethodType = rxACCU.cap(1);
+		}
+		else if ( rxOR.indexIn(line)> -1 )
+		{
 			//---
 			// Which 'OR' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
 			//---
+			type = rxOR.cap(1);
 			if( type == "max" ) {
 				delete and;
 				delete or;
@@ -211,12 +221,6 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 			}else{
 				qWarning()<<"Unknown (or unimplemented) 'OR' method: "<<type;
 			}
-		}
-		if (rxACCU.indexIn(line) > -1) 
-		{
-			/*output.append( "accu(");
-			output.append( rxACCU.cap(1) );
-			output.append( "}\n" );*/
 		}
 		line = readLine(in);
 	} 
@@ -274,8 +278,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 		}
 		else if (rxFunctionBlockEnd.indexIn(line) > -1)
 		{
-			///< End of Function block
-			return;
+			return;///< End of Function block
 		}
 		line = readLine(in);
 	}
