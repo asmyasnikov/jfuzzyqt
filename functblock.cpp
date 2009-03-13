@@ -94,7 +94,7 @@ bool FunctBlock::setDefuzzifier(QString varName, Defuzzifier* d)
 Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 {
 	Defuzzifier* defuzzifier = NULL;
-	if( defuzzType == "COG" )
+	if( defuzzType == "cog" )
 	{
 		//defuzzifier = new DefuzzifierCenterOfGravity(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -102,12 +102,12 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		error.append( "'" );
 		qCritical(error.toAscii());
 	}
-	else if( defuzzType == "COGS" )
+	else if( defuzzType == "cogs" )
 	{	
 		defuzzifier = new DefuzzifierCenterOfGravitySingletons();
 
 	}
-	else if( defuzzType == "COGF" )
+	else if( defuzzType == "cogf" )
 	{
 		//defuzzifier = new DefuzzifierCenterOfGravityFunctions(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -115,7 +115,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		error.append( "'" );
 		qCritical(error.toAscii());
 	}
-	else if( defuzzType == "COA" )
+	else if( defuzzType == "coa" )
 	{
 		//defuzzifier = new DefuzzifierCenterOfArea(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -123,7 +123,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		error.append( "'" );
 		qCritical(error.toAscii());
 	}
-	else if( defuzzType =="LM" )
+	else if( defuzzType =="lm" )
 	{
 		//defuzzifier = new DefuzzifierLeftMostMax(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -131,7 +131,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		error.append( "'" );
 		qCritical(error.toAscii());
 	}
-	else if( defuzzType == "RM" )
+	else if( defuzzType == "rm" )
 	{
 		//defuzzifier = new DefuzzifierRightMostMax(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -139,7 +139,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		error.append( "'" );
 		qCritical(error.toAscii());
 	}
-	else if( defuzzType == "MM" )
+	else if( defuzzType == "mm" )
 	{
 		//defuzzifier = new DefuzzifierMeanMax(variable);
 		QString error = "Unknown/Unimplemented Rule defuzzification method '";
@@ -148,7 +148,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 		qCritical(error.toAscii());
 	}
 	else {
-		QString error = "Unknown/Unimplemented Rule defuzzification method '";
+		QString error = "Unknown/Unimplemented Rule defuzzification method ";
 		error.append( defuzzType );
 		error.append( "'" );
 		qCritical(error.toAscii());

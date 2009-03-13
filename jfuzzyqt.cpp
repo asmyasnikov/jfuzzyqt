@@ -38,7 +38,7 @@ bool JFuzzyQt::load(QString fileUri)
 		return false;
 	}
 
-	QRegExp rxFunctionBlock("FUNCTION_BLOCK\\s+(\\w+)");
+	QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
 
 	QTextStream in(&file);
 	QString line = fclParser.readLine(in);
@@ -46,6 +46,7 @@ bool JFuzzyQt::load(QString fileUri)
 	FunctBlock functionBlock;
 
 	while (!line.isNull()) { ///<File Cycle (only works for one function block
+		
 		if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
 		{
 			functionBlock.setName(rxFunctionBlock.cap(1));

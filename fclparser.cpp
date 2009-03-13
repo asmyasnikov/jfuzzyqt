@@ -27,14 +27,15 @@ QString FCLParser::readLine(QTextStream &in)
 	if(str!=NULL){
 		str = str.toLower();
 		str.remove(QRegExp("//.*")); ///< remove comments 
-		str.replace(QRegExp("\\s*")," "); ///< convert tabs and multiple spaces to single space
+		str.replace(QRegExp("\\s+")," "); ///< convert tabs and multiple spaces to single space
+		qDebug()<<"[FCLParser::readLine]: "<<str;
 	}
 	return str;
 }
 void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
-	QRegExp rxOut("END_VAR");
+	QRegExp rxOut("end_var");
 
 	QString line = readLine(in);
 	while (!line.isNull()) {
@@ -52,7 +53,7 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
-	QRegExp rxOut("END_VAR");
+	QRegExp rxOut("end_var");
 
 	QString line = readLine(in);
 	while (!line.isNull()) {
@@ -70,12 +71,12 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 }
 void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString varName)
 {
-	QString defuzzificationMethodType = "COG";
+	QString defuzzificationMethodType = "cog";
 
-	QRegExp rxOut("END_DEFUZZIFY");
-	QRegExp rxMethod("METHOD\\s*:\\s*(\\w+)");
-	QRegExp rxDefault("DEFAULT\\s*:=\\s*(\\w+)");
-	QRegExp rxExtra("TERM\\s+(\\w+)\\s*:=(.+);");
+	QRegExp rxOut("end_defuzzify");
+	QRegExp rxMethod("method\\s*:\\s*(\\w+)");
+	QRegExp rxDefault("default\\s*:=\\s*(\\w+)");
+	QRegExp rxExtra("term\\s+(\\w+)\\s*:=(.+);");
 
 	QString line = readLine(in);
 
@@ -109,8 +110,8 @@ void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString va
 }
 void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name)
 {
-	QRegExp rxOut("END_FUZZIFY");
-	QRegExp rxExtra("TERM\\s+(\\w+)\\s*:=(.+);");
+	QRegExp rxOut("end_fuzzify");
+	QRegExp rxExtra("term\\s+(\\w+)\\s*:=(.+);");
 
 	QString line = readLine(in);
 	while (!line.isNull()) 
@@ -135,12 +136,12 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 {
 	QString line = readLine(in);
 	///<RULEBLOCK content
-	QRegExp rxlen("RULE\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
-	QRegExp rxOut("END_RULEBLOCK");
-	QRegExp rxAND("AND\\s*:\\s*(\\w+)");
-	QRegExp rxACT("ACT\\s*:\\s*(\\w+)");
-	QRegExp rxACCU("ACCU\\s*:\\s*(\\w+)");
-	QRegExp rxOR("OR\\s*:\\s*(\\w+)");
+	QRegExp rxlen("rule\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
+	QRegExp rxOut("end_ruleblock");
+	QRegExp rxAND("and\\s*:\\s*(\\w+)");
+	QRegExp rxACT("act\\s*:\\s*(\\w+)");
+	QRegExp rxACCU("accu\\s*:\\s*(\\w+)");
+	QRegExp rxOR("or\\s*:\\s*(\\w+)");
 
 	RuleConnectionMethod *and = new RuleConnectionMethodAndMin(), *or = new RuleConnectionMethodOrMax();
 	QString ruleAccumulationMethodType = "sum";
@@ -232,8 +233,8 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 }
 void FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
-	QRegExp rxIF("IF\\s+(\\w+[\\s+|\\w+]*)\\s*THEN");
-	QRegExp rxTHEN ("THEN\\s+(\\w+)\\s+IS\\s+(\\w+)\\s*");
+	QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s*then");
+	QRegExp rxTHEN ("then\\s+(\\w+)\\s+is\\s+(\\w+)\\s*");
 
 	Rule fuzzyRule(NULL,name);
 	fuzzyRule.addAntecedents( &loadRuleIf(funcBlock,rxIF.cap(0),and,or));
@@ -249,13 +250,13 @@ RuleExpression FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,Rule
 }
 void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 {
-	QRegExp rxFunctionBlockEnd("END_FUNCTION_BLOCK");
+	QRegExp rxFunctionBlockEnd("end_function_block");
 
-	QRegExp rxVarInput("VAR_INPUT");
-	QRegExp rxVarOutput("VAR_OUTPUT");
-	QRegExp rxFuziffy("FUZZIFY\\s+(\\w+)");
-	QRegExp rxDefuzzify("DEFUZZIFY\\s+(\\w+)");
-	QRegExp rxRulleBlock("RULEBLOCK\\s+(\\w+)");
+	QRegExp rxVarInput("var_input");
+	QRegExp rxVarOutput("var_output");
+	QRegExp rxFuziffy("fuzzify\\s+(\\w+)");
+	QRegExp rxDefuzzify("defuzzify\\s+(\\w+)");
+	QRegExp rxRulleBlock("ruleblock\\s+(\\w+)");
 
 	QString line = readLine(in);
 	while (!line.isNull())
