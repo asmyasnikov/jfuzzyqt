@@ -1,22 +1,29 @@
 #ifndef RULEBLOCK_H
 #define RULEBLOCK_H
 
+#include <QObject>
 #include <QLinkedList>
 #include <QString>
 #include "ruleactivationmethod.h"
 #include "ruleaccumulationmethod.h"
 #include "rule.h"
 
-class RuleBlock
+class RuleBlock : public QObject
 {
 public:
-	RuleBlock();
+	RuleBlock(QObject *parent=NULL);
 	RuleBlock(QString name);
+	RuleBlock(const RuleBlock &rb);
 	~RuleBlock();
 	void reset();
 	void evaluate();
-	QString getName();
+	QString getName()const;
 	void debug(QString tbs) const;
+	void addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod);
+	void addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulationMethod);
+	RuleActivationMethod* getRuleActivationMethod()const;
+	RuleAccumulationMethod* getRuleAccumulationMethod()const;
+	RuleBlock operator=(const RuleBlock &rb);
 private:
 	QString name;
 	

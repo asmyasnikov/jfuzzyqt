@@ -5,11 +5,15 @@
 #include "defuzzifierdiscrete.h"
 #include "defuzzifiercontinuous.h"
 
-RuleActivationMethod::RuleActivationMethod()
+RuleActivationMethod::RuleActivationMethod(QObject *parent, QString name)
+	: QObject(parent)
 {
-
+	this->name=name;
 }
-
+RuleActivationMethod::RuleActivationMethod(const RuleActivationMethod &ram)
+{
+	this->name = ram.getName();
+}
 RuleActivationMethod::~RuleActivationMethod()
 {
 
@@ -20,7 +24,7 @@ RuleActivationMethod::~RuleActivationMethod()
  * @param membership : membership for this point
  * @return implication
  */
-double RuleActivationMethod::imply(double degreeOfSupport, double membership)
+double RuleActivationMethod::imply(double degreeOfSupport, double membership)const
 {
 	return 0;
 }
@@ -105,4 +109,14 @@ void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod 
 			defuzzifierContinuous->setValue(i, aggregated);
 		}
 	}
+}
+QString RuleActivationMethod::getName()const
+{
+	return this->name;
+}
+QString RuleActivationMethod::toQString()const
+{
+	QString qstr = "ACT : ";
+	qstr.append( this->name );
+	return qstr;
 }

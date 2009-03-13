@@ -1,18 +1,22 @@
 #ifndef RULEACTIVATIONMETHOD_H
 #define RULEACTIVATIONMETHOD_H
 
-#include <QString>
 #include "ruleterm.h"
 #include "ruleaccumulationmethod.h"
+#include <QObject>
+#include <QString>
 
-class RuleActivationMethod
+class RuleActivationMethod : public QObject
 {
 public:
-	RuleActivationMethod();
+	RuleActivationMethod(QObject *parent,QString name="");
+	RuleActivationMethod(const RuleActivationMethod &ram);
 	~RuleActivationMethod();
-	virtual double RuleActivationMethod::imply(double degreeOfSupport, double membership);
+	virtual double imply(double degreeOfSupport, double membership)const;
 	void setName(QString name);
+	QString getName()const;
 	void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport);
+	QString toQString()const;
 private:
 	QString name;
 };

@@ -234,10 +234,6 @@
 					RelativePath=".\ruleaccumulationmethod.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\ruleactivationmethod.cpp"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="RuleConnectionMethod"
@@ -268,6 +264,22 @@
 				</File>
 				<File
 					RelativePath=".\fclruletree.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="RuleActivationMethod"
+				>
+				<File
+					RelativePath=".\ruleactivationmethod.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ruleactivationmethodmin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ruleactivationmethodproduct.cpp"
 					>
 				</File>
 			</Filter>
@@ -392,10 +404,6 @@
 				>
 				<File
 					RelativePath=".\ruleaccumulationmethod.h"
-					>
-				</File>
-				<File
-					RelativePath=".\ruleactivationmethod.h"
 					>
 				</File>
 			</Filter>
@@ -538,6 +546,66 @@
 				</File>
 				<File
 					RelativePath=".\fclruletree.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="RuleActivationMethod"
+				>
+				<File
+					RelativePath=".\ruleactivationmethod.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ruleactivationmethodmin.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\ruleactivationmethodproduct.h"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
