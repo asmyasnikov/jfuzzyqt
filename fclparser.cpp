@@ -5,6 +5,7 @@
 #include "fclruletree.h"
 #include "ruleactivationmethodmin.h"
 #include "ruleactivationmethodproduct.h"
+#include "ruleaccumulationmethodmax.h"
 #include <QRegExp>
 
 FCLParser::FCLParser(): QObject ()
@@ -154,6 +155,7 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
+			ruleBlock.addRuleAccumulationMethod( createAccumulationMethod(ruleAccumulationMethodType) );
 			funcBlock.addRuleBlock(ruleBlock);
 			break;
 		}
@@ -282,4 +284,33 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 		}
 		line = readLine(in);
 	}
+}
+RuleAccumulationMethod* FCLParser::createAccumulationMethod(QString type)
+{
+	RuleAccumulationMethod* ruleAccumulationMethod = NULL;
+	if( type == "max" ) 
+	{
+		ruleAccumulationMethod = new RuleAccumulationMethodMax();
+	}
+	/*else if( type == "bsum" )
+	{
+		ruleAccumulationMethod = new RuleAccumulationMethodBoundedSum();
+	}
+	else if( type == "nsum" )
+	{
+		ruleAccumulationMethod = new RuleAccumulationMethodNormedSum();
+	}
+	else if( type == "probor" )
+	{
+		ruleAccumulationMethod = new RuleAccumulationMethodProbOr();
+	}
+	else if( type == "sum" )
+	{
+		ruleAccumulationMethod = new RuleAccumulationMethodSum();
+	}*/
+	else
+	{
+		qWarning()<<"Unknown/Unimplemented Rule accumulation method "<<type;
+	}
+	return ruleAccumulationMethod;
 }

@@ -25,20 +25,24 @@
 #ifndef RULEACCUMULATIONMETHOD_H
 #define RULEACCUMULATIONMETHOD_H
 
+#include <QObject>
 #include <QString>
 
-class RuleAccumulationMethod
+class RuleAccumulationMethod : public QObject
 {
+	Q_OBJECT
+
 public:
-	RuleAccumulationMethod();
+	RuleAccumulationMethod(QObject* parent=NULL);
+	RuleAccumulationMethod(QObject* parent, QString name);
+	RuleAccumulationMethod(const RuleAccumulationMethod &ram);
 	~RuleAccumulationMethod();
-	virtual double aggregate(double defuzzifierValue, double valueToAggregate);
-	QString getName();
-	void setName(QString name);
-	QString toStringFcl();
+	virtual double aggregate(double defuzzifierValue, double valueToAggregate) const;
+	QString getName()const;
+	void setName(const QString &name);
+	QString toQString()const;
 private:
 	QString name;
-	
 };
 
 #endif // RULEACCUMULATIONMETHOD_H

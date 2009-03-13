@@ -1,8 +1,19 @@
 #include "ruleaccumulationmethod.h"
 
-RuleAccumulationMethod::RuleAccumulationMethod()
+RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent)
+: QObject(parent)
 {
-
+	this->name = "Undefined";
+}
+RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent, QString name)
+: QObject(parent)
+{
+	this->name = name;
+}
+RuleAccumulationMethod::RuleAccumulationMethod(const RuleAccumulationMethod &ram)
+: QObject()
+{
+	this->name=ram.getName();
 }
 
 RuleAccumulationMethod::~RuleAccumulationMethod()
@@ -16,21 +27,21 @@ RuleAccumulationMethod::~RuleAccumulationMethod()
 * @param valueToAggregate : value to aggregate
 * @return new defuzzifier's value
 */
-double RuleAccumulationMethod::aggregate(double defuzzifierValue, double valueToAggregate)
+double RuleAccumulationMethod::aggregate(double defuzzifierValue, double valueToAggregate)const
 {
 return 0;
 }
 
-QString RuleAccumulationMethod::getName()
+QString RuleAccumulationMethod::getName()const
 {
 		return this->name;
 }
-void RuleAccumulationMethod::setName(QString name)
+void RuleAccumulationMethod::setName(const QString &name)
 {
 	this->name = name;
 }
 
-QString RuleAccumulationMethod::toStringFcl()
+QString RuleAccumulationMethod::toQString()const
 {
 	return getName();
 }
