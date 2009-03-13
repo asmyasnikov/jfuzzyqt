@@ -244,6 +244,6 @@ void FunctBlock::debug(QString tbs)const
 
 FunctBlock FunctBlock::operator=(const FunctBlock &fb)
 {
-	FunctBlock tmp;
+	FunctBlock tmp(fb);
 	return tmp;
 }
