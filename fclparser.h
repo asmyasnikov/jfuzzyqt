@@ -1,11 +1,11 @@
 #ifndef FCLPARSER_H
 #define FCLPARSER_H
 
-#include <QString>
-#include <QObject>
-#include <QTextStream>
 #include "functblock.h"
 #include "ruleexpression.h"
+#include <QString>
+#include <QTextStream>
+#include <QObject>
 
 class FCLParser : public QObject
 {
@@ -17,6 +17,7 @@ public:
 	QString readLine(QTextStream &in);
 	void loadFunctBlock(QTextStream &in,FunctBlock& funcBlock);
 
+	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or );
 private:
 	void loadVarInput(QTextStream& in, FunctBlock& funcBlock);
 	void loadVarOutput(QTextStream& in, FunctBlock& funcBlock);
@@ -24,7 +25,6 @@ private:
 	void loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name);
 	void loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name);
 	void loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or );
-	RuleExpression loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or );
 	RuleAccumulationMethod* createAccumulationMethod(QString type);
 };
 

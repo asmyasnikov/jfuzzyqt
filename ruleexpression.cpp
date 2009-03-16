@@ -1,6 +1,6 @@
 #include "ruleexpression.h"
-#include "RuleConnectionMethod.h"
-#include "RuleTerm.h"
+#include "ruleconnectionmethod.h"
+#include "ruleterm.h"
 #include <QDebug>
 
 RuleExpression::RuleExpression(QObject *parent)

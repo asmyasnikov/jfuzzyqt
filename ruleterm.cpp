@@ -2,7 +2,9 @@
 
 RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 {
-
+	this->variable = NULL;
+	this->termName = "Undefined";
+	this->negated = false;
 }
 RuleTerm::RuleTerm(QObject* parent, const RuleTerm &rt) : QObject(parent)
 {
@@ -41,7 +43,16 @@ const bool RuleTerm::isNegated() const
 {
 	return this->negated;
 }
+void RuleTerm::setNegated(const bool& value)
+{
+	this->negated = value;
+}
+
 Variable* RuleTerm::getVariable()const
 {
 	return this->variable;
+}
+void RuleTerm::setVariable(Variable* variable)
+{
+	this->variable = variable;
 }

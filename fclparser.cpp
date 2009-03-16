@@ -254,7 +254,7 @@ RuleExpression FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,Rule
 {
 	FCLRuleTree tree(this);	
 	tree.addExpression(ruleif);
-	return tree.getRuleExpression(and, or );
+	return tree.getRuleExpression(funcBlock, and, or );
 }
 void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 {

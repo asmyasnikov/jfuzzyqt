@@ -1,12 +1,13 @@
 #ifndef FCLRULETREE_H
 #define FCLRULETREE_H
 
+#include "fclrulenode.h"
+#include "ruleexpression.h"
+#include "functblock.h"
 #include <QObject>
 #include <QObject>
 #include <QString>
 #include <QList>
-#include "fclrulenode.h"
-#include "ruleexpression.h"
 
 class FCLRuleTree : public QObject
 {
@@ -15,7 +16,8 @@ public:
 	~FCLRuleTree();
 	void addExpression(QString exp);
 	QString print()const;
-	RuleExpression getRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const;
+	RuleExpression getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const;
+
 private:
 	FCLRuleNode* root;
 	FCLRuleNode* insertNode(FCLRuleNode* root, FCLRuleNode* node);
