@@ -17,6 +17,7 @@ public:
 	Variable* getVariable()const;
 	const MembershipFunction* getMembershipFunction();
 	QString getName()const;
+	void setName(const QString &name);
 	const bool isNegated() const;
 private:
 	/** Is it negated? */

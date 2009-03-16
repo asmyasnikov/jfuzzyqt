@@ -233,16 +233,13 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 }
 void FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
-	QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s*then");
+	QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s+then");
 	QRegExp rxTHEN ("then\\s+(\\w+)\\s+is\\s+(\\w+)\\s*");
 
 	Rule fuzzyRule(NULL,name);
 	if ( rxIF.indexIn(rule) >-1 && rxTHEN.indexIn(rule))
 	{
-		QString str = rxIF.cap(0);
-		//Neste ponto penso que estamos a filtrar poucas coisas nos warnings, isto é o then está a ser enviado para load rule if e isso pode estar a trazer erros
-		qDebug()<< "ERROS" <<str;
-		RuleExpression re = loadRuleIf(funcBlock,str,and,or);
+		RuleExpression re = loadRuleIf(funcBlock,rxIF.cap(1),and,or);
 		fuzzyRule.addAntecedents( &re );
 		Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
 		RuleTerm rt(NULL, v, rxTHEN.cap(2), false);
@@ -255,7 +252,7 @@ void FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rule
 }
 RuleExpression FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
-	FCLRuleTree tree(this);
+	FCLRuleTree tree(this);	
 	tree.addExpression(ruleif);
 	return tree.getRuleExpression(and, or );
 }

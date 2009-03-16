@@ -74,6 +74,8 @@ void FCLRuleTree::addExpression(QString exp)
 		this->insertNode( new FCLRuleNode(this, rx.cap(1) ) );
 		pos += rx.matchedLength();
 	}
+	
+
 
 	pos = 0;
 	while ((pos = rxMember.indexIn(exp, pos)) != -1) {

@@ -81,10 +81,12 @@ QString FCLRuleNode::print()const
 }
 void FCLRuleNode::insertLeaveValues(QList<QString> &values)
 {
+	
 	if( this->left!=NULL )
 	{
 		this->left->insertLeaveValues(values);
-	}else
+	}
+	else
 	{
 		this->value1 = values.takeFirst();
 	}
@@ -92,7 +94,8 @@ void FCLRuleNode::insertLeaveValues(QList<QString> &values)
 	if(this->right!=NULL)
 	{
 		this->right->insertLeaveValues(values);
-	}else
+	}
+	else
 	{
 		this->value2 = values.takeFirst();
 	}
@@ -103,15 +106,15 @@ const QString FCLRuleNode::getOperator()const
 }
 RuleExpression FCLRuleNode::toRuleExpression(RuleConnectionMethod *and, RuleConnectionMethod *or)const
 {
-	RuleExpression re(NULL);
+	RuleExpression re;
 		
 	if( this->left!=NULL )
 	{
-		re.addTerm1Expression(&this->left->toRuleExpression(and,or));
+		re.addTerm1Expression(&this->left->toRuleExpression(and,or)); //penso estar correcto
 	}
 	else
 	{
-		re.addTerm1Rule(&this->left->toRuleTerm());
+		re.addTerm1Rule(&this->left->toRuleTerm()); 
 	}
 	
 	if( this->oper == "and" )
@@ -126,13 +129,40 @@ RuleExpression FCLRuleNode::toRuleExpression(RuleConnectionMethod *and, RuleConn
 	if(this->right!=NULL)
 	{
 		re.addTerm2Expression(&this->right->toRuleExpression(and,or));
-	}else{
+	}
+	else
+	{
 		re.addTerm2Rule(&this->right->toRuleTerm());
 	}
 	return re;
 }
 RuleTerm FCLRuleNode::toRuleTerm()const
 {
+	/*
+	String varName = tree.getText();
+	String lingTerm = tree.getChild(0).getText();
+	boolean negate = false;
+	if( lingTerm.equalsIgnoreCase("NOT") ) {
+		lingTerm = tree.getChild(1).getText();
+		negate = true;
+	}
+	Variable variable = getVariable(varName);
+	*/
+	
+	qDebug()<< "[FCLRuleNode::toRuleTerm]:IN" << this->print();
+
+
 	RuleTerm rt;
+
+	if (this->value1 != "")
+	{
+		qDebug() << "[FCLRuleNode::toRuleTerm]:"<<this->value1;
+		rt.setName(this->value1);
+	}
+	else
+	{
+		rt.setName(this->value2);
+		qDebug() << "[FCLRuleNode::toRuleTerm]:"<<this->value2;
+	}
 	return rt;
 }

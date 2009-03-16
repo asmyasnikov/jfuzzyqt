@@ -2,6 +2,7 @@
 
 RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 {
+
 }
 RuleTerm::RuleTerm(QObject* parent, const RuleTerm &rt) : QObject(parent)
 {
@@ -31,6 +32,10 @@ const MembershipFunction* RuleTerm::getMembershipFunction()
 QString RuleTerm::getName()const
 {
 	return this->termName;
+}
+void RuleTerm::setName(const QString &name)
+{
+	this->termName = name;
 }
 const bool RuleTerm::isNegated() const
 {

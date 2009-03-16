@@ -8,7 +8,7 @@ class RuleTerm;
 class RuleExpression : public QObject
 {
 public:
-	RuleExpression(QObject *parent);
+	RuleExpression(QObject *parent=NULL);
 	RuleExpression(const RuleExpression &re);
 	~RuleExpression();
 	int isTerm1Type()const;
