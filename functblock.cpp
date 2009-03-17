@@ -31,9 +31,9 @@ bool FunctBlock::addVariable(QString varName,Variable variable)
 	{
 		this->variables.insert(variable.getName(),variable);
 		toReturn = true;
-		//qDebug() << "[FunctBlock::setVariable]: added Variable '" << variable.getName() << "'.";
+		qDebug() << "[FunctBlock::addVariable]: added Variable '" << variable.getName() << "'.";
 	}else{
-		qDebug() << "[FunctBlock::setVariable]: Variable '" << variable.getName() << "' duplicated";
+		qDebug() << "[FunctBlock::addVariable: Variable '" << variable.getName() << "' duplicated";
 	}
 
 	return toReturn;
@@ -55,13 +55,28 @@ bool FunctBlock::setVariable(QString varName,LinguisticTerm lt)
 }
 Variable* FunctBlock::getVariable(QString varName)
 {
+ QHash<QString, Variable>::iterator i = this->variables.find(varName);
+ 
+ if ( i!= this->variables.end() )
+{
+	return &i.value();
+}else
+{
+	return NULL;
+}
+ /*while (i != hash.end() && i.key() == "HDR") {
+     cout << i.value() << endl;
+ /*    ++i;
+ /*}
+
+
 	if ( this->variables.contains(varName) )
 	{
 		return &this->variables[varName];
 	}else
 	{
 		return NULL;
-	}
+	}*/
 }
 bool FunctBlock::setDefaultValue(const QString varName,const double value)
 {

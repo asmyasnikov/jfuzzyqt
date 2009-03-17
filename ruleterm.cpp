@@ -6,12 +6,6 @@ RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 	this->termName = "Undefined";
 	this->negated = false;
 }
-RuleTerm::RuleTerm(QObject* parent, const RuleTerm &rt) : QObject(parent)
-{
-	this->variable = rt.getVariable();
-	this->termName = rt.getName();
-	this->negated = rt.isNegated();
-}
 RuleTerm::RuleTerm(QObject* parent, Variable* variable, QString term, bool negated) : QObject(parent)
 {
 	this->variable = variable;
@@ -55,4 +49,33 @@ Variable* RuleTerm::getVariable()const
 void RuleTerm::setVariable(Variable* variable)
 {
 	this->variable = variable;
+}
+
+QString RuleTerm::toQString()const
+{
+	QString str = "";
+	if ( variable != NULL )
+	{
+		str += this->variable->getName();
+	}
+	else
+	{
+		str += "Null variable";
+	}
+	if ( this->negated )
+	{
+		str += " IS NOT ";
+	}
+	else
+	{
+		str += " IS ";
+	}
+
+	str += this->getName();
+	return str;
+}
+RuleTerm RuleTerm::operator=(const RuleTerm &rt)
+{
+	RuleTerm tmp(rt);
+	return tmp;
 }

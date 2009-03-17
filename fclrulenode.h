@@ -24,9 +24,9 @@ public:
 	QString print()const;
 	void insertLeaveValues(QList<QString> &values);
 	const QString getOperator()const;
-	RuleExpression toRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const;
-	RuleTerm toRuleTermLeft(FunctBlock &fb)const;
-	RuleTerm toRuleTermRight(FunctBlock &fb)const;
+	RuleExpression* toRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const;
+	RuleTerm* toRuleTermLeft(FunctBlock &fb)const;
+	RuleTerm* toRuleTermRight(FunctBlock &fb)const;
 
 private:
 	int priority;

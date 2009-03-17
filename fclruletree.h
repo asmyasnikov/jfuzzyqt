@@ -16,7 +16,7 @@ public:
 	~FCLRuleTree();
 	void addExpression(QString exp);
 	QString print()const;
-	RuleExpression getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const;
+	RuleExpression* getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const;
 
 private:
 	FCLRuleNode* root;

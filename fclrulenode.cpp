@@ -105,46 +105,41 @@ const QString FCLRuleNode::getOperator()const
 {
 	return this->oper;
 }
-RuleExpression FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
+RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
 {
-	RuleExpression re;
-		
-	if( this->left!=NULL )
+	///< buggy function
+	RuleExpression *re = new RuleExpression();
+
+	if( this->left!=NULL )//If it has a left node
 	{
-		//If it has a left node
-		re.addTerm1Expression(&this->left->toRuleExpression(fb,and,or)); //penso estar correcto
+		re->addTerm1Expression(this->left->toRuleExpression(fb,and,or));
 	}
-	else
+	else//If it is RuleTerm
 	{
-		//If it is RuleTerm
-		re.addTerm1Rule(&this->toRuleTermLeft(fb)); 
+		re->addTerm1Rule(this->toRuleTermLeft(fb)); 
 	}
 	
-	if( this->oper == "and" )
+	if( this->oper == "and" )//If the operator is 'and'
 	{
-		//If the operator is 'and'
-		re.setRuleConnectionMethod(and);
+		re->setRuleConnectionMethod(and);
 	}
-	else
+	else//If the operator is 'or'
 	{
-		//If the operator is 'or'
-		re.setRuleConnectionMethod(or);
+		re->setRuleConnectionMethod(or);
 	}
 	
-	if(this->right!=NULL)
+	if(this->right!=NULL)//qDebug() << "[FCLRuleNode::toRuleExpression]:" << this->right->print();
 	{
-
-		re.addTerm2Expression(&this->right->toRuleExpression(fb,and,or));
+		re->addTerm2Expression(this->right->toRuleExpression(fb,and,or));
 	}
-	else
+	else//If right is NULL -> it is RuleTerm
 	{
-		//If right is NULL -> it is RuleTerm
-		re.addTerm2Rule(&this->toRuleTermRight(fb));
+		re->addTerm2Rule(this->toRuleTermRight(fb));
 	}
-
+	qDebug() << "[FCLRuleNode::toRuleExpression] toQString():" << re->toQString();
 	return re;
 }
-RuleTerm FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
+RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 {
 	/*
 	String varName = tree.getText();
@@ -157,47 +152,54 @@ RuleTerm FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 	Variable variable = getVariable(varName);
 	*/
 	QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
-	RuleTerm rt;
+	RuleTerm *rt = new RuleTerm();
 	
-	if (rxMember.indexIn(this->value1))
+	if ( rxMember.indexIn(this->value1) > -1 )
 	{
-		rt.setName( rxMember.cap(3) );
+		rt->setName( rxMember.cap(3) );
 		if(  rxMember.cap(2) == "is" ) 
 		{
-			rt.setNegated(false);
+			rt->setNegated(false);
 		}
 		else
 		{
-			rt.setNegated(true);
+			rt->setNegated(true);
 		}
-		rt.setVariable(fb.getVariable( rxMember.cap(1) ));
+		QString varname = rxMember.cap(1);
+		Variable *v = fb.getVariable( varname );
+		if( v == NULL )
+		{
+			qWarning()<< "[FCLRuleNode::toRuleTermLeft]:Variable" << varname << "is NULL!!";
+		}
+		rt->setVariable(v);
+		//qDebug()<< "[FCLRuleNode::toRuleTermLeft]:"  << rt.toQString();
 	}
 	else
 	{
 		qWarning() << "[FCLRuleNode::toRuleTermLeft]: Error reading regular expression";
 	}
 
-	qDebug()<< "[FCLRuleNode::toRuleTermLeft]: " << this->value1;
+	qDebug()<< "[FCLRuleNode::toRuleTermLeft]: " << rt->toQString();
 	return rt;
 }
-RuleTerm FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
+RuleTerm* FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
 {
 	qDebug()<< "[FCLRuleNode::toRuleTermRight]: " << this->value2;
 	QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
-	RuleTerm rt;
+	RuleTerm *rt = new RuleTerm();
 	
-	if (rxMember.indexIn(this->value2))
+	if (rxMember.indexIn(this->value2) > -1 )
 	{
-		rt.setName( rxMember.cap(3) );
+		rt->setName( rxMember.cap(3) );
 		if(  rxMember.cap(2) == "is" ) 
 		{
-			rt.setNegated(false);
+			rt->setNegated(false);
 		}
 		else
 		{
-			rt.setNegated(true);
+			rt->setNegated(true);
 		}
-		rt.setVariable(fb.getVariable( rxMember.cap(1) ));
+		rt->setVariable(fb.getVariable( rxMember.cap(1) ));
 	}
 	else
 	{

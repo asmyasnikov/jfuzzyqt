@@ -8,11 +8,11 @@ class RuleTerm;
 class RuleExpression : public QObject
 {
 public:
+	static enum term_t{RULETERM , RULEEXPRESSION, UNDEF};
+
 	RuleExpression(QObject *parent=NULL);
 	RuleExpression(const RuleExpression &re);
 	~RuleExpression();
-	int isTerm1Type()const;
-	int isTerm2Type()const;
 	RuleConnectionMethod* getRuleConnectionMethod()const;
 	bool isNegated()const;
 	RuleTerm* getTerm1Rule()const;
@@ -24,6 +24,10 @@ public:
 	void addTerm1Expression(RuleExpression *ruleExpression);
 	void addTerm2Expression(RuleExpression *ruleExpression);
 	void setRuleConnectionMethod(RuleConnectionMethod* ruleConnectionMethod);
+	QString toQString()const;
+	RuleExpression::term_t getTerm1Type()const;
+	RuleExpression::term_t getTerm2Type()const;
+	RuleExpression operator=(const RuleExpression &re);
 
 private:
 	bool negated; ///<Is it negated?
@@ -32,7 +36,6 @@ private:
 		RuleTerm *ruleTerm; 
 		RuleExpression *ruleExpression;
 	} term1,term2;
-	static enum term_t{RULETERM , RULEEXPRESSION, UNDEF};
 	term_t term1Type;
 	term_t term2Type;
 };

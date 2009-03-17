@@ -11,7 +11,6 @@ class RuleTerm : public QObject
 public:
 	RuleTerm(QObject* parent=NULL);
 	RuleTerm(const RuleTerm &rt);
-	RuleTerm(QObject* parent, const RuleTerm &rt);
 	RuleTerm(QObject* parent, Variable* variable, QString term, bool negated);
 	~RuleTerm();
 	Variable* getVariable()const;
@@ -21,6 +20,8 @@ public:
 	void setName(const QString &name);
 	const bool isNegated() const;
 	void setNegated(const bool& value);
+	QString toQString()const;
+	RuleTerm operator=(const RuleTerm &rt);
 
 private:
 	/** Is it negated? */

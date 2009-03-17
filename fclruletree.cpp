@@ -81,7 +81,8 @@ void FCLRuleTree::addExpression(QString exp)
 	this->insertLeaveValues(list);
 }
 
-RuleExpression FCLRuleTree::getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
+RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
 {
+	qDebug() << "[FCLRuleTree::getRuleExpression]:" << this->print();
 	return this->root->toRuleExpression(fb, and, or);
 }

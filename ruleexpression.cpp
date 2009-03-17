@@ -9,62 +9,69 @@ RuleExpression::RuleExpression(QObject *parent)
 	term1Type = UNDEF;
 	term2Type = UNDEF;
 }
+
 RuleExpression::RuleExpression(const RuleExpression &re)
 {
 	this->negated = re.isNegated();
-	switch ( re.isTerm1Type() )
+	switch ( re.getTerm1Type() )
 	{ 
-	case 0:///<RULETERM
+	case RULETERM:
 		this->term1Type = RULETERM;	
 		this->term1.ruleTerm = new RuleTerm(re.getTerm1Rule());
 		this->term1.ruleTerm->setParent(this);
 		break;
-	case 1:///<RULEEXPRESSION
+	case RULEEXPRESSION:
 		this->term1Type = RULEEXPRESSION;	
 		this->term1.ruleExpression = new RuleExpression( re.getTerm1Expression() );
 		this->term1.ruleExpression->setParent(this);
 		break;
-	case 2:///<UNDEF
+	case UNDEF:
 		this->term1Type = UNDEF;
 		break;
 	}
 
-	switch ( re.isTerm2Type() )
+	switch ( re.getTerm2Type() )
 	{ 
-	case 0:///<RULETERM
+	case RULETERM:
 		this->term2Type = RULETERM;	
 		this->term2.ruleTerm = new RuleTerm(re.getTerm2Rule());
 		this->term2.ruleTerm->setParent(this);
 		break;
-	case 1:///<RULEEXPRESSION
+	case RULEEXPRESSION:
 		this->term2Type = RULEEXPRESSION;	
 		this->term2.ruleExpression = new RuleExpression( re.getTerm2Expression() );
 		this->term2.ruleExpression->setParent(this);
 		break;
-	case 2:///<UNDEF
+	case UNDEF:
 		this->term2Type = UNDEF;
 		break;
 	}
 }
+
 RuleExpression::~RuleExpression()
 {
 }
-int RuleExpression::isTerm1Type()const
+
+RuleExpression::term_t RuleExpression::getTerm1Type()const
 {
 	return this->term1Type;
 }
-int RuleExpression::isTerm2Type()const
+
+RuleExpression::term_t RuleExpression::getTerm2Type()const
 {	
 	return this->term2Type;
 }
+
 RuleConnectionMethod* RuleExpression::getRuleConnectionMethod()const
 {
 	return this->ruleConnectionMethod;
 }
+
 bool RuleExpression::isNegated()const
 {
 	return this->negated;
 }
+
 RuleTerm* RuleExpression::getTerm1Rule()const
 {
 	if ( this->term1Type==RULETERM )
@@ -76,6 +83,7 @@ RuleTerm* RuleExpression::getTerm1Rule()const
 		return NULL;
 	}
 }
+
 RuleTerm* RuleExpression::getTerm2Rule()const
 {
 	if ( this->term2Type==RULETERM )
@@ -87,6 +95,7 @@ RuleTerm* RuleExpression::getTerm2Rule()const
 		return NULL;
 	}
 }
+
 RuleExpression* RuleExpression::getTerm1Expression()const
 {
 	if ( this->term1Type==RULEEXPRESSION )
@@ -98,6 +107,7 @@ RuleExpression* RuleExpression::getTerm1Expression()const
 		return NULL;
 	}
 }
+
 RuleExpression* RuleExpression::getTerm2Expression()const
 {	
 	if ( this->term2Type==RULEEXPRESSION )
@@ -109,31 +119,70 @@ RuleExpression* RuleExpression::getTerm2Expression()const
 		return NULL;
 	}
 }
+
 void RuleExpression::addTerm1Rule(RuleTerm *ruleTerm)
 {
 	this->term1Type = RULETERM;	
 	this->term1.ruleTerm = ruleTerm;
 	this->term1.ruleTerm->setParent(this);
 }
+
 void RuleExpression::addTerm2Rule(RuleTerm *ruleTerm)
 {
 	this->term2Type = RULETERM;	
 	this->term2.ruleTerm = ruleTerm;
 	this->term2.ruleTerm->setParent(this);
 }
+
 void RuleExpression::addTerm1Expression(RuleExpression *ruleExpression)
 {
 	this->term1Type = RULEEXPRESSION;	
 	this->term1.ruleExpression = ruleExpression;
 	this->term1.ruleExpression->setParent(this);
 }
+
 void RuleExpression::addTerm2Expression(RuleExpression *ruleExpression)
 {
 	this->term2Type = RULEEXPRESSION;	
 	this->term2.ruleExpression = ruleExpression;
 	this->term2.ruleExpression->setParent(this);
 }
+
 void RuleExpression::setRuleConnectionMethod(RuleConnectionMethod* ruleConnectionMethod)
 {
 	this->ruleConnectionMethod = ruleConnectionMethod;
+}
+
+QString RuleExpression::toQString()const
+{
+	QString str = "(";
+	switch (term1Type)
+	{
+		case RULETERM:
+			str += term1.ruleTerm->toQString();
+			break;
+		case RULEEXPRESSION:
+			str += term1.ruleExpression->toQString();
+		case UNDEF:
+			str += "UNDEFINED";
+	}
+	str += ", " ;
+	
+	switch (term2Type)
+	{
+		case RULETERM:
+			str += term2.ruleTerm->toQString();
+			break;
+		case RULEEXPRESSION:
+			str += term2.ruleExpression->toQString();
+		case UNDEF:
+			str += "UNDEFINED";
+	}
+	str += ")" ;
+	return str;
+}
+RuleExpression RuleExpression::operator=(const RuleExpression &re)
+{
+	RuleExpression tmp(re);
+	return tmp;
 }

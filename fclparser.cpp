@@ -28,7 +28,7 @@ QString FCLParser::readLine(QTextStream &in)
 		str = str.toLower();
 		str.remove(QRegExp("//.*")); ///< remove comments 
 		str.replace(QRegExp("\\s+")," "); ///< convert tabs and multiple spaces to single space
-		qDebug()<<"[FCLParser::readLine]: "<<str;
+		qDebug() << "[FCLParser::readLine]:" << str;
 	}
 	return str;
 }
@@ -42,6 +42,7 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 		if (rxlen.indexIn(line) > -1) 
 		{
 			Variable v( rxlen.cap(1) );
+			qDebug()<<"[FCLParser::loadVarInput]:adding variable"<<v.getName();
 			funcBlock.addVariable(v.getName(),v);
 		}else if (rxOut.indexIn(line) > -1) 
 		{
@@ -60,6 +61,7 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 		if (rxlen.indexIn(line) > -1) 
 		{
 			Variable v( rxlen.cap(1) );
+			qDebug()<<"[FCLParser::loadVarOutput]:adding variable"<<v.getName();
 			funcBlock.addVariable(v.getName(),v);
 		}
 		if (rxOut.indexIn(line) > -1) 

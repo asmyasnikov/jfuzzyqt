@@ -24,6 +24,7 @@ public:
 	RuleActivationMethod* getRuleActivationMethod()const;
 	RuleAccumulationMethod* getRuleAccumulationMethod()const;
 	RuleBlock operator=(const RuleBlock &rb);
+
 private:
 	QString name;
 	
