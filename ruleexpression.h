@@ -27,7 +27,8 @@ public:
 	QString toQString()const;
 	RuleExpression::term_t getTerm1Type()const;
 	RuleExpression::term_t getTerm2Type()const;
-	RuleExpression operator=(const RuleExpression &re);
+	
+	//RuleExpression operator=(const RuleExpression &re);
 
 private:
 	bool negated; ///<Is it negated?

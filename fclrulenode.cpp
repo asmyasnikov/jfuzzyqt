@@ -107,7 +107,6 @@ const QString FCLRuleNode::getOperator()const
 }
 RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
 {
-	///< buggy function
 	RuleExpression *re = new RuleExpression();
 
 	if( this->left!=NULL )//If it has a left node
@@ -128,7 +127,7 @@ RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMeth
 		re->setRuleConnectionMethod(or);
 	}
 	
-	if(this->right!=NULL)//qDebug() << "[FCLRuleNode::toRuleExpression]:" << this->right->print();
+	if(this->right!=NULL)
 	{
 		re->addTerm2Expression(this->right->toRuleExpression(fb,and,or));
 	}
@@ -141,16 +140,6 @@ RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMeth
 }
 RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 {
-	/*
-	String varName = tree.getText();
-	String lingTerm = tree.getChild(0).getText();
-	boolean negate = false;
-	if( lingTerm.equalsIgnoreCase("NOT") ) {
-		lingTerm = tree.getChild(1).getText();
-		negate = true;
-	}
-	Variable variable = getVariable(varName);
-	*/
 	QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
 	RuleTerm *rt = new RuleTerm();
 	
@@ -172,7 +161,6 @@ RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 			qWarning()<< "[FCLRuleNode::toRuleTermLeft]:Variable" << varname << "is NULL!!";
 		}
 		rt->setVariable(v);
-		//qDebug()<< "[FCLRuleNode::toRuleTermLeft]:"  << rt.toQString();
 	}
 	else
 	{

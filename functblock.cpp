@@ -55,32 +55,19 @@ bool FunctBlock::setVariable(QString varName,LinguisticTerm lt)
 }
 Variable* FunctBlock::getVariable(QString varName)
 {
- QHash<QString, Variable>::iterator i = this->variables.find(varName);
- 
- if ( i!= this->variables.end() )
-{
-	return &i.value();
-}else
-{
-	return NULL;
-}
- /*while (i != hash.end() && i.key() == "HDR") {
-     cout << i.value() << endl;
- /*    ++i;
- /*}
+	QHash<QString, Variable>::iterator i = this->variables.find(varName);
 
-
-	if ( this->variables.contains(varName) )
+	if ( i!= this->variables.end() )
 	{
-		return &this->variables[varName];
-	}else
+		return &i.value();
+	}
+	else
 	{
 		return NULL;
-	}*/
+	}
 }
 bool FunctBlock::setDefaultValue(const QString varName,const double value)
 {
-	
 	QHash<QString, Variable>::iterator i = this->variables.find(varName);
 	if ( i != this->variables.end() )
 	{
@@ -229,6 +216,10 @@ bool FunctBlock::addRuleBlock(RuleBlock rl)
 	{
 		this->ruleBlocks.insert( rl.getName(), rl );
 		toReturn = true;
+	}
+	else
+	{
+		qWarning() << "[FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl.getName();
 	}
 	return toReturn;
 }

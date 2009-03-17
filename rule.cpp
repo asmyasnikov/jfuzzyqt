@@ -42,3 +42,30 @@ const QLinkedList<RuleTerm> Rule::getConsequents()const
 {
 	return this->consequents;
 }
+QString Rule::toQString() const
+{
+	QString str;
+	str += "Rule (";
+	str += this->getName();
+	str += ")\n{\n";
+	str += "antecedents: ";
+	if ( this->antecedents == NULL )
+	{
+		str += "NULL\n";
+	}
+	else
+	{
+		str += this->antecedents->toQString();
+		str += "\n";
+	}
+
+	QLinkedList<RuleTerm>::const_iterator i = this->consequents.begin();
+	while (i != this->consequents.end()) {
+		str += i->toQString();
+		str += "\n";
+		i++;
+	}
+
+	str += "}";
+	return str;
+}

@@ -64,18 +64,18 @@ QString RuleTerm::toQString()const
 	}
 	if ( this->negated )
 	{
-		str += " IS NOT ";
+		str += " is not ";
 	}
 	else
 	{
-		str += " IS ";
+		str += " is ";
 	}
 
 	str += this->getName();
 	return str;
 }
-RuleTerm RuleTerm::operator=(const RuleTerm &rt)
+/*RuleTerm RuleTerm::operator=(const RuleTerm &rt)
 {
 	RuleTerm tmp(rt);
 	return tmp;
-}
+}*/

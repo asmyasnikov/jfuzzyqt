@@ -19,6 +19,7 @@ public:
 	const QString Rule::getName()const;
 	RuleExpression* getAntecedents()const;
 	const QLinkedList<RuleTerm> getConsequents()const ;
+	QString toQString() const;
 private:
 	QString name;
 	RuleExpression* antecedents;

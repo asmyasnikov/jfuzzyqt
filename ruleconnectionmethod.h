@@ -21,9 +21,10 @@
 #ifndef RULECONNECTIONMETHOD_H
 #define RULECONNECTIONMETHOD_H
 
+#include <QObject>
 #include <QString>
 
-class RuleConnectionMethod 
+class RuleConnectionMethod : QObject
 {
 public:
 	RuleConnectionMethod(QString name="Undefined");
@@ -32,6 +33,7 @@ public:
 	void setName(const QString name);
 	virtual double connect(double antecedent1, double antecedent2);
 	virtual QString toQString() const;
+
 private:
 	QString name;
 };

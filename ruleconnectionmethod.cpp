@@ -2,6 +2,7 @@
 #include <QDebug>
 
 RuleConnectionMethod::RuleConnectionMethod(QString name)
+:QObject()
 {
 	this->name = name;
 }
@@ -25,5 +26,6 @@ double RuleConnectionMethod::connect(double antecedent1, double antecedent2)
 }
 QString RuleConnectionMethod::toQString() const
 {
-	return "[RuleConnectionMethod::toQString]:Virtual method called";
+	qWarning() << "[RuleConnectionMethod::toQString]:Virtual method called";
+	return "";
 }

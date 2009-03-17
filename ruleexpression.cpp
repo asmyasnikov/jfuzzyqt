@@ -163,10 +163,22 @@ QString RuleExpression::toQString()const
 			break;
 		case RULEEXPRESSION:
 			str += term1.ruleExpression->toQString();
+			break;
 		case UNDEF:
 			str += "UNDEFINED";
+			break;
 	}
-	str += ", " ;
+	
+	str += " (" ;
+	if (this->ruleConnectionMethod != NULL )
+	{
+		str += this->ruleConnectionMethod->toQString();
+	}
+	else
+	{
+		str += "Invalid Rule Connection Method";
+	}
+	str += ") " ;
 	
 	switch (term2Type)
 	{
@@ -175,14 +187,16 @@ QString RuleExpression::toQString()const
 			break;
 		case RULEEXPRESSION:
 			str += term2.ruleExpression->toQString();
+			break;
 		case UNDEF:
 			str += "UNDEFINED";
+			break;
 	}
 	str += ")" ;
 	return str;
 }
-RuleExpression RuleExpression::operator=(const RuleExpression &re)
+/*RuleExpression RuleExpression::operator=(const RuleExpression &re)
 {
 	RuleExpression tmp(re);
 	return tmp;
-}
+}*/

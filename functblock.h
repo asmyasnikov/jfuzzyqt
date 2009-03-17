@@ -36,14 +36,11 @@ public:
 
 	FunctBlock operator=(const FunctBlock &fb);
 private:
-	/** Function block name */
-	QString name;
+	QString name; ///<Function block name
 
-	/** Several RuleBlocks indexed by name */
-	QHash<QString, RuleBlock> ruleBlocks;
+	QHash<QString, RuleBlock> ruleBlocks; ///<Several RuleBlocks indexed by name
 
-	/** Every variable is here (key: VariableName) */
-	QHash<QString, Variable> variables;
+	QHash<QString, Variable> variables; ///<Every variable is here (key: VariableName)
 };
 
 #endif // FUNCTBLOCK_H

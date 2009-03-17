@@ -134,10 +134,8 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name
 		line = readLine(in);
 	}
 }
-void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name)
+RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name)
 {
-	QString line = readLine(in);
-	///<RULEBLOCK content
 	QRegExp rxlen("rule\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
 	QRegExp rxOut("end_ruleblock");
 	QRegExp rxAND("and\\s*:\\s*(\\w+)");
@@ -149,18 +147,28 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 	QString ruleAccumulationMethodType = "sum";
 	QString type;
 
-	RuleBlock ruleBlock(name);
+	RuleBlock *ruleBlock = new RuleBlock(name);
 
+	QString line = readLine(in);
 	while (!line.isNull()) {
 
 		if (rxlen.indexIn(line) > -1) 
 		{	
-			loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1),and,or); ///< May need pointer to var 'and' or 'or'
-			funcBlock.addRuleBlock(ruleBlock);
+			Rule *r = loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1),and,or);
+			if ( r == NULL )
+			{
+				qWarning() << "[FCLParser::loadRuleBlock]: Error loading rule" << rxlen.cap(2);
+			}
+			else
+			{
+				ruleBlock->addRule( *r );
+				delete r;
+			}
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
-			ruleBlock.addRuleAccumulationMethod( createAccumulationMethod(ruleAccumulationMethodType) );
+			ruleBlock->addRuleAccumulationMethod( createAccumulationMethod(ruleAccumulationMethodType) );
+			qDebug() << "[FCLParser::loadRuleBlock]:" <<ruleBlock->toQString();
 			funcBlock.addRuleBlock(ruleBlock);
 			break;
 		}
@@ -192,11 +200,11 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 			type = rxACT.cap(1);
 			if( type == "min")
 			{
-				ruleBlock.addRuleActivationMethod (new RuleActivationMethodMin(NULL));
+				ruleBlock->addRuleActivationMethod (new RuleActivationMethodMin(NULL));
 			}
 			else if( type=="prod" )
 			{
-				ruleBlock.addRuleActivationMethod (new RuleActivationMethodProduct(NULL));
+				ruleBlock->addRuleActivationMethod (new RuleActivationMethodProduct(NULL));
 			}
 			else
 			{
@@ -231,28 +239,31 @@ void FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString na
 		}
 		line = readLine(in);
 	} 
+	return ruleBlock;
 
 }
-void FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
+Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
 	QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s+then");
 	QRegExp rxTHEN ("then\\s+(\\w+)\\s+is\\s+(\\w+)\\s*");
 
-	Rule fuzzyRule(NULL,name);
-	if ( rxIF.indexIn(rule) >-1 && rxTHEN.indexIn(rule))
+	Rule* fuzzyRule = new Rule(NULL,name);
+	if ( rxIF.indexIn(rule) > -1 && rxTHEN.indexIn(rule) > -1)
 	{
-		RuleExpression re = loadRuleIf(funcBlock,rxIF.cap(1),and,or);
-		fuzzyRule.addAntecedents( &re );
+		RuleExpression *antecedents = loadRuleIf(funcBlock,rxIF.cap(1),and,or);
+		fuzzyRule->addAntecedents( antecedents );
 		Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
 		RuleTerm rt(NULL, v, rxTHEN.cap(2), false);
-		fuzzyRule.addConsequent(rt);
+		fuzzyRule->addConsequent(rt);
 	}
 	else
 	{
-		qWarning()<<"Unknown rule "<<rule;
+		qWarning()<<"Unknown rule " << rule;
+		return NULL;
 	}
+	return fuzzyRule;
 }
-RuleExpression FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
+RuleExpression* FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
 	FCLRuleTree tree(this);	
 	tree.addExpression(ruleif);
@@ -289,7 +300,17 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 		}
 		else if (rxRulleBlock.indexIn(line) > -1) 
 		{
-			loadRuleBlock(in, funcBlock, rxRulleBlock.cap(1));///< Rule block
+			RuleBlock *rb = loadRuleBlock(in, funcBlock, rxRulleBlock.cap(1));
+			if ( rb == NULL )
+			{
+				qWarning() << "[FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
+			}
+			else
+			{
+				funcBlock.addRuleBlock ( *rb );///< Rule block
+				delete rb;
+			}
+
 		}
 		else if (rxFunctionBlockEnd.indexIn(line) > -1)
 		{

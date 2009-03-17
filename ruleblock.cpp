@@ -78,3 +78,47 @@ RuleBlock RuleBlock::operator=(const RuleBlock &rb)
 	RuleBlock tmp(rb);
 	return tmp;
 }
+void RuleBlock::addRule(const Rule &fuzzyRule)
+{
+	qDebug() << "[RuleBlock::addRule]:Added rule block" << fuzzyRule.getName();
+	rules.append(fuzzyRule);
+}
+QString RuleBlock::toQString()
+{
+	QString tmp;
+	tmp += "RuleBlock(";
+	tmp += this->name;
+	tmp += ")\n{\n";
+	tmp += "ruleAccumulationMethod: ";
+	if ( this->ruleAccumulationMethod != NULL )
+	{
+		tmp += this->ruleAccumulationMethod->toQString();
+		tmp += "\n";
+	}
+	else
+	{
+		tmp += "NULL\n";
+	}
+
+	tmp += "ruleActivationMethod: ";
+	if ( this->ruleActivationMethod != NULL )
+	{
+		tmp += this->ruleActivationMethod->toQString();
+		tmp += "\n";
+	}
+	else
+	{
+		tmp += " NULL\n";
+	}
+
+	QLinkedList<Rule>::iterator i = rules.begin();
+	while (i != rules.end()) {
+		tmp += i->toQString();
+		tmp += "\n";
+		i++;
+	}
+
+
+	tmp += "}";
+	return tmp;
+}
