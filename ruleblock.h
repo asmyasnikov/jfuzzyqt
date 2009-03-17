@@ -25,7 +25,7 @@ public:
 	RuleAccumulationMethod* getRuleAccumulationMethod()const;
 	void addRule(const Rule &fuzzyRule);
 	RuleBlock operator=(const RuleBlock &rb);
-	QString toQString();
+	QString toQString()const;
 
 private:
 	QString name;

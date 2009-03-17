@@ -83,7 +83,7 @@ void RuleBlock::addRule(const Rule &fuzzyRule)
 	qDebug() << "[RuleBlock::addRule]:Added rule block" << fuzzyRule.getName();
 	rules.append(fuzzyRule);
 }
-QString RuleBlock::toQString()
+QString RuleBlock::toQString()const
 {
 	QString tmp;
 	tmp += "RuleBlock(";
@@ -111,13 +111,12 @@ QString RuleBlock::toQString()
 		tmp += " NULL\n";
 	}
 
-	QLinkedList<Rule>::iterator i = rules.begin();
+	QLinkedList<Rule>::const_iterator i = rules.begin();
 	while (i != rules.end()) {
 		tmp += i->toQString();
 		tmp += "\n";
 		i++;
 	}
-
 
 	tmp += "}";
 	return tmp;

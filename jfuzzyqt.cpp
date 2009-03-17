@@ -50,7 +50,10 @@ bool JFuzzyQt::load(QString fileUri)
 		if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
 		{
 			functionBlock.setName(rxFunctionBlock.cap(1));
-			fclParser.loadFunctBlock(in,functionBlock);
+			fclParser.loadFunctBlock(in,functionBlock); 
+
+			///<May have problem
+
 			this->addFunctionBlock(functionBlock);
 		}///<END If Function Block
 		line = fclParser.readLine(in);

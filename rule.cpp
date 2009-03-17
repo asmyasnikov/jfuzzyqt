@@ -55,10 +55,10 @@ QString Rule::toQString() const
 	}
 	else
 	{
-		str += this->antecedents->toQString();
+		str += this->antecedents->toQString(); ///< antecedents problem!!
 		str += "\n";
 	}
-
+	str += "antecedents: ";
 	QLinkedList<RuleTerm>::const_iterator i = this->consequents.begin();
 	while (i != this->consequents.end()) {
 		str += i->toQString();

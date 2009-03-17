@@ -9,7 +9,6 @@ RuleExpression::RuleExpression(QObject *parent)
 	term1Type = UNDEF;
 	term2Type = UNDEF;
 }
-
 RuleExpression::RuleExpression(const RuleExpression &re)
 {
 	this->negated = re.isNegated();
@@ -17,15 +16,18 @@ RuleExpression::RuleExpression(const RuleExpression &re)
 	{ 
 	case RULETERM:
 		this->term1Type = RULETERM;	
-		this->term1.ruleTerm = new RuleTerm(re.getTerm1Rule());
+		//this->term1.ruleTerm = new RuleTerm(re.getTerm1Rule());
+		this->term1.ruleTerm = re.getTerm1Rule();
 		this->term1.ruleTerm->setParent(this);
 		break;
 	case RULEEXPRESSION:
 		this->term1Type = RULEEXPRESSION;	
-		this->term1.ruleExpression = new RuleExpression( re.getTerm1Expression() );
+		//this->term1.ruleExpression = new RuleExpression( re.getTerm1Expression() );
+		this->term1.ruleExpression = re.getTerm1Expression();
 		this->term1.ruleExpression->setParent(this);
 		break;
 	case UNDEF:
+		qWarning() << "[RuleExpression::RuleExpression]: unddefined term1type";
 		this->term1Type = UNDEF;
 		break;
 	}
@@ -43,6 +45,7 @@ RuleExpression::RuleExpression(const RuleExpression &re)
 		this->term2.ruleExpression->setParent(this);
 		break;
 	case UNDEF:
+		qWarning() << "[RuleExpression::RuleExpression]: unddefined term2type";
 		this->term2Type = UNDEF;
 		break;
 	}

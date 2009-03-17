@@ -143,7 +143,8 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 	QRegExp rxACCU("accu\\s*:\\s*(\\w+)");
 	QRegExp rxOR("or\\s*:\\s*(\\w+)");
 
-	RuleConnectionMethod *and = new RuleConnectionMethodAndMin(), *or = new RuleConnectionMethodOrMax();
+	RuleConnectionMethod *and = new RuleConnectionMethodAndMin();
+	RuleConnectionMethod *or = new RuleConnectionMethodOrMax();
 	QString ruleAccumulationMethodType = "sum";
 	QString type;
 
@@ -169,6 +170,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 		{
 			ruleBlock->addRuleAccumulationMethod( createAccumulationMethod(ruleAccumulationMethodType) );
 			qDebug() << "[FCLParser::loadRuleBlock]:" <<ruleBlock->toQString();
+
 			funcBlock.addRuleBlock(ruleBlock);
 			break;
 		}
@@ -179,8 +181,8 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			// Which 'AND' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
 			//---
 			if( type == "min")  {
-				delete and;
-				delete or;
+				//delete and;
+				//delete or;
 				and = new RuleConnectionMethodAndMin();
 				or = new RuleConnectionMethodOrMax();
 			/*} else if( type == "PROD" ) {
@@ -222,8 +224,8 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			//---
 			type = rxOR.cap(1);
 			if( type == "max" ) {
-				delete and;
-				delete or;
+				//delete and;
+				//delete or;
 				or = new RuleConnectionMethodOrMax();
 				and = new RuleConnectionMethodAndMin();
 			/*} else if( type.equalsIgnoreCase("asum") ) {
@@ -251,6 +253,10 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 	if ( rxIF.indexIn(rule) > -1 && rxTHEN.indexIn(rule) > -1)
 	{
 		RuleExpression *antecedents = loadRuleIf(funcBlock,rxIF.cap(1),and,or);
+		if (antecedents == NULL)
+		{
+			qWarning() << "[FCLParser::loadRule]:antecedents are NULL.";
+		}
 		fuzzyRule->addAntecedents( antecedents );
 		Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
 		RuleTerm rt(NULL, v, rxTHEN.cap(2), false);
@@ -261,6 +267,7 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 		qWarning()<<"Unknown rule " << rule;
 		return NULL;
 	}
+	qDebug() << "[FCLParser::loadRule]:" << fuzzyRule->toQString();
 	return fuzzyRule;
 }
 RuleExpression* FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
