@@ -11,6 +11,8 @@ RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
 	//String ruleAccumulationMethodType = "SUM";
 	this->ruleActivationMethod=NULL;
 	this->ruleAccumulationMethod = NULL;
+	this->and=NULL;
+	this->or=NULL;
 }
 
 RuleBlock::RuleBlock(QString name) : QObject ()
@@ -18,14 +20,23 @@ RuleBlock::RuleBlock(QString name) : QObject ()
 	this->name = name;
 	this->ruleActivationMethod=NULL;
 	this->ruleAccumulationMethod = NULL;
+	this->and=NULL;
+	this->or=NULL;
 }
 RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
 {
 	this->name = rb.getName();
 	this->ruleActivationMethod = NULL;
 	this->ruleAccumulationMethod = NULL;
-	this->addRuleActivationMethod (new RuleActivationMethod(*rb.getRuleActivationMethod()));
-	this->addRuleAccumulationMethod (new RuleAccumulationMethod(*rb.getRuleAccumulationMethod()));
+	//this->addRuleActivationMethod (new RuleActivationMethod(*rb.getRuleActivationMethod()));
+	this->addRuleActivationMethod ( rb.getRuleActivationMethod() );
+	//this->addRuleAccumulationMethod (new RuleAccumulationMethod(*rb.getRuleAccumulationMethod()));
+	this->addRuleAccumulationMethod ( rb.getRuleAccumulationMethod() );
+	
+	this->and=NULL;
+	this->or=NULL;
+	this->setRuleConnectionMethodAnd( rb.getRuleConnectionMethodAnd() );
+	this->setRuleConnectionMethodOr( rb.getRuleConnectionMethodOr() );
 }
 RuleBlock::~RuleBlock()
 {
@@ -63,6 +74,7 @@ void RuleBlock::addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulati
 		delete this->ruleAccumulationMethod;
 	}
 	this->ruleAccumulationMethod = ruleAccumulationMethod;
+	this->ruleAccumulationMethod->setParent(this);
 
 }
 RuleActivationMethod* RuleBlock::getRuleActivationMethod()const
@@ -120,4 +132,31 @@ QString RuleBlock::toQString()const
 
 	tmp += "}";
 	return tmp;
+}
+
+void RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *and)
+{
+	if( this->and != NULL)
+	{
+		delete (this->and);
+	}
+	this->and = and;
+	this->and->setParent(this);
+}
+void RuleBlock::setRuleConnectionMethodOr(RuleConnectionMethod *or)
+{
+	if( this->or != NULL)
+	{
+		delete (this->or);
+	}
+	this->or = or;
+	this->or->setParent(this);
+}
+RuleConnectionMethod* RuleBlock::getRuleConnectionMethodAnd()const
+{
+	return this->and;
+}
+RuleConnectionMethod* RuleBlock::getRuleConnectionMethodOr()const
+{
+	return this->or;
 }

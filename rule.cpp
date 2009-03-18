@@ -14,7 +14,8 @@ Rule::Rule(QObject *parent, QString name)
 Rule::Rule(const Rule &rule)
 {
 	this->name = rule.getName();
-	this->addAntecedents( new RuleExpression(*rule.getAntecedents()) );
+	//this->addAntecedents( new RuleExpression(*rule.getAntecedents()) );
+	this->addAntecedents(rule.getAntecedents());
 	this->consequents = rule.getConsequents();
 }
 Rule::~Rule()
@@ -58,7 +59,7 @@ QString Rule::toQString() const
 		str += this->antecedents->toQString(); ///< antecedents problem!!
 		str += "\n";
 	}
-	str += "antecedents: ";
+	str += "consequents: ";
 	QLinkedList<RuleTerm>::const_iterator i = this->consequents.begin();
 	while (i != this->consequents.end()) {
 		str += i->toQString();

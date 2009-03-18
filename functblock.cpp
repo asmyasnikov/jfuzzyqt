@@ -9,12 +9,15 @@ FunctBlock::FunctBlock(QObject* parent, QString name) : QObject (parent)
 }
 FunctBlock::FunctBlock(const FunctBlock &fb)
 {
+	this->name = fb.getName();
+	this->ruleBlocks = fb.getRuleBlocks();
+	this->variables = fb.getVariables();
 }
 FunctBlock::~FunctBlock()
 {
 
 }
-QString FunctBlock::getName()
+QString FunctBlock::getName()const
 {
 	return this->name;
 }
@@ -252,4 +255,12 @@ FunctBlock FunctBlock::operator=(const FunctBlock &fb)
 {
 	FunctBlock tmp(fb);
 	return tmp;
+}
+QHash<QString, RuleBlock> FunctBlock::getRuleBlocks()const
+{
+	return this->ruleBlocks;
+}
+QHash<QString, Variable> FunctBlock::getVariables()const
+{
+	return this->variables;
 }

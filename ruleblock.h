@@ -4,6 +4,8 @@
 #include "ruleactivationmethod.h"
 #include "ruleaccumulationmethod.h"
 #include "rule.h"
+#include "ruleconnectionmethod.h"
+#include "ruleconnectionmethod.h"
 #include <QString>
 #include <QLinkedList>
 #include <QObject>
@@ -24,9 +26,13 @@ public:
 	RuleActivationMethod* getRuleActivationMethod()const;
 	RuleAccumulationMethod* getRuleAccumulationMethod()const;
 	void addRule(const Rule &fuzzyRule);
-	RuleBlock operator=(const RuleBlock &rb);
 	QString toQString()const;
+	RuleConnectionMethod* getRuleConnectionMethodAnd()const;
+	void setRuleConnectionMethodAnd(RuleConnectionMethod *and);
+	RuleConnectionMethod* getRuleConnectionMethodOr()const;
+	void setRuleConnectionMethodOr(RuleConnectionMethod *or);
 
+	RuleBlock operator=(const RuleBlock &rb);
 private:
 	QString name;
 	
@@ -38,6 +44,9 @@ private:
 
 	///< All the rules
 	QLinkedList<Rule> rules;
+
+	RuleConnectionMethod *and;
+	RuleConnectionMethod *or;
 };
 
 #endif // RULEBLOCK_H

@@ -162,15 +162,23 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			}
 			else
 			{
+				qDebug() << "\n\n[FCLParser::loadRuleBlock]:" << r->toQString();
 				ruleBlock->addRule( *r );
+				qDebug() << "\n[FCLParser::loadRuleBlock]:" << ruleBlock->toQString();
 				delete r;
 			}
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
-			ruleBlock->addRuleAccumulationMethod( createAccumulationMethod(ruleAccumulationMethodType) );
+			RuleAccumulationMethod* ram = createAccumulationMethod(ruleAccumulationMethodType);
+			if ( ram == NULL )
+			{
+				qWarning() << "[FCLParser::loadRuleBlock]: No rule acumulation method created.";
+			}
+			ruleBlock->addRuleAccumulationMethod( ram );  ///<BUG
 			qDebug() << "[FCLParser::loadRuleBlock]:" <<ruleBlock->toQString();
-
+			ruleBlock->setRuleConnectionMethodAnd(and);
+			ruleBlock->setRuleConnectionMethodOr(or);
 			funcBlock.addRuleBlock(ruleBlock);
 			break;
 		}
@@ -202,11 +210,11 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			type = rxACT.cap(1);
 			if( type == "min")
 			{
-				ruleBlock->addRuleActivationMethod (new RuleActivationMethodMin(NULL));
+				ruleBlock->addRuleActivationMethod (new RuleActivationMethodMin(this));
 			}
 			else if( type=="prod" )
 			{
-				ruleBlock->addRuleActivationMethod (new RuleActivationMethodProduct(NULL));
+				ruleBlock->addRuleActivationMethod (new RuleActivationMethodProduct(this));
 			}
 			else
 			{
@@ -314,6 +322,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 			}
 			else
 			{
+				qDebug() << "[FCLParser::loadFunctBlock]:" << rb->toQString();
 				funcBlock.addRuleBlock ( *rb );///< Rule block
 				delete rb;
 			}

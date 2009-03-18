@@ -13,13 +13,15 @@
 
 class FunctBlock : public QObject
 {
+	Q_OBJECT
+
 public:
 	FunctBlock(QObject* parent=NULL);
 	FunctBlock(QObject* parent, QString name);
 	FunctBlock(const FunctBlock &fb);
 	~FunctBlock();
 	
-	QString getName();
+	QString getName()const;
 	void setName(QString name);
 	//bool addVarBlock(Variable variable);
 	Defuzzifier* createDefuzzifier(QString defuzzType);
@@ -33,6 +35,8 @@ public:
 	bool setDefuzzifier(QString varName, Defuzzifier* d);
 	bool addRuleBlock(RuleBlock rl);
 	void debug(QString tbs) const;
+	QHash<QString, RuleBlock> getRuleBlocks()const;
+	QHash<QString, Variable> getVariables()const;
 
 	FunctBlock operator=(const FunctBlock &fb);
 private:

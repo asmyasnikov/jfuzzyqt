@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QString>
 
-class RuleConnectionMethod : QObject
+class RuleConnectionMethod : public QObject
 {
 public:
 	RuleConnectionMethod(QString name="Undefined");
