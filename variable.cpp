@@ -2,7 +2,8 @@
 #include "defuzzifier.h"
 #include <QDebug>
 
-Variable::Variable()
+Variable::Variable(QObject* parent)
+: QObject (parent)
 {
 	this->deffuzifier=NULL;
 	linguisticTerms.clear();
@@ -10,7 +11,8 @@ Variable::Variable()
 	this->defaultValue=NULL;
 }
 
-Variable::Variable(QString name)
+Variable::Variable(QObject* parent,QString name)
+: QObject (parent)
 {
 	this->name=name;
 	this->deffuzifier=NULL;
@@ -38,13 +40,14 @@ void Variable::setName(QString name)
 {
 	this->name=name;
 }
-void Variable::addLinguisticTerm(LinguisticTerm lt)
+void Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
-	linguisticTerms.insert(lt.getTermName(), lt);
+	lt->setParent(this);
+	linguisticTerms.insert(lt->getTermName(), lt);
 }
-const MembershipFunction* Variable::getMembershipFunction(QString termName)
+const MembershipFunction* Variable::getMembershipFunction(const QString& termName)
 {
-	return this->getLinguisticTerm(termName).getMembershipFunction();
+	return this->getLinguisticTerm(termName)->getMembershipFunction();
 }
 Defuzzifier* Variable::getDefuzzifier()
 {
@@ -70,7 +73,7 @@ void Variable::defuzzify()
 
 /*! \brief Get 'termName' linguistic term
 */
-LinguisticTerm Variable::getLinguisticTerm(QString termName)
+LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
 {
 	//LinguisticTerm lt = linguisticTerms.get(termName);
 	//if( lt == null ) throw new RuntimeException("No such linguistic term: '" + termName + "'");
@@ -96,6 +99,7 @@ void Variable::setDefuzzifier(Defuzzifier* deffuzifier)
 		delete this->deffuzifier;
 	}
 	this->deffuzifier = deffuzifier;
+	this->deffuzifier->setParent(this);
 }
 void Variable::debug(QString tbs) const
 {
@@ -104,10 +108,10 @@ void Variable::debug(QString tbs) const
 	qDebug() << tbs << "Variable" << this->name << "{";
 	(this->deffuzifier!=NULL) ? this->deffuzifier->debug(nxTbs) : qDebug() << tbs << "No deffuzifier";
 	qDebug() << tbs<< "Value(" << this->value << ")";
-	QHashIterator<QString, LinguisticTerm> var(this->linguisticTerms);
+	QHashIterator<QString, LinguisticTerm*> var(this->linguisticTerms);
 	while ( var.hasNext() ) {
 		var.next();
-		var.value().debug(tbs);
+		var.value()->debug(tbs);
 	}
 	qDebug() << tbs<< "}";
 }

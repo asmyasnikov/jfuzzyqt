@@ -3,7 +3,7 @@
 FunctBlock::FunctBlock(QObject* parent) : QObject (parent)
 {
 }
-FunctBlock::FunctBlock(QObject* parent, QString name) : QObject (parent)
+FunctBlock::FunctBlock(QObject* parent,const QString& name) : QObject (parent)
 {
 	this->name = name;
 }
@@ -21,34 +21,36 @@ QString FunctBlock::getName()const
 {
 	return this->name;
 }
-void FunctBlock::setName(QString name)
+void FunctBlock::setName(const QString& name)
 {
 	this->name = name;
 }
 
-bool FunctBlock::addVariable(QString varName,Variable variable)
+bool FunctBlock::addVariable(const QString& varName, Variable* variable)
 {
 
 	bool toReturn = false;
 	if ( !this->variables.contains(varName) )
 	{
-		this->variables.insert(variable.getName(),variable);
+		this->variables.insert(varName, variable);
+		variable->setParent(this);
 		toReturn = true;
-		qDebug() << "[FunctBlock::addVariable]: added Variable '" << variable.getName() << "'.";
-	}else{
-		qDebug() << "[FunctBlock::addVariable: Variable '" << variable.getName() << "' duplicated";
+		qDebug() << "[FunctBlock::addVariable]: added Variable '" << varName << "'.";
 	}
-
+	else
+	{
+		qDebug() << "[FunctBlock::addVariable: Variable '" << varName << "' duplicated";
+	}
 	return toReturn;
 }
 
-bool FunctBlock::setVariable(QString varName,LinguisticTerm lt)
+bool FunctBlock::setVariable(const QString& varName, LinguisticTerm* lt)
 {
 	
-	QHash<QString, Variable>::iterator i = this->variables.find(varName);
+	QHash<QString, Variable*>::iterator i = this->variables.find(varName);
 	if ( i != this->variables.end() )
 	{
-		i.value().addLinguisticTerm(lt);
+		i.value()->addLinguisticTerm(lt);
 		return true;
 	}else
 	{
@@ -56,25 +58,25 @@ bool FunctBlock::setVariable(QString varName,LinguisticTerm lt)
 	}
 	return false;
 }
-Variable* FunctBlock::getVariable(QString varName)
+Variable* FunctBlock::getVariable(const QString& varName)
 {
-	QHash<QString, Variable>::iterator i = this->variables.find(varName);
+	QHash<QString, Variable*>::iterator i = this->variables.find(varName);
 
 	if ( i!= this->variables.end() )
 	{
-		return &i.value();
+		return i.value();
 	}
 	else
 	{
 		return NULL;
 	}
 }
-bool FunctBlock::setDefaultValue(const QString varName,const double value)
+bool FunctBlock::setDefaultValue(const QString& varName,const double value)
 {
-	QHash<QString, Variable>::iterator i = this->variables.find(varName);
+	QHash<QString, Variable*>::iterator i = this->variables.find(varName);
 	if ( i != this->variables.end() )
 	{
-		i.value().setDefaultValue(value);
+		i.value()->setDefaultValue(value);
 		return true;
 	}else
 	{
@@ -82,13 +84,13 @@ bool FunctBlock::setDefaultValue(const QString varName,const double value)
 	}
 	return false;
 }
-bool FunctBlock::setDefuzzifier(QString varName, Defuzzifier* d)
+bool FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d)
 {
 	
-	QHash<QString, Variable>::iterator i = this->variables.find(varName);
+	QHash<QString, Variable*>::iterator i = this->variables.find(varName);
 	if ( i != this->variables.end() )
 	{
-		i.value().setDefuzzifier(d);
+		i.value()->setDefuzzifier(d);
 		return true;
 	}else
 	{
@@ -96,7 +98,7 @@ bool FunctBlock::setDefuzzifier(QString varName, Defuzzifier* d)
 	}
 	return false;
 }
-Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
+Defuzzifier* FunctBlock::createDefuzzifier(const QString& defuzzType)
 {
 	Defuzzifier* defuzzifier = NULL;
 	if( defuzzType == "cog" )
@@ -161,14 +163,13 @@ Defuzzifier* FunctBlock::createDefuzzifier(QString defuzzType)
 	return defuzzifier;
 }
 
-bool FunctBlock::setValue(QString varName,double value)
+bool FunctBlock::setValue(const QString& varName, const double& value)
 {
 	bool toReturn = false;
 	if ( this->variables.contains( varName ) )
 	{
-		Variable v;
-		v.setName( varName );
-		v.setValue( value );
+		Variable *v = new Variable(this,varName);
+		v->setValue( value );
 		this->variables.insert( varName , v );
 		toReturn = true;
 	}
@@ -179,50 +180,54 @@ bool FunctBlock::setValue(QString varName,double value)
 void FunctBlock::evaluate()
 {
 	///<First: Reset defuzzifiers, variables, etc.
-	QHashIterator<QString, RuleBlock> i(this->ruleBlocks);
+	QHashIterator<QString, RuleBlock*> i(this->ruleBlocks);
 	while (i.hasNext()) {
 		i.next();
-		this->ruleBlocks[i.key()].reset();
+		i.value()->reset();
+		//this->ruleBlocks[i.key()].reset();
 	}
 
 	///<Second: Evaluate each RuleBlock
-	QHashIterator<QString, RuleBlock> j(this->ruleBlocks);
+	QHashIterator<QString, RuleBlock*> j(this->ruleBlocks);
 	while (j.hasNext()) {
 		j.next();
-		this->ruleBlocks[j.key()].evaluate();
+		i.value()->evaluate();
+		//this->ruleBlocks[j.key()].evaluate();
 	}
 
 	///<Third: Defuzzify each consequent variable
-	QHashIterator<QString, Variable> var(this->variables);
+	QHashIterator<QString, Variable*> var(this->variables);
 	while ( var.hasNext() ) {
 		var.next();
-		if( var.value().isOutputVariable() ){ 
-			this->variables[var.key()].defuzzify();
+		if( var.value()->isOutputVariable() ){ 
+			var.value()->defuzzify();
+			//this->variables[var.key()].defuzzify();
 		}
 	}
 }
 
-double FunctBlock::getValue(QString varName)
+double FunctBlock::getValue(const QString& varName)const
 {
 	double toReturn = NULL;
 	if ( this->variables.contains( varName ) )
 	{
-		toReturn = this->variables[varName].getValue();
+		toReturn = this->variables[varName]->getValue();
 	}
 	return toReturn;
 }
 
-bool FunctBlock::addRuleBlock(RuleBlock rl)
+bool FunctBlock::addRuleBlock(RuleBlock* rl)
 {
 	bool toReturn = false;
-	if ( !this->ruleBlocks.contains(rl.getName()) )
+	if ( !this->ruleBlocks.contains(rl->getName()) )
 	{
-		this->ruleBlocks.insert( rl.getName(), rl );
+		this->ruleBlocks.insert( rl->getName(), rl );
+		rl->setParent(this);
 		toReturn = true;
 	}
 	else
 	{
-		qWarning() << "[FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl.getName();
+		qWarning() << "[FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl->getName();
 	}
 	return toReturn;
 }
@@ -235,18 +240,18 @@ void FunctBlock::debug(QString tbs)const
 	qDebug() << tbs << "Debuging" << this->name;
 	
 	qDebug() << tbs << "VARIABLES{";
-	QHashIterator<QString, Variable> var(this->variables);
+	QHashIterator<QString, Variable*> var(this->variables);
 	while ( var.hasNext() ) {
 		var.next();
-		var.value().debug(nxTbs);
+		var.value()->debug(nxTbs);
 	}
 	qDebug() << tbs << "}";
 	
 	qDebug() << tbs << "RULE BLOCK{";
-	QHashIterator<QString, RuleBlock> j(this->ruleBlocks);
+	QHashIterator<QString, RuleBlock*> j(this->ruleBlocks);
 	while (j.hasNext()) {
 		j.next();
-		j.value().debug(nxTbs);
+		j.value()->debug(nxTbs);
 	}
 	qDebug() << tbs << "}";
 }
@@ -256,11 +261,11 @@ FunctBlock FunctBlock::operator=(const FunctBlock &fb)
 	FunctBlock tmp(fb);
 	return tmp;
 }
-QHash<QString, RuleBlock> FunctBlock::getRuleBlocks()const
+QHash<QString, RuleBlock*> FunctBlock::getRuleBlocks()const
 {
 	return this->ruleBlocks;
 }
-QHash<QString, Variable> FunctBlock::getVariables()const
+QHash<QString, Variable*> FunctBlock::getVariables()const
 {
 	return this->variables;
 }

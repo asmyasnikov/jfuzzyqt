@@ -11,23 +11,25 @@ class Defuzzifier;
 class LinguisticTerm;
 class MembershipFunction;
 
-class Variable
+class Variable : public QObject
 {
+	Q_OBJECT
+
 public:
-	Variable();
-	Variable(QString name);
+	Variable(QObject* parent=NULL);
+	Variable(QObject* parent,QString name);
 	~Variable();
 	
 	QString getName();
 	void setName(QString name);
-	void addLinguisticTerm(LinguisticTerm lt);
-	const MembershipFunction* getMembershipFunction(QString termName);
+	void addLinguisticTerm(LinguisticTerm* lt);
+	const MembershipFunction* getMembershipFunction(const QString& termName);
 	Defuzzifier* getDefuzzifier();
 	void setValue(double value);
 	double getValue();
 	bool isOutputVariable() const;
 	void defuzzify();
-	LinguisticTerm getLinguisticTerm(QString termName);
+	LinguisticTerm* getLinguisticTerm(const QString& termName);
 	void setDefaultValue(double value);
 	void setDefuzzifier(Defuzzifier* deffuzifier);
 	void debug(QString tbs) const;
@@ -36,7 +38,7 @@ private:
 	double value;
 	double* defaultValue;
 	Defuzzifier* deffuzifier;
-	QHash<QString, LinguisticTerm> linguisticTerms;///<Terms for this variable
+	QHash<QString, LinguisticTerm*> linguisticTerms;///<Terms for this variable
 };
 
 #endif // VARIABLE_H

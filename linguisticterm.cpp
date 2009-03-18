@@ -7,12 +7,14 @@
 #include <QList>
 #include <QDebug>
 
-LinguisticTerm::LinguisticTerm()
+LinguisticTerm::LinguisticTerm(QObject* parent)
+: QObject (parent)
 {
 	this->membershipFunction=NULL;
 }
 
-LinguisticTerm::LinguisticTerm(QString& termName, MembershipFunction* membershipFunction)
+LinguisticTerm::LinguisticTerm(QObject* parent, QString& termName, MembershipFunction* membershipFunction)
+: QObject (parent)
 {
 	this->termName = termName;
 	this->membershipFunction = membershipFunction;
@@ -32,7 +34,8 @@ QString LinguisticTerm::getTermName() const{
 	return this->termName;
 }
 
-void LinguisticTerm::setTermName(const QString name){
+void LinguisticTerm::setTermName(const QString& name)
+{
 	this->termName = name;
 }
 

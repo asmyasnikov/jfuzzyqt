@@ -35,13 +35,10 @@ bool JFuzzyQt::load(QString fileUri)
 	FCLParser fclParser;
 	QString line = fclParser.readLine(in);
 
-	FunctBlock* functionBlock = new FunctBlock(this);
-
 	while (!line.isNull()) { ///<File Cycle (only works for one function block
-		
 		if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
 		{
-			functionBlock->setName(rxFunctionBlock.cap(1));
+			FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
 			fclParser.loadFunctBlock(in,*functionBlock);
 			this->addFunctionBlock(functionBlock);
 		}///<END If Function Block
@@ -53,8 +50,11 @@ bool JFuzzyQt::load(QString fileUri)
 }
 bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 {
+	qWarning("Only one function block is supported");
+
 	bool toReturn = false;
 	functionBlock->setParent(this);
+
 	if ( !this->functionBlocks.contains( functionBlock->getName() ))
 	{
 		this->functionBlocks.insert(functionBlock->getName(),functionBlock);
@@ -127,12 +127,4 @@ double JFuzzyQt::getValue(QString varName)
 void JFuzzyQt::debug() const
 {
 	this->functionBlocks.value(this->defaultBlockName)->debug("");
-}
-QString JFuzzyQt::getDefaultBlockName()const
-{
-	return this->defaultBlockName;
-}
-QHash<QString, FunctBlock*> JFuzzyQt::getFunctionBlocks()const
-{
-	return this->functionBlocks;
 }

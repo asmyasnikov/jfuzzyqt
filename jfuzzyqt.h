@@ -13,6 +13,9 @@
 
 class JFuzzyQt : public QObject
 {
+
+	Q_OBJECT
+
 public:
 	JFuzzyQt(QObject *parent=NULL);
 	~JFuzzyQt();
@@ -21,10 +24,7 @@ public:
 	void evaluate();
 	double getValue(QString varName);
 	void debug() const;
-	QHash<QString, FunctBlock*> getFunctionBlocks()const;
-	QString getDefaultBlockName()const;
-	FCLParser* getFCLParser()const;
-
+	
 private:
 	QHash<QString, FunctBlock*> functionBlocks;
 	QString defaultBlockName;

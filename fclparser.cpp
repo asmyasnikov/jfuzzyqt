@@ -41,9 +41,9 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 	while (!line.isNull()) {
 		if (rxlen.indexIn(line) > -1) 
 		{
-			Variable v( rxlen.cap(1) );
-			qDebug()<<"[FCLParser::loadVarInput]:adding variable"<<v.getName();
-			funcBlock.addVariable(v.getName(),v);
+			Variable *v = new Variable(this, rxlen.cap(1) );
+			qDebug() << "[FCLParser::loadVarInput]:adding variable" << v->getName();
+			funcBlock.addVariable(v->getName(),v);
 		}else if (rxOut.indexIn(line) > -1) 
 		{
 			break;
@@ -60,11 +60,11 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 	while (!line.isNull()) {
 		if (rxlen.indexIn(line) > -1) 
 		{
-			Variable v( rxlen.cap(1) );
-			qDebug()<<"[FCLParser::loadVarOutput]:adding variable"<<v.getName();
-			funcBlock.addVariable(v.getName(),v);
+			Variable *v = new Variable(this, rxlen.cap(1) );
+			qDebug()<<"[FCLParser::loadVarOutput]:adding variable"<<v->getName();
+			funcBlock.addVariable(v->getName(),v);
 		}
-		if (rxOut.indexIn(line) > -1) 
+		else if (rxOut.indexIn(line) > -1) 
 		{
 			break;
 		}
@@ -86,11 +86,12 @@ void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString va
 	{	
 		if ( rxExtra.indexIn(line) > -1)
 		{
-			Variable v ( rxExtra.cap(1) );
-			funcBlock.addVariable( v.getName() , v );
-			LinguisticTerm lt;
-			lt.setTermName( rxExtra.cap(1) );
-			lt.loadFrom( rxExtra.cap(2) );
+			Variable *v = new Variable(this, rxExtra.cap(1) );
+			funcBlock.addVariable( v->getName() , v );
+			
+			LinguisticTerm* lt = new LinguisticTerm(this);
+			lt->setTermName( rxExtra.cap(1) );
+			lt->loadFrom( rxExtra.cap(2) );
 			funcBlock.setVariable( rxExtra.cap(1) , lt );
 		}
 		else if (rxOut.indexIn(line) > -1) 
@@ -120,11 +121,11 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name
 	{
 		if ( rxExtra.indexIn(line) > -1)
 		{
-			Variable v ( rxExtra.cap(1) );
-			funcBlock.addVariable( v.getName() , v );
-			LinguisticTerm lt;
-			lt.setTermName( rxExtra.cap(1) );
-			lt.loadFrom( rxExtra.cap(2) );
+			Variable *v = new Variable(this, rxExtra.cap(1) );
+			funcBlock.addVariable( v->getName() , v );
+			LinguisticTerm* lt = new LinguisticTerm(this);
+			lt->setTermName( rxExtra.cap(1) );
+			lt->loadFrom( rxExtra.cap(2) );
 			funcBlock.setVariable( rxExtra.cap(1) , lt );
 		}
 		else if (rxOut.indexIn(line) > -1) 
@@ -323,7 +324,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 			else
 			{
 				qDebug() << "[FCLParser::loadFunctBlock]:" << rb->toQString();
-				funcBlock.addRuleBlock ( *rb );///< Rule block
+				funcBlock.addRuleBlock ( rb );///< Rule block
 				delete rb;
 			}
 
