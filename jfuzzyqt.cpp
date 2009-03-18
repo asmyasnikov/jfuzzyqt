@@ -14,12 +14,6 @@ JFuzzyQt::JFuzzyQt() : QObject()
 JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 {
 }
-
-JFuzzyQt::JFuzzyQt(const JFuzzyQt& fuzzy)
-{
-	this->functionBlocks = fuzzy.getFunctionBlocks();
-	this->defaultBlockName = fuzzy.getDefaultBlockName();
-}
 JFuzzyQt::~JFuzzyQt()
 {
 
@@ -41,16 +35,17 @@ bool JFuzzyQt::load(QString fileUri)
 	QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
 
 	QTextStream in(&file);
+	FCLParser fclParser;
 	QString line = fclParser.readLine(in);
 
-	FunctBlock functionBlock;
+	FunctBlock* functionBlock = new FunctBlock(this);
 
 	while (!line.isNull()) { ///<File Cycle (only works for one function block
 		
 		if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
 		{
-			functionBlock.setName(rxFunctionBlock.cap(1));
-			fclParser.loadFunctBlock(in,functionBlock);  ///< Has a HUGE bug
+			functionBlock->setName(rxFunctionBlock.cap(1));
+			fclParser.loadFunctBlock(in,*functionBlock);
 			this->addFunctionBlock(functionBlock);
 		}///<END If Function Block
 		line = fclParser.readLine(in);
@@ -59,17 +54,18 @@ bool JFuzzyQt::load(QString fileUri)
 	
 	return toReturn;
 }
-bool JFuzzyQt::addFunctionBlock(FunctBlock functionBlock)
+bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 {
 	bool toReturn = false;
-	if ( !this->functionBlocks.contains( functionBlock.getName() ))
+	functionBlock->setParent(this);
+	if ( !this->functionBlocks.contains( functionBlock->getName() ))
 	{
-		this->functionBlocks.insert(functionBlock.getName(),functionBlock);
+		this->functionBlocks.insert(functionBlock->getName(),functionBlock);
 		toReturn = true;
 	}
 	if ( this->defaultBlockName == "" )
 	{
-		this->defaultBlockName = functionBlock.getName();
+		this->defaultBlockName = functionBlock->getName();
 	}
 	return toReturn;
 }
@@ -82,7 +78,12 @@ void JFuzzyQt::setVariable(QString varName, double value)
 	if( functionBlocks.size() > 0 )
 	{
 		qWarning("Only one function block is supported");
-		this->functionBlocks[ this->defaultBlockName ].setValue(varName,value);
+		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
+		if ( i!=this->functionBlocks.end() )
+		{
+			i.value()->setValue(varName,value);
+		}
+		//this->functionBlocks[ this->defaultBlockName ].setValue(varName,value);
 	}
 	else
 	{
@@ -94,7 +95,11 @@ void JFuzzyQt::evaluate()
 	if( functionBlocks.size() > 0 )
 	{
 		qWarning("Only one function block is supported");
-		this->functionBlocks[ this->defaultBlockName ].evaluate();
+		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
+		if ( i!=this->functionBlocks.end() )
+		{
+			i.value()->evaluate();
+		}
 	}
 	else
 	{
@@ -106,7 +111,13 @@ double JFuzzyQt::getValue(QString varName)
 	if( functionBlocks.size() > 0 )
 	{
 		qWarning("Only one function block is supported");
-		return this->functionBlocks[ this->defaultBlockName ].getValue(varName);
+		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
+		if ( i!=this->functionBlocks.end() )
+		{
+			return i.value()->getValue(varName);
+		}
+		//return this->functionBlocks.value(this->defaultBlockName)->getValue(varName);
+		//return this->functionBlocks[ this->defaultBlockName ].getValue(varName);
 	}
 	else
 	{
@@ -118,13 +129,13 @@ double JFuzzyQt::getValue(QString varName)
 
 void JFuzzyQt::debug() const
 {
-	this->functionBlocks.value(this->defaultBlockName).debug("");
+	this->functionBlocks.value(this->defaultBlockName)->debug("");
 }
 QString JFuzzyQt::getDefaultBlockName()const
 {
 	return this->defaultBlockName;
 }
-QHash<QString, FunctBlock> JFuzzyQt::getFunctionBlocks()const
+QHash<QString, FunctBlock*> JFuzzyQt::getFunctionBlocks()const
 {
 	return this->functionBlocks;
 }
