@@ -1,11 +1,11 @@
 #ifndef RULE_H
 #define RULE_H
 
+#include "ruleexpression.h"
+#include "ruleterm.h"
 #include <QObject>
 #include <QString>
 #include <QLinkedList>
-#include "ruleexpression.h"
-#include "ruleterm.h"
 
 class Rule : public QObject
 {
@@ -20,10 +20,14 @@ public:
 	RuleExpression* getAntecedents()const;
 	const QLinkedList<RuleTerm> getConsequents()const ;
 	QString toQString() const;
+	void setDegreeOfSupport(const double& degreeOfSupport);
+	void reset();
+
 private:
 	QString name;
 	RuleExpression* antecedents;
 	QLinkedList<RuleTerm> consequents;
+	double degreeOfSupport;
 };
 
 #endif // RULE_H

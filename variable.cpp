@@ -8,7 +8,7 @@ Variable::Variable(QObject* parent)
 	this->deffuzifier=NULL;
 	linguisticTerms.clear();
 	this->value=0;
-	this->defaultValue=NULL;
+	this->defaultValue.clear();
 }
 
 Variable::Variable(QObject* parent,QString name)
@@ -17,7 +17,7 @@ Variable::Variable(QObject* parent,QString name)
 	this->name=name;
 	this->deffuzifier=NULL;
 	linguisticTerms.clear();
-	this->defaultValue=NULL;
+	this->defaultValue.clear();
 	this->value=0;
 }
 Variable::~Variable()
@@ -26,11 +26,6 @@ Variable::~Variable()
 	{
 		delete(this->deffuzifier);
 	}
-	if (this->defaultValue!=NULL)
-	{
-		delete this->defaultValue;
-	}
-
 }
 QString Variable::getName()const
 {
@@ -68,7 +63,7 @@ bool Variable::isOutputVariable() const
 }
 void Variable::defuzzify()
 {
-	qDebug()<<"Variable::isOutputVarable->Uninplemented";
+	qDebug()<<"[Variable::defuzzify]:Uninplemented";
 }
 
 /*! \brief Get 'termName' linguistic term
@@ -85,11 +80,6 @@ LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
 }
 void Variable::setDefaultValue(const double& value)
 {
-	if (this->defaultValue!=NULL)
-	{
-		delete this->defaultValue;
-	}
-	this->defaultValue = new double(value);
 }
 
 void Variable::setDefuzzifier(Defuzzifier* deffuzifier)
@@ -114,4 +104,17 @@ void Variable::debug(QString tbs) const
 		var.value()->debug(tbs);
 	}
 	qDebug() << tbs<< "}";
+}
+void Variable::reset()
+{
+	if (this->deffuzifier != NULL)
+	{
+		this->deffuzifier->reset();
+		///<Set default value for output variables (if any default value was defined)
+		if( defaultValue.isValid() )
+		{
+			this->value = defaultValue.toDouble() ;
+		}
+	}
+	latestDefuzzifiedValue = defaultValue;
 }

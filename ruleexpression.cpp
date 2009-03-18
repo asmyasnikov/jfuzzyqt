@@ -198,8 +198,31 @@ QString RuleExpression::toQString()const
 	str += ")" ;
 	return str;
 }
-/*RuleExpression RuleExpression::operator=(const RuleExpression &re)
+void RuleExpression::reset()
 {
-	RuleExpression tmp(re);
-	return tmp;
-}*/
+	switch (term1Type)
+	{
+		case RULETERM:
+			this->term1.ruleTerm->getVariable()->reset();
+			break;
+		case RULEEXPRESSION:
+			this->term1.ruleExpression->reset();
+			break;
+		case UNDEF:
+			qWarning() << "[RuleExpression::reset]:Error reseting term1";
+			break;
+	}
+	
+	switch (term2Type)
+	{
+		case RULETERM:
+			this->term2.ruleTerm->getVariable()->reset();
+			break;
+		case RULEEXPRESSION:
+			this->term2.ruleExpression->reset();
+			break;
+		case UNDEF:
+			qWarning() << "[RuleExpression::reset]:Error reseting term2";
+			break;
+	}
+}

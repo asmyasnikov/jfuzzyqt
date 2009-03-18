@@ -21,7 +21,6 @@ public:
 	const bool isNegated() const;
 	void setNegated(const bool& value);
 	QString toQString()const;
-	//RuleTerm operator=(const RuleTerm &rt);
 
 private:
 	/** Is it negated? */

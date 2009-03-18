@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QHash>
+#include <QVariant>
 #include "linguisticterm.h"
 #include "membershipfunction.h"
 
@@ -33,12 +34,15 @@ public:
 	void setDefaultValue(const double& value);
 	void setDefuzzifier(Defuzzifier* deffuzifier);
 	void debug(QString tbs) const;
+	void reset();
+
 private:
 	QString name;
 	double value;
-	double* defaultValue;
+	QVariant defaultValue;
 	Defuzzifier* deffuzifier;
 	QHash<QString, LinguisticTerm*> linguisticTerms;///<Terms for this variable
+	QVariant latestDefuzzifiedValue;///<Latest defuzzified value
 };
 
 #endif // VARIABLE_H

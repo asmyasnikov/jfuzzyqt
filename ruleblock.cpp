@@ -36,11 +36,15 @@ RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
 }
 RuleBlock::~RuleBlock()
 {
-	qDebug()<< "[RuleBlock::~RuleBlock]:Uninplemented.";
 }
 void RuleBlock::reset()
 {
-	qDebug()<< "[void RuleBlock::reset]:Uninplemented.";
+	QLinkedList<Rule>::iterator fr = rules.begin();
+	while (fr != rules.end()) {
+		fr->setDegreeOfSupport(0);
+		fr->reset();
+		fr++;
+	}
 }
 void RuleBlock::evaluate()
 {
@@ -120,7 +124,6 @@ QString RuleBlock::toQString()const
 		tmp += "\n";
 		i++;
 	}
-
 	tmp += "}";
 	return tmp;
 }

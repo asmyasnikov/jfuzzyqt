@@ -70,3 +70,16 @@ QString Rule::toQString() const
 	str += "}";
 	return str;
 }
+void Rule::setDegreeOfSupport(const double& degreeOfSupport)
+{
+	this->degreeOfSupport = degreeOfSupport;
+}
+void Rule::reset()
+{
+	QLinkedList<RuleTerm>::iterator i = this->consequents.begin();
+	while (i != this->consequents.end()) {
+		i->getVariable()->reset();
+		i++;
+	}
+	this->antecedents->reset();
+}

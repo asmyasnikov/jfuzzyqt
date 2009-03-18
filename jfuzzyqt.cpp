@@ -13,7 +13,6 @@ JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 }
 JFuzzyQt::~JFuzzyQt()
 {
-
 }
 bool JFuzzyQt::load(QString fileUri)
 {
@@ -79,6 +78,7 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value)
 		if ( i!=this->functionBlocks.end() )
 		{
 			i.value()->setValue(varName.toLower(),value);
+			qDebug() << "[JFuzzyQt::setVariable]:variable"<< varName.toLower() <<"set to '"<< value <<"'";
 		}
 	}
 	else
@@ -104,7 +104,6 @@ void JFuzzyQt::evaluate()
 }
 double JFuzzyQt::getValue(const QString& varName)const
 {
-	
 	if( functionBlocks.size() > 0 )
 	{
 		qWarning("[JFuzzyQt::getValue]:Only one function block is supported");
