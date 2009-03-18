@@ -20,17 +20,17 @@ public:
 	Variable(QObject* parent,QString name);
 	~Variable();
 	
-	QString getName();
-	void setName(QString name);
+	QString getName()const;
+	void setName(const QString& name);
 	void addLinguisticTerm(LinguisticTerm* lt);
 	const MembershipFunction* getMembershipFunction(const QString& termName);
-	Defuzzifier* getDefuzzifier();
-	void setValue(double value);
-	double getValue();
+	Defuzzifier* getDefuzzifier()const;
+	void setValue(const double& value);
+	double getValue()const;
 	bool isOutputVariable() const;
 	void defuzzify();
 	LinguisticTerm* getLinguisticTerm(const QString& termName);
-	void setDefaultValue(double value);
+	void setDefaultValue(const double& value);
 	void setDefuzzifier(Defuzzifier* deffuzifier);
 	void debug(QString tbs) const;
 private:

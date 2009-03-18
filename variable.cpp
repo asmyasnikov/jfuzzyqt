@@ -32,11 +32,11 @@ Variable::~Variable()
 	}
 
 }
-QString Variable::getName()
+QString Variable::getName()const
 {
 	return this->name;
 }
-void Variable::setName(QString name)
+void Variable::setName(const QString& name)
 {
 	this->name=name;
 }
@@ -49,15 +49,15 @@ const MembershipFunction* Variable::getMembershipFunction(const QString& termNam
 {
 	return this->getLinguisticTerm(termName)->getMembershipFunction();
 }
-Defuzzifier* Variable::getDefuzzifier()
+Defuzzifier* Variable::getDefuzzifier()const
 {
 	return this->deffuzifier;
 }
-void Variable::setValue(double value)
+void Variable::setValue(const double& value)
 {
 	this->value=value;
 }
-double Variable::getValue()
+double Variable::getValue()const
 {
 	return this->value;
 }
@@ -83,7 +83,7 @@ LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
 	}
 	return this->linguisticTerms.value(termName);
 }
-void Variable::setDefaultValue(double value)
+void Variable::setDefaultValue(const double& value)
 {
 	if (this->defaultValue!=NULL)
 	{
