@@ -7,8 +7,6 @@
 RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
 {
 	this->name = "Unknown";
-	//RuleConnectionMethod and = new RuleConnectionMethodAndMin(), or = new RuleConnectionMethodOrMax();
-	//String ruleAccumulationMethodType = "SUM";
 	this->ruleActivationMethod=NULL;
 	this->ruleAccumulationMethod = NULL;
 	this->and=NULL;
@@ -28,9 +26,7 @@ RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
 	this->name = rb.getName();
 	this->ruleActivationMethod = NULL;
 	this->ruleAccumulationMethod = NULL;
-	//this->addRuleActivationMethod (new RuleActivationMethod(*rb.getRuleActivationMethod()));
 	this->addRuleActivationMethod ( rb.getRuleActivationMethod() );
-	//this->addRuleAccumulationMethod (new RuleAccumulationMethod(*rb.getRuleAccumulationMethod()));
 	this->addRuleAccumulationMethod ( rb.getRuleAccumulationMethod() );
 	
 	this->and=NULL;
