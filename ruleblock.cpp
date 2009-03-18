@@ -52,7 +52,7 @@ QString RuleBlock::getName()const
 }
 void RuleBlock::debug(QString tbs) const
 {
-	qDebug() << tbs << "[RuleBlock::debug]:Uninplemented.";
+	qDebug() << tbs << this->toQString();
 }
 void RuleBlock::addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod)
 {
@@ -80,11 +80,6 @@ RuleActivationMethod* RuleBlock::getRuleActivationMethod()const
 RuleAccumulationMethod* RuleBlock::getRuleAccumulationMethod()const
 {
 	return this->ruleAccumulationMethod;
-}
-RuleBlock RuleBlock::operator=(const RuleBlock &rb)
-{
-	RuleBlock tmp(rb);
-	return tmp;
 }
 void RuleBlock::addRule(const Rule &fuzzyRule)
 {

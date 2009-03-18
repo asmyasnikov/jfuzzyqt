@@ -256,11 +256,11 @@ void FunctBlock::debug(QString tbs)const
 	qDebug() << tbs << "}";
 }
 
-FunctBlock FunctBlock::operator=(const FunctBlock &fb)
+/*FunctBlock FunctBlock::operator=(const FunctBlock &fb)
 {
 	FunctBlock tmp(fb);
 	return tmp;
-}
+}*/
 QHash<QString, RuleBlock*> FunctBlock::getRuleBlocks()const
 {
 	return this->ruleBlocks;

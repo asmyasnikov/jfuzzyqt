@@ -32,7 +32,6 @@ public:
 	RuleConnectionMethod* getRuleConnectionMethodOr()const;
 	void setRuleConnectionMethodOr(RuleConnectionMethod *or);
 
-	RuleBlock operator=(const RuleBlock &rb);
 private:
 	QString name;
 	

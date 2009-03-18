@@ -37,7 +37,7 @@ public:
 	QHash<QString, RuleBlock*> getRuleBlocks()const;
 	QHash<QString, Variable*> getVariables()const;
 
-	FunctBlock operator=(const FunctBlock &fb);
+	//FunctBlock operator=(const FunctBlock &fb);
 private:
 	QString name; ///<Function block name
 	QHash<QString, RuleBlock*> ruleBlocks; ///<Several RuleBlocks indexed by name
