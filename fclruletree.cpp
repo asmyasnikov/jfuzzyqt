@@ -82,6 +82,5 @@ void FCLRuleTree::addExpression(QString exp)
 
 RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, RuleConnectionMethod *and, RuleConnectionMethod *or)const
 {
-	qDebug() << "[FCLRuleTree::getRuleExpression]:" << this->print();
 	return this->root->toRuleExpression(fb, and, or);
 }

@@ -135,7 +135,6 @@ RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, RuleConnectionMeth
 	{
 		re->addTerm2Rule(this->toRuleTermRight(fb));
 	}
-	qDebug() << "[FCLRuleNode::toRuleExpression] toQString():" << re->toQString();
 	return re;
 }
 RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
@@ -166,13 +165,10 @@ RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 	{
 		qWarning() << "[FCLRuleNode::toRuleTermLeft]: Error reading regular expression";
 	}
-
-	qDebug()<< "[FCLRuleNode::toRuleTermLeft]: " << rt->toQString();
 	return rt;
 }
 RuleTerm* FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
 {
-	qDebug()<< "[FCLRuleNode::toRuleTermRight]: " << this->value2;
 	QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
 	RuleTerm *rt = new RuleTerm();
 	

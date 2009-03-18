@@ -50,7 +50,7 @@ bool JFuzzyQt::load(QString fileUri)
 }
 bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 {
-	qWarning("Only one function block is supported");
+	qWarning("[JFuzzyQt::addFunctionBlock]:Only one function block is supported");
 
 	bool toReturn = false;
 	functionBlock->setParent(this);
@@ -74,24 +74,23 @@ void JFuzzyQt::setVariable(QString varName, double value)
 {
 	if( functionBlocks.size() > 0 )
 	{
-		qWarning("Only one function block is supported");
+		qWarning("[JFuzzyQt::setVariable]:Only one function block is supported");
 		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{
 			i.value()->setValue(varName,value);
 		}
-		//this->functionBlocks[ this->defaultBlockName ].setValue(varName,value);
 	}
 	else
 	{
-			qWarning("There are no FunctionBlocks");
+		qWarning("[JFuzzyQt::setVariable]:There are no FunctionBlocks");
 	}
 }
 void JFuzzyQt::evaluate()
 {
 	if( functionBlocks.size() > 0 )
 	{
-		qWarning("Only one function block is supported");
+		qWarning("[JFuzzyQt::evaluate]:Only one function block is supported");
 		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{
@@ -100,25 +99,23 @@ void JFuzzyQt::evaluate()
 	}
 	else
 	{
-			qWarning("There are no FunctionBlocks");
+			qWarning("[JFuzzyQt::evaluate]:There are no FunctionBlocks");
 	}
 }
 double JFuzzyQt::getValue(QString varName)
 {
 	if( functionBlocks.size() > 0 )
 	{
-		qWarning("Only one function block is supported");
+		qWarning("[JFuzzyQt::getValue]:Only one function block is supported");
 		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{
 			return i.value()->getValue(varName);
 		}
-		//return this->functionBlocks.value(this->defaultBlockName)->getValue(varName);
-		//return this->functionBlocks[ this->defaultBlockName ].getValue(varName);
 	}
 	else
 	{
-		qWarning("There are no FunctionBlocks");
+		qWarning("[JFuzzyQt::getValue]:There are no FunctionBlocks");
 	}
 	return 0;
 

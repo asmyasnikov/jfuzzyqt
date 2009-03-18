@@ -28,7 +28,7 @@ QString FCLParser::readLine(QTextStream &in)
 		str = str.toLower();
 		str.remove(QRegExp("//.*")); ///< remove comments 
 		str.replace(QRegExp("\\s+")," "); ///< convert tabs and multiple spaces to single space
-		qDebug() << "[FCLParser::readLine]:" << str;
+		qDebug() << "\n[FCLParser::readLine]:" << str;
 	}
 	return str;
 }
@@ -42,7 +42,6 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 		if (rxlen.indexIn(line) > -1) 
 		{
 			Variable *v = new Variable(this, rxlen.cap(1) );
-			qDebug() << "[FCLParser::loadVarInput]:adding variable" << v->getName();
 			funcBlock.addVariable(v->getName(),v);
 		}else if (rxOut.indexIn(line) > -1) 
 		{
@@ -61,7 +60,6 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 		if (rxlen.indexIn(line) > -1) 
 		{
 			Variable *v = new Variable(this, rxlen.cap(1) );
-			qDebug()<<"[FCLParser::loadVarOutput]:adding variable"<<v->getName();
 			funcBlock.addVariable(v->getName(),v);
 		}
 		else if (rxOut.indexIn(line) > -1) 
@@ -163,10 +161,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			}
 			else
 			{
-				qDebug() << "\n\n[FCLParser::loadRuleBlock]:" << r->toQString();
 				ruleBlock->addRule( *r );
-				qDebug() << "\n[FCLParser::loadRuleBlock]:" << ruleBlock->toQString();
-				delete r;
 			}
 		}
 		else if (rxOut.indexIn(line) > -1) 
@@ -176,11 +171,12 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 			{
 				qWarning() << "[FCLParser::loadRuleBlock]: No rule acumulation method created.";
 			}
-			ruleBlock->addRuleAccumulationMethod( ram );  ///<BUG
-			qDebug() << "[FCLParser::loadRuleBlock]:" <<ruleBlock->toQString();
-			ruleBlock->setRuleConnectionMethodAnd(and);
-			ruleBlock->setRuleConnectionMethodOr(or);
-			funcBlock.addRuleBlock(ruleBlock);
+			else
+			{
+				ruleBlock->addRuleAccumulationMethod( ram );
+				ruleBlock->setRuleConnectionMethodAnd(and);
+				ruleBlock->setRuleConnectionMethodOr(or);
+			}
 			break;
 		}
 		else if (rxAND.indexIn(line) > -1) 
@@ -276,7 +272,6 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 		qWarning()<<"Unknown rule " << rule;
 		return NULL;
 	}
-	qDebug() << "[FCLParser::loadRule]:" << fuzzyRule->toQString();
 	return fuzzyRule;
 }
 RuleExpression* FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
@@ -323,9 +318,8 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 			}
 			else
 			{
-				qDebug() << "[FCLParser::loadFunctBlock]:" << rb->toQString();
 				funcBlock.addRuleBlock ( rb );///< Rule block
-				delete rb;
+				qDebug() << "[FCLParser::loadFunctBlock]:" << rb->toQString();
 			}
 
 		}
