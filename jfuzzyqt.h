@@ -20,9 +20,9 @@ public:
 	JFuzzyQt(QObject *parent=NULL);
 	~JFuzzyQt();
 	bool load(QString fileUri);
-	void setVariable(QString varName, double value);
+	void setVariable(const QString& varName, const double& value);
 	void evaluate();
-	double getValue(QString varName);
+	double getValue(const QString& varName)const;
 	void debug() const;
 	
 private:

@@ -70,7 +70,7 @@ bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 /*! \brief Sets var from default functions block inserted
 *
 */
-void JFuzzyQt::setVariable(QString varName, double value)
+void JFuzzyQt::setVariable(const QString& varName, const double& value)
 {
 	if( functionBlocks.size() > 0 )
 	{
@@ -78,7 +78,7 @@ void JFuzzyQt::setVariable(QString varName, double value)
 		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{
-			i.value()->setValue(varName,value);
+			i.value()->setValue(varName.toLower(),value);
 		}
 	}
 	else
@@ -102,15 +102,16 @@ void JFuzzyQt::evaluate()
 			qWarning("[JFuzzyQt::evaluate]:There are no FunctionBlocks");
 	}
 }
-double JFuzzyQt::getValue(QString varName)
+double JFuzzyQt::getValue(const QString& varName)const
 {
+	
 	if( functionBlocks.size() > 0 )
 	{
 		qWarning("[JFuzzyQt::getValue]:Only one function block is supported");
-		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
+		QHash<QString, FunctBlock*>::const_iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{
-			return i.value()->getValue(varName);
+			return i.value()->getValue( varName.toLower() );
 		}
 	}
 	else
