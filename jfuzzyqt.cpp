@@ -8,9 +8,6 @@
 #include <QFile>
 #include <QTextStream>
 
-JFuzzyQt::JFuzzyQt() : QObject()
-{
-}
 JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 {
 }

@@ -14,8 +14,7 @@
 class JFuzzyQt : public QObject
 {
 public:
-	JFuzzyQt();
-	JFuzzyQt(QObject *parent);
+	JFuzzyQt(QObject *parent=NULL);
 	~JFuzzyQt();
 	bool load(QString fileUri);
 	void setVariable(QString varName, double value);
