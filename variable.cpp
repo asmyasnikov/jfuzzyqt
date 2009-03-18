@@ -79,7 +79,7 @@ LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
 	//if( lt == null ) throw new RuntimeException("No such linguistic term: '" + termName + "'");
 	if( !this->linguisticTerms.contains(termName))
 	{
-		qCritical("Variable::getLinguisticTerm:No such linguistic term: '" + termName.toAscii() + "'");
+		qCritical("[Variable::getLinguisticTerm]:No such linguistic term: '" + termName.toAscii() + "'");
 	}
 	return this->linguisticTerms.value(termName);
 }
