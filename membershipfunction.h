@@ -2,21 +2,29 @@
 #define MEMBERSHIPFUNCTION_H
 
 #include <QString>
+#include <QObject>
 
 class Value;
 
-class MembershipFunction
+class MembershipFunction : public QObject
 {
+	Q_OBJECT
+
 public:
-	enum MembershipType{FunctionContinuous,FunctionCosine,FunctionDifferenceSigmoidal,FunctionDiscrete,FunctionFuncion,
-	FunctionGaussian,FunctionGenBell,FunctionGenericSingleton,FunctionPieceWiseLinear,FunctionSigmoidal,
-	FunctionSingleton,FunctionTrapetzoidal,FunctionTriangular};
+	enum MembershipType
+	{
+		FunctionContinuous,FunctionCosine,FunctionDifferenceSigmoidal,
+		FunctionDiscrete,FunctionFuncion,FunctionGaussian,
+		FunctionGenBell,FunctionGenericSingleton,FunctionPieceWiseLinear,
+		FunctionSigmoidal,FunctionSingleton,FunctionTrapetzoidal,
+		FunctionTriangular
+	};
 	
 	bool discrete;
 	Value* parameters;
 	MembershipType type;
 
-	MembershipFunction(MembershipType type);
+	MembershipFunction(QObject* parent, MembershipType type);
 	MembershipFunction(MembershipType type, MembershipFunction& membership);
 	~MembershipFunction();
 	
@@ -28,6 +36,7 @@ public:
 	const bool isDiscrete()const;
 	const QString getName()const;
 	virtual void debug(QString tbs)const;
+
 private:
 	//-------------------------------------------------------------------------
 	// Variables
@@ -38,6 +47,7 @@ private:
 	double* universeMax;
 	/** Universe min (range min) */
 	double* universeMin;
+
 };
 
 #endif // MEMBERSHIPFUNCTION_H

@@ -69,16 +69,13 @@ bool LinguisticTerm::loadFrom(QString qString)
 		{
 			delete this->membershipFunction;
 		}
-		this->membershipFunction = new MembershipFunctionPieceWiseLinear(x, y);
-		/*qDebug() << "\n\nxxxx>";
-		this->membershipFunction->debug("");
-		qDebug() << "<xxxx\n\n";*/
+		this->membershipFunction = new MembershipFunctionPieceWiseLinear(this, x, y);
 		toReturn = true;
 
 	}else if (rxSingleton.indexIn(qString) > -1) ///<Singleton
 	{
 		Value singleTonValueX ( rxSingleton.cap(0).toDouble() );
-		this->membershipFunction = new MembershipFunctionSingleton(singleTonValueX);
+		this->membershipFunction = new MembershipFunctionSingleton(this, singleTonValueX);
 		toReturn = true;
 	}else
 	{

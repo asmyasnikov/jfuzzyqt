@@ -41,10 +41,10 @@ void RuleActivationMethod::setName(QString name)
 void RuleActivationMethod::imply(QLinkedList<RuleTerm>::iterator fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
 {
 	qDebug() << "[RuleActivationMethod::imply]:Unimplemented";
-	/*Variable* variable = fuzzyRuleTerm->getVariable();
+	Variable* variable = fuzzyRuleTerm->getVariable();
 	Defuzzifier* defuzzifier = variable->getDefuzzifier();
-	const MembershipFunction* mf = fuzzyRuleTerm->getMembershipFunction();
-	double membership, y, x, aggregated = 0;
+	//const MembershipFunction* mf = fuzzyRuleTerm->getMembershipFunction();
+	/*double membership, y, x, aggregated = 0;
 
 	// Both are equal? (both discrete or both continuous?)
 	if( mf->isDiscrete() != defuzzifier->isDiscrete() )

@@ -12,8 +12,8 @@
 * See also 'membership()' for a precise definition.
 */
 
-MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QList<Value> x, QList<Value> y)
-	:MembershipFunctionContinuous(FunctionPieceWiseLinear)
+MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* parent, QList<Value> x, QList<Value> y)
+	:MembershipFunctionContinuous(parent, FunctionPieceWiseLinear)
 {
 	if ( x.count()<1 )
 	{

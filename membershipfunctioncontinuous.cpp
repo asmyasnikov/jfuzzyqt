@@ -1,6 +1,6 @@
 #include "membershipfunctioncontinuous.h"
 
-MembershipFunctionContinuous::MembershipFunctionContinuous(MembershipType type):MembershipFunction(type)
+MembershipFunctionContinuous::MembershipFunctionContinuous(QObject* parent, MembershipType type):MembershipFunction(parent, type)
 {
 
 }

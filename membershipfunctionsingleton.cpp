@@ -2,7 +2,8 @@
 #include "value.h"
 #include <QDebug>
 
-MembershipFunctionSingleton::MembershipFunctionSingleton(Value valueX):MembershipFunctionDiscrete(FunctionSingleton)
+MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, Value valueX)
+:MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
 	parameters = new Value[2];
 	parameters[0] = valueX;

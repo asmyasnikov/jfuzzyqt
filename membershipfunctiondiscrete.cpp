@@ -1,6 +1,7 @@
 #include "membershipfunctiondiscrete.h"
 
-MembershipFunctionDiscrete::MembershipFunctionDiscrete(MembershipType type):MembershipFunction(type)
+MembershipFunctionDiscrete::MembershipFunctionDiscrete(QObject* parent, MembershipType type)
+:MembershipFunction(parent, type)
 {
 	this->discrete = true;
 }

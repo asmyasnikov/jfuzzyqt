@@ -6,7 +6,7 @@
 class MembershipFunctionContinuous : public MembershipFunction
 {
 public:
-	MembershipFunctionContinuous(MembershipType type);
+	MembershipFunctionContinuous(QObject* parent, MembershipType type);
 	~MembershipFunctionContinuous();
 
 private:

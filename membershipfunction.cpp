@@ -2,7 +2,8 @@
 #include "value.h"
 #include <QDebug>
 
-MembershipFunction::MembershipFunction(MembershipType type)
+MembershipFunction::MembershipFunction(QObject* parent, MembershipType type)
+:QObject (parent)
 {
 	this->type = type;
 	this->universeMax = this->universeMin = NULL;
@@ -71,7 +72,8 @@ const QString MembershipFunction::getName() const
 }
 void MembershipFunction::debug(QString tbs)const
 {
-	switch (this->type){
+	switch (this->type)
+	{
 		case FunctionDiscrete:
 			qDebug() << tbs <<"[MembershipFunction::debug] virtual method called (FunctionDiscrete)";
 			break;

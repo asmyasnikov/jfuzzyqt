@@ -8,7 +8,7 @@
 class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 {
 public:
-	MembershipFunctionPieceWiseLinear(QList<Value> x, QList<Value> y);
+	MembershipFunctionPieceWiseLinear(QObject* parent, QList<Value> x, QList<Value> y);
 	~MembershipFunctionPieceWiseLinear();
 	void debug(QString tbs)const;
 
