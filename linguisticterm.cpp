@@ -75,6 +75,10 @@ bool LinguisticTerm::loadFrom(QString qString)
 	}else if (rxSingleton.indexIn(qString) > -1) ///<Singleton
 	{
 		Value singleTonValueX ( rxSingleton.cap(0).toDouble() );
+		if( this->membershipFunction!=NULL )
+		{
+			delete this->membershipFunction;
+		}
 		this->membershipFunction = new MembershipFunctionSingleton(this, singleTonValueX);
 		toReturn = true;
 	}else

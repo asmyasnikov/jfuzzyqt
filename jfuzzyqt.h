@@ -13,7 +13,6 @@
 
 class JFuzzyQt : public QObject
 {
-
 	Q_OBJECT
 
 public:
@@ -30,6 +29,7 @@ private:
 	QString defaultBlockName;
 	
 	bool addFunctionBlock(FunctBlock* functionBlock);
+
 };
 
 #endif // JFUZZYQT_H

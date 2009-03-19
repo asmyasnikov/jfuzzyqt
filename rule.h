@@ -17,10 +17,10 @@ public:
 	Rule(QObject *parent, QString name);
 	~Rule();
 	void addAntecedents(RuleExpression *antecedents);
-	void addConsequent(RuleTerm rt);
+	void addConsequent(RuleTerm* rt);
 	const QString Rule::getName()const;
 	RuleExpression* getAntecedents()const;
-	const QLinkedList<RuleTerm> getConsequents()const ;
+	const QList<RuleTerm*> getConsequents()const ;
 	QString toQString() const;
 	void setDegreeOfSupport(const double& degreeOfSupport);
 	void reset();
@@ -30,7 +30,7 @@ public:
 private:
 	QString name;
 	RuleExpression* antecedents;
-	QLinkedList<RuleTerm> consequents;
+	QList<RuleTerm*> consequents;
 	double degreeOfSupport;
 	double weight;
 };

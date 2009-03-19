@@ -1,4 +1,5 @@
 #include "ruleterm.h"
+#include <QDebug>
 
 RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 {
@@ -6,17 +7,13 @@ RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 	this->termName = "Undefined";
 	this->negated = false;
 }
-RuleTerm::RuleTerm(QObject* parent, Variable* variable, QString term, bool negated) : QObject(parent)
+RuleTerm::RuleTerm(QObject* parent, Variable* variable, QString term, bool negated) 
+: QObject(parent)
 {
 	this->variable = variable;
+	this->variable->setParent(this);
 	this->termName = term;
 	this->negated = negated;
-}
-RuleTerm::RuleTerm(const RuleTerm &rt): QObject()
-{
-	this->variable = rt.getVariable();
-	this->termName = rt.getName();
-	this->negated = rt.isNegated();
 }
 RuleTerm::~RuleTerm()
 {
@@ -49,6 +46,7 @@ Variable* RuleTerm::getVariable()const
 void RuleTerm::setVariable(Variable* variable)
 {
 	this->variable = variable;
+	this->variable->setParent(this);
 }
 
 QString RuleTerm::toQString()const

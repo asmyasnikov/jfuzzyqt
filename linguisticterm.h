@@ -1,3 +1,13 @@
+/*!
+* \file linguisticterm.h
+* \class LinguisticTerm
+* \author Marco Estanqueiro
+* \date 2009/03
+* \version 0.1
+* \brief A linguistic term is an asociation between a termName and a membership function
+*
+* From pcingola@users.sourceforge.net jFuzzyLogic project
+*/
 #ifndef LINGUISTICTERM_H
 #define LINGUISTICTERM_H
 

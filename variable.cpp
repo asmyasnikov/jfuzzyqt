@@ -39,6 +39,8 @@ void Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
 	lt->setParent(this);
 	linguisticTerms.insert(lt->getTermName(), lt);
+	qDebug() << "[Variable::addLinguisticTerm]:";
+	lt->debug("");
 }
 const MembershipFunction* Variable::getMembershipFunction(const QString& termName)
 {
@@ -69,12 +71,12 @@ void Variable::defuzzify()
 /*! \brief Get 'termName' linguistic term
 */
 LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
-{
-	//LinguisticTerm lt = linguisticTerms.get(termName);
-	//if( lt == null ) throw new RuntimeException("No such linguistic term: '" + termName + "'");
+{	
+	this->debug("");
 	if( !this->linguisticTerms.contains(termName))
 	{
 		qCritical("[Variable::getLinguisticTerm]:No such linguistic term: '" + termName.toAscii() + "'");
+		return NULL;
 	}
 	return this->linguisticTerms.value(termName);
 }
@@ -102,6 +104,10 @@ void Variable::debug(QString tbs) const
 	while ( var.hasNext() ) {
 		var.next();
 		var.value()->debug(tbs);
+	}
+	if(this->linguisticTerms.count()<1)
+	{
+		qDebug() << tbs<< "No Linguitic Terms";
 	}
 	qDebug() << tbs<< "}";
 }

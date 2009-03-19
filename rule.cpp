@@ -30,8 +30,9 @@ void Rule::addAntecedents(RuleExpression *antecedents)
 	antecedents->setParent(this);
 	this->antecedents = antecedents;
 }
-void Rule::addConsequent(RuleTerm rt)
+void Rule::addConsequent(RuleTerm* rt)
 {
+	rt->setParent(this);
 	this->consequents.append(rt);
 }
 const QString Rule::getName()const
@@ -42,7 +43,7 @@ RuleExpression* Rule::getAntecedents()const
 {
 	return antecedents;
 }
-const QLinkedList<RuleTerm> Rule::getConsequents()const
+const QList<RuleTerm*> Rule::getConsequents()const
 {
 	return this->consequents;
 }
@@ -63,11 +64,10 @@ QString Rule::toQString() const
 		str += "\n";
 	}
 	str += "consequents: ";
-	QLinkedList<RuleTerm>::const_iterator i = this->consequents.begin();
-	while (i != this->consequents.end()) {
-		str += i->toQString();
-		str += "\n";
-		i++;
+	
+	for (int i = 0; i < this->consequents.size(); ++i) {
+		 str += this->consequents.at(i)->toQString();
+		 str += "\n";
 	}
 
 	str += "}";
@@ -79,10 +79,8 @@ void Rule::setDegreeOfSupport(const double& degreeOfSupport)
 }
 void Rule::reset()
 {
-	QLinkedList<RuleTerm>::iterator i = this->consequents.begin();
-	while (i != this->consequents.end()) {
-		i->getVariable()->reset();
-		i++;
+	for (int i = 0; i < this->consequents.size(); ++i) {
+		this->consequents.at(i)->getVariable()->reset();
 	}
 	this->antecedents->reset();
 }
@@ -94,10 +92,8 @@ void Rule::evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu)
 	this->degreeOfSupport *= this->weight;
 
 	///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
-	QLinkedList<RuleTerm>::iterator i;
-	for (i = this->consequents.begin(); i != this->consequents.end(); ++i)
-	{
-		act.imply(i,accu,this->degreeOfSupport);
+	for (int i = 0; i < this->consequents.size(); ++i) {
+		act.imply(this->consequents.at(i),accu,this->degreeOfSupport);
 	}
 }
 double Rule::getWeight()const

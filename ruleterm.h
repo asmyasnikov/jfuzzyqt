@@ -10,7 +10,6 @@ class RuleTerm : public QObject
 {
 public:
 	RuleTerm(QObject* parent=NULL);
-	RuleTerm(const RuleTerm &rt);
 	RuleTerm(QObject* parent, Variable* variable, QString term, bool negated);
 	~RuleTerm();
 	Variable* getVariable()const;

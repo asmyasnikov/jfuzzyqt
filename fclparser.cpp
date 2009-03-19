@@ -121,10 +121,13 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name
 		{
 			Variable *v = new Variable(this, rxExtra.cap(1) );
 			funcBlock.addVariable( v->getName() , v );
+			
 			LinguisticTerm* lt = new LinguisticTerm(this);
 			lt->setTermName( rxExtra.cap(1) );
 			lt->loadFrom( rxExtra.cap(2) );
+			
 			funcBlock.setVariable( rxExtra.cap(1) , lt );
+			lt->debug("");
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
@@ -264,7 +267,7 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 		}
 		fuzzyRule->addAntecedents( antecedents );
 		Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
-		RuleTerm rt(NULL, v, rxTHEN.cap(2), false);
+		RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(2), false);
 		fuzzyRule->addConsequent(rt);
 	}
 	else
