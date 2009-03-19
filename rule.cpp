@@ -1,4 +1,5 @@
 #include "rule.h"
+#include <QDebug>
 
 Rule::Rule() 
 : QObject()
@@ -14,7 +15,6 @@ Rule::Rule(QObject *parent, QString name)
 Rule::Rule(const Rule &rule)
 {
 	this->name = rule.getName();
-	//this->addAntecedents( new RuleExpression(*rule.getAntecedents()) );
 	this->addAntecedents(rule.getAntecedents());
 	this->consequents = rule.getConsequents();
 }
@@ -82,4 +82,8 @@ void Rule::reset()
 		i++;
 	}
 	this->antecedents->reset();
+}
+void Rule::evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu)
+{
+	qDebug() << "[Rule::evaluate]:Unimplemented.";
 }

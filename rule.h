@@ -3,6 +3,8 @@
 
 #include "ruleexpression.h"
 #include "ruleterm.h"
+#include "ruleaccumulationmethod.h"
+#include "ruleactivationmethod.h"
 #include <QObject>
 #include <QString>
 #include <QLinkedList>
@@ -22,6 +24,7 @@ public:
 	QString toQString() const;
 	void setDegreeOfSupport(const double& degreeOfSupport);
 	void reset();
+	void evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu);
 
 private:
 	QString name;

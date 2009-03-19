@@ -46,9 +46,18 @@ void RuleBlock::reset()
 		fr++;
 	}
 }
+
+/*!
+ * \brief Evaluate fuzzy rule set 
+ */
 void RuleBlock::evaluate()
 {
-	qDebug()<< "[void RuleBlock::evaluate]:Uninplemented.";
+	///< Apply each rule
+	QLinkedList<Rule>::iterator i;
+	for (i = this->rules.begin(); i != this->rules.end(); ++i)
+	{
+		i->evaluate(*this->ruleActivationMethod, *this->ruleAccumulationMethod);
+	}
 }
 QString RuleBlock::getName()const
 {
