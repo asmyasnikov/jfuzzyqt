@@ -4,6 +4,7 @@
 #include "membershipfunctiondiscrete.h"
 #include "defuzzifierdiscrete.h"
 #include "defuzzifiercontinuous.h"
+#include <QDebug>
 
 RuleActivationMethod::RuleActivationMethod(QObject *parent, QString name)
 	: QObject(parent)
@@ -37,18 +38,19 @@ void RuleActivationMethod::setName(QString name)
 * Inference method
 * Add membershipfunction to deffuzifier (using 'min' as inference)
 */
-void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
+void RuleActivationMethod::imply(QLinkedList<RuleTerm>::iterator fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
 {
-	Variable* variable = fuzzyRuleTerm.getVariable();
+	qDebug() << "[RuleActivationMethod::imply]:Unimplemented";
+	/*Variable* variable = fuzzyRuleTerm->getVariable();
 	Defuzzifier* defuzzifier = variable->getDefuzzifier();
-	const MembershipFunction* mf = fuzzyRuleTerm.getMembershipFunction();
+	const MembershipFunction* mf = fuzzyRuleTerm->getMembershipFunction();
 	double membership, y, x, aggregated = 0;
 
 	// Both are equal? (both discrete or both continuous?)
 	if( mf->isDiscrete() != defuzzifier->isDiscrete() )
 	{
 		QString error = "MembershipFunction and Defuzzifier are neither both discrete nor both continuous\n\tTerm: ";
-		error.append(fuzzyRuleTerm.getName());
+		error.append(fuzzyRuleTerm->getName());
 		error.append("\n\tMembership function: ");
 		error.append(mf->getName());
 		error.append("\n\tDefuzzifier: ");
@@ -73,7 +75,7 @@ void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod 
 			x = mfd->valueX(i);
 
 			// Is term negated?
-			if( fuzzyRuleTerm.isNegated() ) membership = 1 - mf->membership(x);
+			if( fuzzyRuleTerm->isNegated() ) membership = 1 - mf->membership(x);
 			else membership = mf->membership(x);
 
 			y = imply(degreeOfSupport, membership); // Call to abstract implication method described above
@@ -99,7 +101,7 @@ void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod 
 		// Add membershipfunction to deffuzifier
 		for( i = 0; i < length; i++, x += step ) {
 			// Is term negated?
-			if( fuzzyRuleTerm.isNegated() ) membership = 1 - mf->membership(x);
+			if( fuzzyRuleTerm->isNegated() ) membership = 1 - mf->membership(x);
 			else membership = mf->membership(x);
 
 			y = imply(degreeOfSupport, membership); // Call to abstract implication method described above
@@ -108,7 +110,7 @@ void RuleActivationMethod::imply(RuleTerm fuzzyRuleTerm, RuleAccumulationMethod 
 			aggregated = ruleAccumulationMethod.aggregate(defuzzifierContinuous->getValue(i), y);
 			defuzzifierContinuous->setValue(i, aggregated);
 		}
-	}
+	}*/
 }
 QString RuleActivationMethod::getName()const
 {

@@ -226,3 +226,8 @@ void RuleExpression::reset()
 			break;
 	}
 }
+double RuleExpression::evaluate()
+{
+	qDebug() << "[RuleExpression::evaluate]:Unimplemented";
+	return 0;
+}

@@ -12,7 +12,7 @@
 class Rule : public QObject
 {
 public:
-	Rule();
+	Rule(QObject *parent=NULL);
 	Rule(const Rule &rule);
 	Rule(QObject *parent, QString name);
 	~Rule();
@@ -25,12 +25,14 @@ public:
 	void setDegreeOfSupport(const double& degreeOfSupport);
 	void reset();
 	void evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu);
+	double getWeight()const;
 
 private:
 	QString name;
 	RuleExpression* antecedents;
 	QLinkedList<RuleTerm> consequents;
 	double degreeOfSupport;
+	double weight;
 };
 
 #endif // RULE_H
