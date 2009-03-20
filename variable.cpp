@@ -64,7 +64,7 @@ bool Variable::isOutputVariable() const
 }
 QVariant Variable::defuzzify()
 {
-	qDebug()<<"[Variable::defuzzify]:Uninplemented";
+	qDebug()<<"[Variable::defuzzify]:beta";
 	QVariant ldv = this->deffuzifier->defuzzify();
 
 	// Only assign valid defuzzifier's result
@@ -73,7 +73,6 @@ QVariant Variable::defuzzify()
 		this->latestDefuzzifiedValue = ldv.toDouble();
 		this->value = this->latestDefuzzifiedValue.toDouble();
 	}
-
 	return latestDefuzzifiedValue;
 }
 

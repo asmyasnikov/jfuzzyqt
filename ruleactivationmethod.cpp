@@ -27,6 +27,7 @@ RuleActivationMethod::~RuleActivationMethod()
  */
 double RuleActivationMethod::imply(double degreeOfSupport, double membership)const
 {
+	qWarning() << "[RuleActivationMethod::imply]: Virtual Method called";
 	return 0;
 }
 void RuleActivationMethod::setName(QString name)
