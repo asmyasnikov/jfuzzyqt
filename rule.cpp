@@ -86,8 +86,13 @@ void Rule::reset()
 }
 void Rule::evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu)
 {
-	qDebug() << "[Rule::evaluate]:Unimplemented.";
-	this->degreeOfSupport = this->antecedents->evaluate(); ///< Evaluate antecedents
+	QVariant tmp = this->antecedents->evaluate(); ///< Evaluate antecedents
+	if ( !tmp.isValid() )
+	{
+		qCritical() << "[Rule::evaluate]:no antecedentes evaluation.";
+		tmp = 0;
+	}
+	this->degreeOfSupport = tmp.toDouble();
 	///< Apply weight
 	this->degreeOfSupport *= this->weight;
 

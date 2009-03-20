@@ -24,7 +24,7 @@ public:
 	QString getName()const;
 	void setName(const QString& name);
 	void addLinguisticTerm(LinguisticTerm* lt);
-	const MembershipFunction* getMembershipFunction(const QString& termName);
+	MembershipFunction* getMembershipFunction(const QString& termName);
 	Defuzzifier* getDefuzzifier()const;
 	void setValue(const double& value);
 	double getValue()const;
@@ -35,6 +35,7 @@ public:
 	void setDefuzzifier(Defuzzifier* deffuzifier);
 	void debug(QString tbs) const;
 	void reset();
+	double getMembership(const QString& termName);
 
 private:
 	QString name;
@@ -43,6 +44,7 @@ private:
 	Defuzzifier* deffuzifier;
 	QHash<QString, LinguisticTerm*> linguisticTerms;///<Terms for this variable
 	QVariant latestDefuzzifiedValue;///<Latest defuzzified value
+
 };
 
 #endif // VARIABLE_H

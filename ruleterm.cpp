@@ -72,8 +72,9 @@ QString RuleTerm::toQString()const
 	str += this->getName();
 	return str;
 }
-/*RuleTerm RuleTerm::operator=(const RuleTerm &rt)
+double RuleTerm::getMembership()const
 {
-	RuleTerm tmp(rt);
-	return tmp;
-}*/
+	double memb = variable->getMembership(this->termName);
+	if( this->negated ) memb = 1.0 - memb;
+	return memb;
+}

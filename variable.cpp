@@ -40,7 +40,7 @@ void Variable::addLinguisticTerm(LinguisticTerm* lt)
 	lt->setParent(this);
 	linguisticTerms.insert(lt->getTermName(), lt);
 }
-const MembershipFunction* Variable::getMembershipFunction(const QString& termName)
+MembershipFunction* Variable::getMembershipFunction(const QString& termName)
 {
 	return this->getLinguisticTerm(termName)->getMembershipFunction();
 }
@@ -120,4 +120,15 @@ void Variable::reset()
 		}
 	}
 	latestDefuzzifiedValue = defaultValue;
+}
+
+/** Evaluate 'termName' membershipfunction at 'value' */
+double Variable::getMembership(const QString& termName)
+{
+	MembershipFunction* mf = getMembershipFunction(termName);
+	if( mf == NULL )
+	{
+		qCritical() << "[Variable::getMembership]:No membership function";
+	}
+	return mf->membership(value);
 }

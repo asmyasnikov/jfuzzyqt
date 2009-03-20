@@ -39,7 +39,7 @@ void LinguisticTerm::setTermName(const QString& name)
 	this->termName = name;
 }
 
-const MembershipFunction* LinguisticTerm::getMembershipFunction()
+MembershipFunction* LinguisticTerm::getMembershipFunction()
 {
 	return this->membershipFunction;
 }

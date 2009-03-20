@@ -1,7 +1,19 @@
+/*!
+* \file ruleexpression.h
+* \class RuleExpression
+* \author Marco Estanqueiro
+* \date 2009/03
+* \version 0.1
+* \brief General rule expression term
+*
+* E.g.: "(temp IS hot AND pressure IS high) OR pressure IS low" 
+* Original author  pcingola@users.sourceforge.net (jFuzzyLogic)
+*/
 #ifndef RULEEXPRESSION_H
 #define RULEEXPRESSION_H
 
 #include <QObject>
+#include <QVariant>
 class RuleConnectionMethod;
 class RuleTerm;
 
@@ -28,7 +40,7 @@ public:
 	RuleExpression::term_t getTerm1Type()const;
 	RuleExpression::term_t getTerm2Type()const;
 	void reset();
-	double evaluate();
+	QVariant evaluate();
 
 private:
 	bool negated; ///<Is it negated?
@@ -39,6 +51,7 @@ private:
 	} term1,term2;
 	term_t term1Type;
 	term_t term2Type;
+
 };
 
 #endif // RULEEXPRESSION_H

@@ -226,8 +226,33 @@ void RuleExpression::reset()
 			break;
 	}
 }
-double RuleExpression::evaluate()
+QVariant RuleExpression::evaluate()
 {
-	qDebug() << "[RuleExpression::evaluate]:Unimplemented";
-	return 0;
+	qDebug() << "[RuleExpression::evaluate]:beta";
+	// Results for each term
+	QVariant resTerm1 = 0;
+	QVariant resTerm2 = 0;
+
+	// Evaluate term1: if it's an expression => recurse
+	if( this->term1Type == RULEEXPRESSION ) resTerm1 = this->term1.ruleExpression->evaluate();
+	else if( this->term1Type == RULETERM ) resTerm1 = this->term1.ruleTerm->getMembership();
+	else if( term1Type == UNDEF ) resTerm1.clear();
+
+	// Evaluate term2: if it's an expression => recurse
+	if( this->term2Type == RULEEXPRESSION ) resTerm2 = this->term2.ruleExpression->evaluate();
+	else if( this->term2Type == RULETERM ) resTerm2 = this->term2.ruleTerm->getMembership();
+	else if( term2Type == UNDEF ) resTerm2.clear();
+
+	QVariant result;
+	// No values? => return NaN
+	if( (term1Type == UNDEF) && (term2Type == UNDEF) ) return result;
+	// if we only have 1 term => just return that result
+	if( term1Type == UNDEF ) result = resTerm2;
+	else if( term2Type == UNDEF ) result = resTerm1;
+	// Ok, we've got 2 values => connect these 2 values 
+	else result = this->ruleConnectionMethod->connect(resTerm1.toDouble(), resTerm2.toDouble());
+
+	// Is this clause negated?
+	if( this->negated ) result = 1 - result.toDouble();
+	return result;
 }

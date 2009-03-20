@@ -20,6 +20,7 @@ public:
 	const bool isNegated() const;
 	void setNegated(const bool& value);
 	QString toQString()const;
+	double getMembership()const;
 
 private:
 	/** Is it negated? */

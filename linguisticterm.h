@@ -27,7 +27,7 @@ public:
 	
 	QString getTermName() const;
 	void setTermName(const QString& name);
-	const MembershipFunction* getMembershipFunction();
+	MembershipFunction* getMembershipFunction();
 	bool loadFrom(QString qString);
 	void debug(QString tbs) const;
 
