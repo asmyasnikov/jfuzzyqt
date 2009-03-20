@@ -84,13 +84,13 @@ void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString va
 	{	
 		if ( rxExtra.indexIn(line) > -1)
 		{
-			Variable *v = new Variable(this, rxExtra.cap(1) );
+			Variable *v = new Variable(this, varName );
 			funcBlock.addVariable( v->getName() , v );
 			
 			LinguisticTerm* lt = new LinguisticTerm(this);
 			lt->setTermName( rxExtra.cap(1) );
 			lt->loadFrom( rxExtra.cap(2) );
-			funcBlock.setVariable( rxExtra.cap(1) , lt );
+			funcBlock.setVariable( varName , lt );
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
@@ -119,15 +119,14 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name
 	{
 		if ( rxExtra.indexIn(line) > -1)
 		{
-			Variable *v = new Variable(this, rxExtra.cap(1) );
+			Variable *v = new Variable(this, name );
 			funcBlock.addVariable( v->getName() , v );
 			
 			LinguisticTerm* lt = new LinguisticTerm(this);
 			lt->setTermName( rxExtra.cap(1) );
 			lt->loadFrom( rxExtra.cap(2) );
 			
-			funcBlock.setVariable( rxExtra.cap(1) , lt );
-			lt->debug("");
+			funcBlock.setVariable( name , lt );
 		}
 		else if (rxOut.indexIn(line) > -1) 
 		{
