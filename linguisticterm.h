@@ -18,7 +18,6 @@ class MembershipFunction;
 
 class LinguisticTerm : public QObject
 {
-
 	Q_OBJECT
 
 public:
@@ -31,6 +30,7 @@ public:
 	const MembershipFunction* getMembershipFunction();
 	bool loadFrom(QString qString);
 	void debug(QString tbs) const;
+
 private:
 	QString termName;///<Terms's name
 	MembershipFunction* membershipFunction;///< Membership function 

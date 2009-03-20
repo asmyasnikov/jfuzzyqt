@@ -8,7 +8,7 @@ class MembershipFunctionDiscrete : public MembershipFunction
 public:
 	MembershipFunctionDiscrete(QObject* parent, MembershipType type);
 	~MembershipFunctionDiscrete();
-	virtual int size();
+	virtual int size()const;
 	virtual double valueX(int index);
 private:
 

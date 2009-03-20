@@ -9,6 +9,7 @@ public:
 	MembershipFunctionSingleton(QObject* parent, Value valueX);
 	~MembershipFunctionSingleton();
 	void debug(QString tbs)const;
+	int size()const;
 private:
 	
 };

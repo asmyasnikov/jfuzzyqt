@@ -25,5 +25,8 @@ void MembershipFunctionSingleton::debug(QString tbs)const
 	//parameters[1].debug(nxtTbs);
 	//qDebug() << tbs << "universeMax:" << this->universeMax;
 	//qDebug() << tbs << "universeMin:" << this->universeMin;
-		
+}
+int MembershipFunctionSingleton::size()const
+{
+	return 1;
 }

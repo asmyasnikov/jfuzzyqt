@@ -44,7 +44,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 	Variable* variable = fuzzyRuleTerm->getVariable();
 	Defuzzifier* defuzzifier = variable->getDefuzzifier();
 	const MembershipFunction* mf = fuzzyRuleTerm->getMembershipFunction();
-	/*double membership, y, x, aggregated = 0;
+	double membership, y, x, aggregated = 0;
 
 	// Both are equal? (both discrete or both continuous?)
 	if( mf->isDiscrete() != defuzzifier->isDiscrete() )
@@ -56,7 +56,6 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 		error.append("\n\tDefuzzifier: ");
 		error.append(defuzzifier->getName());
 		error.append( "\n");
-		
 		qFatal( error.toAscii() );
 	}
 
@@ -110,7 +109,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 			aggregated = ruleAccumulationMethod.aggregate(defuzzifierContinuous->getValue(i), y);
 			defuzzifierContinuous->setValue(i, aggregated);
 		}
-	}*/
+	}
 }
 QString RuleActivationMethod::getName()const
 {
