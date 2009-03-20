@@ -42,12 +42,17 @@ double MembershipFunction::getUniverseMin()
 }
 bool MembershipFunction::checkParamters(QString errors)
 {
+	qWarning() << "[MembershipFunction::checkParamters]:Virtual Function called";
 	return NULL;
 }
-void MembershipFunction::estimateUniverse(){}
+void MembershipFunction::estimateUniverse()
+{
+	qWarning() << "[MembershipFunction::estimateUniverse]:Virtual Function called";
+}
 
 double MembershipFunction::membership(double in) const
 {
+	qWarning() << "[MembershipFunction::membership]:Virtual Function called";
 	return NULL;
 }
 const bool MembershipFunction::isDiscrete() const
