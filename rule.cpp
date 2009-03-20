@@ -84,7 +84,7 @@ void Rule::reset()
 	}
 	this->antecedents->reset();
 }
-void Rule::evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu)
+void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 {
 	QVariant tmp = this->antecedents->evaluate(); ///< Evaluate antecedents
 	if ( !tmp.isValid() )
@@ -95,10 +95,11 @@ void Rule::evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu)
 	this->degreeOfSupport = tmp.toDouble();
 	///< Apply weight
 	this->degreeOfSupport *= this->weight;
+	qDebug() << "[Rule::evaluate]:degree of support =" << this->degreeOfSupport;
 
 	///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
 	for (int i = 0; i < this->consequents.size(); ++i) {
-		act.imply(this->consequents.at(i),accu,this->degreeOfSupport);
+		act->imply(this->consequents.at(i),accu,this->degreeOfSupport);
 	}
 }
 double Rule::getWeight()const

@@ -18,7 +18,7 @@ public:
 	void setName(QString name);
 	QString getName()const;
 	virtual double imply(double degreeOfSupport, double membership)const;
-	void imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport);
+	void imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod* ruleAccumulationMethod, double degreeOfSupport);
 	QString toQString()const;
 
 private:

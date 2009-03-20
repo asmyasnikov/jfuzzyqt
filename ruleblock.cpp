@@ -56,7 +56,7 @@ void RuleBlock::evaluate()
 	QLinkedList<Rule>::iterator i;
 	for (i = this->rules.begin(); i != this->rules.end(); ++i)
 	{
-		i->evaluate(*this->ruleActivationMethod, *this->ruleAccumulationMethod);
+		i->evaluate(this->ruleActivationMethod, this->ruleAccumulationMethod);
 	}
 }
 QString RuleBlock::getName()const

@@ -24,7 +24,7 @@ public:
 	QString toQString() const;
 	void setDegreeOfSupport(const double& degreeOfSupport);
 	void reset();
-	void evaluate (RuleActivationMethod& act,RuleAccumulationMethod& accu);
+	void evaluate (RuleActivationMethod* act,RuleAccumulationMethod* accu);
 	double getWeight()const;
 
 private:

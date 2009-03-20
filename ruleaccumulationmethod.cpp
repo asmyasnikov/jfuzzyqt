@@ -1,4 +1,5 @@
 #include "ruleaccumulationmethod.h"
+#include <QDebug>
 
 RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent)
 : QObject(parent)
@@ -29,7 +30,8 @@ RuleAccumulationMethod::~RuleAccumulationMethod()
 */
 double RuleAccumulationMethod::aggregate(double defuzzifierValue, double valueToAggregate)const
 {
-return 0;
+	qDebug() << "[RuleAccumulationMethod::aggregate]:Virtual method called.";
+	return 0;
 }
 
 QString RuleAccumulationMethod::getName()const

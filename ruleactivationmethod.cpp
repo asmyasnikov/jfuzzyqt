@@ -39,7 +39,7 @@ void RuleActivationMethod::setName(QString name)
  * \brief Inference method
  * Add membershipfunction to deffuzifier (using 'min' as inference)
  */
-void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
+void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod* ruleAccumulationMethod, double degreeOfSupport)
 {
 	qDebug() << "[RuleActivationMethod::imply]:beta";
 	Variable* variable = fuzzyRuleTerm->getVariable();
@@ -81,7 +81,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 			y = imply(degreeOfSupport, membership); // Call to abstract implication method described above
 
 			// Aggregate value
-			aggregated = ruleAccumulationMethod.aggregate(defuzzifierDiscrete->getDiscreteValue(x), y);
+			aggregated = ruleAccumulationMethod->aggregate(defuzzifierDiscrete->getDiscreteValue(x), y);
 			defuzzifierDiscrete->setPoint(x, aggregated);
 		}
 	} else {
@@ -107,7 +107,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 			y = imply(degreeOfSupport, membership); // Call to abstract implication method described above
 
 			// Aggregate value
-			aggregated = ruleAccumulationMethod.aggregate(defuzzifierContinuous->getValue(i), y);
+			aggregated = ruleAccumulationMethod->aggregate(defuzzifierContinuous->getValue(i), y);
 			defuzzifierContinuous->setValue(i, aggregated);
 		}
 	}
