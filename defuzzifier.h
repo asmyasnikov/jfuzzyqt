@@ -13,6 +13,7 @@ public:
 	virtual double* defuzzify();
 	virtual void reset();
 	bool isDiscrete();
+	void setDiscrete(const bool& value);
 	virtual void debug(QString tbs) const;
 private:
 	bool discrete;

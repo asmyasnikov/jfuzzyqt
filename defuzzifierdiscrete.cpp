@@ -3,7 +3,7 @@
 
 DefuzzifierDiscrete::DefuzzifierDiscrete()
 {
-
+	this->setDiscrete(true);
 }
 
 DefuzzifierDiscrete::~DefuzzifierDiscrete()

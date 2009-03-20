@@ -4,7 +4,7 @@
 
 DefuzzifierContinuous::DefuzzifierContinuous():Defuzzifier()
 {
-
+	this->setDiscrete(false);
 }
 
 DefuzzifierContinuous::~DefuzzifierContinuous()

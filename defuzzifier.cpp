@@ -31,6 +31,10 @@ bool Defuzzifier::isDiscrete()
 {
 	return this->discrete;
 }
+void Defuzzifier::setDiscrete(const bool& value)
+{
+	this->discrete = value;
+}
 void Defuzzifier::debug(QString tbs) const
 {
 	qDebug()<< tbs <<"[Defuzzifier::debug]:Call to virtual method.";
