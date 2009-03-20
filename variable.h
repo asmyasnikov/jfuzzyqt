@@ -1,12 +1,12 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
+#include "linguisticterm.h"
+#include "membershipfunction.h"
 #include <QObject>
 #include <QString>
 #include <QHash>
 #include <QVariant>
-#include "linguisticterm.h"
-#include "membershipfunction.h"
 
 class Defuzzifier;
 class LinguisticTerm;
@@ -29,7 +29,7 @@ public:
 	void setValue(const double& value);
 	double getValue()const;
 	bool isOutputVariable() const;
-	void defuzzify();
+	QVariant defuzzify();
 	LinguisticTerm* getLinguisticTerm(const QString& termName);
 	void setDefaultValue(const double& value);
 	void setDefuzzifier(Defuzzifier* deffuzifier);

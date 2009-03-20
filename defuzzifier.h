@@ -2,15 +2,15 @@
 #define DEFUZZIFIER_H
 
 #include <QObject>
+#include <QVariant>
 
 class Defuzzifier : public QObject
 {
 public:
 	Defuzzifier();
-	//Defuzzifier(Variable variable);
 	~Defuzzifier();
 	QString getName();
-	virtual double* defuzzify();
+	virtual QVariant defuzzify();
 	virtual void reset();
 	bool isDiscrete();
 	void setDiscrete(const bool& value);

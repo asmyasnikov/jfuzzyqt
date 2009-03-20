@@ -16,16 +16,10 @@ public:
 	int getLength();
 	void setValue(double valueX, double valueY);
 	int getIndex(double d);
-	double DefuzzifierContinuous::getValue(double x);
+	double getValue(double x);
 private:
-	//-------------------------------------------------------------------------
-	// Variables
-	//-------------------------------------------------------------------------
-
-	/** Where function ends */
-	double max;
-	/** Where function begins */
-	double min;
+	double max; ///<Where function ends
+	double min;///<Where function begins
 	/** 
 	 * Step size between each element in 'values[]'
 	 * 			stepSize = (max - min) / values.length 

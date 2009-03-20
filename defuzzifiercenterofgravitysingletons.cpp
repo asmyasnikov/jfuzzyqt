@@ -11,7 +11,7 @@ DefuzzifierCenterOfGravitySingletons::~DefuzzifierCenterOfGravitySingletons()
 
 }
 
-double* DefuzzifierCenterOfGravitySingletons::defuzzify() 
+QVariant DefuzzifierCenterOfGravitySingletons::defuzzify() 
 {
 	double x, y, sum = 0, sumWeight = 0;
 	QList<double> list = this->values();
@@ -24,16 +24,12 @@ double* DefuzzifierCenterOfGravitySingletons::defuzzify()
 		sum += y;
 	}
 
-	/*for( double xD : this ) {
-		y = getDiscreteValue(xD);
-		x = xD;
-		sumWeight += x * y;
-		sum += y;
-	}*/
-
-
-	if( sum != 0 ) return new double (sumWeight / sum);
-	return NULL;
+	QVariant toReturn;
+	
+	if( sum != 0 ){
+		toReturn = (sumWeight / sum);
+	}
+	return toReturn;
 }
 
 void DefuzzifierCenterOfGravitySingletons::debug(QString tbs) const

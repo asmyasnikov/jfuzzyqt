@@ -1,17 +1,18 @@
 #ifndef DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H
 #define DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H
 
-#include <QString>
-#include <QList>
 #include "defuzzifierdiscrete.h"
 #include "variable.h"
+#include <QString>
+#include <QList>
+#include <QVariant>
 
 class DefuzzifierCenterOfGravitySingletons : public DefuzzifierDiscrete
 {
 public:
 	DefuzzifierCenterOfGravitySingletons();
 	~DefuzzifierCenterOfGravitySingletons();
-	double* defuzzify();
+	QVariant defuzzify();
 	void debug(QString tbs) const;
 private:
 	

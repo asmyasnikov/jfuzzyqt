@@ -21,10 +21,11 @@ QString Defuzzifier::getName()
 
 void Defuzzifier::reset(){}
 
-double* Defuzzifier::defuzzify()
+QVariant Defuzzifier::defuzzify()
 {
 	qDebug() << "double* Defuzzifier::defuzzify: UNINPLEMENTED";
-	return NULL;
+	QVariant res;
+	return res;
 }
 
 bool Defuzzifier::isDiscrete()

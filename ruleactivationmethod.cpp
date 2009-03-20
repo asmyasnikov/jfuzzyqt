@@ -40,7 +40,7 @@ void RuleActivationMethod::setName(QString name)
  */
 void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod ruleAccumulationMethod, double degreeOfSupport)
 {
-	qDebug() << "[RuleActivationMethod::imply]:Unimplemented";
+	qDebug() << "[RuleActivationMethod::imply]:beta";
 	Variable* variable = fuzzyRuleTerm->getVariable();
 	Defuzzifier* defuzzifier = variable->getDefuzzifier();
 	const MembershipFunction* mf = fuzzyRuleTerm->getMembershipFunction();

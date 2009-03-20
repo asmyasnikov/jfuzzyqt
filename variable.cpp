@@ -1,6 +1,7 @@
 #include "variable.h"
 #include "defuzzifier.h"
 #include <QDebug>
+#include <QVariant>
 
 Variable::Variable(QObject* parent)
 : QObject (parent)
@@ -61,9 +62,19 @@ bool Variable::isOutputVariable() const
 {
 	return (deffuzifier != NULL);///<Only output variables have defuzzyfiers
 }
-void Variable::defuzzify()
+QVariant Variable::defuzzify()
 {
 	qDebug()<<"[Variable::defuzzify]:Uninplemented";
+	QVariant ldv = this->deffuzifier->defuzzify();
+
+	// Only assign valid defuzzifier's result
+	if( ldv.isValid() )
+	{ 
+		this->latestDefuzzifiedValue = ldv.toDouble();
+		this->value = this->latestDefuzzifiedValue.toDouble();
+	}
+
+	return latestDefuzzifiedValue;
 }
 
 /*! \brief Get 'termName' linguistic term
