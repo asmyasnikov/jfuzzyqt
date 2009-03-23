@@ -49,7 +49,6 @@ void MembershipFunction::estimateUniverse()
 {
 	qWarning() << "[MembershipFunction::estimateUniverse]:Virtual Function called";
 }
-
 double MembershipFunction::membership(double index) const
 {
 	qWarning() << "[MembershipFunction::membership]:Virtual Function called";

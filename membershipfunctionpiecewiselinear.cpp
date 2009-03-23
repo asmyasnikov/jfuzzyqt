@@ -49,6 +49,26 @@ void MembershipFunctionPieceWiseLinear::debug(QString tbs)const
 	str.append("}");
 	qDebug() << tbs << str;
 }
+/*!
+ * \brief Membership funcion definiton
+ * 
+ * \param index
+ * Description of parameter index.
+ * 
+ * \returns
+ * Write description of return value here.
+ * 
+ * \throws <exception class>
+ * Description of criteria for throwing this exception.
+ * 
+ * Membership funcion is defined as:
+ * 		membership(x) = y[0]											if x <= x[0]
+ * 		membership(x) = y[n]											if x >= x[n]  (where n = x.length)
+ * 		membership(x) = y[i - 1] + (y[i] - y[i - 1]) / (in - x[i])		if x[i-1] < x <= x[i]
+ * 	
+ * \see net.sourceforge.jFuzzyLogic.membership.MembershipFunction#membership(double)
+ * 
+ */
 double MembershipFunctionPieceWiseLinear::membership(double index) const
 {
 	int i, len = x.size();

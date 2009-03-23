@@ -19,5 +19,6 @@ int MembershipFunctionDiscrete::size()const
 }
 double MembershipFunctionDiscrete::valueX(int index)
 {
+	qDebug()<<"[MembershipFunctionDiscrete::valueX]:Virtual Method Called";
 	return 0;
 }

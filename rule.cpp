@@ -95,7 +95,6 @@ void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 	this->degreeOfSupport = tmp.toDouble();
 	///< Apply weight
 	this->degreeOfSupport *= this->weight;
-	qDebug() << "[Rule::evaluate]:degree of support =" << this->degreeOfSupport;
 
 	///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
 	for (int i = 0; i < this->consequents.size(); ++i) {

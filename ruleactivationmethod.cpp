@@ -61,9 +61,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 	}
 
 	if( mf->isDiscrete() ) {
-		//---
-		// Discrete case
-		//---
+		///< Discrete case
 		DefuzzifierDiscrete* defuzzifierDiscrete = (DefuzzifierDiscrete*) defuzzifier;
 		MembershipFunctionDiscrete* mfd = (MembershipFunctionDiscrete*) mf;
 
@@ -85,9 +83,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 			defuzzifierDiscrete->setPoint(x, aggregated);
 		}
 	} else {
-		//---
-		// Continuous case
-		//---
+		///< Continuous case
 		DefuzzifierContinuous* defuzzifierContinuous = (DefuzzifierContinuous*) defuzzifier;
 		x = defuzzifierContinuous->getMin();
 		double step = defuzzifierContinuous->getStepSize();

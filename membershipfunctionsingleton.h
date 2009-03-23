@@ -11,7 +11,7 @@ public:
 	void debug(QString tbs)const;
 	int size()const;
 	double membership(double index) const;
-
+	double valueX(int index);
 private:
 	
 };

@@ -39,3 +39,14 @@ double MembershipFunctionSingleton::membership(double index) const
 	}
 	return 0;
 }
+double MembershipFunctionSingleton::valueX(int index)
+{
+	if( index == 0 )
+	{
+		return parameters[0].getValue();
+	}
+	else
+	{
+		qCritical() << "Array index out of range: ";
+	}
+}
