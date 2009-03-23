@@ -11,6 +11,7 @@ public:
 	MembershipFunctionPieceWiseLinear(QObject* parent, QList<Value> x, QList<Value> y);
 	~MembershipFunctionPieceWiseLinear();
 	void debug(QString tbs)const;
+	double membership(double index) const;
 
 private:
 	QList<Value> x;///<Piece wise linear function values x

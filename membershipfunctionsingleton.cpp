@@ -30,3 +30,12 @@ int MembershipFunctionSingleton::size()const
 {
 	return 1;
 }
+
+double MembershipFunctionSingleton::membership(double index) const
+{
+	if( index == 0 )
+	{
+		return this->parameters[1].getValue();
+	}
+	return 0;
+}

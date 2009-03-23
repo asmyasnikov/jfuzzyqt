@@ -30,7 +30,7 @@ public:
 	
 	virtual bool checkParamters(QString errors);
 	virtual void estimateUniverse();	
-	virtual double membership(double in) const;
+	virtual double membership(double index) const;
 	double getUniverseMax();
 	double getUniverseMin();
 	const bool isDiscrete()const;

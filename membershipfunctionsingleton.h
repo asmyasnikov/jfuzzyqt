@@ -10,6 +10,8 @@ public:
 	~MembershipFunctionSingleton();
 	void debug(QString tbs)const;
 	int size()const;
+	double membership(double index) const;
+
 private:
 	
 };
