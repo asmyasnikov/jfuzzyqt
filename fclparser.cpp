@@ -271,7 +271,7 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 	}
 	else
 	{
-		qWarning()<<"Unknown rule " << rule;
+		qWarning()<<"[FCLParser::loadRule]:Unknown rule " << rule;
 		return NULL;
 	}
 	return fuzzyRule;

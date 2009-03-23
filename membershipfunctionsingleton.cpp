@@ -18,14 +18,11 @@ void MembershipFunctionSingleton::debug(QString tbs)const
 {
 	QString nxtTbs = tbs;
 	tbs.append("\t");
-
 	qDebug() << tbs << "Discrete:" << this->discrete;
 	qDebug() << tbs <<"Parameters";
 	parameters[0].debug(nxtTbs);
-	//parameters[1].debug(nxtTbs);
-	//qDebug() << tbs << "universeMax:" << this->universeMax;
-	//qDebug() << tbs << "universeMin:" << this->universeMin;
 }
+
 int MembershipFunctionSingleton::size()const
 {
 	return 1;
@@ -39,6 +36,7 @@ double MembershipFunctionSingleton::membership(double index) const
 	}
 	return 0;
 }
+
 double MembershipFunctionSingleton::valueX(int index)
 {
 	if( index == 0 )
@@ -47,6 +45,7 @@ double MembershipFunctionSingleton::valueX(int index)
 	}
 	else
 	{
-		qCritical() << "Array index out of range: ";
+		qCritical() << "[MembershipFunctionSingleton::valueX]:Array index out of range.";
+		return NULL;
 	}
 }

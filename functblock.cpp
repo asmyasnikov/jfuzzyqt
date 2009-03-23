@@ -68,6 +68,7 @@ Variable* FunctBlock::getVariable(const QString& varName)
 	}
 	else
 	{
+		qWarning() << "[FunctBlock::getVariable]:Unknwon variable";
 		return NULL;
 	}
 }
@@ -200,7 +201,6 @@ void FunctBlock::evaluate()
 		var.next();
 		if( var.value()->isOutputVariable() ){ 
 			var.value()->defuzzify();
-			//this->variables[var.key()].defuzzify();
 		}
 	}
 }

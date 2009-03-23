@@ -33,5 +33,5 @@ QVariant DefuzzifierCenterOfGravitySingletons::defuzzify()
 
 void DefuzzifierCenterOfGravitySingletons::debug(QString tbs) const
 {
-	qDebug() << tbs << "[DefuzzifierCenterOfGravitySingletons]: METHOD = COGS;";
+	qDebug() << tbs << "defuzzifier method = cogs;";
 }

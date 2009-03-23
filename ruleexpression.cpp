@@ -83,6 +83,7 @@ RuleTerm* RuleExpression::getTerm1Rule()const
 	}
 	else
 	{
+		qCritical() << "[RuleExpression::getTerm1Rule]:Null term returned";
 		return NULL;
 	}
 }
@@ -95,6 +96,7 @@ RuleTerm* RuleExpression::getTerm2Rule()const
 	}
 	else
 	{
+		qCritical() << "[RuleExpression::getTerm2Rule]:Null term returned";
 		return NULL;
 	}
 }
@@ -107,6 +109,7 @@ RuleExpression* RuleExpression::getTerm1Expression()const
 	}
 	else
 	{
+		qCritical() << "[RuleExpression::getTerm1Expression]:Null term returned";
 		return NULL;
 	}
 }
@@ -119,6 +122,7 @@ RuleExpression* RuleExpression::getTerm2Expression()const
 	}
 	else
 	{
+		qCritical() << "[RuleExpression::getTerm2Expression]:Null term returned";
 		return NULL;
 	}
 }

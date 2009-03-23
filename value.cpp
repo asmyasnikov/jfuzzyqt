@@ -5,7 +5,6 @@ Value::Value()
 {
 	this->type = UNDEFINED;
 	this->valReal = 0;
-	
 }
 
 Value::Value(double value)
@@ -17,8 +16,8 @@ Value::Value(double value)
 
 Value::~Value()
 {
-
 }
+
 double Value::getValue()const
 {
 	if( type == UNDEFINED )

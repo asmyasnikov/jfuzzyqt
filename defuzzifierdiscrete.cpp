@@ -22,13 +22,12 @@ QList<double> DefuzzifierDiscrete::values()
 /** Get a point's 'y' value */
 double DefuzzifierDiscrete::getDiscreteValue(double x) 
 {
+	double toReturn = 0;
 	if ( discreteValues.contains( QString::number(x) ) )
 	{
-		return discreteValues.value(QString::number(x));
-	}else
-	{
-		return 0;
+		toReturn = discreteValues.value(QString::number(x));
 	}
+	return toReturn;
 }
 /** Set a point */
 void DefuzzifierDiscrete::setPoint(double x, double y)
@@ -47,9 +46,4 @@ void DefuzzifierDiscrete::reset()
 		this->discreteValues.insert(i.key(),0.0);
 		++i;
 	}
-	/*if( discreteValues != NULL ) { // Set all values to 0
-		
-		for( Double key : this )
-			discreteValues.put(key, 0.0);
-	}*/
 }
