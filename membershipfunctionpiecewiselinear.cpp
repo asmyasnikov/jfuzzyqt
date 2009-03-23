@@ -72,23 +72,23 @@ void MembershipFunctionPieceWiseLinear::debug(QString tbs)const
 double MembershipFunctionPieceWiseLinear::membership(double index) const
 {
 	int i, len = x.size();
-	if( index <= x[0].getValue() )
+	
+	if( index <= x.at(0).getValue() )
 	{
-		return y[0].getValue();
+		return y.at(0).getValue();
 	}
-	if( index > x[len - 1].getValue() )
+	if( index > x.at(len - 1).getValue() )
 	{
-		return y[len - 1].getValue();
+		return y.at(len - 1).getValue();
 	}
 	for( i = 1; i < len; i++ )
 	{
-		if( index <= x[i].getValue() ) 
+		if( index <= x.at(i).getValue() ) 
 		{
-			return y[i - 1].getValue() + (y[i].getValue() - y[i - 1].getValue()) * ((index - x[i - 1].getValue()) / (x[i].getValue() - x[i - 1].getValue()));
+			return y.at(i - 1).getValue() + (y.at(i).getValue() - y.at(i - 1).getValue()) * ((index - x.at(i - 1).getValue()) / (x.at(i).getValue() - x.at(i - 1).getValue()));
 		}
 	}
 	
-	/*if( Double.isNaN(index) ) return Double.NaN;
-	throw new RuntimeException("Error calculating membership! This should never happen! (index = " + index + ")");*/
-
+	qCritical("[MembershipFunctionPieceWiseLinear::membership]:Error calculating membership! This should never happen!");
+	return 0;
 }
