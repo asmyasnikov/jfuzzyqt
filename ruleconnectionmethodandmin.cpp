@@ -16,5 +16,5 @@ double RuleConnectionMethodAndMin::connect(double antecedent1, double antecedent
 }
 QString RuleConnectionMethodAndMin::toQString() const
 {
-	return "AND : MIN";
+	return "and : min";
 }

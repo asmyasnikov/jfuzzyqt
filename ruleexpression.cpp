@@ -8,47 +8,7 @@ RuleExpression::RuleExpression(QObject *parent)
 {
 	term1Type = UNDEF;
 	term2Type = UNDEF;
-}
-RuleExpression::RuleExpression(const RuleExpression &re)
-{
-	this->negated = re.isNegated();
-	switch ( re.getTerm1Type() )
-	{ 
-	case RULETERM:
-		this->term1Type = RULETERM;	
-		//this->term1.ruleTerm = new RuleTerm(re.getTerm1Rule());
-		this->term1.ruleTerm = re.getTerm1Rule();
-		this->term1.ruleTerm->setParent(this);
-		break;
-	case RULEEXPRESSION:
-		this->term1Type = RULEEXPRESSION;	
-		//this->term1.ruleExpression = new RuleExpression( re.getTerm1Expression() );
-		this->term1.ruleExpression = re.getTerm1Expression();
-		this->term1.ruleExpression->setParent(this);
-		break;
-	case UNDEF:
-		qWarning() << "[RuleExpression::RuleExpression]: unddefined term1type";
-		this->term1Type = UNDEF;
-		break;
-	}
-
-	switch ( re.getTerm2Type() )
-	{ 
-	case RULETERM:
-		this->term2Type = RULETERM;	
-		this->term2.ruleTerm = new RuleTerm(re.getTerm2Rule());
-		this->term2.ruleTerm->setParent(this);
-		break;
-	case RULEEXPRESSION:
-		this->term2Type = RULEEXPRESSION;	
-		this->term2.ruleExpression = new RuleExpression( re.getTerm2Expression() );
-		this->term2.ruleExpression->setParent(this);
-		break;
-	case UNDEF:
-		qWarning() << "[RuleExpression::RuleExpression]: unddefined term2type";
-		this->term2Type = UNDEF;
-		break;
-	}
+	this->negated = false;
 }
 
 RuleExpression::~RuleExpression()
@@ -202,6 +162,7 @@ QString RuleExpression::toQString()const
 	str += ")" ;
 	return str;
 }
+
 void RuleExpression::reset()
 {
 	switch (term1Type)
@@ -230,12 +191,13 @@ void RuleExpression::reset()
 			break;
 	}
 }
+
 QVariant RuleExpression::evaluate()
 {
 	qDebug() << "[RuleExpression::evaluate]:beta";
 	// Results for each term
-	QVariant resTerm1 = 0;
-	QVariant resTerm2 = 0;
+	QVariant resTerm1 = 0.0;
+	QVariant resTerm2 = 0.0;
 
 	// Evaluate term1: if it's an expression => recurse
 	if( this->term1Type == RULEEXPRESSION ) resTerm1 = this->term1.ruleExpression->evaluate();
@@ -257,6 +219,10 @@ QVariant RuleExpression::evaluate()
 	else result = this->ruleConnectionMethod->connect(resTerm1.toDouble(), resTerm2.toDouble());
 
 	// Is this clause negated?
-	if( this->negated ) result = 1 - result.toDouble();
+	if( this->negated )
+	{
+		result = 1 - result.toDouble();
+	}
+	qDebug()<< "[RuleExpression::evaluate]: result=" << result.toDouble();
 	return result;
 }

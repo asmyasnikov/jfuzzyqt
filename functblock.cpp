@@ -199,7 +199,8 @@ void FunctBlock::evaluate()
 	QHashIterator<QString, Variable*> var(this->variables);
 	while ( var.hasNext() ) {
 		var.next();
-		if( var.value()->isOutputVariable() ){ 
+		if( var.value()->isOutputVariable() )
+		{ 
 			var.value()->defuzzify();
 		}
 	}

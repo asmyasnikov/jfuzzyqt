@@ -23,7 +23,6 @@ public:
 	static enum term_t{RULETERM , RULEEXPRESSION, UNDEF};
 
 	RuleExpression(QObject *parent=NULL);
-	RuleExpression(const RuleExpression &re);
 	~RuleExpression();
 	RuleConnectionMethod* getRuleConnectionMethod()const;
 	bool isNegated()const;

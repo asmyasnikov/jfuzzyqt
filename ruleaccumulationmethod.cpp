@@ -45,5 +45,7 @@ void RuleAccumulationMethod::setName(const QString &name)
 
 QString RuleAccumulationMethod::toQString()const
 {
-	return getName();
+	QString qstr = "accu : ";
+	qstr.append( this->name );
+	return qstr;
 }

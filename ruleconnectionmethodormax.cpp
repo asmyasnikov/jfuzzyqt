@@ -17,5 +17,5 @@ double RuleConnectionMethodOrMax::connect(double antecedent1, double antecedent2
 
 QString RuleConnectionMethodOrMax::toStringFcl()const
 {
-	return "OR: MAX";
+	return "or: max";
 }

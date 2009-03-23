@@ -21,6 +21,7 @@ Variable::Variable(QObject* parent,QString name)
 	this->defaultValue.clear();
 	this->value=0;
 }
+
 Variable::~Variable()
 {
 	if (this->deffuzifier!=NULL)
@@ -28,40 +29,49 @@ Variable::~Variable()
 		delete(this->deffuzifier);
 	}
 }
+
 QString Variable::getName()const
 {
 	return this->name;
 }
+
 void Variable::setName(const QString& name)
 {
 	this->name=name;
 }
+
 void Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
 	lt->setParent(this);
 	linguisticTerms.insert(lt->getTermName(), lt);
 }
+
 MembershipFunction* Variable::getMembershipFunction(const QString& termName)
 {
 	return this->getLinguisticTerm(termName)->getMembershipFunction();
 }
+
 Defuzzifier* Variable::getDefuzzifier()const
 {
 	return this->deffuzifier;
 }
+
 void Variable::setValue(const double& value)
 {
 	this->value=value;
 }
+
 double Variable::getValue()const
 {
 	return this->value;
 }
+
 /** Return 'true' if this is an output variable */
 bool Variable::isOutputVariable() const
 {
 	return (deffuzifier != NULL);///<Only output variables have defuzzyfiers
 }
+
 QVariant Variable::defuzzify()
 {
 	qDebug()<<"[Variable::defuzzify]:beta";
@@ -87,6 +97,7 @@ LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
 	}
 	return this->linguisticTerms.value(termName);
 }
+
 void Variable::setDefaultValue(const double& value)
 {
 }
@@ -100,6 +111,7 @@ void Variable::setDefuzzifier(Defuzzifier* deffuzifier)
 	this->deffuzifier = deffuzifier;
 	this->deffuzifier->setParent(this);
 }
+
 void Variable::debug(QString tbs) const
 {
 	QString nxTbs = tbs;
@@ -118,6 +130,7 @@ void Variable::debug(QString tbs) const
 	}
 	qDebug() << tbs<< "}";
 }
+
 void Variable::reset()
 {
 	if (this->deffuzifier != NULL)

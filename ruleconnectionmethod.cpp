@@ -27,5 +27,5 @@ double RuleConnectionMethod::connect(double antecedent1, double antecedent2)
 QString RuleConnectionMethod::toQString() const
 {
 	qWarning() << "[RuleConnectionMethod::toQString]:Virtual method called";
-	return "";
+	return "Undef";
 }
