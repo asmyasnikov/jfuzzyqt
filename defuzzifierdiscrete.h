@@ -15,8 +15,11 @@ public:
 	double getDiscreteValue(double x);
 	void setPoint(double x, double y);
 	virtual void debug(QString tbs) const;
+	void reset();
+
 private:
 	QHash<QString, double> discreteValues;
+
 };
 
 #endif // DEFUZZIFIERDISCRETE_H

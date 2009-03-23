@@ -15,8 +15,10 @@ public:
 	bool isDiscrete();
 	void setDiscrete(const bool& value);
 	virtual void debug(QString tbs) const;
+
 private:
 	bool discrete;
+
 };
 
 #endif // DEFUZZIFIER_H

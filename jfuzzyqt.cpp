@@ -78,7 +78,7 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value)
 		if ( i!=this->functionBlocks.end() )
 		{
 			i.value()->setValue(varName.toLower(),value);
-			qDebug() << "[JFuzzyQt::setVariable]:variable"<< varName.toLower() <<"set to '"<< value <<"'";
+			qDebug() << "[JFuzzyQt::setVariable]:variable"<< varName.toLower() <<"set to '"<< i.value()->getValue(varName.toLower()) <<"'";
 		}
 	}
 	else

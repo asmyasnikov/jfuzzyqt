@@ -39,3 +39,17 @@ void DefuzzifierDiscrete::debug(QString tbs) const
 {
 	qDebug()<< tbs <<"[DefuzzifierDiscrete::debug]:Call to virtual method.";
 }
+void DefuzzifierDiscrete::reset()
+{
+	QHash<QString, double>::iterator i = this->discreteValues.begin();
+	while (i != this->discreteValues.end())
+	{
+		this->discreteValues.insert(i.key(),0.0);
+		++i;
+	}
+	/*if( discreteValues != NULL ) { // Set all values to 0
+		
+		for( Double key : this )
+			discreteValues.put(key, 0.0);
+	}*/
+}
