@@ -21,6 +21,7 @@ double DefuzzifierContinuous::getStepSize()
 }
 int DefuzzifierContinuous::getLength()
 {
+	qDebug() << "[DefuzzifierContinuous::getLength]:Unimplmented.";
 	//if( values != null ) return values.length;
 	//return 0;
 	return this->DEFAULT_NUMBER_OF_POINTS;

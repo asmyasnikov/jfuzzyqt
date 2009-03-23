@@ -19,5 +19,5 @@ double RuleAccumulationMethodMax::aggregate(double defuzzifierValue, double valu
 
 QString RuleAccumulationMethodMax::toQString()const
 {
-	return "ACCU : MAX;";
+	return "accu : max;";
 }

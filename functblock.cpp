@@ -179,20 +179,19 @@ bool FunctBlock::setValue(const QString& varName, const double& value)
 */
 void FunctBlock::evaluate()
 {
+	qDebug() << "[FunctBlock::evaluate]: beta.";
 	///<First: Reset defuzzifiers, variables, etc.
 	QHashIterator<QString, RuleBlock*> i(this->ruleBlocks);
 	while (i.hasNext()) {
 		i.next();
 		i.value()->reset();
-		//this->ruleBlocks[i.key()].reset();
 	}
 
 	///<Second: Evaluate each RuleBlock
 	QHashIterator<QString, RuleBlock*> j(this->ruleBlocks);
 	while (j.hasNext()) {
 		j.next();
-		i.value()->evaluate();
-		//this->ruleBlocks[j.key()].evaluate();
+		j.value()->evaluate();
 	}
 
 	///<Third: Defuzzify each consequent variable
@@ -211,7 +210,7 @@ double FunctBlock::getValue(const QString& varName)const
 	double toReturn = NULL;
 	if ( this->variables.contains( varName ) )
 	{
-		toReturn = this->variables[varName]->getValue();
+		toReturn = this->variables.value(varName)->getValue();
 	}
 	return toReturn;
 }

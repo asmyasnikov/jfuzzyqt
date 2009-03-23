@@ -5,12 +5,10 @@ DefuzzifierDiscrete::DefuzzifierDiscrete()
 {
 	this->setDiscrete(true);
 }
-
 DefuzzifierDiscrete::~DefuzzifierDiscrete()
 {
 
 }
-
 QList<double> DefuzzifierDiscrete::values()
 {
 	QList<double> toReturn;
@@ -21,7 +19,6 @@ QList<double> DefuzzifierDiscrete::values()
 	}
 	return toReturn;
 }
-
 /** Get a point's 'y' value */
 double DefuzzifierDiscrete::getDiscreteValue(double x) 
 {
@@ -33,9 +30,9 @@ double DefuzzifierDiscrete::getDiscreteValue(double x)
 		return 0;
 	}
 }
-
 /** Set a point */
-void DefuzzifierDiscrete::setPoint(double x, double y) {
+void DefuzzifierDiscrete::setPoint(double x, double y)
+{
 	discreteValues.insert(QString::number(x), y);
 }
 void DefuzzifierDiscrete::debug(QString tbs) const

@@ -82,7 +82,10 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
 			aggregated = ruleAccumulationMethod->aggregate(defuzzifierDiscrete->getDiscreteValue(x), y);
 			defuzzifierDiscrete->setPoint(x, aggregated);
 		}
-	} else {
+	} 
+	else 
+	{
+		qDebug() << "[RuleActivationMethod::imply]:continuous case unimplemented";
 		///< Continuous case
 		DefuzzifierContinuous* defuzzifierContinuous = (DefuzzifierContinuous*) defuzzifier;
 		x = defuzzifierContinuous->getMin();
@@ -114,7 +117,7 @@ QString RuleActivationMethod::getName()const
 }
 QString RuleActivationMethod::toQString()const
 {
-	QString qstr = "ACT : ";
+	QString qstr = "act : ";
 	qstr.append( this->name );
 	return qstr;
 }

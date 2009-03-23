@@ -25,7 +25,6 @@ QVariant DefuzzifierCenterOfGravitySingletons::defuzzify()
 	}
 
 	QVariant toReturn;
-	
 	if( sum != 0 ){
 		toReturn = (sumWeight / sum);
 	}

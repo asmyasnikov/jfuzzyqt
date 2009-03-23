@@ -16,18 +16,16 @@ QString Defuzzifier::getName()
 	toReturn = "Defuzzifier";
 	return toReturn;
 }
-
-
-
-void Defuzzifier::reset(){}
-
+void Defuzzifier::reset()
+{
+	qWarning() << "[Defuzzifier::reset]: Virtual method called.";
+}
 QVariant Defuzzifier::defuzzify()
 {
-	qDebug() << "double* Defuzzifier::defuzzify: UNINPLEMENTED";
+	qWarning() << "[Defuzzifier::defuzzify]: Virtual method called.";
 	QVariant res;
 	return res;
 }
-
 bool Defuzzifier::isDiscrete()
 {
 	return this->discrete;
