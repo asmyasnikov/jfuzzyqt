@@ -89,7 +89,5 @@ double MembershipFunctionPieceWiseLinear::membership(double index) const
 			}
 		}
 	}
-	qDebug() << "[MembershipFunctionPieceWiseLinear::membership]:" << toReturn;
-	//qCritical("[MembershipFunctionPieceWiseLinear::membership]:Error calculating membership! This should never happen!");
 	return toReturn;
 }

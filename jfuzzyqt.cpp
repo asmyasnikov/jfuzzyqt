@@ -11,9 +11,11 @@
 JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 {
 }
+
 JFuzzyQt::~JFuzzyQt()
 {
 }
+
 bool JFuzzyQt::load(QString fileUri)
 {
 	bool toReturn = false;
@@ -43,10 +45,11 @@ bool JFuzzyQt::load(QString fileUri)
 		}///<END If Function Block
 		line = fclParser.readLine(in);
 	} ///<END File Cycle
-	qDebug() << "[JFuzzyQt::load]:File Loaded \n\n";
+	qDebug() << "\n[JFuzzyQt::load]:File Loaded !!\n\n";
 	
 	return toReturn;
 }
+
 bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 {
 	qWarning("[JFuzzyQt::addFunctionBlock]:Only one function block is supported");
@@ -86,6 +89,7 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value)
 		qWarning("[JFuzzyQt::setVariable]:There are no FunctionBlocks");
 	}
 }
+
 void JFuzzyQt::evaluate()
 {
 	if( functionBlocks.size() > 0 )
@@ -102,6 +106,7 @@ void JFuzzyQt::evaluate()
 			qWarning("[JFuzzyQt::evaluate]:There are no FunctionBlocks");
 	}
 }
+
 double JFuzzyQt::getValue(const QString& varName)const
 {
 	if( functionBlocks.size() > 0 )

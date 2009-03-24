@@ -19,7 +19,6 @@ QVariant DefuzzifierCenterOfGravitySingletons::defuzzify()
 	foreach (double xD, list)
 	{
 		y = getDiscreteValue(xD);
-		qDebug() << "x=" << xD << "y=" << y;
 		x = xD;
 		sumWeight += x * y;
 		sum += y;

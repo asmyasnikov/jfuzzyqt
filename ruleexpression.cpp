@@ -223,7 +223,6 @@ double RuleExpression::evaluate()
 	double result;
 	result = this->ruleConnectionMethod->connect(resTerm1, resTerm2);
 	
-	qDebug() << "[RuleExpression::evaluate]:" << resTerm1 << "x" << resTerm2;
 
 	// Is this clause negated?
 	if( this->negated )

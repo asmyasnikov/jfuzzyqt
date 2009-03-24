@@ -74,7 +74,6 @@ bool Variable::isOutputVariable() const
 
 QVariant Variable::defuzzify()
 {
-	qDebug()<<"[Variable::defuzzify]:beta";
 	QVariant ldv = this->deffuzifier->defuzzify();
 
 	// Only assign valid defuzzifier's result

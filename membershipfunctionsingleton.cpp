@@ -36,7 +36,6 @@ double MembershipFunctionSingleton::membership(double index) const
 	{
 		toReturn= parameters[1]->getValue();
 	}
-	qDebug()<< "[MembershipFunctionSingleton::membership](index=" << index << "):" << toReturn;
 	return toReturn;
 }
 
