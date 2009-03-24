@@ -2,7 +2,7 @@
 #include "value.h"
 #include <QDebug>
 
-MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, Value valueX)
+MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, Value* valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
 	parameters = new Value[2];
@@ -30,11 +30,13 @@ int MembershipFunctionSingleton::size()const
 
 double MembershipFunctionSingleton::membership(double index) const
 {
-	if( index == 0 )
+	double toReturn=0;
+	if( index == parameters[0]->getValue() )
 	{
-		return this->parameters[1].getValue();
+		toReturn= parameters[1]->getValue();
 	}
-	return 0;
+	qDebug()<< "[MembershipFunctionSingleton::membership]:" << toReturn;
+	return toReturn;
 }
 
 double MembershipFunctionSingleton::valueX(int index)
