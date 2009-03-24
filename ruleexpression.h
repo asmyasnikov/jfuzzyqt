@@ -39,7 +39,7 @@ public:
 	RuleExpression::term_t getTerm1Type()const;
 	RuleExpression::term_t getTerm2Type()const;
 	void reset();
-	QVariant evaluate();
+	double evaluate();
 
 private:
 	bool negated; ///<Is it negated?
