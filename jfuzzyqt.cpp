@@ -43,7 +43,7 @@ bool JFuzzyQt::load(QString fileUri)
 		}///<END If Function Block
 		line = fclParser.readLine(in);
 	} ///<END File Cycle
-	qDebug() << "FIM FICHEIRO \n\n";
+	qDebug() << "[JFuzzyQt::load]:File Loaded \n\n";
 	
 	return toReturn;
 }
@@ -73,7 +73,7 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value)
 {
 	if( functionBlocks.size() > 0 )
 	{
-		qWarning("[JFuzzyQt::setVariable]:Only one function block is supported");
+		///< Only one function block is supported
 		QHash<QString, FunctBlock*>::iterator i = this->functionBlocks.find(this->defaultBlockName);
 		if ( i!=this->functionBlocks.end() )
 		{

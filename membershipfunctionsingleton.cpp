@@ -8,6 +8,7 @@ MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const 
 	parameters = new Value*[2];
 	parameters[0] = new Value(this, valueX);
 	parameters[1] = new Value(this, 1);
+	qDebug() << "[MembershipFunctionSingleton::MembershipFunctionSingleton]:" << valueX;
 }
 
 MembershipFunctionSingleton::~MembershipFunctionSingleton()
@@ -35,7 +36,7 @@ double MembershipFunctionSingleton::membership(double index) const
 	{
 		toReturn= parameters[1]->getValue();
 	}
-	qDebug()<< "[MembershipFunctionSingleton::membership]:" << toReturn;
+	qDebug()<< "[MembershipFunctionSingleton::membership](index=" << index << "):" << toReturn;
 	return toReturn;
 }
 

@@ -194,7 +194,6 @@ void RuleExpression::reset()
 
 double RuleExpression::evaluate()
 {
-	qDebug() << "[RuleExpression::evaluate]:beta";
 	// Results for each term
 	double resTerm1 = 0.0;
 	double resTerm2 = 0.0;

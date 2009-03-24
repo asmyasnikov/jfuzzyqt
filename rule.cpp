@@ -86,13 +86,8 @@ void Rule::reset()
 }
 void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 {
-	QVariant tmp = this->antecedents->evaluate(); ///< Evaluate antecedents
-	if ( !tmp.isValid() )
-	{
-		qCritical() << "[Rule::evaluate]:no antecedentes evaluation.";
-		tmp = 0;
-	}
-	this->degreeOfSupport = tmp.toDouble();
+	double tmp = this->antecedents->evaluate(); ///< Evaluate antecedents
+	this->degreeOfSupport = tmp;
 	///< Apply weight
 	this->degreeOfSupport *= this->weight;
 

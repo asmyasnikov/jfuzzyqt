@@ -5,6 +5,7 @@
 
 class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 {
+
 public:
 	MembershipFunctionSingleton(QObject* parent, const double& valueX);
 	~MembershipFunctionSingleton();
@@ -12,6 +13,7 @@ public:
 	int size()const;
 	double membership(double index) const;
 	double valueX(int index);
+
 private:
 	
 };

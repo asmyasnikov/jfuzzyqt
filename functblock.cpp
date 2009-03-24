@@ -167,20 +167,23 @@ Defuzzifier* FunctBlock::createDefuzzifier(const QString& defuzzType)
 bool FunctBlock::setValue(const QString& varName, const double& value)
 {
 	bool toReturn = false;
-	if ( this->variables.contains( varName ) )
+
+	QHash<QString, Variable*>::iterator i = this->variables.find(varName);
+	if (i != this->variables.end())
 	{
-		Variable *v = new Variable(this,varName);
-		v->setValue( value );
-		this->variables.insert( varName , v );
-		toReturn = true;
+	 i.value()->setValue(value);
+	}
+	else
+	{
+		qCritical() << "[FunctBlock::setValue]:no variable found";
 	}
 	return toReturn;
 }
+
 /*! \brief Evaluate fuzzy rules in this function block  
 */
 void FunctBlock::evaluate()
 {
-	qDebug() << "[FunctBlock::evaluate]: beta.";
 	///<First: Reset defuzzifiers, variables, etc.
 	QHashIterator<QString, RuleBlock*> i(this->ruleBlocks);
 	while (i.hasNext()) {

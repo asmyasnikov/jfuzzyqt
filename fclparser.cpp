@@ -11,16 +11,20 @@
 FCLParser::FCLParser(): QObject ()
 {
 }
+
 FCLParser::FCLParser(QObject* parent) : QObject (parent)
 {
 }
+
 FCLParser::FCLParser(const FCLParser& parser)
 {
 }
+
 FCLParser::~FCLParser()
 {
 
 }
+
 QString FCLParser::readLine(QTextStream &in)
 {
 	QString str = in.readLine();
@@ -32,6 +36,7 @@ QString FCLParser::readLine(QTextStream &in)
 	}
 	return str;
 }
+
 void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
@@ -50,6 +55,7 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 		line = readLine(in);
 	} 
 }
+
 void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 {
 	QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
@@ -69,6 +75,7 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 		line = readLine(in);
 	} 
 }
+
 void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString varName)
 {
 	QString defuzzificationMethodType = "cog";
@@ -109,6 +116,7 @@ void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, QString va
 		line = readLine(in);
 	}
 }
+
 void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name)
 {
 	QRegExp rxOut("end_fuzzify");
@@ -135,6 +143,7 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, QString name
 		line = readLine(in);
 	}
 }
+
 RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QString name)
 {
 	QRegExp rxlen("rule\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
@@ -251,6 +260,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, QStr
 	return ruleBlock;
 
 }
+
 Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
 	QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s+then");
@@ -276,12 +286,14 @@ Rule* FCLParser::loadRule(FunctBlock& funcBlock, QString &rule, QString name,Rul
 	}
 	return fuzzyRule;
 }
+
 RuleExpression* FCLParser::loadRuleIf(FunctBlock& funcBlock, QString &ruleif,RuleConnectionMethod *and, RuleConnectionMethod *or)
 {
 	FCLRuleTree tree(this);	
 	tree.addExpression(ruleif);
 	return tree.getRuleExpression(funcBlock, and, or );
 }
+
 void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 {
 	QRegExp rxFunctionBlockEnd("end_function_block");
@@ -321,7 +333,6 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 			else
 			{
 				funcBlock.addRuleBlock ( rb );///< Rule block
-				qDebug() << "[FCLParser::loadFunctBlock]:" << rb->toQString();
 			}
 
 		}
@@ -332,6 +343,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 		line = readLine(in);
 	}
 }
+
 RuleAccumulationMethod* FCLParser::createAccumulationMethod(QString type)
 {
 	RuleAccumulationMethod* ruleAccumulationMethod = NULL;
