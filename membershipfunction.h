@@ -41,12 +41,8 @@ private:
 	//-------------------------------------------------------------------------
 	// Variables
 	//-------------------------------------------------------------------------
-	/** Function's parameters */
-	
-	/** Universe max (range max) */
-	double* universeMax;
-	/** Universe min (range min) */
-	double* universeMin;
+	double* universeMax; ///< Universe max (range max)
+	double* universeMin; ///< Universe min (range min)
 
 };
 
