@@ -57,12 +57,12 @@ bool LinguisticTerm::loadFrom(QString qString)
 		
 	}else if ( rxPoint.indexIn(qString) > -1)///<Point
 	{
-		QList<Value> x;
-		QList<Value> y;
+		QList<double> x;
+		QList<double> y;
 		int pos = 0;
 		while ((pos = rxPoint.indexIn(qString, pos)) != -1) {
-			x.append( Value(rxPoint.cap(2).toDouble()) );
-			y.append( Value(rxPoint.cap(4).toDouble()) );
+			x.append( rxPoint.cap(2).toDouble() );
+			y.append( rxPoint.cap(4).toDouble() );
 			pos += rxPoint.matchedLength();
 		}
 		if( this->membershipFunction!=NULL )
@@ -74,7 +74,7 @@ bool LinguisticTerm::loadFrom(QString qString)
 
 	}else if (rxSingleton.indexIn(qString) > -1) ///<Singleton
 	{
-		Value singleTonValueX ( rxSingleton.cap(0).toDouble() );
+		double singleTonValueX = rxSingleton.cap(0).toDouble() ;
 		if( this->membershipFunction!=NULL )
 		{
 			delete this->membershipFunction;

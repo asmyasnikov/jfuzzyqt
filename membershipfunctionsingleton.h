@@ -6,7 +6,7 @@
 class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 {
 public:
-	MembershipFunctionSingleton(QObject* parent, Value valueX);
+	MembershipFunctionSingleton(QObject* parent, const double& valueX);
 	~MembershipFunctionSingleton();
 	void debug(QString tbs)const;
 	int size()const;

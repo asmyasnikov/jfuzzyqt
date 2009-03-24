@@ -1,13 +1,15 @@
 #include "value.h"
 #include <QDebug>
 
-Value::Value()
+Value::Value(QObject* parent)
+:QObject(parent)
 {
 	this->type = UNDEFINED;
 	this->valReal = 0;
 }
 
-Value::Value(double value)
+Value::Value(QObject* parent, const double& value)
+:QObject(parent)
 {
 	this->type = REAL;
 	this->valReal = value;

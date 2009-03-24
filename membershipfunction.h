@@ -21,7 +21,7 @@ public:
 	};
 	
 	bool discrete;
-	Value* parameters;
+	Value** parameters;
 	MembershipType type;
 
 	MembershipFunction(QObject* parent, MembershipType type);

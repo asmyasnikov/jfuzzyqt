@@ -8,14 +8,14 @@
 class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 {
 public:
-	MembershipFunctionPieceWiseLinear(QObject* parent, QList<Value> x, QList<Value> y);
+	MembershipFunctionPieceWiseLinear(QObject* parent, const QList<double>& x,const QList<double>& y);
 	~MembershipFunctionPieceWiseLinear();
 	void debug(QString tbs)const;
 	double membership(double index) const;
 
 private:
-	QList<Value> x;///<Piece wise linear function values x
-	QList<Value> y;///<Piece wise linear function values y
+	QList<Value*> x;///<Piece wise linear function values x
+	QList<Value*> y;///<Piece wise linear function values y
 
 };
 
