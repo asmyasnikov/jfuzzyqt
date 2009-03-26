@@ -313,7 +313,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing functblock.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\functblock.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_functblock.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\functblock.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_functblock.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\functblock.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_functblock.cpp&quot;"
 					/>
@@ -339,7 +339,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing jfuzzyqt.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\jfuzzyqt.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_jfuzzyqt.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\jfuzzyqt.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_jfuzzyqt.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\jfuzzyqt.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_jfuzzyqt.cpp&quot;"
 					/>
@@ -392,7 +392,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing membershipfunction.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\membershipfunction.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_membershipfunction.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\membershipfunction.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_membershipfunction.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\membershipfunction.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_membershipfunction.cpp&quot;"
 						/>
@@ -434,7 +434,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing value.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\value.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_value.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\value.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_value.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\value.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_value.cpp&quot;"
 						/>
@@ -464,7 +464,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing linguisticterm.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\linguisticterm.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_linguisticterm.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\linguisticterm.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_linguisticterm.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\linguisticterm.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_linguisticterm.cpp&quot;"
 						/>
@@ -528,7 +528,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing variable.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\variable.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_variable.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\variable.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_variable.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\variable.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_variable.cpp&quot;"
 						/>
@@ -558,7 +558,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ruleaccumulationmethod.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleaccumulationmethod.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethod.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleaccumulationmethod.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethod.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\ruleaccumulationmethod.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethod.cpp&quot;"
 						/>
@@ -584,7 +584,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ruleaccumulationmethodmax.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleaccumulationmethodmax.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethodmax.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleaccumulationmethodmax.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethodmax.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\ruleaccumulationmethodmax.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleaccumulationmethodmax.cpp&quot;"
 						/>
@@ -778,7 +778,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ruleactivationmethod.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleactivationmethod.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleactivationmethod.cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_XML_LIB -DJFUZZYQT_LIB -D_WINDLL  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; &quot;.\ruleactivationmethod.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleactivationmethod.cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\ruleactivationmethod.h"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_ruleactivationmethod.cpp&quot;"
 						/>

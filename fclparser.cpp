@@ -27,12 +27,22 @@ FCLParser::~FCLParser()
 
 QString FCLParser::readLine(QTextStream &in)
 {
+	QRegExp rxEmptyLine("^\\s+$");///< empty line
 	QString str = in.readLine();
-	if(str!=NULL){
+	while(str!=NULL)
+	{
 		str = str.toLower();
 		str.remove(QRegExp("//.*")); ///< remove comments 
 		str.replace(QRegExp("\\s+")," "); ///< convert tabs and multiple spaces to single space
-		qDebug() << "\n[FCLParser::readLine]:" << str;
+		if ( rxEmptyLine.exactMatch(str) )
+		{
+			str = in.readLine(); ///<Removes empty lines
+		}
+		else
+		{
+			qDebug() << "\n[FCLParser::readLine]:" << str;
+			break;
+		}
 	}
 	return str;
 }
