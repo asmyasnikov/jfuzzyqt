@@ -34,7 +34,8 @@ QString FCLParser::readLine(QTextStream &in)
 	{
 		str = str.toLower();
 		str.remove(QRegExp("//.*")); ///< remove comments 
-		str.replace(QRegExp("^\\s+"),""); ///< removes indentation	
+		str.replace(QRegExp("^\\s+"),""); ///< removes indentation
+		str.replace(QRegExp("\\s+$"),""); ///< removes end line spaces or tabs
 		str.replace(QRegExp("\\s+")," "); ///< convert tabs and multiple spaces to single space
 		if ( str == "" )
 		{
