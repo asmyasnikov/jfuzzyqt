@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file membershipfunctionpiecewiselinear.h
- * \class FIXME
+ * \class MembershipFunctionPieceWiseLinear
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include <QList>
 #include "membershipfunctioncontinuous.h"
 #include "../value.h"
+
+namespace jfuzzyqt
+{
 
 class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 {
@@ -45,5 +48,8 @@ private:
     QList<Value*> y;///<Piece wise linear function values y
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONPIECEWISELINEAR_H

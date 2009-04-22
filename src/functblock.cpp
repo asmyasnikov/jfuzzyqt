@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file functblock.cpp
- * \class FIXME
+ * \class FunctBlock
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -66,17 +66,16 @@ bool FunctBlock::addVariable(const QString& varName, Variable* variable)
 
 bool FunctBlock::setVariable(const QString& varName, LinguisticTerm* lt)
 {
-	
-        QHash<QString, Variable*>::iterator i = variables.find(varName);
-        if ( i != variables.end() )
-	{
-		i.value()->addLinguisticTerm(lt);
-		return true;
-	}else
-	{
-		qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
-	}
-	return false;
+    QHash<QString, Variable*>::iterator i = variables.find(varName);
+    if ( i != variables.end() )
+    {
+        i.value()->addLinguisticTerm(lt);
+        return true;
+    }else
+    {
+        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+    }
+    return false;
 }
 Variable* FunctBlock::getVariable(const QString& varName)
 {
@@ -91,16 +90,16 @@ Variable* FunctBlock::getVariable(const QString& varName)
 }
 bool FunctBlock::setDefaultValue(const QString& varName,const double value)
 {
-        QHash<QString, Variable*>::iterator i = variables.find(varName);
-        if ( i != variables.end() )
-	{
-		i.value()->setDefaultValue(value);
-		return true;
-	}else
-	{
-		qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
-	}
-	return false;
+    QHash<QString, Variable*>::iterator i = variables.find(varName);
+    if ( i != variables.end() )
+    {
+        i.value()->setDefaultValue(value);
+        return true;
+    }else
+    {
+        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+    }
+    return false;
 }
 bool FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d)
 {

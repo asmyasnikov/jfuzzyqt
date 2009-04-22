@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleaccumulationmethodbsum.cpp
- * \class FIXME
+ * \class RuleAccumulationMethodBoundedSum
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project

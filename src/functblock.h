@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file functblock.h
- * \class FIXME
+ * \class FunctBlock
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -33,6 +33,9 @@ in file LICENSE along with this program.  If not, see
 #include "rule/ruleblock.h"
 #include "defuzzifier/defuzzifier.h"
 
+
+namespace jfuzzyqt
+{
 
 class FunctBlock : public QObject
 {
@@ -66,5 +69,8 @@ private:
     QHash<QString, RuleBlock*> ruleBlocks; ///<Several RuleBlocks indexed by name
     QHash<QString, Variable*> variables; ///<Every variable is here (key: VariableName)
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // FUNCTBLOCK_H

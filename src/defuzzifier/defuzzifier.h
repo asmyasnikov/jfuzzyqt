@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file defuzzifier.h
- * \class FIXME
+ * \class Defuzzifier
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -27,6 +27,9 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QVariant>
+
+namespace jfuzzyqt
+{
 
 class Defuzzifier : public QObject
 {
@@ -53,5 +56,8 @@ protected:
     double min;
     double max;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIER_H

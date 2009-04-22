@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleconnectionmethodorprobor.h
- * \class FIXME
+ * \class RuleConnectionMethodOrProbOr
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,9 @@ in file LICENSE along with this program.  If not, see
 #define RULECONNECTIONMETHODORPROBOR_H
 
 #include "../ruleconnectionmethod.h"
+
+namespace jfuzzyqt
+{
 
 class RuleConnectionMethodOrProbOr : public RuleConnectionMethod
 {
@@ -39,5 +42,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODORPROBOR_H

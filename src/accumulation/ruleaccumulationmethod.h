@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleaccumulationmethod.h
- * \class FIXME
+ * \class RuleAccumulationMethod
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -40,6 +40,9 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 
+namespace jfuzzyqt
+{
+
 class RuleAccumulationMethod : public QObject
 {
     Q_OBJECT
@@ -56,5 +59,8 @@ public:
 private:
     QString name;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULEACCUMULATIONMETHOD_H

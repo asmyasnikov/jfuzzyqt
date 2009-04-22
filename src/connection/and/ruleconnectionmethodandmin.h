@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleconnectionmethodandmin.h
- * \class FIXME
+ * \class RuleConnectionMethodAndMin
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,10 @@ in file LICENSE along with this program.  If not, see
 #include "../ruleconnectionmethod.h"
 #include <QString>
 
+
+namespace jfuzzyqt
+{
+
 class RuleConnectionMethodAndMin : public RuleConnectionMethod
 {
     Q_OBJECT
@@ -40,5 +44,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODANDMIN_H

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleconnectionmethodorbsum.h
- * \class FIXME
+ * \class RuleConnectionMethodOrBoundedSum
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,10 @@ in file LICENSE along with this program.  If not, see
 #define RULECONNECTIONMETHODORBSUM_H
 
 #include "../ruleconnectionmethod.h"
+
+
+namespace jfuzzyqt
+{
 
 class RuleConnectionMethodOrBoundedSum : public RuleConnectionMethod
 {
@@ -39,5 +43,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODORBSUM_H

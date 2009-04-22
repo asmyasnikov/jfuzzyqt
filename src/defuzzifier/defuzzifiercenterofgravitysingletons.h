@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file defuzzifiercenterofgravitysingletons.h
- * \class FIXME
+ * \class DefuzzifierCenterOfGravitySingletons
  * \author Marco Estanqueiro
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -30,6 +30,9 @@ in file LICENSE along with this program.  If not, see
 #include <QList>
 #include <QVariant>
 
+namespace jfuzzyqt
+{
+
 class DefuzzifierCenterOfGravitySingletons : public DefuzzifierDiscrete
 {
     Q_OBJECT
@@ -43,5 +46,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H

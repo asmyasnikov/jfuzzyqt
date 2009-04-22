@@ -28,6 +28,11 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QVariant>
+
+namespace jfuzzyqt
+{
+
+using namespace jfuzzyqt;
 class RuleConnectionMethod;
 class RuleTerm;
 
@@ -68,5 +73,8 @@ private:
     term_t term1Type;
     term_t term2Type;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULEEXPRESSION_H

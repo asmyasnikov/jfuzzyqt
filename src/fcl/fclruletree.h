@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file fclruletree.h
- * \class FIXME
+ * \class FCLRuleTree
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -32,6 +32,9 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 #include <QList>
+
+namespace jfuzzyqt
+{
 
 class FCLRuleTree : public QObject
 {
@@ -51,5 +54,8 @@ private:
     void insertRight(FCLRuleNode* root, FCLRuleNode* node);
     void insertLeaveValues(QList<QString> &values);
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // FCLRULETREE_H

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file fclparser.h
- * \class FIXME
+ * \class FCLParser
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -30,6 +30,9 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QTextStream>
 #include <QObject>
+
+namespace jfuzzyqt
+{
 
 class FCLParser : public QObject
 {
@@ -61,5 +64,8 @@ private:
                                const RuleConnectionMethod *OR );
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // FCLPARSER_H

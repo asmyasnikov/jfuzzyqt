@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleactivationmethodmin.h
- * \class FIXME
+ * \class RuleActivationMethodMin
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include "ruleactivationmethod.h"
 #include <QObject>
 
+namespace jfuzzyqt
+{
+
 class RuleActivationMethodMin : public RuleActivationMethod
 {
     Q_OBJECT
@@ -39,5 +42,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULEACTIVATIONMETHODMIN_H

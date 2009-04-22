@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file defuzzifiercontinuous.h
- * \class FIXME
+ * \class DefuzzifierContinuous
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,9 @@ in file LICENSE along with this program.  If not, see
 #define DEFUZZIFIERCONTINUOUS_H
 
 #include "defuzzifier.h"
+
+namespace jfuzzyqt
+{
 
 class DefuzzifierContinuous : public Defuzzifier
 {
@@ -61,5 +64,8 @@ protected:
      */
     double values[DEFAULT_NUMBER_OF_POINTS];
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERCONTINUOUS_H

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleconnectionmethodormax.h
- * \class FIXME
+ * \class RuleConnectionMethodOrMax
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,10 @@ in file LICENSE along with this program.  If not, see
 #define RULECONNECTIONMETHODORMAX_H
 
 #include "../ruleconnectionmethod.h"
+
+
+namespace jfuzzyqt
+{
 
 class RuleConnectionMethodOrMax : public RuleConnectionMethod
 {
@@ -39,5 +43,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODORMAX_H

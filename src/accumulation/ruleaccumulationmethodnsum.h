@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleaccumulationmethodnsum.h
- * \class FIXME
+ * \class RuleAccumulationMethodNormalisedSum
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethod.h"
 #include <QObject>
 
+namespace jfuzzyqt
+{
+
 class RuleAccumulationMethodNormalisedSum : public RuleAccumulationMethod
 {
     Q_OBJECT
@@ -40,5 +43,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULE_ACCUMULATION_METHOD_NORMALISED_SUM_H

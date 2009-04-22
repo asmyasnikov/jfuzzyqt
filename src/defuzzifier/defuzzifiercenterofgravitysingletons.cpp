@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file defuzzifiercenterofgravitysingletons.cpp
- * \class FIXME
+ * \class DefuzzifierCenterOfGravitySingletons
  * \author Marco Estanqueiro
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04

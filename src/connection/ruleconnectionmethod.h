@@ -35,6 +35,9 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 
+namespace jfuzzyqt
+{
+
 class RuleConnectionMethod : public QObject
 {
     Q_OBJECT
@@ -50,5 +53,8 @@ public:
 private:
     QString name;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHOD_H

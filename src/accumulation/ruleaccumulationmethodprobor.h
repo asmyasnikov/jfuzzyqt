@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleaccumulationmethodprobor.h
- * \class FIXME
+ * \class RuleAccumulationMethodProbOr
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethod.h"
 #include <QObject>
 
+namespace jfuzzyqt
+{
+
 class RuleAccumulationMethodProbOr : public RuleAccumulationMethod
 {
     Q_OBJECT
@@ -39,5 +42,8 @@ public:
     QString toQString()const;
 private:
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULE_ACCUMULATION_METHOD_BROBOR_H

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file variable.h
- * \class FIXME
+ * \class Variable
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -31,6 +31,9 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QHash>
 #include <QVariant>
+
+namespace jfuzzyqt
+{
 
 class Defuzzifier;
 class LinguisticTerm;
@@ -72,5 +75,8 @@ private:
     QVariant latestDefuzzifiedValue;///<Latest defuzzified value
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // VARIABLE_H

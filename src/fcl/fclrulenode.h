@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file fclrulenode.h
- * \class FIXME
+ * \class FCLRuleNode
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -33,6 +33,9 @@ in file LICENSE along with this program.  If not, see
 #include "../functblock.h"
 #include <QObject>
 #include <QString>
+
+namespace jfuzzyqt
+{
 
 class FCLRuleNode : public QObject
 {
@@ -62,5 +65,8 @@ private:
     FCLRuleNode* left;
     FCLRuleNode* right;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // FCLRULENODE_H

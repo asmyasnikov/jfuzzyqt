@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file linguisticterm.h
- * \class FIXME
+ * \class LinguisticTerm
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -27,6 +27,9 @@ in file LICENSE along with this program.  If not, see
 
 #include <QString>
 #include <QObject>
+
+namespace jfuzzyqt
+{
 
 class MembershipFunction;
 
@@ -50,5 +53,8 @@ private:
     MembershipFunction* membershipFunction;///< Membership function
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // LINGUISTICTERM_H

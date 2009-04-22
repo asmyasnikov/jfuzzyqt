@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleactivationmethod.h
- * \class FIXME
+ * \class RuleActivationMethod
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -30,6 +30,9 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 #include <QLinkedList>
+
+namespace jfuzzyqt
+{
 
 class RuleActivationMethod : public QObject
 {
@@ -48,5 +51,8 @@ public:
 private:
     QString name;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULEACTIVATIONMETHOD_H

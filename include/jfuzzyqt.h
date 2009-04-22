@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file jfuzzyqt.h
- * \class FIXME
+ * \class JFuzzyQt
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -34,6 +34,9 @@ in file LICENSE along with this program.  If not, see
 #include <QHash>
 
 ///<Thisclass is called FIS@jFuzzyLogic
+
+namespace jfuzzyqt
+{
 
 class FunctBlock;
 
@@ -57,5 +60,8 @@ private:
     bool addFunctionBlock(FunctBlock* functionBlock);
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // JFUZZYQT_H

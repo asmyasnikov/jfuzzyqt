@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file value.h
- * \class FIXME
+ * \class Value
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include "../rule/variable.h"
 #include <QObject>
 #include <QString>
+
+namespace jfuzzyqt
+{
 
 class Value : public QObject
 {
@@ -48,5 +51,7 @@ private:
     Variable* varRef;
 
 };
+};
+using namespace jfuzzyqt;
 
 #endif // VALUE_H

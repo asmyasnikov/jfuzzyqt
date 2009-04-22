@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleterm.h
- * \class FIXME
+ * \class RuleTerm
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -29,6 +29,9 @@ in file LICENSE along with this program.  If not, see
 #include "../membership/membershipfunction.h"
 #include <QObject>
 #include <QString>
+
+namespace jfuzzyqt
+{
 
 class RuleTerm : public QObject
 {
@@ -58,5 +61,7 @@ private:
     Variable* variable;
 
 };
+};
+using namespace jfuzzyqt;
 
 #endif // RULETERM_H

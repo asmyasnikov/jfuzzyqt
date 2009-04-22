@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file membershipfunctionsingleton.h
- * \class FIXME
+ * \class MembershipFunctionSingleton
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,9 @@ in file LICENSE along with this program.  If not, see
 #define MEMBERSHIPFUNCTIONSINGLETON_H
 
 #include "membershipfunctiondiscrete.h"
+
+namespace jfuzzyqt
+{
 
 class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 {
@@ -43,6 +46,9 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONSINGLETON_H
 

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file ruleblock.h
- * \class FIXME
+ * \class RuleBlock
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -32,6 +32,9 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QLinkedList>
 #include <QObject>
+
+namespace jfuzzyqt
+{
 
 class RuleBlock : public QObject
 {
@@ -72,5 +75,8 @@ private:
     RuleConnectionMethod *AND;
     RuleConnectionMethod *OR;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULEBLOCK_H

@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file membershipfunction.h
- * \class FIXME
+ * \class MembershipFunction
  * \author Marco Estanqueiro
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -26,6 +26,9 @@ in file LICENSE along with this program.  If not, see
 
 #include <QString>
 #include <QObject>
+
+namespace jfuzzyqt
+{
 
 class Value;
 
@@ -65,5 +68,8 @@ protected:
     double* universeMin; ///< Universe min (range min)
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTION_H

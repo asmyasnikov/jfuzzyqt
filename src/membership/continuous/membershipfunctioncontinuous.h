@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file membershipfunctioncontinuous.h
- * \class FIXME
+ * \class MembershipFunctionContinuous
  * \author Marco Estanqueiro
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -25,6 +25,9 @@ in file LICENSE along with this program.  If not, see
 #define MEMBERSHIPFUNCTIONCONTINUOUS_H
 
 #include "../membershipfunction.h"
+
+namespace jfuzzyqt
+{
 
 class MembershipFunctionContinuous : public MembershipFunction
 {
@@ -37,5 +40,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONCONTINUOUS_H

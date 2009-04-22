@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file defuzzifierdiscrete.h
- * \class FIXME
+ * \class DefuzzifierDiscrete
  * \author Marco Estanqueiro
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -28,6 +28,9 @@ in file LICENSE along with this program.  If not, see
 #include <QList>
 #include <QString>
 #include "defuzzifier.h"
+
+namespace jfuzzyqt
+{
 
 class DefuzzifierDiscrete : public Defuzzifier
 {
@@ -46,5 +49,8 @@ private:
     QHash<QString, double> discreteValues;
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERDISCRETE_H

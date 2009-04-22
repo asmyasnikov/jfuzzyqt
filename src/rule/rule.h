@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file rule.h
- * \class FIXME
+ * \class Rule
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -32,6 +32,9 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 #include <QLinkedList>
+
+namespace jfuzzyqt
+{
 
 class Rule : public QObject
 {
@@ -60,5 +63,8 @@ private:
     double degreeOfSupport;
     double weight;
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // RULE_H

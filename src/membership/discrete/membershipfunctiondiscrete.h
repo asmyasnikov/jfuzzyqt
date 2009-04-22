@@ -14,7 +14,7 @@ in file LICENSE along with this program.  If not, see
 ****************************************************************/
 /*!
  * \file membershipfunctiondiscrete.h
- * \class FIXME
+ * \class MembershipFunctionDiscrete
  * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
@@ -26,6 +26,9 @@ in file LICENSE along with this program.  If not, see
 #define MEMBERSHIPFUNCTIONDISCRETE_H
 
 #include "../membershipfunction.h"
+
+namespace jfuzzyqt
+{
 
 class MembershipFunctionDiscrete : public MembershipFunction
 {
@@ -39,5 +42,8 @@ public:
 private:
 
 };
+
+};
+using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONDISCRETE_H
