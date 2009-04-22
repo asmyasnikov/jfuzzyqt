@@ -1,0 +1,46 @@
+1) Parsing brackets in anticendent. For example:
+   IF (A IS a1 AND B IS b1) OR (A IS a2) THEN C IS c1;
+2) Implement fuzzyfy methods: GAUSS, COSINE, DSIGM, TRIAN, GBELL, TRAPE, SIGM, FUNCTION
+3) Implement defuzzyfy methods: COA, etc.
+4) Implement multi function blocks support.
+5) Implement hierarchical conclusion. For example:
+   A) with multi function blocks:
+       FUNCTION_BLOCK first_level
+       // ...
+       VAR_OUTPUT
+          var1 : REAL;
+       END_VAR
+       // ...
+       END_FUNCTION_BLOCK
+
+       FUNCTION_BLOCK second_level
+       // ...
+       VAR_INPUT
+          var1 : REAL;
+       END_VAR
+       VAR_OUTPUT
+          var2 : REAL;
+       END_VAR
+       // ...
+       END_FUNCTION_BLOCK
+   B) with multi rule blocks:
+       FUNCTION_BLOCK fb
+       // ...
+       VAR_INPUT
+          var1 : REAL;
+          var2 : REAL;
+       END_VAR
+       VAR_OUTPUT
+          var2 : REAL;
+          var3 : REAL;
+       END_VAR
+       // ...
+       RULE_BLOCK No1
+          RULE 1 : IF var1 IS ... THEN var2 IS ...;
+       // ...
+       END_RULE_BLOCK
+       RULE_BLOCK No2
+          RULE 1 : IF var2 IS ... THEN var3 IS ...;
+       // ...
+       END_RULE_BLOCK
+       END_FUNCTION_BLOCK

@@ -1,0 +1,15 @@
+LANGUAGE = C++
+QT -= gui
+CONFIG += release console
+LIBS += -L../build/ -ljfuzzyqt
+UI_DIR = ./src.gen/ui
+MOC_DIR = ./src.gen/moc
+OBJECTS_DIR = ./src.gen/obj
+DESTDIR = ../build
+TARGET = jfuzzyqt
+DEPENDPATH += .
+INCLUDEPATH += ../include
+TEMPLATE = app
+DEPENDPATH += .
+INCLUDEPATH += .
+SOURCES += main.cpp

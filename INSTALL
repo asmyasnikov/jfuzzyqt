@@ -1,0 +1,35 @@
+You need Qt library 4.* version installed in your system
+
+1) qmake
+
+2) make
+
+3) In build dirrectory you found distributive jfuzzyqt project:
+
+4) If you want to build examples, you need:
+
+4a)In Windows
+
+   cd ..\example
+   qmake
+   make
+
+4b)In Linux
+
+   cd ../example
+   qmake
+   make
+
+5) If you want to execute examples, you need:
+
+5a)In Windows
+   
+   cd ..\build
+   .\jfuzzyqt.exe
+   
+5b)In Linux
+   
+   cd ../build
+   export LD_LIBRARY_PATH=`pwd`
+   ./jfuzzyqt
+
