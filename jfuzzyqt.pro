@@ -76,7 +76,8 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/discrete/membershipfunctiondiscrete.h \
     src/membership/continuous/membershipfunctioncontinuous.h \
     src/membership/continuous/membershipfunctionpiecewiselinear.h \
-    src/membership/continuous/membershipfunctiongauss.h
+    src/membership/continuous/membershipfunctiongauss.h \
+    src/membership/continuous/membershipfunctionsigm.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -115,7 +116,8 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/discrete/membershipfunctiondiscrete.cpp \
     src/membership/continuous/membershipfunctioncontinuous.cpp \
     src/membership/continuous/membershipfunctionpiecewiselinear.cpp \
-    src/membership/continuous/membershipfunctiongauss.cpp
+    src/membership/continuous/membershipfunctiongauss.cpp \
+    src/membership/continuous/membershipfunctionsigm.cpp
 OTHER_FILES += fcl/tipper.fcl \
     fcl/singletone.fcl \
     fcl/mamdani.fcl \
