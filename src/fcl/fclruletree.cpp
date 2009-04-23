@@ -15,8 +15,8 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file fclruletree.cpp
  * \class FCLRuleTree
- * \author Marco Estanqueiro
- * \author Aleksey Myasnikov
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
@@ -83,6 +83,7 @@ void FCLRuleTree::insertLeaveValues(QList<QString> &values)
 void FCLRuleTree::addExpression(const QString& exp)
 {
     QList<QString> list;
+    // For Marco :  This regular expressions need debuging with brackets
     QRegExp rx("(and|or)");
     QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
     int pos = 0;

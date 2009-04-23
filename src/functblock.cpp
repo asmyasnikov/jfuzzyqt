@@ -15,8 +15,8 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file functblock.cpp
  * \class FunctBlock
- * \author Marco Estanqueiro
- * \author Aleksey Myasnikov
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
@@ -189,7 +189,7 @@ bool FunctBlock::setValue(const QString& varName, const double& value)
     return toReturn;
 }
 
-/*! \brief Evaluate fuzzy rules in this function block  
+/*! \brief Evaluate fuzzy rules in this function block
 */
 void FunctBlock::evaluate()
 {

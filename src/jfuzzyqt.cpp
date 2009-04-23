@@ -15,8 +15,8 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file jfuzzyqt.cpp
  * \class JFuzzyQt
- * \author Marco Estanqueiro
- * \author Aleksey Myasnikov
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
@@ -45,30 +45,30 @@ JFuzzyQt::~JFuzzyQt()
 
 bool JFuzzyQt::load(const QString& fileUri)
 {
-	bool toReturn = false;
-	QFile file(fileUri);
-	if (!file.open(QIODevice::ReadOnly))
-	{
-		QString str = "Unable to open the file (";
-		str.append( fileUri );
-		str.append( ")" );
-		qFatal("%s", str.toLocal8Bit().data());
-		return false;
-	}
-	QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
-	QTextStream in(&file);
-	FCLParser fclParser;
-	QString line = fclParser.readLine(in);
-	while (!line.isNull()) { ///<File Cycle (only works for one function block
-		if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
-		{
-			FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
-			fclParser.loadFunctBlock(in,*functionBlock);
-			addFunctionBlock(functionBlock);
-		}///<END If Function Block
-		line = fclParser.readLine(in);
-	} ///<END File Cycle
-	return toReturn;
+    bool toReturn = false;
+    QFile file(fileUri);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        QString str = "Unable to open the file (";
+        str.append( fileUri );
+        str.append( ")" );
+        qFatal("%s", str.toLocal8Bit().data());
+        return false;
+    }
+    QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
+    QTextStream in(&file);
+    FCLParser fclParser;
+    QString line = fclParser.readLine(in);
+    while (!line.isNull()) { ///<File Cycle (only works for one function block
+        if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
+        {
+            FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
+            fclParser.loadFunctBlock(in,*functionBlock);
+            addFunctionBlock(functionBlock);
+        }///<END If Function Block
+        line = fclParser.readLine(in);
+    } ///<END File Cycle
+    return toReturn;
 }
 
 bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)

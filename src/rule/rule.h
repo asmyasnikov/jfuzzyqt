@@ -15,8 +15,8 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file rule.h
  * \class Rule
- * \author Marco Estanqueiro
- * \author Aleksey Myasnikov
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com> <estanqueiro.marco@gmail.com>
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2

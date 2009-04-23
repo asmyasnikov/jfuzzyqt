@@ -15,8 +15,8 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file fclparser.cpp
  * \class FIXME
- * \author Marco Estanqueiro
- * \author Aleksey Myasnikov
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
@@ -284,6 +284,7 @@ Rule* FCLParser::loadRule( FunctBlock& funcBlock,
                            const RuleConnectionMethod *AND,
                            const RuleConnectionMethod *OR )
 {
+    // For Marco :  This regular expression need debuging
     QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s+then");
     QRegExp rxTHEN ("then\\s+(\\w+)\\s+is\\s+(\\w+)\\s*");
 
@@ -313,6 +314,7 @@ RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
                                        const RuleConnectionMethod *AND,
                                        const RuleConnectionMethod *OR )
 {
+    qDebug() << ruleif;
     FCLRuleTree tree(this);
     tree.addExpression(ruleif);
     return tree.getRuleExpression(funcBlock, AND, OR);

@@ -15,7 +15,7 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctiongauss.cpp
  * \class MembershipFunctionGauss
- * \author Aleksey Myasnikov
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2

@@ -15,7 +15,7 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctioncontinuous.cpp
  * \class MembershipFunctionContinuous
- * \author Marco Estanqueiro
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2

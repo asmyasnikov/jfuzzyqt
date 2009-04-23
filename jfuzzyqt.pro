@@ -125,4 +125,5 @@ OTHER_FILES += fcl/tipper.fcl \
     TODO \
     LICENSE \
     PROBLEMS \
-    fcl/gauss.fcl
+    fcl/gauss.fcl \
+    fcl/brackets.fcl
