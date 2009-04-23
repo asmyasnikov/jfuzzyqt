@@ -34,8 +34,7 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class FCLRuleNode : public QObject
 {
@@ -66,7 +65,6 @@ private:
     FCLRuleNode* right;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // FCLRULENODE_H

@@ -23,8 +23,10 @@ in file LICENSE along with this program.  If not, see
  */
 #include "membershipfunctioncontinuous.h"
 
-MembershipFunctionContinuous::MembershipFunctionContinuous(QObject* parent, MembershipType type):MembershipFunction(parent, type)
+MembershipFunctionContinuous::MembershipFunctionContinuous(QObject* parent, MembershipType type)
+    : MembershipFunction(parent, type)
 {
+    discrete = false;
 }
 
 MembershipFunctionContinuous::~MembershipFunctionContinuous()

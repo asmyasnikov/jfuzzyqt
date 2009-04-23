@@ -31,6 +31,7 @@ MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const 
 {
     parameters = new Value*[2];
     parameters[0] = new Value(this, valueX);
+    parameters[1] = new Value(this, 1.);
     if(universeMax) delete universeMax;
     if(universeMin) delete universeMin;
     universeMax = new double;
@@ -45,7 +46,7 @@ MembershipFunctionSingleton::~MembershipFunctionSingleton()
 
 QString MembershipFunctionSingleton::getName() const
 {
-    return "MembershipFunctionSingleton";
+    return "Singleton";
 }
 
 void MembershipFunctionSingleton::debug(const QString& tbs)const
@@ -80,4 +81,21 @@ double MembershipFunctionSingleton::valueX(int index)const
         qCritical() << "[MembershipFunctionSingleton::valueX]:Array index out of range.";
         return 0.;
     }
+}
+bool MembershipFunctionSingleton::checkParamters(QString&errors)const
+{
+    bool toReturn = true;
+    if( parameters[1]->getValue() < 0. || parameters[1]->getValue() > 1.)
+    {
+        toReturn = false;
+        errors.append(QString("Parameter 'membership of singletone' should be between 0 and 1 : %1\n").arg(parameters[1]->getValue()));
+    }
+    return toReturn;
+}
+void MembershipFunctionSingleton::estimateUniverse()
+{
+    if(!universeMax) universeMax = new double;
+    if(!universeMin) universeMin = new double;
+    *universeMax = parameters[1]->getValue()+1.e10;
+    *universeMin = parameters[1]->getValue()-1.e10;
 }

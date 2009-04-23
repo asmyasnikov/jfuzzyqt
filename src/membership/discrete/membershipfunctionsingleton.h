@@ -27,8 +27,7 @@ in file LICENSE along with this program.  If not, see
 
 #include "membershipfunctiondiscrete.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 {
@@ -42,13 +41,14 @@ public:
     double membership(double index) const;
     double valueX(int index)const;
     QString getName()const;
+    bool checkParamters(QString& errors)const;
+    void estimateUniverse();
 
 private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONSINGLETON_H
 

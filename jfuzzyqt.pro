@@ -72,10 +72,11 @@ HEADERS += include/jfuzzyqt.h \
     src/connection/or/ruleconnectionmethodorbsum.h \
     src/connection/or/ruleconnectionmethodormax.h \
     src/connection/or/ruleconnectionmethodorprobor.h \
-    src/membership/continuous/membershipfunctioncontinuous.h \
     src/membership/discrete/membershipfunctionsingleton.h \
     src/membership/discrete/membershipfunctiondiscrete.h \
-    src/membership/continuous/membershipfunctionpiecewiselinear.h
+    src/membership/continuous/membershipfunctioncontinuous.h \
+    src/membership/continuous/membershipfunctionpiecewiselinear.h \
+    src/membership/continuous/membershipfunctiongauss.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -110,14 +111,16 @@ SOURCES += src/jfuzzyqt.cpp \
     src/connection/or/ruleconnectionmethodorbsum.cpp \
     src/connection/or/ruleconnectionmethodormax.cpp \
     src/connection/or/ruleconnectionmethodorprobor.cpp \
-    src/membership/continuous/membershipfunctioncontinuous.cpp \
     src/membership/discrete/membershipfunctionsingleton.cpp \
     src/membership/discrete/membershipfunctiondiscrete.cpp \
-    src/membership/continuous/membershipfunctionpiecewiselinear.cpp
+    src/membership/continuous/membershipfunctioncontinuous.cpp \
+    src/membership/continuous/membershipfunctionpiecewiselinear.cpp \
+    src/membership/continuous/membershipfunctiongauss.cpp
 OTHER_FILES += fcl/tipper.fcl \
     fcl/singletone.fcl \
     fcl/mamdani.fcl \
     fcl/tsukamoto.fcl \
     TODO \
     LICENSE \
-    PROBLEMS
+    PROBLEMS \
+    fcl/gauss.fcl

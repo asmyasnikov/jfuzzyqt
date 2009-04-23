@@ -28,8 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethod.h"
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleAccumulationMethodSum : public RuleAccumulationMethod
 {
@@ -44,7 +43,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULEACCUMULATIONMETHODSUM_H

@@ -28,8 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt {
 
 class MembershipFunction;
 
@@ -54,7 +53,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+} using namespace jfuzzyqt;
 
 #endif // LINGUISTICTERM_H

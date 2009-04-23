@@ -28,8 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethod.h"
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleAccumulationMethodProbOr : public RuleAccumulationMethod
 {
@@ -43,7 +42,6 @@ public:
 private:
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULE_ACCUMULATION_METHOD_BROBOR_H

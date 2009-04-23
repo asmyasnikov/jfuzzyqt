@@ -29,8 +29,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleConnectionMethodAndMin : public RuleConnectionMethod
 {
@@ -45,7 +44,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODANDMIN_H

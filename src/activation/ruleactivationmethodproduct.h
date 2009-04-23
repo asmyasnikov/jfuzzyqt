@@ -28,8 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include "ruleactivationmethod.h"
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleActivationMethodProduct : public RuleActivationMethod
 {
@@ -43,7 +42,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULEACTIVATIONMETHODPRODUCT_H

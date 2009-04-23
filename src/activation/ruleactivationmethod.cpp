@@ -62,7 +62,7 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
     // Both are equal? (both discrete or both continuous?)
     if( mf->isDiscrete() && !defuzzifier->isDiscrete() )
     {
-        QString error = "MembershipFunction and Defuzzifier are neither both discrete nor both continuous\n\tTerm: ";
+        QString error = "MembershipFunction are disrete and Defuzzifier are continuous\n\tTerm: ";
         error.append(fuzzyRuleTerm->getName());
         error.append("\n\tMembership function: ");
         error.append(mf->getName());

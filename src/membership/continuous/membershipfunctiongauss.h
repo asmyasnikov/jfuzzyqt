@@ -13,39 +13,39 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file defuzzifiercenterofgravity.h
- * \class DefuzzifierCenterOfGravity
+ * \file membershipfunctiongauss.h
+ * \class MembershipFunctionGauss
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
  * \brief FIXME
  */
-#ifndef DEFUZZIFIERCENTEROFGRAVITY_H
-#define DEFUZZIFIERCENTEROFGRAVITY_H
+#ifndef MEMBERSHIPFUNCTION_GAUSS_H
+#define MEMBERSHIPFUNCTION_GAUSS_H
 
-#include "defuzzifiercontinuous.h"
-#include "../rule/variable.h"
-#include <QString>
 #include <QList>
-#include <QVariant>
+#include "membershipfunctioncontinuous.h"
+#include "../value.h"
 
 namespace jfuzzyqt{
 
-class DefuzzifierCenterOfGravity : public DefuzzifierContinuous
+class MembershipFunctionGauss : public MembershipFunctionContinuous
 {
     Q_OBJECT
 
 public:
-    DefuzzifierCenterOfGravity();
-    ~DefuzzifierCenterOfGravity();
-    QVariant defuzzify()const;
-    void debug(const QString& tbs) const;
+    MembershipFunctionGauss(QObject* parent, double mx, double dx);
+    ~MembershipFunctionGauss();
+    void debug(const QString& tbs)const;
     QString getName()const;
-private:
+    double membership(double index) const;
+    bool checkParamters(QString& errors)const;
+    void estimateUniverse();
 
+private:
 };
 
 }using namespace jfuzzyqt;
 
-#endif // DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H
+#endif // MEMBERSHIPFUNCTION_GAUSS_H

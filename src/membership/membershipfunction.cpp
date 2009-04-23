@@ -50,15 +50,6 @@ double MembershipFunction::getUniverseMin()
     Q_ASSERT(universeMin);
     return *universeMin;
 }
-bool MembershipFunction::checkParamters(const QString&)
-{
-    qWarning() << "[MembershipFunction::checkParamters]:Virtual Function called";
-    return false;
-}
-void MembershipFunction::estimateUniverse()
-{
-    qWarning() << "[MembershipFunction::estimateUniverse]:Virtual Function called";
-}
 bool MembershipFunction::isDiscrete() const
 {
     return discrete;

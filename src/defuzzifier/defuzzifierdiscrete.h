@@ -29,8 +29,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include "defuzzifier.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class DefuzzifierDiscrete : public Defuzzifier
 {
@@ -50,7 +49,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERDISCRETE_H

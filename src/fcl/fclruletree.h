@@ -33,8 +33,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QList>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class FCLRuleTree : public QObject
 {
@@ -55,7 +54,6 @@ private:
     void insertLeaveValues(QList<QString> &values);
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // FCLRULETREE_H

@@ -33,8 +33,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QLinkedList>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class Rule : public QObject
 {
@@ -64,7 +63,6 @@ private:
     double weight;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULE_H

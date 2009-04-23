@@ -26,8 +26,7 @@ in file LICENSE along with this program.  If not, see
 
 #include "../membershipfunction.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class MembershipFunctionContinuous : public MembershipFunction
 {
@@ -41,7 +40,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONCONTINUOUS_H

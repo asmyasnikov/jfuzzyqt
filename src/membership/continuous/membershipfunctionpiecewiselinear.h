@@ -29,8 +29,7 @@ in file LICENSE along with this program.  If not, see
 #include "membershipfunctioncontinuous.h"
 #include "../value.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 {
@@ -42,6 +41,8 @@ public:
     void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
+    bool checkParamters(QString& errors)const;
+    void estimateUniverse();
 
 private:
     QList<Value*> x;///<Piece wise linear function values x
@@ -49,7 +50,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTIONPIECEWISELINEAR_H

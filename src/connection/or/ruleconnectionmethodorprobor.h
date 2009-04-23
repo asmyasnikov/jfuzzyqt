@@ -27,8 +27,7 @@ in file LICENSE along with this program.  If not, see
 
 #include "../ruleconnectionmethod.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleConnectionMethodOrProbOr : public RuleConnectionMethod
 {
@@ -43,7 +42,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODORPROBOR_H

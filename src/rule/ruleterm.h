@@ -30,8 +30,7 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleTerm : public QObject
 {
@@ -61,7 +60,7 @@ private:
     Variable* variable;
 
 };
-};
-using namespace jfuzzyqt;
+
+}using namespace jfuzzyqt;
 
 #endif // RULETERM_H

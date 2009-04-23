@@ -31,8 +31,7 @@ in file LICENSE along with this program.  If not, see
 #include <QTextStream>
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class FCLParser : public QObject
 {
@@ -65,7 +64,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // FCLPARSER_H

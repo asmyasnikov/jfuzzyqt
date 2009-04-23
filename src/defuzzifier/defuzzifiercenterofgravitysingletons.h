@@ -30,8 +30,7 @@ in file LICENSE along with this program.  If not, see
 #include <QList>
 #include <QVariant>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class DefuzzifierCenterOfGravitySingletons : public DefuzzifierDiscrete
 {
@@ -47,7 +46,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H

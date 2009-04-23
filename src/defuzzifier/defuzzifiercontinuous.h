@@ -27,8 +27,7 @@ in file LICENSE along with this program.  If not, see
 
 #include "defuzzifier.h"
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class DefuzzifierContinuous : public Defuzzifier
 {
@@ -65,7 +64,6 @@ protected:
     double values[DEFAULT_NUMBER_OF_POINTS];
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIERCONTINUOUS_H

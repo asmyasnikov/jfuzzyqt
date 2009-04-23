@@ -40,8 +40,7 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QString>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleAccumulationMethod : public QObject
 {
@@ -60,7 +59,6 @@ private:
     QString name;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULEACCUMULATIONMETHOD_H

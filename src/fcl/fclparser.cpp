@@ -167,6 +167,8 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, const QStrin
             funcBlock.setVariable( name , lt );
         }else if (rxOut.indexIn(line) > -1){
             break;
+        }else{
+            qWarning() << "[FCLParser::loadFuzzify] term unimplemented : " << line;
         }
         line = readLine(in);
     }

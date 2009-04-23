@@ -35,8 +35,7 @@ in file LICENSE along with this program.  If not, see
 
 ///<Thisclass is called FIS@jFuzzyLogic
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class FunctBlock;
 
@@ -61,7 +60,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // JFUZZYQT_H

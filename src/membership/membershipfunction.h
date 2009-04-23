@@ -27,8 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class Value;
 
@@ -39,23 +38,19 @@ class MembershipFunction : public QObject
 public:
     enum MembershipType
     {
-            FunctionContinuous,FunctionCosine,FunctionDifferenceSigmoidal,
-            FunctionDiscrete,FunctionFunction,FunctionGaussian,
-            FunctionGenBell,FunctionGenericSingleton,FunctionPieceWiseLinear,
-            FunctionSigmoidal,FunctionSingleton,FunctionTrapetzoidal,
-            FunctionTriangular
+        FunctionContinuous,FunctionCosine,FunctionDifferenceSigmoidal,
+        FunctionDiscrete,FunctionFunction,FunctionGaussian,
+        FunctionGenBell,FunctionGenericSingleton,FunctionPieceWiseLinear,
+        FunctionSigmoidal,FunctionSingleton,FunctionTrapetzoidal,
+        FunctionTriangular
     };
-
-    bool discrete;
-    Value** parameters;
-    MembershipType type;
 
     MembershipFunction(QObject* parent, MembershipType type);
     MembershipFunction(MembershipType type, MembershipFunction& membership);
     ~MembershipFunction();
 
-    virtual bool checkParamters(const QString& errors);
-    virtual void estimateUniverse();
+    virtual bool checkParamters(QString& errors) const = 0;
+    virtual void estimateUniverse() = 0;
     virtual double membership(double index) const = 0;
     double getUniverseMax();
     double getUniverseMin();
@@ -66,10 +61,11 @@ public:
 protected:
     double* universeMax; ///< Universe max (range max)
     double* universeMin; ///< Universe min (range min)
-
+    bool discrete;
+    Value** parameters;
+    MembershipType type;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // MEMBERSHIPFUNCTION_H

@@ -15,7 +15,6 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file ruleconnectionmethodandbdif.h
  * \class RuleConnectionMethodAndBoundedDif
- * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -28,8 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include "../ruleconnectionmethod.h"
 #include <QString>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleConnectionMethodAndBoundedDif : public RuleConnectionMethod
 {
@@ -44,7 +42,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULECONNECTIONMETHODANDBDIF_H

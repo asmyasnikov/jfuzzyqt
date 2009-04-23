@@ -33,8 +33,7 @@ in file LICENSE along with this program.  If not, see
 #include <QLinkedList>
 #include <QObject>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleBlock : public QObject
 {
@@ -76,7 +75,6 @@ private:
     RuleConnectionMethod *OR;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULEBLOCK_H

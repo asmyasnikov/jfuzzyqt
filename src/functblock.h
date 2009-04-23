@@ -34,8 +34,7 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifier/defuzzifier.h"
 
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class FunctBlock : public QObject
 {
@@ -70,7 +69,6 @@ private:
     QHash<QString, Variable*> variables; ///<Every variable is here (key: VariableName)
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // FUNCTBLOCK_H

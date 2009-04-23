@@ -36,7 +36,7 @@ in file LICENSE along with this program.  If not, see
 * See also 'membership()' for a precise definition.
 */
 MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* parent, const QList<double>& x,const QList<double>& y)
-	:MembershipFunctionContinuous(parent, FunctionPieceWiseLinear)
+    : MembershipFunctionContinuous(parent, FunctionPieceWiseLinear)
 {
     if ( x.count()<1 )
     {
@@ -50,24 +50,16 @@ MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* pa
     {
         qCritical("Array size differ");
     }
-    if(universeMax) delete universeMax;
-    if(universeMin) delete universeMin;
-    universeMax = new double;
-    universeMin = new double;
-    *universeMax = -1.e304;
-    *universeMin =  1.e304;
     for (int i = 0; i < x.size(); ++i)
     {
         this->x.append( new Value(this,x.at(i)) );
         this->y.append( new Value(this,y.at(i)) );
-        *universeMax = qMax(*universeMax, x.at(i));
-        *universeMin = qMin(*universeMin, x.at(i));
     }
+    estimateUniverse();
 }
 
 MembershipFunctionPieceWiseLinear::~MembershipFunctionPieceWiseLinear()
 {
-
 }
 
 void MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
@@ -86,7 +78,7 @@ void MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
 }
 QString MembershipFunctionPieceWiseLinear::getName() const
 {
-    return "MembershipFunctionPieceWiseLinear";
+    return "PieceWiseLinear";
 }
 
 /*!
@@ -122,4 +114,37 @@ double MembershipFunctionPieceWiseLinear::membership(double index) const
         }
     }
     return toReturn;
+}
+bool MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
+{
+    bool toReturn = true;
+
+    if( x.size() > 1 )
+    {
+        for( int i = 0; i < x.size(); i++ )
+        {
+            if( (i > 0) && (x.at(i-1)->getValue() > x.at(i)->getValue()) ) {
+                toReturn = false;
+                errors.append(QString("Array not sorted: x[%1]=%2, x[%3]=%4").arg(i-1).arg(x.at(i-1)->getValue()).arg(i).arg(x.at(i)->getValue()));
+            }
+
+            if( (y.at(i)->getValue() < 0) || (y.at(i)->getValue() > 1) ) {
+                toReturn = false;
+                errors.append(QString("Membership funcion out of range: y[%1]=%2(should be in range [0,1]\n").arg(i).arg(y.at(i)->getValue()));
+            }
+        }
+    }
+    return toReturn;
+}
+void MembershipFunctionPieceWiseLinear::estimateUniverse()
+{
+    if(!universeMax) universeMax = new double;
+    if(!universeMin) universeMin = new double;
+    *universeMax = -1.e304;
+    *universeMin =  1.e304;
+    for (int i = 0; i < x.size(); ++i)
+    {
+        *universeMax = qMax(*universeMax, x.at(i)->getValue());
+        *universeMin = qMin(*universeMin, x.at(i)->getValue());
+    }
 }

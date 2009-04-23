@@ -1,0 +1,41 @@
+FUNCTION_BLOCK tipper // Many function blocks supported if only one output variable in function block
+
+VAR_INPUT
+    service : REAL;
+    food : REAL;
+END_VAR
+
+VAR_OUTPUT
+    tip : REAL;
+END_VAR
+
+FUZZIFY service
+    TERM poor := (0, 1) (6,0);
+    TERM good := gauss 5 2.5;
+    TERM excellent := (4,0) (9, 1);
+END_FUZZIFY
+
+FUZZIFY food
+    TERM rancid := (0, 1) (6,0) ;
+    TERM delicious := (4,0) (9,1);
+END_FUZZIFY
+
+DEFUZZIFY tip
+    TERM cheap := (0,0) (5,1) (10,0);
+    TERM average := gauss 15 2;
+    TERM generous := gauss 25 2;
+    METHOD : COG; // [COG|COGS]
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK No1 // Many rule blocks supported. This need if used different AND, OR, ACT, ACCU operators in rule block
+    AND : MIN;    // [MIN|BDIF|PROD]
+    OR : MAX;     // [MAX|ASUM|BSUM]
+    ACT : MIN;    // [MIN|PROD]
+    ACCU : MAX;   // [MAX|BSUM|NSUM|PROBOR|SUM]
+    RULE 1 : IF service IS excellent THEN tip IS generous;
+    RULE 2 : IF service IS poor OR food IS rancid THEN tip IS cheap;
+    RULE 3 : IF service IS good THEN tip IS average;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

@@ -32,8 +32,7 @@ in file LICENSE along with this program.  If not, see
 #include <QHash>
 #include <QVariant>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class Defuzzifier;
 class LinguisticTerm;
@@ -76,7 +75,6 @@ private:
 
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // VARIABLE_H

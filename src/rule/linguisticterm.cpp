@@ -26,6 +26,7 @@ in file LICENSE along with this program.  If not, see
 #include "../membership/value.h"
 #include "../membership/membershipfunction.h"
 #include "../membership/continuous/membershipfunctionpiecewiselinear.h"
+#include "../membership/continuous/membershipfunctiongauss.h"
 #include "../membership/discrete/membershipfunctionsingleton.h"
 #include <QRegExp>
 #include <QList>
@@ -74,7 +75,8 @@ bool LinguisticTerm::loadFrom(const QString& qString)
 
     QRegExp rxSingleton("(-?\\d+(.\\d+)*)");
     QRegExp rxPoint("\\s*((-?\\d+(.\\d+)*)\\s*,\\s*(-?\\d+(.\\d+)*))");
-    QRegExp rxUnimplemented("(COSINE|DSIGM|GAUSS|TRIAN|GBELL|TRAPE|SIGM|FUNCTION)\\s*\\(((\\d+(.\\d+)*)\\s*,\\s*(\\d+(.\\d+)*))");
+    QRegExp rxGauss("(gauss\\s+)*(\\d+(.\\d+)*)*\\s+(\\d+(.\\d+)*)");
+    QRegExp rxUnimplemented("(COSINE|DSIGM|TRIAN|GBELL|TRAPE|SIGM|FUNCTION)\\s*\\(((\\d+(.\\d+)*)\\s*,\\s*(\\d+(.\\d+)*))");
     if ( rxUnimplemented.indexIn(qString) > -1){///<Unimplemented
         qCritical("[LinguisticTerm::loadFrom]: Unimplemented") ;
     }else if ( rxPoint.indexIn(qString) > -1){///<Point
@@ -93,13 +95,13 @@ bool LinguisticTerm::loadFrom(const QString& qString)
         }
         membershipFunction = new MembershipFunctionPieceWiseLinear(this, x, y);
         toReturn = true;
-
+    }else if ( rxGauss.indexIn(qString) > -1 ){///<Gauss
+        if( membershipFunction ) delete membershipFunction;
+        membershipFunction = new MembershipFunctionGauss(this, rxGauss.cap(2).toDouble(), rxGauss.cap(4).toDouble());
+        toReturn = true;
     }else if (rxSingleton.indexIn(qString) > -1){ ///<Singleton
         double singleTonValueX = rxSingleton.cap(0).toDouble() ;
-        if( membershipFunction )
-        {
-            delete membershipFunction;
-        }
+        if( membershipFunction ) delete membershipFunction;
         membershipFunction = new MembershipFunctionSingleton(this, singleTonValueX);
         toReturn = true;
     }else{

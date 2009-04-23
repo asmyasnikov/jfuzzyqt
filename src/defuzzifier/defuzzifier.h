@@ -28,8 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include <QObject>
 #include <QVariant>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class Defuzzifier : public QObject
 {
@@ -57,7 +56,6 @@ protected:
     double max;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // DEFUZZIFIER_H

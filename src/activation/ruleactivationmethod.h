@@ -31,8 +31,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QLinkedList>
 
-namespace jfuzzyqt
-{
+namespace jfuzzyqt{
 
 class RuleActivationMethod : public QObject
 {
@@ -52,7 +51,6 @@ private:
     QString name;
 };
 
-};
-using namespace jfuzzyqt;
+}using namespace jfuzzyqt;
 
 #endif // RULEACTIVATIONMETHOD_H
