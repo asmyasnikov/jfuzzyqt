@@ -13,16 +13,16 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file membershipfunctionsigm.h
- * \class MembershipFunctionSigm
+ * \file membershipfunctiontrian.h
+ * \class MembershipFunctionTrian
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
- * \brief Implementation Sigmoidal membership function
+ * \brief Implementation Triangular membership function
  */
-#ifndef MEMBERSHIPFUNCTION_SIGM_H
-#define MEMBERSHIPFUNCTION_SIGM_H
+#ifndef MEMBERSHIPFUNCTION_TRIAN_H
+#define MEMBERSHIPFUNCTION_TRIAN_H
 
 #include <QList>
 #include "membershipfunctioncontinuous.h"
@@ -30,13 +30,13 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class MembershipFunctionSigm : public MembershipFunctionContinuous
+class MembershipFunctionTrian : public MembershipFunctionContinuous
 {
     Q_OBJECT
 
 public:
-    MembershipFunctionSigm(QObject* parent, double mx, double dx);
-    ~MembershipFunctionSigm();
+    MembershipFunctionTrian(QObject* parent, double left, double mid, double right);
+    ~MembershipFunctionTrian();
     void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
@@ -48,4 +48,4 @@ private:
 
 }using namespace jfuzzyqt;
 
-#endif // MEMBERSHIPFUNCTION_SIGM_H
+#endif // MEMBERSHIPFUNCTION_TRIAN_H

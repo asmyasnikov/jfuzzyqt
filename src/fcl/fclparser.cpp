@@ -270,7 +270,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
             }else{
                 qWarning()<<"Unknown (or unimplemented) 'OR' method: "<<type;
             }
-        }else{
+        }else if(!line.isEmpty()){
             qWarning()<<"Unknown line: " << line;
         }
         line = readLine(in);
@@ -314,7 +314,6 @@ RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
                                        const RuleConnectionMethod *AND,
                                        const RuleConnectionMethod *OR )
 {
-    qDebug() << ruleif;
     FCLRuleTree tree(this);
     tree.addExpression(ruleif);
     return tree.getRuleExpression(funcBlock, AND, OR);

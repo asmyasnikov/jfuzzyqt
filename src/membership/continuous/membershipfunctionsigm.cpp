@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.2
- * \brief Implementation Gaussian membership function
+ * \brief Implementation Sigmoidal membership function
  */
 #include "membershipfunctionsigm.h"
 #include <math.h>

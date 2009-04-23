@@ -77,7 +77,8 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/continuous/membershipfunctioncontinuous.h \
     src/membership/continuous/membershipfunctionpiecewiselinear.h \
     src/membership/continuous/membershipfunctiongauss.h \
-    src/membership/continuous/membershipfunctionsigm.h
+    src/membership/continuous/membershipfunctionsigm.h \
+    src/membership/continuous/membershipfunctiontrian.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -117,7 +118,8 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/continuous/membershipfunctioncontinuous.cpp \
     src/membership/continuous/membershipfunctionpiecewiselinear.cpp \
     src/membership/continuous/membershipfunctiongauss.cpp \
-    src/membership/continuous/membershipfunctionsigm.cpp
+    src/membership/continuous/membershipfunctionsigm.cpp \
+    src/membership/continuous/membershipfunctiontrian.cpp
 OTHER_FILES += fcl/tipper.fcl \
     fcl/singletone.fcl \
     fcl/mamdani.fcl \
@@ -126,4 +128,5 @@ OTHER_FILES += fcl/tipper.fcl \
     LICENSE \
     PROBLEMS \
     fcl/gauss.fcl \
-    fcl/brackets.fcl
+    fcl/brackets.fcl \
+    fcl/sigm.fcl

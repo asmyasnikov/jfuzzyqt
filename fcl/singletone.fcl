@@ -10,7 +10,7 @@ tip : REAL;
 END_VAR
 
 FUZZIFY service
-TERM poor := (0, 1) (6,0);
+TERM poor := (0.0, 1.0) (6,0);
 TERM good := (1, 0) (4,1) (6,1) (9,0);
 TERM excellent := (4,0) (9, 1);
 END_FUZZIFY
@@ -21,8 +21,8 @@ TERM delicious := (4,0) (9,1);
 END_FUZZIFY
 
 DEFUZZIFY tip
-TERM cheap := 5;
-TERM average := 15;
+TERM cheap := 5.3;
+TERM average := 15.1;
 TERM generous := 25;
 METHOD : COGS;
 DEFAULT := 0;

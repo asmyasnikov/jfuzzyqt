@@ -28,6 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include "../membership/continuous/membershipfunctionpiecewiselinear.h"
 #include "../membership/continuous/membershipfunctiongauss.h"
 #include "../membership/continuous/membershipfunctionsigm.h"
+#include "../membership/continuous/membershipfunctiontrian.h"
 #include "../membership/discrete/membershipfunctionsingleton.h"
 #include <QRegExp>
 #include <QList>
@@ -74,13 +75,80 @@ bool LinguisticTerm::loadFrom(const QString& qString)
 {
     bool toReturn = false;
 
-    QRegExp rxSingleton("(-?\\d+(.\\d+)*)");
+    QRegExp rxSingleton("(-?\\d+(\\.\\d+)?)");
     QRegExp rxPoint("\\s*((-?\\d+(.\\d+)*)\\s*,\\s*(-?\\d+(.\\d+)*))");
-    QRegExp rxGauss("(gauss\\s+)*(\\d+(.\\d+)*)*\\s+(\\d+(.\\d+)*)");
-    QRegExp rxSigm("(sigm\\s+)*(\\d+(.\\d+)*)*\\s+(\\d+(.\\d+)*)");
-    QRegExp rxUnimplemented("(COSINE|DSIGM|TRIAN|GBELL|TRAPE|FUNCTION)\\s*\\(((\\d+(.\\d+)*)\\s*,\\s*(\\d+(.\\d+)*))");
-    if ( rxUnimplemented.indexIn(qString) > -1){///<Unimplemented
-        qCritical("[LinguisticTerm::loadFrom]: Unimplemented") ;
+    if(qString.contains("gauss")){
+        int pos = 0;
+        double mx, dx;
+        if((pos = rxSingleton.indexIn(qString)) != -1)
+        {
+            mx = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if((pos = rxSingleton.indexIn(qString, pos+rxSingleton.matchedLength())) != -1)
+        {
+            dx = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if( membershipFunction ) delete membershipFunction;
+        membershipFunction = new MembershipFunctionGauss(this, mx, dx);
+        toReturn = true;
+    }else if(qString.contains("dsigm")){
+        qDebug() << "dsigm " << qString;
+        qCritical("LinguisticTerm::loadFrom : dsigm membersip function not implemeted : %s",
+                  qString.toLocal8Bit().data());
+        Q_ASSERT(0);
+    }else if(qString.contains("sigm")){
+        int pos = 0;
+        double d1, d2;
+        if((pos = rxSingleton.indexIn(qString)) != -1)
+        {
+            d1 = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if((pos = rxSingleton.indexIn(qString, pos+rxSingleton.matchedLength())) != -1)
+        {
+            d2 = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if( membershipFunction ) delete membershipFunction;
+        membershipFunction = new MembershipFunctionSigm(this, d1, d2);
+        toReturn = true;
+    }else if(qString.contains("trian")){
+        int pos = 0;
+        double d1, d2, d3;
+        if((pos = rxSingleton.indexIn(qString)) != -1)
+        {
+            d1 = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if((pos = rxSingleton.indexIn(qString, pos+rxSingleton.matchedLength())) != -1)
+        {
+            d2 = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if((pos = rxSingleton.indexIn(qString, pos+rxSingleton.matchedLength())) != -1)
+        {
+            d3 = rxSingleton.cap(1).toDouble();
+        }else{
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+                      qString.toLocal8Bit().data());
+        }
+        if( membershipFunction ) delete membershipFunction;
+        membershipFunction = new MembershipFunctionTrian(this, d1, d2, d3);
+        toReturn = true;
     }else if ( rxPoint.indexIn(qString) > -1){///<Point
         QList<double> x;
         QList<double> y;
@@ -97,21 +165,14 @@ bool LinguisticTerm::loadFrom(const QString& qString)
         }
         membershipFunction = new MembershipFunctionPieceWiseLinear(this, x, y);
         toReturn = true;
-    }else if ( rxGauss.indexIn(qString) > -1 ){///<Gauss
-        if( membershipFunction ) delete membershipFunction;
-        membershipFunction = new MembershipFunctionGauss(this, rxGauss.cap(2).toDouble(), rxGauss.cap(4).toDouble());
-        toReturn = true;
-    }else if ( rxSigm.indexIn(qString) > -1 ){///<Sigm
-        if( membershipFunction ) delete membershipFunction;
-        membershipFunction = new MembershipFunctionSigm(this, rxSigm.cap(2).toDouble(), rxSigm.cap(4).toDouble());
-        toReturn = true;
     }else if (rxSingleton.indexIn(qString) > -1){ ///<Singleton
-        double singleTonValueX = rxSingleton.cap(0).toDouble() ;
+        double singleTonValueX = rxSingleton.cap(1).toDouble() ;
         if( membershipFunction ) delete membershipFunction;
         membershipFunction = new MembershipFunctionSingleton(this, singleTonValueX);
         toReturn = true;
     }else{
-        qCritical("LinguisticTerm::loadFrom : unknown linguistic term");
+        qCritical("LinguisticTerm::loadFrom : unknown linguistic term : %s",
+                  qString.toLocal8Bit().data());
     }
     return toReturn;
 }
