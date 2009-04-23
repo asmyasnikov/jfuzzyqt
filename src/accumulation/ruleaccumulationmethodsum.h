@@ -1,5 +1,5 @@
 /****************************************************************
-Copyright (C) 2009 Marco Estanqueiro, Aleksey Myasnikov
+Copyright (C) 2009 Aleksey Myasnikov
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +15,6 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file ruleaccumulationmethodsum.h
  * \class RuleAccumulationMethodSum
- * \author Marco Estanqueiro
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
