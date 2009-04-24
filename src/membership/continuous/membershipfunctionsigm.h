@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.2
+ * \version 0.78
  * \brief Implementation Sigmoidal membership function
  */
 #ifndef MEMBERSHIPFUNCTION_SIGM_H

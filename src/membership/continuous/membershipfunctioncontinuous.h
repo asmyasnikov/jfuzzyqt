@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.2
+ * \version 0.78
  * \brief FIXME
  */
 #ifndef MEMBERSHIPFUNCTIONCONTINUOUS_H
