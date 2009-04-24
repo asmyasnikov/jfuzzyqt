@@ -58,7 +58,7 @@ private:
                    const RuleConnectionMethod *OR );
     RuleAccumulationMethod* createAccumulationMethod(const QString& type);
     RuleExpression* loadRuleIf(FunctBlock& funcBlock,
-                               const QString &ruleif,
+                               QString ruleif,
                                const RuleConnectionMethod *AND,
                                const RuleConnectionMethod *OR );
 

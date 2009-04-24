@@ -32,7 +32,7 @@ FCLRuleNode::FCLRuleNode(QObject *parent, const QString& oper)
     left = NULL;
     right = NULL;
     this->oper = oper.toLower();
-    if ( !this->oper.compare("and") )
+    if ( !this->oper.contains("and") )
     {
         priority = 0;
     }else{

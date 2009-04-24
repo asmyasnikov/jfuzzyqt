@@ -42,9 +42,10 @@ class FCLRuleTree : public QObject
 public:
     FCLRuleTree(QObject *parent);
     ~FCLRuleTree();
-    void addExpression(const QString&exp);
+    void addExpression(QString exp);
     QString print()const;
     RuleExpression* getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const;
+    FCLRuleNode* getRootRuleNode()const;
 
 private:
     FCLRuleNode* root;

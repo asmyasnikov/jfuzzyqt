@@ -80,10 +80,25 @@ void FCLRuleTree::insertLeaveValues(QList<QString> &values)
     Q_ASSERT(root);
     root->insertLeaveValues(values);
 }
-void FCLRuleTree::addExpression(const QString& exp)
+void FCLRuleTree::addExpression(QString exp)
 {
     QList<QString> list;
-    // For Marco :  This regular expressions need debuging with brackets
+    QRegExp rxBrackets("\\(\\s*(\\w+)\\s+(is not|is)\\s+(\\w+)\\s*\\)");
+    if(rxBrackets.indexIn(exp) > -1)
+    {
+        qWarning() << "[FCLRuleTree::addExpression]: brackets are not supported in anticendent";
+        QHash<QString,FCLRuleNode*>subtrees;
+        int pos = 0;
+        while ((pos = rxBrackets.indexIn(exp, pos)) != -1)
+        {
+            qWarning() << "expression " << rxBrackets.cap(0) << " will be ignored ";
+            FCLRuleTree tree(this);
+            tree.addExpression(rxBrackets.cap(0).mid(1,rxBrackets.cap(0).size()-2));
+            subtrees.insert(rxBrackets.cap(0), tree.getRootRuleNode());
+            exp = exp.replace(pos, rxBrackets.cap(0).size(), QString::null);
+            pos += rxBrackets.matchedLength();
+        }
+    }
     QRegExp rx("(and|or)");
     QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
     int pos = 0;
@@ -107,11 +122,16 @@ void FCLRuleTree::addExpression(const QString& exp)
         }
         pos += rxMember.matchedLength();
     }
-    insertLeaveValues(list);
+    if(root) insertLeaveValues(list);
 }
 
 RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
 {
-    Q_ASSERT(root);
-    return root->toRuleExpression(fb, AND, OR);
+    return root ?
+           root->toRuleExpression(fb, AND, OR) :
+           NULL;
+}
+FCLRuleNode* FCLRuleTree::getRootRuleNode()const
+{
+    return root;
 }

@@ -79,13 +79,13 @@ QString FCLParser::readLine(QTextStream &in)
 
 void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 {
-    QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
+    QRegExp rxVar("(\\w+)\\s*:\\s*(\\w+)");
     QRegExp rxOut("end_var");
     QString line = readLine(in);
     while (!line.isNull()) {
-        if (rxlen.indexIn(line) > -1)
+        if (rxVar.indexIn(line) > -1)
         {
-            Variable *v = new Variable(this, rxlen.cap(1) );
+            Variable *v = new Variable(this, rxVar.cap(1) );
             funcBlock.addVariable(v->getName(),v);
         }else if (rxOut.indexIn(line) > -1){
             break;
@@ -96,14 +96,14 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 
 void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 {
-    QRegExp rxlen("(\\w+)\\s*:\\s*(\\w+)");
+    QRegExp rxVar("(\\w+)\\s*:\\s*(\\w+)");
     QRegExp rxOut("end_var");
 
     QString line = readLine(in);
     while (!line.isNull()) {
-        if (rxlen.indexIn(line) > -1)
+        if (rxVar.indexIn(line) > -1)
         {
-            Variable *v = new Variable(this, rxlen.cap(1) );
+            Variable *v = new Variable(this, rxVar.cap(1) );
             funcBlock.addVariable(v->getName(),v);
         }else if (rxOut.indexIn(line) > -1){
             break;
@@ -176,12 +176,12 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, const QStrin
 
 RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, const QString& name)
 {
-    QRegExp rxlen("rule\\s+(\\w+)\\s*:\\s*(\\w+[\\s+|\\w+]*)\\s*;");
-    QRegExp rxOut("end_ruleblock");
-    QRegExp rxAND("and\\s*:\\s*(\\w+)");
-    QRegExp rxACT("act\\s*:\\s*(\\w+)");
+    QRegExp rxRule("(rule\\s+(\\w+)\\s*:\\s*)(if\\s+.*\\s+then\\s+.*\\s*;)?");
+    QRegExp rxOut ("end_ruleblock");
+    QRegExp rxAND ("and\\s*:\\s*(\\w+)");
+    QRegExp rxOR  ("or\\s*:\\s*(\\w+)");
+    QRegExp rxACT ("act\\s*:\\s*(\\w+)");
     QRegExp rxACCU("accu\\s*:\\s*(\\w+)");
-    QRegExp rxOR("or\\s*:\\s*(\\w+)");
 
     RuleConnectionMethod *AND = NULL;
     RuleConnectionMethod *OR = NULL;
@@ -191,7 +191,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
     QString line = readLine(in);
     while (!line.isNull())
     {
-        if (rxlen.indexIn(line) > -1)
+        if (rxRule.indexIn(line) > -1)
         {
             if(AND && !OR)
             {
@@ -218,10 +218,10 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
                 }
             }
             Q_ASSERT(AND && OR);
-            Rule *r = loadRule(funcBlock, rxlen.cap(2), rxlen.cap(1),AND,OR);
+            Rule *r = loadRule(funcBlock, rxRule.cap(3), rxRule.cap(2),AND,OR);
             if ( r == NULL )
             {
-                qWarning() << "[FCLParser::loadRuleBlock]: Error loading rule" << rxlen.cap(2);
+                qWarning() << "[FCLParser::loadRuleBlock]: Error loading rule" << rxRule.cap(2);
             }else{
                 ruleBlock->addRule( *r );
             }
@@ -284,10 +284,8 @@ Rule* FCLParser::loadRule( FunctBlock& funcBlock,
                            const RuleConnectionMethod *AND,
                            const RuleConnectionMethod *OR )
 {
-    // For Marco :  This regular expression need debuging
-    QRegExp rxIF("if\\s+(\\w+[\\s+|\\w+]*)\\s+then");
-    QRegExp rxTHEN ("then\\s+(\\w+)\\s+is\\s+(\\w+)\\s*");
-
+    QRegExp rxIF("if\\s+(.*)?\\s+then");
+    QRegExp rxTHEN ("then\\s+((\\w+)?.*)?\\s+is\\s+((\\w+)?.*)?\\s*;");
     Rule* fuzzyRule = new Rule(NULL,name);
     if ( rxIF.indexIn(rule) > -1 && rxTHEN.indexIn(rule) > -1)
     {
@@ -297,12 +295,10 @@ Rule* FCLParser::loadRule( FunctBlock& funcBlock,
             qWarning() << "[FCLParser::loadRule]:antecedents are NULL.";
         }
         fuzzyRule->addAntecedents( antecedents );
-        Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
-        RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(2), false);
+        Variable *v = funcBlock.getVariable(rxTHEN.cap(2));
+        RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(3), false);
         fuzzyRule->addConsequent(rt);
-    }
-    else
-    {
+    }else{
         qWarning()<<"[FCLParser::loadRule]:Unknown rule " << rule;
         return NULL;
     }
@@ -310,7 +306,7 @@ Rule* FCLParser::loadRule( FunctBlock& funcBlock,
 }
 
 RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
-                                       const QString &ruleif,
+                                       QString ruleif,
                                        const RuleConnectionMethod *AND,
                                        const RuleConnectionMethod *OR )
 {

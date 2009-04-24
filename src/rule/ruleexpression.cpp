@@ -224,8 +224,6 @@ double RuleExpression::evaluate()
     else if( term1Type == RULETERM && term1.ruleTerm->isValid() )
     {
         resTerm1 = term1.ruleTerm->getMembership();
-    }else{
-        qCritical() << "[RuleExpression::evaluate]:term1 undefined";
     }
 
     // Evaluate term2: if it's an expression => recursive

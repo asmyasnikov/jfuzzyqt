@@ -52,7 +52,7 @@ Rule::~Rule()
 void Rule::addAntecedents(RuleExpression *antecedents)
 {
     this->antecedents = antecedents;
-    this->antecedents->setParent(this);
+    if(this->antecedents) this->antecedents->setParent(this);
 }
 void Rule::addConsequent(RuleTerm* rt)
 {
@@ -82,7 +82,9 @@ QString Rule::toQString() const
     {
         str += "NULL\n";
     }else{
-        str += antecedents->toQString(); ///< antecedents problem!!
+        str += antecedents ?
+               antecedents->toQString() :
+               QString::null; ///< antecedents problem!!
         str += "\n";
     }
     str += "consequents: ";
@@ -103,11 +105,11 @@ void Rule::reset()
     {
         consequents.at(i)->getVariable()->reset();
     }
-    antecedents->reset();
+    if(antecedents) antecedents->reset();
 }
 void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 {
-    double tmp = antecedents->evaluate(); ///< Evaluate antecedents
+    double tmp = antecedents ? antecedents->evaluate() : 0.; ///< Evaluate antecedents
     degreeOfSupport = tmp;
     ///< Apply weight
     degreeOfSupport *= weight;
