@@ -44,15 +44,19 @@ public:
     ~FCLRuleTree();
     void addExpression(QString exp);
     QString print()const;
-    RuleExpression* getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const;
-    FCLRuleNode* getRootRuleNode()const;
+    RuleExpression* getRuleExpression(FunctBlock &fb, 
+                                      const RuleConnectionMethod *AND,
+                                      const RuleConnectionMethod *OR)const;
+    FCLRuleNode* getRuleNode(const QString& exp)const;
 
 private:
     FCLRuleNode* root;
+    FCLRuleTree* parentTree;
+    QHash<QString,FCLRuleNode*>subtrees;
     FCLRuleNode* insertNode(FCLRuleNode* root, FCLRuleNode* node);
     void insertNode(FCLRuleNode* node);
     void insertRight(FCLRuleNode* root, FCLRuleNode* node);
-    void insertLeaveValues(QList<QString> &values);
+    void insertLeaveValues(QList<QString>&values);
 };
 
 }using namespace jfuzzyqt;

@@ -36,6 +36,8 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
+class FCLRuleTree;
+
 class FCLRuleNode : public QObject
 {
     Q_OBJECT
@@ -50,7 +52,7 @@ public:
     FCLRuleNode* getRight();
     void setRight(FCLRuleNode* node);
     QString print()const;
-    void insertLeaveValues(QList<QString> &values);
+    void insertLeaveValues(QList<QString>&values, FCLRuleTree*rt);
     const QString& getOperator()const;
     RuleExpression* toRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const;
     RuleTerm* toRuleTermLeft(FunctBlock &fb)const;

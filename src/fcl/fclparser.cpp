@@ -318,7 +318,6 @@ RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
 void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 {
     QRegExp rxFunctionBlockEnd("end_function_block");
-
     QRegExp rxVarInput("var_input");
     QRegExp rxVarOutput("var_output");
     QRegExp rxFuziffy("fuzzify\\s+(\\w+)");

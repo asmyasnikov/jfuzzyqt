@@ -23,6 +23,7 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "fclrulenode.h"
+#include "fclruletree.h"
 #include <QDebug>
 #include <QRegExp>
 
@@ -31,7 +32,7 @@ FCLRuleNode::FCLRuleNode(QObject *parent, const QString& oper)
 {
     left = NULL;
     right = NULL;
-    this->oper = oper.toLower();
+    this->oper = oper.toLower().contains("and") ? "and" : "or";
     if ( !this->oper.contains("and") )
     {
         priority = 0;
@@ -95,24 +96,28 @@ QString FCLRuleNode::print()const
     str.append(")");
     return str;
 }
-void FCLRuleNode::insertLeaveValues(QList<QString> &values)
+void FCLRuleNode::insertLeaveValues(QList<QString>&values, FCLRuleTree*rt)
 {
     if(values.size())
     {
         if( left )
         {
-            left->insertLeaveValues(values);
+            left->insertLeaveValues(values, rt);
         }else{
             value1 = values.takeFirst();
+            FCLRuleNode*node = rt->getRuleNode(value1);
+            if(node)setLeft(node);
         }
     }
     if(values.size())
     {
         if( right )
         {
-            right->insertLeaveValues(values);
+            right->insertLeaveValues(values, rt);
         }else{
             value2 = values.takeFirst();
+            FCLRuleNode*node = rt->getRuleNode(value2);
+            if(node) setRight(node);
         }
     }
 }
@@ -129,7 +134,6 @@ RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, const RuleConnecti
     }else{
         re->addTerm1Rule(toRuleTermLeft(fb));
     }
-
     if( oper == "and" )//If the operator is 'and'
     {
         re->setRuleConnectionMethod(AND);
@@ -164,8 +168,9 @@ RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
             if( !v )
             {
                 qWarning()<< "[FCLRuleNode::toRuleTermLeft]:Variable " << varname << " is NULL!!";
+            }else{
+                rt->setVariable(v);
             }
-            rt->setVariable(v);
         }else{
             qWarning() << "[FCLRuleNode::toRuleTermLeft]: Error reading regular expression";
         }

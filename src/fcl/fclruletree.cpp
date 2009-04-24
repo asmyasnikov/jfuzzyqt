@@ -27,7 +27,8 @@ in file LICENSE along with this program.  If not, see
 #include <QRegExp>
 
 FCLRuleTree::FCLRuleTree(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      parentTree(dynamic_cast<FCLRuleTree*>(parent))
 {
     root = NULL;
 }
@@ -75,54 +76,60 @@ QString FCLRuleTree::print()const
     Q_ASSERT(root);
     return root->print();
 }
-void FCLRuleTree::insertLeaveValues(QList<QString> &values)
+void FCLRuleTree::insertLeaveValues(QList<QString>&values)
 {
     Q_ASSERT(root);
-    root->insertLeaveValues(values);
+    root->insertLeaveValues(values, this);
 }
 void FCLRuleTree::addExpression(QString exp)
 {
     QList<QString> list;
-    QRegExp rxBrackets("\\(\\s*(\\w+)\\s+(is not|is)\\s+(\\w+)\\s*\\)");
-    if(rxBrackets.indexIn(exp) > -1)
-    {
-        qWarning() << "[FCLRuleTree::addExpression]: brackets are not supported in anticendent";
-        QHash<QString,FCLRuleNode*>subtrees;
-        int pos = 0;
-        while ((pos = rxBrackets.indexIn(exp, pos)) != -1)
-        {
-            qWarning() << "expression " << rxBrackets.cap(0) << " will be ignored ";
-            FCLRuleTree tree(this);
-            tree.addExpression(rxBrackets.cap(0).mid(1,rxBrackets.cap(0).size()-2));
-            subtrees.insert(rxBrackets.cap(0), tree.getRootRuleNode());
-            exp = exp.replace(pos, rxBrackets.cap(0).size(), QString::null);
-            pos += rxBrackets.matchedLength();
-        }
-    }
-    QRegExp rx("(and|or)");
-    QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
+    QRegExp rxBrackets("\\([^(\\(|\\))]*\\)");
     int pos = 0;
-    if((pos = rx.indexIn(exp, pos)) == -1 && !exp.isEmpty())
+    while((pos = rxBrackets.indexIn(exp)) != -1)
     {
-        insertNode( new FCLRuleNode(this, exp ) );
+        static int brackets = 0;
+        FCLRuleTree tree(this);
+        tree.addExpression(rxBrackets.cap(0).mid(1,rxBrackets.cap(0).size()-2));
+        QString replacement = QString("generic%1 is value").arg(brackets);
+        exp = exp.replace(pos, rxBrackets.cap(0).size(), QString(" %1 ").arg(replacement));
+        subtrees.insert(replacement,tree.root);
+        if(tree.root && tree.root->parent()) tree.root->setParent(this);
+        brackets++;
+    }
+    if(!exp.contains("(") && !exp.contains(")"))
+    {
+        QRegExp rx("(and|or)");
+        QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
+        pos = 0;
+        if((pos = rx.indexIn(exp, pos)) == -1 && !exp.isEmpty())
+        {
+            insertNode( (subtrees.find(exp) != subtrees.end()) ?
+                        (subtrees[exp]) :
+                        new FCLRuleNode(this, exp ) );
+        }else{
+            while ((pos = rx.indexIn(exp, pos)) != -1)
+            {
+                insertNode( new FCLRuleNode(this, rx.cap(1) ) );
+                pos += rx.matchedLength();
+            }
+        }
+        pos = 0;
+        while ((pos = rxMember.indexIn(exp, pos)) != -1)
+        {
+            QString condition(rxMember.cap(0));
+            if(!condition.isEmpty())
+            {
+                list.append( condition );
+            }
+            pos += rxMember.matchedLength();
+        }
+        if(root) insertLeaveValues(list);
     }else{
-        while ((pos = rx.indexIn(exp, pos)) != -1)
-        {
-            insertNode( new FCLRuleNode(this, rx.cap(1) ) );
-            pos += rx.matchedLength();
-        }
+        qCritical("[FCLRuleTree::addExpression] : unnecessary bracket '(' or ')'");
+        Q_ASSERT(!exp.contains( '(' ));
+        Q_ASSERT(!exp.contains( ')' ));
     }
-    pos = 0;
-    while ((pos = rxMember.indexIn(exp, pos)) != -1)
-    {
-        QString condition(rxMember.cap(0));
-        if(!condition.isEmpty())
-        {
-            list.append( condition );
-        }
-        pos += rxMember.matchedLength();
-    }
-    if(root) insertLeaveValues(list);
 }
 
 RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
@@ -131,7 +138,9 @@ RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, const RuleConnect
            root->toRuleExpression(fb, AND, OR) :
            NULL;
 }
-FCLRuleNode* FCLRuleTree::getRootRuleNode()const
+FCLRuleNode* FCLRuleTree::getRuleNode(const QString& exp)const
 {
-    return root;
+    return (subtrees.find(exp) != subtrees.end()) ?
+           (subtrees[exp]) :
+           (parentTree ? parentTree->getRuleNode(exp) : NULL);
 }
