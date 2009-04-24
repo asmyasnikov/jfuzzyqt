@@ -32,6 +32,7 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QObject>
 #include <QHash>
+#include <QStringList>
 
 ///<Thisclass is called FIS@jFuzzyLogic
 
@@ -47,10 +48,13 @@ public:
     JFuzzyQt(QObject *parent=NULL);
     ~JFuzzyQt();
     bool load(const QString& fileUri);
-    void setVariable(const QString& varName, const double& value);
-    void evaluate();
-    double getValue(const QString& varName)const;
+    void setVariable(const QString& varName, const double& value, const QString& fb = QString::null);
+    void evaluate(const QString& fb = QString::null);
+    double getValue(const QString& varName, const QString& fb = QString::null)const;
     void debug() const;
+    QStringList functBlocks()const;
+    QStringList inputs(const QString& fb)const;
+    QStringList outputs(const QString& fb)const;
 
 private:
     QHash<QString, FunctBlock*> functionBlocks;

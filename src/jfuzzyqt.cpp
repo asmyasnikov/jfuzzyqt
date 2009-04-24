@@ -90,7 +90,7 @@ bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 /*! \brief Sets var from default functions block inserted
 *
 */
-void JFuzzyQt::setVariable(const QString& varName, const double& value)
+void JFuzzyQt::setVariable(const QString& varName, const double& value, const QString& fb)
 {
     if( functionBlocks.size() > 0 )
     {
@@ -105,7 +105,7 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value)
     }
 }
 
-void JFuzzyQt::evaluate()
+void JFuzzyQt::evaluate(const QString& fb)
 {
     if( functionBlocks.size() > 0 )
     {
@@ -119,11 +119,13 @@ void JFuzzyQt::evaluate()
     }
 }
 
-double JFuzzyQt::getValue(const QString& varName)const
+double JFuzzyQt::getValue(const QString& varName, const QString& fb)const
 {
     if( functionBlocks.size() > 0 )
     {
-        QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(defaultBlockName);
+        QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(fb.isEmpty() ?
+                                                                            defaultBlockName :
+                                                                            fb);
         if ( i!=functionBlocks.end() )
         {
             if(i.value()->getVariable(varName.toLower()))
@@ -140,4 +142,46 @@ double JFuzzyQt::getValue(const QString& varName)const
 void JFuzzyQt::debug() const
 {
 	functionBlocks.value(defaultBlockName)->debug("");
+}
+QStringList JFuzzyQt::functBlocks()const
+{
+    return functionBlocks.keys();
+}
+QStringList JFuzzyQt::inputs(const QString& fb)const
+{
+    QStringList toReturn;
+    QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(fb.isEmpty() ?
+                                                                        defaultBlockName :
+                                                                        fb);
+    if ( i!=functionBlocks.end() )
+    {
+        QHash<QString, Variable*> variables = i.value()->getVariables();
+        for(QHash<QString, Variable*>::const_iterator j = variables.begin(); j != variables.end(); j++ )
+        {
+            if(!j.value()->isOutputVariable())
+            {
+                toReturn.append(j.key());
+            }
+        }
+    }
+    return toReturn;
+}
+QStringList JFuzzyQt::outputs(const QString& fb)const
+{
+    QStringList toReturn;
+    QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(fb.isEmpty() ?
+                                                                        defaultBlockName :
+                                                                        fb);
+    if ( i!=functionBlocks.end() )
+    {
+        QHash<QString, Variable*> variables = i.value()->getVariables();
+        for(QHash<QString, Variable*>::const_iterator j = variables.begin(); j != variables.end(); j++ )
+        {
+            if(j.value()->isOutputVariable())
+            {
+                toReturn.append(j.key());
+            }
+        }
+    }
+    return toReturn;
 }
