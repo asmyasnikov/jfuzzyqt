@@ -7,8 +7,6 @@
 
 int main(int, char**)
 {
-    char	option;	// var for selection of what user wants to do
-
     std::cout.setf(std::ios::fixed);
     std::cout.precision(2); // only display 2 decimal places
     // create and load the model
@@ -26,7 +24,7 @@ int main(int, char**)
     int example = -1;
     while((example < 1) || (example > fclfiles.size()))
     {
-        std::cout << "Select number of fcl file [0.." << fclfiles.size()-1 << "] : ";
+        std::cout << "Select number of fcl file [1.." << fclfiles.size() << "] : ";
         std::cin >> example;
     }
     if(model.load("../fcl/"+fclfiles.at(example-1)))
@@ -36,42 +34,68 @@ int main(int, char**)
         // is set to the executable's directory if running from the MSVC IDE
         return 0;
     }
-    std::cout << "SELECT AN OPTION (C - calc model, Q - quit) : ";
-    std::cin >> option;
-    if (option == 'C' || option == 'c')
+    QStringList funct_blocks = model.functBlocks();
+    int funct_block = 0;
+    if(funct_blocks.size() > 1)
     {
-        int service, food; // values for input variables
-        std::cout << " |     |                        food                               " << std::endl;
-        std::cout << " |value|-----------------------------------------------------------" << std::endl;
-        std::cout << " |     | 0.0 | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 " << std::endl;
-        std::cout << "-|-----------------------------------------------------------------" << std::endl;
-        for(service = 0; service < 10; service++)
+        std::cout << "Detected function blocks:" << std::endl;
+        for(int i = 0; i < funct_blocks.size(); i++)
+        {
+            std::cout << " " << (i+1) << ". " << funct_blocks.at(i).toLocal8Bit().data() << std::endl;
+        }
+        while((funct_block < 1) || (funct_block > funct_blocks.size()))
+        {
+            std::cout << "Select number of funct block [1.." << funct_blocks.size() << "] : ";
+            std::cin >> funct_block;
+        }
+        funct_block--;
+    }
+    QStringList inputs = model.inputs(funct_blocks.at(funct_block));
+    QStringList outputs = model.outputs(funct_blocks.at(funct_block));
+    if(inputs.size() == 2 && outputs.size() == 1)
+    {
+        std::cout << " Declarations : " << std::endl;
+        std::cout << " input1 = " << inputs.at(0).toLocal8Bit().data() << std::endl;
+        std::cout << " input2 = " << inputs.at(1).toLocal8Bit().data() << std::endl;
+        std::cout << " output = " << outputs.at(0).toLocal8Bit().data() << std::endl;
+        int input1, input2; // values for input variables
+        std::cout << "------------------------------------------------------------------" << std::endl;
+        std::cout << "                               output                             " << std::endl;
+        std::cout << "------------------------------------------------------------------" << std::endl;
+        std::cout << "      |                        input2                             " << std::endl;
+        std::cout << "input1|-----------------------------------------------------------" << std::endl;
+        std::cout << "      | 0.0 | 1.0 | 2.0 | 3.0 | 4.0 | 5.0 | 6.0 | 7.0 | 8.0 | 9.0 " << std::endl;
+        std::cout << "------------------------------------------------------------------" << std::endl;
+        for(input1 = 0; input1 < 10; input1++)
         {
             QString line;
-            switch(service)
+            line.append(QString("%1").arg(double(input1),5,'f',2));
+            line.append(" |");
+            for(input2 = 0; input2 < 10; input2++)
             {
-                case 1: line.append("s"); break;
-                case 2: line.append("e"); break;
-                case 3: line.append("r"); break;
-                case 4: line.append("v"); break;
-                case 5: line.append("i"); break;
-                case 6: line.append("c"); break;
-                case 7: line.append("e"); break;
-                default: line.append(" "); break;
-            }
-            line.append("|");
-            line.append(QString("%1").arg(double(service),5,'f',2));
-            line.append("|");
-            for(food = 0; food < 10; food++)
-            {
-                model.setVariable("service", service);
-                model.setVariable("food", food);
-                model.evaluate();
-                line.append(QString("%1").arg(model.getValue("tip"),5,'f', 2));
-                if(food < 9) line.append("|");
+                model.setVariable(inputs.at(0), input1, funct_blocks.at(funct_block));
+                model.setVariable(inputs.at(1), input2, funct_blocks.at(funct_block));
+                model.evaluate(funct_blocks.at(funct_block));
+                line.append(QString("%1").arg(model.getValue(outputs.at(0), funct_blocks.at(funct_block)),5,'f', 2));
+                if(input2 < 9) line.append("|");
             }
             std::cout << line.toLocal8Bit().data() << std::endl;
         }
-    } // end if option = 's'
+    }else{
+        std::cout << "Input values: " << std::endl;
+        for(int i = 0; i < inputs.size(); i++)
+        {
+            double value = 0.;
+            std::cout << inputs.at(i).toLocal8Bit().data() << " = ";
+            std::cin >> value;
+            model.setVariable(inputs.at(i), value, funct_blocks.at(funct_block));
+        }
+        std::cout << "Result: " << std::endl;
+        model.evaluate(funct_blocks.at(funct_block));
+        for(int i = 0; i < outputs.size(); i++)
+        {
+            std::cout << outputs.at(i).toLocal8Bit().data() << " = " << model.getValue(outputs.at(i), funct_blocks.at(funct_block)) << std::endl;
+        }
+    }
     return 0;
-} // end main()
+}

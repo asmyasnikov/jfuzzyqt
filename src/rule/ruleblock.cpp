@@ -173,12 +173,9 @@ void RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *AND)
 }
 void RuleBlock::setRuleConnectionMethodOr(RuleConnectionMethod *OR)
 {
-    if( this->OR != NULL)
-    {
-        delete (this->OR);
-    }
+    if( this->OR ) delete (this->OR);
     this->OR = OR;
-    this->OR->setParent(this);
+    if( this->OR ) this->OR->setParent(this);
 }
 RuleConnectionMethod* RuleBlock::getRuleConnectionMethodAnd()const
 {
