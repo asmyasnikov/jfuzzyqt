@@ -39,6 +39,11 @@ JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 {
 }
 
+JFuzzyQt::JFuzzyQt(const QString& fileUri, QObject *parent) : QObject(parent)
+{
+    load(fileUri);
+}
+
 JFuzzyQt::~JFuzzyQt()
 {
 }
@@ -94,9 +99,11 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value, const QS
 {
     if( functionBlocks.size() > 0 )
     {
-        ///< Only one function block is supported
-        QHash<QString, FunctBlock*>::iterator i = functionBlocks.find(defaultBlockName);
-        if ( i!=functionBlocks.end() )
+        for(QHash<QString, FunctBlock*>::iterator i = fb.isEmpty() ?
+                                                      i = functionBlocks.begin() :
+                                                      functionBlocks.find(fb);
+            i != functionBlocks.end();
+            i++ )
         {
             i.value()->setValue(varName.toLower(),value);
         }
@@ -109,8 +116,11 @@ void JFuzzyQt::evaluate(const QString& fb)
 {
     if( functionBlocks.size() > 0 )
     {
-        QHash<QString, FunctBlock*>::iterator i = functionBlocks.find(defaultBlockName);
-        if ( i!=functionBlocks.end() )
+        for(QHash<QString, FunctBlock*>::iterator i = fb.isEmpty() ?
+                                                      i = functionBlocks.begin() :
+                                                      functionBlocks.find(fb);
+            i != functionBlocks.end();
+            i++ )
         {
             i.value()->evaluate();
         }
@@ -132,6 +142,10 @@ double JFuzzyQt::getValue(const QString& varName, const QString& fb)const
             {
                 return i.value()->getValue( varName.toLower() );
             }
+        }else{
+            qWarning("[JFuzzyQt::getValue]:There are no %s variable in %s function block",
+                     varName.toLocal8Bit().data(),
+                     fb.toLocal8Bit().data());
         }
     }else{
         qWarning("[JFuzzyQt::getValue]:There are no FunctionBlocks");
@@ -141,7 +155,12 @@ double JFuzzyQt::getValue(const QString& varName, const QString& fb)const
 
 void JFuzzyQt::debug() const
 {
-	functionBlocks.value(defaultBlockName)->debug("");
+    for(QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.begin();
+        i != functionBlocks.end();
+        i++ )
+    {
+        i.value()->debug("");
+    }
 }
 QStringList JFuzzyQt::functBlocks()const
 {

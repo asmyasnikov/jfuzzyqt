@@ -51,6 +51,7 @@ bool FCLRuleNode::isPriorThen(int priority)
 void FCLRuleNode::setLeft(FCLRuleNode* node)
 {
     left = node;
+    if(left) left->setParent(this);
 }
 int FCLRuleNode::getPriority()
 {
@@ -59,6 +60,7 @@ int FCLRuleNode::getPriority()
 void FCLRuleNode::setRight(FCLRuleNode* node)
 {
     right = node;
+    if(right) right->setParent(this);
 }
 FCLRuleNode* FCLRuleNode::getRight()
 {
