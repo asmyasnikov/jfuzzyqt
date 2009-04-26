@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #ifndef VARIABLE_H
@@ -59,6 +59,7 @@ public:
     bool isOutputVariable() const;
     QVariant defuzzify();
     LinguisticTerm* getLinguisticTerm(const QString& termName);
+    QList<QString> getLinguisticTermNames()const;
     void setDefaultValue(const double& value);
     void setDefuzzifier(Defuzzifier* deffuzifier);
     void debug(const QString& tbs) const;
@@ -72,7 +73,6 @@ private:
     Defuzzifier* deffuzifier;
     QHash<QString, LinguisticTerm*> linguisticTerms;///<Terms for this variable
     QVariant latestDefuzzifiedValue;///<Latest defuzzified value
-
 };
 
 }using namespace jfuzzyqt;

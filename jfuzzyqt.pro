@@ -78,7 +78,10 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/continuous/membershipfunctionpiecewiselinear.h \
     src/membership/continuous/membershipfunctiongauss.h \
     src/membership/continuous/membershipfunctionsigm.h \
-    src/membership/continuous/membershipfunctiontrian.h
+    src/membership/continuous/membershipfunctiontrian.h \
+    src/membership/continuous/membershipfunctiontrap.h \
+    src/membership/discrete/membershipfunctiongenericsingleton.h \
+    src/membership/continuous/membershipfunctiongbell.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -119,7 +122,10 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/continuous/membershipfunctionpiecewiselinear.cpp \
     src/membership/continuous/membershipfunctiongauss.cpp \
     src/membership/continuous/membershipfunctionsigm.cpp \
-    src/membership/continuous/membershipfunctiontrian.cpp
+    src/membership/continuous/membershipfunctiontrian.cpp \
+    src/membership/continuous/membershipfunctiontrap.cpp \
+    src/membership/discrete/membershipfunctiongenericsingleton.cpp \
+    src/membership/continuous/membershipfunctiongbell.cpp
 OTHER_FILES += fcl/tipper.fcl \
     fcl/singletone.fcl \
     fcl/mamdani.fcl \
@@ -131,4 +137,5 @@ OTHER_FILES += fcl/tipper.fcl \
     fcl/brackets.fcl \
     fcl/sigm.fcl \
     fcl/decomposition1.fcl \
-    fcl/decomposition2.fcl
+    fcl/decomposition2.fcl \
+    fcl/membership_functions_demo.fcl

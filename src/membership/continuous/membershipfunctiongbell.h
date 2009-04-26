@@ -13,35 +13,39 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file ruleconnectionmethodandbdif.h
- * \class RuleConnectionMethodAndBoundedDif
+ * \file membershipfunctiongbell.h
+ * \class MembershipFunctionGBell
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.82
- * \brief FIXME
+ * \version 0.78
+ * \brief Implementation Gaussian membership function
  */
-#ifndef RULECONNECTIONMETHODANDBDIF_H
-#define RULECONNECTIONMETHODANDBDIF_H
+#ifndef MEMBERSHIPFUNCTION_GBELL_H
+#define MEMBERSHIPFUNCTION_GBELL_H
 
-#include "../ruleconnectionmethod.h"
-#include <QString>
+#include <QList>
+#include "membershipfunctioncontinuous.h"
+#include "../value.h"
 
 namespace jfuzzyqt{
 
-class RuleConnectionMethodAndBoundedDif : public RuleConnectionMethod
+class MembershipFunctionGBell : public MembershipFunctionContinuous
 {
     Q_OBJECT
 
 public:
-    RuleConnectionMethodAndBoundedDif();
-    ~RuleConnectionMethodAndBoundedDif();
-    double connect(double antecedent1, double antecedent2)const;
-    QString toQString() const;
-private:
+    MembershipFunctionGBell(QObject* parent, double a, double b, double mean);
+    ~MembershipFunctionGBell();
+    void debug(const QString& tbs)const;
+    QString getName()const;
+    double membership(double index) const;
+    bool checkParamters(QString& errors)const;
+    void estimateUniverse();
 
+private:
 };
 
 }using namespace jfuzzyqt;
 
-#endif // RULECONNECTIONMETHODANDBDIF_H
+#endif // MEMBERSHIPFUNCTION_GBELL_H

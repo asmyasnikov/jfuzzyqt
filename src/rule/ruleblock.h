@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #ifndef RULEBLOCK_H
@@ -53,6 +53,7 @@ public:
     RuleActivationMethod* getRuleActivationMethod()const;
     RuleAccumulationMethod* getRuleAccumulationMethod()const;
     void addRule(const Rule &fuzzyRule);
+    int getRulesCount()const;
     QString toQString()const;
     RuleConnectionMethod* getRuleConnectionMethodAnd()const;
     void setRuleConnectionMethodAnd(RuleConnectionMethod *_and_);

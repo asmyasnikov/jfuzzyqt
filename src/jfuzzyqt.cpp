@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #include "../include/jfuzzyqt.h"
@@ -69,6 +69,31 @@ bool JFuzzyQt::load(const QString& fileUri)
         {
             FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
             fclParser.loadFunctBlock(in,*functionBlock);
+            QHash<QString, Variable*> variables = functionBlock->getVariables();
+            for(QHash<QString, Variable*>::const_iterator i = variables.begin(); i != variables.end(); i++)
+            {
+                if(!i.value()->getLinguisticTermNames().size())
+                {
+                    qWarning("Variable '%s' in function block '%s' not contain terms",
+                             i.key().toLocal8Bit().data(),
+                             rxFunctionBlock.cap(1).toLocal8Bit().data());
+                }
+            }
+            bool rules = false;
+            QHash<QString, RuleBlock*> ruleblocks = functionBlock->getRuleBlocks();
+            for(QHash<QString, RuleBlock*>::const_iterator i = ruleblocks.begin(); i != ruleblocks.end(); i++)
+            {
+                if(i.value()->getRulesCount())
+                {
+                    rules = true;
+                    break;
+                }
+            }
+            if(!rules)
+            {
+                qWarning("Rules in function block '%s' was not found",
+                         rxFunctionBlock.cap(1).toLocal8Bit().data());
+            }
             addFunctionBlock(functionBlock);
         }///<END If Function Block
         line = fclParser.readLine(in);

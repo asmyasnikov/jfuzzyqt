@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #include "membershipfunctionpiecewiselinear.h"
@@ -130,7 +130,7 @@ bool MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
 
             if( (y.at(i)->getValue() < 0) || (y.at(i)->getValue() > 1) ) {
                 toReturn = false;
-                errors.append(QString("Membership funcion out of range: y[%1]=%2(should be in range [0,1]\n").arg(i).arg(y.at(i)->getValue()));
+                errors.append(QString("Membership function out of range: y[%1]=%2 (should be in range [0,1])\n").arg(i).arg(y.at(i)->getValue()));
             }
         }
     }

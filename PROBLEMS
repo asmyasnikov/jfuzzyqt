@@ -8,5 +8,5 @@
    See examples: decomposition1.fcl and decomposition2.fcl.
 2) Not impliment following operaors:
       defuzzifier: COA, COGF, LeftMostMax, RightMostMax, MeanMax;
-      fuzzifier  : Cosine, DSigm, Function, GBell, GenericSingletone, Trapetzoidal
+      fuzzifier  : Cosine, DSigm, Function
 3) Not implement optimization of knowledge base.

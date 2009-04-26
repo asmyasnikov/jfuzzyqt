@@ -13,73 +13,81 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file membershipfunctiontrian.cpp
- * \class MembershipFunctionTrian
+ * \file membershipfunctiontrap.cpp
+ * \class MembershipFunctionTrap
  * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.78
  * \brief Implementation Triangular membership function
  */
-#include "membershipfunctiontrian.h"
+#include "membershipfunctiontrap.h"
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, double mid, double right)
+MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
-    parameters = new Value*[3];
+    parameters = new Value*[4];
     parameters[0] = new Value(this, left);
-    parameters[1] = new Value(this, mid);
-    parameters[2] = new Value(this, right);
+    parameters[1] = new Value(this, lmid);
+    parameters[2] = new Value(this, rmid);
+    parameters[3] = new Value(this, right);
     estimateUniverse();
 }
 
-MembershipFunctionTrian::~MembershipFunctionTrian()
+MembershipFunctionTrap::~MembershipFunctionTrap()
 {
 
 }
 
-void MembershipFunctionTrian::debug(const QString& tbs)const
+void MembershipFunctionTrap::debug(const QString& tbs)const
 {
-    QString str = "{ trian ( ";
+    QString str = "{ trap ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
     str.append(" , ");
     str.append ( QString::number( parameters[1]->getValue() ) );
     str.append(" , ");
     str.append ( QString::number( parameters[2]->getValue() ) );
+    str.append(" , ");
+    str.append ( QString::number( parameters[3]->getValue() ) );
     str.append(" ) ");
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionTrian::getName() const
+QString MembershipFunctionTrap::getName() const
 {
-    return "Trian";
+    return "Trapetziodal";
 }
 
-double MembershipFunctionTrian::membership(double index) const
+double MembershipFunctionTrap::membership(double index) const
 {
     if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;
-    else if( qAbs(index-parameters[1]->getValue()) < 1.e-10 ) return 1.;
+    else if( index >= index-parameters[1]->getValue() && index <= index-parameters[1]->getValue() ) return 1.;
     else if( index <= parameters[1]->getValue() ) return ((index - parameters[0]->getValue()) / (parameters[1]->getValue() - parameters[0]->getValue()));
     else return 1.-((index-parameters[1]->getValue())/(parameters[2]->getValue()-parameters[1]->getValue()));
 }
-bool MembershipFunctionTrian::checkParamters(QString&errors)const
+bool MembershipFunctionTrap::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[0]->getValue() > parameters[1]->getValue() )
     {
         toReturn = false;
-        errors.append(QString("Parameter mid is out of range : %1 > %2\n").arg(parameters[0]->getValue()).arg(parameters[1]->getValue()));
+        errors.append(QString("Parameter left is out of range : %1 > %2\n").arg(parameters[0]->getValue()).arg(parameters[1]->getValue()));
     }
     if( parameters[1]->getValue() > parameters[2]->getValue() )
     {
         toReturn = false;
-        errors.append(QString("Parameter mid is out of range : %1 > %2\n").arg(parameters[1]->getValue()).arg(parameters[2]->getValue()));
+        errors.append(QString("Parameter left mid is out of range : %1 > %2\n").arg(parameters[1]->getValue()).arg(parameters[2]->getValue()));
+    }
+    if( parameters[2]->getValue() > parameters[3]->getValue() )
+    {
+        toReturn = false;
+        errors.append(QString("Parameter right mid is out of range : %1 > %2\n").arg(parameters[2]->getValue()).arg(parameters[3]->getValue()));
     }
     return toReturn;
 }
-void MembershipFunctionTrian::estimateUniverse()
+void MembershipFunctionTrap::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

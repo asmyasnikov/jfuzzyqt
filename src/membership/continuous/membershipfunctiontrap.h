@@ -13,35 +13,39 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file ruleconnectionmethodandbdif.h
- * \class RuleConnectionMethodAndBoundedDif
- * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
+ * \file membershipfunctiontrap.h
+ * \class MembershipFunctionTrap
+ * \author Aleksey Myasnikov
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.82
- * \brief FIXME
+ * \version 0.78
+ * \brief Implementation Trapetziodal membership function
  */
-#ifndef RULECONNECTIONMETHODANDBDIF_H
-#define RULECONNECTIONMETHODANDBDIF_H
+#ifndef MEMBERSHIPFUNCTION_TRAP_H
+#define MEMBERSHIPFUNCTION_TRAP_H
 
-#include "../ruleconnectionmethod.h"
-#include <QString>
+#include <QList>
+#include "membershipfunctioncontinuous.h"
+#include "../value.h"
 
 namespace jfuzzyqt{
 
-class RuleConnectionMethodAndBoundedDif : public RuleConnectionMethod
+class MembershipFunctionTrap : public MembershipFunctionContinuous
 {
     Q_OBJECT
 
 public:
-    RuleConnectionMethodAndBoundedDif();
-    ~RuleConnectionMethodAndBoundedDif();
-    double connect(double antecedent1, double antecedent2)const;
-    QString toQString() const;
-private:
+    MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right);
+    ~MembershipFunctionTrap();
+    void debug(const QString& tbs)const;
+    QString getName()const;
+    double membership(double index) const;
+    bool checkParamters(QString& errors)const;
+    void estimateUniverse();
 
+private:
 };
 
 }using namespace jfuzzyqt;
 
-#endif // RULECONNECTIONMETHODANDBDIF_H
+#endif // MEMBERSHIPFUNCTION_TRAP_H

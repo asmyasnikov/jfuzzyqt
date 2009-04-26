@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #include "ruleblock.h"
@@ -184,4 +184,8 @@ RuleConnectionMethod* RuleBlock::getRuleConnectionMethodAnd()const
 RuleConnectionMethod* RuleBlock::getRuleConnectionMethodOr()const
 {
     return OR;
+}
+int RuleBlock::getRulesCount()const
+{
+    return rules.size();
 }

@@ -13,68 +13,71 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file membershipfunctiongauss.cpp
+ * \file membershipfunctiongbell.cpp
  * \class MembershipFunctionGauss
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.82
- * \brief Implementation Gaussian membership function
+ * \version 0.78
+ * \brief Implementation GenBell membership function
  */
-#include "membershipfunctiongauss.h"
+#include "membershipfunctiongbell.h"
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, double dx)
+MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters = new Value*[2];
-    parameters[0] = new Value(this, mx);
-    parameters[1] = new Value(this, dx);
+    parameters = new Value*[3];
+    parameters[0] = new Value(this, mean);
+    parameters[1] = new Value(this, a);
+    parameters[2] = new Value(this, b);
     estimateUniverse();
 }
 
-MembershipFunctionGauss::~MembershipFunctionGauss()
+MembershipFunctionGBell::~MembershipFunctionGBell()
 {
 
 }
 
-void MembershipFunctionGauss::debug(const QString& tbs)const
+void MembershipFunctionGBell::debug(const QString& tbs)const
 {
-    QString str = "{ gauss ( ";
+    QString str = "{ gbell ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
     str.append(" , ");
     str.append ( QString::number( parameters[1]->getValue() ) );
+    str.append(" , ");
+    str.append ( QString::number( parameters[2]->getValue() ) );
     str.append(" ) ");
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionGauss::getName() const
+QString MembershipFunctionGBell::getName() const
 {
-    return "Gauss";
+    return "GBell";
 }
 
-double MembershipFunctionGauss::membership(double index) const
+double MembershipFunctionGBell::membership(double index) const
 {
-    return (1. / parameters[1]->getValue() / sqrt(2. * M_PI) *
-            exp(-(index - parameters[0]->getValue()) *
-                 (index - parameters[0]->getValue()) /
-                 (2 * parameters[1]->getValue() * parameters[1]->getValue())));
+    double t = qAbs((index - parameters[0]->getValue()) / parameters[1]->getValue());
+    t = pow(t, 2.0 * parameters[2]->getValue());
+    return 1.0 / (1.0 + t);
 }
-bool MembershipFunctionGauss::checkParamters(QString&errors)const
+bool MembershipFunctionGBell::checkParamters(QString&errors)const
 {
     bool toReturn = true;
-    if( parameters[1]->getValue() < 0 )
+    if( parameters[2]->getValue() < 0.)
     {
         toReturn = false;
-        errors.append(QString("Parameter 'stdev' should be greater than zero : %1\n").arg(parameters[1]->getValue()));
+        errors.append(QString("Parameter 'b' should be greater than zero : %1\n").arg(parameters[2]->getValue()));
     }
     return toReturn;
 }
-void MembershipFunctionGauss::estimateUniverse()
+void MembershipFunctionGBell::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
-    *universeMax = parameters[0]->getValue()+3.*parameters[1]->getValue();
-    *universeMin = parameters[0]->getValue()-3.*parameters[1]->getValue();
+    double delta = pow(999, 1 / (2 * parameters[2]->getValue())) * parameters[1]->getValue();
+    *universeMin = parameters[0]->getValue() - delta;
+    *universeMax = parameters[0]->getValue() + delta;
 }

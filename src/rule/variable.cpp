@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #include "variable.h"
@@ -206,4 +206,8 @@ double Variable::getMembership(const QString& termName)
         qCritical() << "[Variable::getMembership]:No membership function";
     }
     return mf->membership(value);
+}
+QList<QString> Variable::getLinguisticTermNames()const
+{
+    return linguisticTerms.keys();
 }

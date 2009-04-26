@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.78
+ * \version 0.82
  * \brief FIXME
  */
 #ifndef FCLRULETREE_H
@@ -44,7 +44,7 @@ public:
     ~FCLRuleTree();
     void addExpression(QString exp);
     QString print()const;
-    RuleExpression* getRuleExpression(FunctBlock &fb, 
+    RuleExpression* getRuleExpression(FunctBlock &fb,
                                       const RuleConnectionMethod *AND,
                                       const RuleConnectionMethod *OR)const;
     FCLRuleNode* getRuleNode(const QString& exp)const;

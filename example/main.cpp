@@ -92,6 +92,10 @@ int main(int, char**)
         }
         std::cout << "Result: " << std::endl;
         model.evaluate(funct_blocks.at(funct_block));
+        if(!outputs.size())
+        {
+            std::cout << "Output variables was not found" << std::endl;
+        }
         for(int i = 0; i < outputs.size(); i++)
         {
             std::cout << outputs.at(i).toLocal8Bit().data() << " = " << model.getValue(outputs.at(i), funct_blocks.at(funct_block)) << std::endl;
