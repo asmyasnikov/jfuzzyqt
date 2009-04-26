@@ -129,4 +129,6 @@ OTHER_FILES += fcl/tipper.fcl \
     PROBLEMS \
     fcl/gauss.fcl \
     fcl/brackets.fcl \
-    fcl/sigm.fcl
+    fcl/sigm.fcl \
+    fcl/decomposition1.fcl \
+    fcl/decomposition2.fcl

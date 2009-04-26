@@ -1,8 +1,12 @@
-1) При декомпозиции правил типа "Если А есть а1, то С есть с1" на множество правил вида
-   "Если А есть а1 И В есть в1, то С есть с1"
-   "Если А есть а1 И В есть в2, то С есть с1"
-   ...
-   "Если А есть а1 И В есть вN, то С есть с1"
-   При использовании метода аккумулирования MAX наблюдается различие в результатах НЛВ.
-   При этом различий не наблюдается при использовании метода аккумулирования PROBOR, BSUM или NSUM
-2) Не реализованы способы фаззификации: Гаусса, и др.
+1) Decomposition problem.
+   In boolean logic following expressions is equal:
+      IF a IS a1 THEN c IS c1;
+   and
+      IF a IS a1 AND (b IS b1 OR b IS b2 OR b IS b3) THEN c IS c1;
+   where b consist of values b1, b2, b3 (divisible group of exclusive values).
+   In fuzzy logic this expressions is not equal.
+   See examples: decomposition1.fcl and decomposition2.fcl.
+2) Not impliment following operaors:
+      defuzzifier: COA, COGF, LeftMostMax, RightMostMax, MeanMax;
+      fuzzifier  : Cosine, DSigm, Function, GBell, GenericSingletone, Trapetzoidal
+3) Not implement optimization of knowledge base.
