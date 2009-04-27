@@ -27,7 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include "ruleterm.h"
 #include <QDebug>
 
-RuleExpression::RuleExpression(QObject *parent)
+jfuzzyqt::RuleExpression::RuleExpression(QObject *parent)
     : QObject(parent)
 {
     term1Type = UNDEF;
@@ -35,108 +35,108 @@ RuleExpression::RuleExpression(QObject *parent)
     negated = false;
 }
 
-RuleExpression::~RuleExpression()
+jfuzzyqt::RuleExpression::~RuleExpression()
 {
 }
 
-RuleExpression::term_t RuleExpression::getTerm1Type()const
+jfuzzyqt::RuleExpression::term_t jfuzzyqt::RuleExpression::getTerm1Type()const
 {
     return term1Type;
 }
 
-RuleExpression::term_t RuleExpression::getTerm2Type()const
+jfuzzyqt::RuleExpression::term_t jfuzzyqt::RuleExpression::getTerm2Type()const
 {
     return term2Type;
 }
 
-const RuleConnectionMethod* RuleExpression::getRuleConnectionMethod()const
+const RuleConnectionMethod* jfuzzyqt::RuleExpression::getRuleConnectionMethod()const
 {
     return ruleConnectionMethod;
 }
 
-bool RuleExpression::isNegated()const
+bool jfuzzyqt::RuleExpression::isNegated()const
 {
     return negated;
 }
 
-RuleTerm* RuleExpression::getTerm1Rule()const
+RuleTerm* jfuzzyqt::RuleExpression::getTerm1Rule()const
 {
     if ( term1Type==RULETERM )
     {
         return term1.ruleTerm;
     }else{
-        qCritical() << "[RuleExpression::getTerm1Rule]:Null term returned";
+        qCritical() << "[jfuzzyqt::RuleExpression::getTerm1Rule]:Null term returned";
         return NULL;
     }
 }
 
-RuleTerm* RuleExpression::getTerm2Rule()const
+RuleTerm* jfuzzyqt::RuleExpression::getTerm2Rule()const
 {
     if ( term2Type==RULETERM )
     {
         return term2.ruleTerm;
     }else{
-        qCritical() << "[RuleExpression::getTerm2Rule]:Null term returned";
+        qCritical() << "[jfuzzyqt::RuleExpression::getTerm2Rule]:Null term returned";
         return NULL;
     }
 }
 
-RuleExpression* RuleExpression::getTerm1Expression()const
+RuleExpression* jfuzzyqt::RuleExpression::getTerm1Expression()const
 {
     if ( term1Type==RULEEXPRESSION )
     {
         return term1.ruleExpression;
     }else{
-        qCritical() << "[RuleExpression::getTerm1Expression]:Null term returned";
+        qCritical() << "[jfuzzyqt::RuleExpression::getTerm1Expression]:Null term returned";
         return NULL;
     }
 }
 
-RuleExpression* RuleExpression::getTerm2Expression()const
+RuleExpression* jfuzzyqt::RuleExpression::getTerm2Expression()const
 {
     if ( term2Type==RULEEXPRESSION )
     {
         return term2.ruleExpression;
     }else{
-        qCritical() << "[RuleExpression::getTerm2Expression]:Null term returned";
+        qCritical() << "[jfuzzyqt::RuleExpression::getTerm2Expression]:Null term returned";
         return NULL;
     }
 }
 
-void RuleExpression::addTerm1Rule(RuleTerm *ruleTerm)
+void jfuzzyqt::RuleExpression::addTerm1Rule(RuleTerm *ruleTerm)
 {
     term1Type = RULETERM;
     term1.ruleTerm = ruleTerm;
     term1.ruleTerm->setParent(this);
 }
 
-void RuleExpression::addTerm2Rule(RuleTerm *ruleTerm)
+void jfuzzyqt::RuleExpression::addTerm2Rule(RuleTerm *ruleTerm)
 {
     term2Type = RULETERM;
     term2.ruleTerm = ruleTerm;
     term2.ruleTerm->setParent(this);
 }
 
-void RuleExpression::addTerm1Expression(RuleExpression *ruleExpression)
+void jfuzzyqt::RuleExpression::addTerm1Expression(RuleExpression *ruleExpression)
 {
     term1Type = RULEEXPRESSION;
     term1.ruleExpression = ruleExpression;
     term1.ruleExpression->setParent(this);
 }
 
-void RuleExpression::addTerm2Expression(RuleExpression *ruleExpression)
+void jfuzzyqt::RuleExpression::addTerm2Expression(RuleExpression *ruleExpression)
 {
     term2Type = RULEEXPRESSION;
     term2.ruleExpression = ruleExpression;
     term2.ruleExpression->setParent(this);
 }
 
-void RuleExpression::setRuleConnectionMethod(const RuleConnectionMethod* ruleConnectionMethod)
+void jfuzzyqt::RuleExpression::setRuleConnectionMethod(const RuleConnectionMethod* ruleConnectionMethod)
 {
     this->ruleConnectionMethod = ruleConnectionMethod;
 }
 
-QString RuleExpression::toQString()const
+QString jfuzzyqt::RuleExpression::toQString()const
 {
     QString str = "(";
     switch (term1Type)
@@ -179,7 +179,7 @@ QString RuleExpression::toQString()const
     return str;
 }
 
-void RuleExpression::reset()
+void jfuzzyqt::RuleExpression::reset()
 {
     switch (term1Type)
     {
@@ -193,7 +193,7 @@ void RuleExpression::reset()
             term1.ruleExpression->reset();
             break;
         case UNDEF:
-            qWarning() << "[RuleExpression::reset]:Error reseting term1";
+            qWarning() << "[jfuzzyqt::RuleExpression::reset]:Error reseting term1";
             break;
     }
     switch (term2Type)
@@ -208,12 +208,12 @@ void RuleExpression::reset()
             term2.ruleExpression->reset();
             break;
         case UNDEF:
-            qWarning() << "[RuleExpression::reset]:Error reseting term2";
+            qWarning() << "[jfuzzyqt::RuleExpression::reset]:Error reseting term2";
             break;
     }
 }
 
-double RuleExpression::evaluate()
+double jfuzzyqt::RuleExpression::evaluate()
 {
     // Results for each term
     double resTerm1 = 0.0;

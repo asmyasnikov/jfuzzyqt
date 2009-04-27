@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, double mid, double right)
+jfuzzyqt::MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, double mid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
     parameters = new Value*[3];
@@ -35,12 +35,12 @@ MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, d
     estimateUniverse();
 }
 
-MembershipFunctionTrian::~MembershipFunctionTrian()
+jfuzzyqt::MembershipFunctionTrian::~MembershipFunctionTrian()
 {
 
 }
 
-void MembershipFunctionTrian::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionTrian::debug(const QString& tbs)const
 {
     QString str = "{ trian ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
@@ -52,19 +52,19 @@ void MembershipFunctionTrian::debug(const QString& tbs)const
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionTrian::getName() const
+QString jfuzzyqt::MembershipFunctionTrian::getName() const
 {
     return "Trian";
 }
 
-double MembershipFunctionTrian::membership(double index) const
+double jfuzzyqt::MembershipFunctionTrian::membership(double index) const
 {
     if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;
     else if( qAbs(index-parameters[1]->getValue()) < 1.e-10 ) return 1.;
     else if( index <= parameters[1]->getValue() ) return ((index - parameters[0]->getValue()) / (parameters[1]->getValue() - parameters[0]->getValue()));
     else return 1.-((index-parameters[1]->getValue())/(parameters[2]->getValue()-parameters[1]->getValue()));
 }
-bool MembershipFunctionTrian::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionTrian::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[0]->getValue() > parameters[1]->getValue() )
@@ -79,7 +79,7 @@ bool MembershipFunctionTrian::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionTrian::estimateUniverse()
+void jfuzzyqt::MembershipFunctionTrian::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

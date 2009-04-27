@@ -27,7 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include <QDebug>
 #include <QRegExp>
 
-FCLRuleNode::FCLRuleNode(QObject *parent, const QString& oper)
+jfuzzyqt::FCLRuleNode::FCLRuleNode(QObject *parent, const QString& oper)
         : QObject(parent)
 {
     left = NULL;
@@ -41,36 +41,36 @@ FCLRuleNode::FCLRuleNode(QObject *parent, const QString& oper)
     }
 }
 
-FCLRuleNode::~FCLRuleNode()
+jfuzzyqt::FCLRuleNode::~FCLRuleNode()
 {
 }
-bool FCLRuleNode::isPriorThen(int priority)
+bool jfuzzyqt::FCLRuleNode::isPriorThen(int priority)
 {
     return (this->priority < priority);
 }
-void FCLRuleNode::setLeft(FCLRuleNode* node)
+void jfuzzyqt::FCLRuleNode::setLeft(FCLRuleNode* node)
 {
     left = node;
     if(left) left->setParent(this);
 }
-int FCLRuleNode::getPriority()
+int jfuzzyqt::FCLRuleNode::getPriority()
 {
     return priority;
 }
-void FCLRuleNode::setRight(FCLRuleNode* node)
+void jfuzzyqt::FCLRuleNode::setRight(FCLRuleNode* node)
 {
     right = node;
     if(right) right->setParent(this);
 }
-FCLRuleNode* FCLRuleNode::getRight()
+FCLRuleNode* jfuzzyqt::FCLRuleNode::getRight()
 {
     return right;
 }
-bool FCLRuleNode::hasRightMember()const
+bool jfuzzyqt::FCLRuleNode::hasRightMember()const
 {
     return right;
 }
-QString FCLRuleNode::print()const
+QString jfuzzyqt::FCLRuleNode::print()const
 {
     QString str;
     str.append("(");
@@ -98,7 +98,7 @@ QString FCLRuleNode::print()const
     str.append(")");
     return str;
 }
-void FCLRuleNode::insertLeaveValues(QList<QString>&values, FCLRuleTree*rt)
+void jfuzzyqt::FCLRuleNode::insertLeaveValues(QList<QString>&values, FCLRuleTree*rt)
 {
     if(values.size())
     {
@@ -123,11 +123,11 @@ void FCLRuleNode::insertLeaveValues(QList<QString>&values, FCLRuleTree*rt)
         }
     }
 }
-const QString& FCLRuleNode::getOperator()const
+const QString& jfuzzyqt::FCLRuleNode::getOperator()const
 {
     return oper;
 }
-RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
+RuleExpression* jfuzzyqt::FCLRuleNode::toRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
 {
     RuleExpression *re = new RuleExpression();
     if(left)
@@ -150,7 +150,7 @@ RuleExpression* FCLRuleNode::toRuleExpression(FunctBlock &fb, const RuleConnecti
     }
     return re;
 }
-RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
+RuleTerm* jfuzzyqt::FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
 {
     QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
     RuleTerm *rt = new RuleTerm();
@@ -169,17 +169,17 @@ RuleTerm* FCLRuleNode::toRuleTermLeft(FunctBlock &fb)const
             Variable *v = fb.getVariable( varname );
             if( !v )
             {
-                qWarning()<< "[FCLRuleNode::toRuleTermLeft]:Variable " << varname << " is NULL!!";
+                qWarning()<< "[jfuzzyqt::FCLRuleNode::toRuleTermLeft]:Variable " << varname << " is NULL!!";
             }else{
                 rt->setVariable(v);
             }
         }else{
-            qWarning() << "[FCLRuleNode::toRuleTermLeft]: Error reading regular expression";
+            qWarning() << "[jfuzzyqt::FCLRuleNode::toRuleTermLeft]: Error reading regular expression";
         }
     }
     return rt;
 }
-RuleTerm* FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
+RuleTerm* jfuzzyqt::FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
 {
     QRegExp rxMember("(\\w+)\\s+(is not|is)\\s+(\\w+)");
     RuleTerm *rt = new RuleTerm();
@@ -198,11 +198,11 @@ RuleTerm* FCLRuleNode::toRuleTermRight(FunctBlock &fb)const
             Variable *v = fb.getVariable( varname );
             if( !v )
             {
-                qWarning()<< "[FCLRuleNode::toRuleTermRight]:Variable " << varname << " is NULL!!";
+                qWarning()<< "[jfuzzyqt::FCLRuleNode::toRuleTermRight]:Variable " << varname << " is NULL!!";
             }
             rt->setVariable(v);
         }else{
-            qWarning() << "[FCLRuleNode::toRuleTermRight]: Error reading regular expression";
+            qWarning() << "[jfuzzyqt::FCLRuleNode::toRuleTermRight]: Error reading regular expression";
         }
     }
     return rt;

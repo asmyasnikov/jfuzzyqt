@@ -64,6 +64,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // FCLPARSER_H

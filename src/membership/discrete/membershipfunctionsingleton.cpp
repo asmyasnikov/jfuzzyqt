@@ -26,7 +26,7 @@ in file LICENSE along with this program.  If not, see
 #include "../../membership/value.h"
 #include <QDebug>
 
-MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
+jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
     parameters = new Value*[2];
@@ -40,16 +40,16 @@ MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const 
     *universeMin = valueX-1.e-10;
 }
 
-MembershipFunctionSingleton::~MembershipFunctionSingleton()
+jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
 {
 }
 
-QString MembershipFunctionSingleton::getName() const
+QString jfuzzyqt::MembershipFunctionSingleton::getName() const
 {
     return "Singleton";
 }
 
-void MembershipFunctionSingleton::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionSingleton::debug(const QString& tbs)const
 {
     QString nxtTbs = tbs;
     qDebug() << tbs << "\tDiscrete:" << discrete;
@@ -57,12 +57,12 @@ void MembershipFunctionSingleton::debug(const QString& tbs)const
     parameters[0]->debug(nxtTbs);
 }
 
-int MembershipFunctionSingleton::size()const
+int jfuzzyqt::MembershipFunctionSingleton::size()const
 {
     return 1;
 }
 
-double MembershipFunctionSingleton::membership(double index) const
+double jfuzzyqt::MembershipFunctionSingleton::membership(double index) const
 {
     double toReturn = 0.;
     if( qAbs(index-parameters[0]->getValue()) < 1.e-10 )
@@ -72,17 +72,17 @@ double MembershipFunctionSingleton::membership(double index) const
     return toReturn;
 }
 
-double MembershipFunctionSingleton::valueX(int index)const
+double jfuzzyqt::MembershipFunctionSingleton::valueX(int index)const
 {
     if( index == 0 )
     {
         return parameters[0]->getValue();
     }else{
-        qCritical() << "[MembershipFunctionSingleton::valueX]:Array index out of range.";
+        qCritical() << "[jfuzzyqt::MembershipFunctionSingleton::valueX]:Array index out of range.";
         return 0.;
     }
 }
-bool MembershipFunctionSingleton::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSingleton::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[1]->getValue() < 0. || parameters[1]->getValue() > 1.)
@@ -92,7 +92,7 @@ bool MembershipFunctionSingleton::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionSingleton::estimateUniverse()
+void jfuzzyqt::MembershipFunctionSingleton::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

@@ -25,14 +25,14 @@ in file LICENSE along with this program.  If not, see
 #include "ruleactivationmethodmin.h"
 #include <QtGlobal>
 
-RuleActivationMethodMin::RuleActivationMethodMin(QObject *parent)
+jfuzzyqt::RuleActivationMethodMin::RuleActivationMethodMin(QObject *parent)
 	: RuleActivationMethod(parent,"min")
 {
 }
-RuleActivationMethodMin::~RuleActivationMethodMin()
+jfuzzyqt::RuleActivationMethodMin::~RuleActivationMethodMin()
 {
 }
-double RuleActivationMethodMin::imply(double degreeOfSupport, double membership)const
+double jfuzzyqt::RuleActivationMethodMin::imply(double degreeOfSupport, double membership)const
 {
     return qMin(degreeOfSupport, membership);
 }

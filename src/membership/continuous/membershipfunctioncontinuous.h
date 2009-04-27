@@ -40,6 +40,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTIONCONTINUOUS_H

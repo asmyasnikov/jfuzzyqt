@@ -24,19 +24,19 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodandbdif.h"
 #include <QtGlobal>
 
-RuleConnectionMethodAndBoundedDif::RuleConnectionMethodAndBoundedDif()
+jfuzzyqt::RuleConnectionMethodAndBoundedDif::RuleConnectionMethodAndBoundedDif()
     : RuleConnectionMethod("and")
 {
 }
 
-RuleConnectionMethodAndBoundedDif::~RuleConnectionMethodAndBoundedDif()
+jfuzzyqt::RuleConnectionMethodAndBoundedDif::~RuleConnectionMethodAndBoundedDif()
 {
 }
-double RuleConnectionMethodAndBoundedDif::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodAndBoundedDif::connect(double antecedent1, double antecedent2)const
 {
     return qMax(0.,antecedent1+antecedent2-1);
 }
-QString RuleConnectionMethodAndBoundedDif::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndBoundedDif::toQString() const
 {
     return "and : bdif";
 }

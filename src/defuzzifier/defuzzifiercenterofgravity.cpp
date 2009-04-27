@@ -24,20 +24,20 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifiercenterofgravity.h"
 #include <QDebug>
 
-DefuzzifierCenterOfGravity::DefuzzifierCenterOfGravity()
+jfuzzyqt::DefuzzifierCenterOfGravity::DefuzzifierCenterOfGravity()
     : DefuzzifierContinuous()
 {
 }
 
-DefuzzifierCenterOfGravity::~DefuzzifierCenterOfGravity()
+jfuzzyqt::DefuzzifierCenterOfGravity::~DefuzzifierCenterOfGravity()
 {
 }
 
-QString DefuzzifierCenterOfGravity::getName()const
+QString jfuzzyqt::DefuzzifierCenterOfGravity::getName()const
 {
     return "CenterOfGravity";
 }
-QVariant DefuzzifierCenterOfGravity::defuzzify()const
+QVariant jfuzzyqt::DefuzzifierCenterOfGravity::defuzzify()const
 {
     double x = min, y, sum = 0., sumWeight = 0.;
     for( int i = 0; i < DEFAULT_NUMBER_OF_POINTS; i++, x += stepSize )
@@ -53,7 +53,7 @@ QVariant DefuzzifierCenterOfGravity::defuzzify()const
     return toReturn;
 }
 
-void DefuzzifierCenterOfGravity::debug(const QString& tbs) const
+void jfuzzyqt::DefuzzifierCenterOfGravity::debug(const QString& tbs) const
 {
     qDebug() << tbs << "defuzzifier method = cog;";
 }

@@ -28,7 +28,7 @@ in file LICENSE along with this program.  If not, see
 #include "../connection/or/ruleconnectionmethodormax.h"
 #include <QDebug>
 
-RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
+jfuzzyqt::RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
 {
     name = "Unknown";
     ruleActivationMethod=NULL;
@@ -37,7 +37,7 @@ RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
     OR=NULL;
 }
 
-RuleBlock::RuleBlock(const QString& name) : QObject ()
+jfuzzyqt::RuleBlock::RuleBlock(const QString& name) : QObject ()
 {
     this->name = name;
     ruleActivationMethod=NULL;
@@ -45,7 +45,7 @@ RuleBlock::RuleBlock(const QString& name) : QObject ()
     AND=NULL;
     OR=NULL;
 }
-RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
+jfuzzyqt::RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
 {
     name = rb.getName();
     ruleActivationMethod = NULL;
@@ -58,10 +58,10 @@ RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
     setRuleConnectionMethodAnd( rb.getRuleConnectionMethodAnd() );
     setRuleConnectionMethodOr( rb.getRuleConnectionMethodOr() );
 }
-RuleBlock::~RuleBlock()
+jfuzzyqt::RuleBlock::~RuleBlock()
 {
 }
-void RuleBlock::reset()
+void jfuzzyqt::RuleBlock::reset()
 {
     QLinkedList<Rule>::iterator fr = rules.begin();
     int i = 0;
@@ -76,7 +76,7 @@ void RuleBlock::reset()
 /*!
  * \brief Evaluate fuzzy rule set
  */
-void RuleBlock::evaluate()
+void jfuzzyqt::RuleBlock::evaluate()
 {
     ///< Apply each rule
     QLinkedList<Rule>::iterator i;
@@ -85,15 +85,15 @@ void RuleBlock::evaluate()
         i->evaluate(ruleActivationMethod, ruleAccumulationMethod);
     }
 }
-const QString& RuleBlock::getName()const
+const QString& jfuzzyqt::RuleBlock::getName()const
 {
     return name;
 }
-void RuleBlock::debug(const QString& tbs) const
+void jfuzzyqt::RuleBlock::debug(const QString& tbs) const
 {
     qDebug() << tbs << toQString();
 }
-void RuleBlock::addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod)
+void jfuzzyqt::RuleBlock::addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod)
 {
     if (this->ruleActivationMethod!=NULL)
     {
@@ -102,7 +102,7 @@ void RuleBlock::addRuleActivationMethod(RuleActivationMethod* ruleActivationMeth
     this->ruleActivationMethod = ruleActivationMethod;
     this->ruleActivationMethod->setParent(this);
 }
-void RuleBlock::addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulationMethod)
+void jfuzzyqt::RuleBlock::addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulationMethod)
 {
     if (this->ruleAccumulationMethod!=NULL)
     {
@@ -112,19 +112,19 @@ void RuleBlock::addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulati
     this->ruleAccumulationMethod->setParent(this);
 
 }
-RuleActivationMethod* RuleBlock::getRuleActivationMethod()const
+RuleActivationMethod* jfuzzyqt::RuleBlock::getRuleActivationMethod()const
 {
     return ruleActivationMethod;
 }
-RuleAccumulationMethod* RuleBlock::getRuleAccumulationMethod()const
+RuleAccumulationMethod* jfuzzyqt::RuleBlock::getRuleAccumulationMethod()const
 {
     return ruleAccumulationMethod;
 }
-void RuleBlock::addRule(const Rule &fuzzyRule)
+void jfuzzyqt::RuleBlock::addRule(const Rule &fuzzyRule)
 {
     rules.append(fuzzyRule);
 }
-QString RuleBlock::toQString()const
+QString jfuzzyqt::RuleBlock::toQString()const
 {
     QString tmp;
     tmp += "RuleBlock(";
@@ -162,7 +162,7 @@ QString RuleBlock::toQString()const
     return tmp;
 }
 
-void RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *AND)
+void jfuzzyqt::RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *AND)
 {
     if( this->AND != NULL)
     {
@@ -171,21 +171,21 @@ void RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *AND)
     this->AND = AND;
     this->AND->setParent(this);
 }
-void RuleBlock::setRuleConnectionMethodOr(RuleConnectionMethod *OR)
+void jfuzzyqt::RuleBlock::setRuleConnectionMethodOr(RuleConnectionMethod *OR)
 {
     if( this->OR ) delete (this->OR);
     this->OR = OR;
     if( this->OR ) this->OR->setParent(this);
 }
-RuleConnectionMethod* RuleBlock::getRuleConnectionMethodAnd()const
+RuleConnectionMethod* jfuzzyqt::RuleBlock::getRuleConnectionMethodAnd()const
 {
     return AND;
 }
-RuleConnectionMethod* RuleBlock::getRuleConnectionMethodOr()const
+RuleConnectionMethod* jfuzzyqt::RuleBlock::getRuleConnectionMethodOr()const
 {
     return OR;
 }
-int RuleBlock::getRulesCount()const
+int jfuzzyqt::RuleBlock::getRulesCount()const
 {
     return rules.size();
 }

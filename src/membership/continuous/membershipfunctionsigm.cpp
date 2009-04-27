@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double mx, double dx)
+jfuzzyqt::MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
     parameters = new Value*[2];
@@ -34,12 +34,12 @@ MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double mx, doubl
     estimateUniverse();
 }
 
-MembershipFunctionSigm::~MembershipFunctionSigm()
+jfuzzyqt::MembershipFunctionSigm::~MembershipFunctionSigm()
 {
 
 }
 
-void MembershipFunctionSigm::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionSigm::debug(const QString& tbs)const
 {
     QString str = "{ sigm ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
@@ -49,20 +49,20 @@ void MembershipFunctionSigm::debug(const QString& tbs)const
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionSigm::getName() const
+QString jfuzzyqt::MembershipFunctionSigm::getName() const
 {
     return "Sigm";
 }
 
-double MembershipFunctionSigm::membership(double index) const
+double jfuzzyqt::MembershipFunctionSigm::membership(double index) const
 {
     return 1./(1.+exp(-parameters[0]->getValue()*(index-parameters[1]->getValue())));
 }
-bool MembershipFunctionSigm::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSigm::checkParamters(QString&errors)const
 {
     return true;
 }
-void MembershipFunctionSigm::estimateUniverse()
+void jfuzzyqt::MembershipFunctionSigm::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

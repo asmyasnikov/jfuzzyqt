@@ -26,18 +26,18 @@ in file LICENSE along with this program.  If not, see
 #include <QDebug>
 #include <QRegExp>
 
-FCLRuleTree::FCLRuleTree(QObject *parent)
+jfuzzyqt::FCLRuleTree::FCLRuleTree(QObject *parent)
     : QObject(parent),
       parentTree(dynamic_cast<FCLRuleTree*>(parent))
 {
     root = NULL;
 }
 
-FCLRuleTree::~FCLRuleTree()
+jfuzzyqt::FCLRuleTree::~FCLRuleTree()
 {
 }
 
-void FCLRuleTree::insertNode(FCLRuleNode* node)
+void jfuzzyqt::FCLRuleTree::insertNode(FCLRuleNode* node)
 {
     node->setParent(this);
     if (!root)
@@ -48,7 +48,7 @@ void FCLRuleTree::insertNode(FCLRuleNode* node)
     }
     Q_ASSERT(root);
 }
-FCLRuleNode* FCLRuleTree::insertNode(FCLRuleNode* root, FCLRuleNode* node)
+FCLRuleNode* jfuzzyqt::FCLRuleTree::insertNode(FCLRuleNode* root, FCLRuleNode* node)
 {
     if(node->isPriorThen( root->getPriority()))
     {
@@ -59,7 +59,7 @@ FCLRuleNode* FCLRuleTree::insertNode(FCLRuleNode* root, FCLRuleNode* node)
         return node;
     }
 }
-void FCLRuleTree::insertRight(FCLRuleNode* root, FCLRuleNode* node)
+void jfuzzyqt::FCLRuleTree::insertRight(FCLRuleNode* root, FCLRuleNode* node)
 {
     Q_ASSERT(root);
     Q_ASSERT(node);
@@ -71,17 +71,17 @@ void FCLRuleTree::insertRight(FCLRuleNode* root, FCLRuleNode* node)
     }
 }
 
-QString FCLRuleTree::print()const
+QString jfuzzyqt::FCLRuleTree::print()const
 {
     Q_ASSERT(root);
     return root->print();
 }
-void FCLRuleTree::insertLeaveValues(QList<QString>&values)
+void jfuzzyqt::FCLRuleTree::insertLeaveValues(QList<QString>&values)
 {
     Q_ASSERT(root);
     root->insertLeaveValues(values, this);
 }
-void FCLRuleTree::addExpression(QString exp)
+void jfuzzyqt::FCLRuleTree::addExpression(QString exp)
 {
     QList<QString> list;
     QRegExp rxBrackets("\\([^(\\(|\\))]*\\)");
@@ -126,19 +126,19 @@ void FCLRuleTree::addExpression(QString exp)
         }
         if(root) insertLeaveValues(list);
     }else{
-        qCritical("[FCLRuleTree::addExpression] : unnecessary bracket '(' or ')'");
+        qCritical("[jfuzzyqt::FCLRuleTree::addExpression] : unnecessary bracket '(' or ')'");
         Q_ASSERT(!exp.contains( '(' ));
         Q_ASSERT(!exp.contains( ')' ));
     }
 }
 
-RuleExpression* FCLRuleTree::getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
+RuleExpression* jfuzzyqt::FCLRuleTree::getRuleExpression(FunctBlock &fb, const RuleConnectionMethod *AND, const RuleConnectionMethod *OR)const
 {
     return root ?
            root->toRuleExpression(fb, AND, OR) :
            NULL;
 }
-FCLRuleNode* FCLRuleTree::getRuleNode(const QString& exp)const
+FCLRuleNode* jfuzzyqt::FCLRuleTree::getRuleNode(const QString& exp)const
 {
     return (subtrees.find(exp) != subtrees.end()) ?
            (subtrees[exp]) :

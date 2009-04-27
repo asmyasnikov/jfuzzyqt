@@ -46,6 +46,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H

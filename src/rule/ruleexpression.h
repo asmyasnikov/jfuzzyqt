@@ -73,6 +73,6 @@ private:
     term_t term2Type;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULEEXPRESSION_H

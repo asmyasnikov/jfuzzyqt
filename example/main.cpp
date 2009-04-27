@@ -2,9 +2,6 @@
 #include <iostream>
 #include <QDir>
 
-#define OUR_HEALTH	0 // our health is 1st variable
-#define ENEMY_HEALTH	1 // enemy health is 2nd variable
-
 int main(int, char**)
 {
     std::cout.setf(std::ios::fixed);

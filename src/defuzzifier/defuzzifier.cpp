@@ -25,35 +25,35 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifier.h"
 #include <QDebug>
 
-Defuzzifier::Defuzzifier()
+jfuzzyqt::Defuzzifier::Defuzzifier()
 {
     min = 1.e304;
     max = -1.e304;
 }
-void Defuzzifier::setMin(double min)
+void jfuzzyqt::Defuzzifier::setMin(double min)
 {
     this->min = min;
 }
-void Defuzzifier::setMax(double max)
+void jfuzzyqt::Defuzzifier::setMax(double max)
 {
     this->max = max;
 }
-double Defuzzifier::getMin()const
+double jfuzzyqt::Defuzzifier::getMin()const
 {
     return min;
 }
-double Defuzzifier::getMax()const
+double jfuzzyqt::Defuzzifier::getMax()const
 {
     return max;
 }
-Defuzzifier::~Defuzzifier()
+jfuzzyqt::Defuzzifier::~Defuzzifier()
 {
 }
-bool Defuzzifier::isDiscrete()const
+bool jfuzzyqt::Defuzzifier::isDiscrete()const
 {
     return discrete;
 }
-void Defuzzifier::setDiscrete(const bool& value)
+void jfuzzyqt::Defuzzifier::setDiscrete(const bool& value)
 {
     discrete = value;
 }

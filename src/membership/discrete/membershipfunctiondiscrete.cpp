@@ -25,12 +25,12 @@ in file LICENSE along with this program.  If not, see
 #include "membershipfunctiondiscrete.h"
 #include <QDebug>
 
-MembershipFunctionDiscrete::MembershipFunctionDiscrete(QObject* parent, MembershipType type)
+jfuzzyqt::MembershipFunctionDiscrete::MembershipFunctionDiscrete(QObject* parent, MembershipType type)
     : MembershipFunction(parent, type)
 {
     discrete = true;
 }
 
-MembershipFunctionDiscrete::~MembershipFunctionDiscrete()
+jfuzzyqt::MembershipFunctionDiscrete::~MembershipFunctionDiscrete()
 {
 }

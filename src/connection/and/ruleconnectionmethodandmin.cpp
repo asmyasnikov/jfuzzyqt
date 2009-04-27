@@ -25,21 +25,21 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodandmin.h"
 #include <QtGlobal>
 
-RuleConnectionMethodAndMin::RuleConnectionMethodAndMin()
+jfuzzyqt::RuleConnectionMethodAndMin::RuleConnectionMethodAndMin()
     : RuleConnectionMethod("and")
 {
 
 }
 
-RuleConnectionMethodAndMin::~RuleConnectionMethodAndMin()
+jfuzzyqt::RuleConnectionMethodAndMin::~RuleConnectionMethodAndMin()
 {
 
 }
-double RuleConnectionMethodAndMin::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodAndMin::connect(double antecedent1, double antecedent2)const
 {
     return qMin(antecedent1, antecedent2);
 }
-QString RuleConnectionMethodAndMin::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndMin::toQString() const
 {
     return "and : min";
 }

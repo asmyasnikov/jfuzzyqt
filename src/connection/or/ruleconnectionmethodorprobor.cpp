@@ -24,19 +24,19 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodorprobor.h"
 #include <QtGlobal>
 
-RuleConnectionMethodOrProbOr::RuleConnectionMethodOrProbOr()
+jfuzzyqt::RuleConnectionMethodOrProbOr::RuleConnectionMethodOrProbOr()
     : RuleConnectionMethod("or")
 {
 }
 
-RuleConnectionMethodOrProbOr::~RuleConnectionMethodOrProbOr()
+jfuzzyqt::RuleConnectionMethodOrProbOr::~RuleConnectionMethodOrProbOr()
 {
 }
-double RuleConnectionMethodOrProbOr::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodOrProbOr::connect(double antecedent1, double antecedent2)const
 {
     return (antecedent1+antecedent2-antecedent1*antecedent2);
 }
-QString RuleConnectionMethodOrProbOr::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrProbOr::toQString()const
 {
     return "or: asum";
 }

@@ -35,20 +35,20 @@ in file LICENSE along with this program.  If not, see
 #include <QFile>
 #include <QTextStream>
 
-JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
+jfuzzyqt::JFuzzyQt::JFuzzyQt(QObject *parent) : QObject(parent)
 {
 }
 
-JFuzzyQt::JFuzzyQt(const QString& fileUri, QObject *parent) : QObject(parent)
+jfuzzyqt::JFuzzyQt::JFuzzyQt(const QString& fileUri, QObject *parent) : QObject(parent)
 {
     load(fileUri);
 }
 
-JFuzzyQt::~JFuzzyQt()
+jfuzzyqt::JFuzzyQt::~JFuzzyQt()
 {
 }
 
-bool JFuzzyQt::load(const QString& fileUri)
+bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
 {
     bool toReturn = false;
     QFile file(fileUri);
@@ -101,7 +101,7 @@ bool JFuzzyQt::load(const QString& fileUri)
     return toReturn;
 }
 
-bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
+bool jfuzzyqt::JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 {
     bool toReturn = false;
     functionBlock->setParent(this);
@@ -120,7 +120,7 @@ bool JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
 /*! \brief Sets var from default functions block inserted
 *
 */
-void JFuzzyQt::setVariable(const QString& varName, const double& value, const QString& fb)
+void jfuzzyqt::JFuzzyQt::setVariable(const QString& varName, const double& value, const QString& fb)
 {
     if( functionBlocks.size() > 0 )
     {
@@ -133,11 +133,11 @@ void JFuzzyQt::setVariable(const QString& varName, const double& value, const QS
             i.value()->setValue(varName.toLower(),value);
         }
     }else{
-        qWarning("[JFuzzyQt::setVariable]:There are no FunctionBlocks");
+        qWarning("[jfuzzyqt::JFuzzyQt::setVariable]:There are no FunctionBlocks");
     }
 }
 
-void JFuzzyQt::evaluate(const QString& fb)
+void jfuzzyqt::JFuzzyQt::evaluate(const QString& fb)
 {
     if( functionBlocks.size() > 0 )
     {
@@ -150,11 +150,11 @@ void JFuzzyQt::evaluate(const QString& fb)
             i.value()->evaluate();
         }
     }else{
-        qWarning("[JFuzzyQt::evaluate]:There are no FunctionBlocks");
+        qWarning("[jfuzzyqt::JFuzzyQt::evaluate]:There are no FunctionBlocks");
     }
 }
 
-double JFuzzyQt::getValue(const QString& varName, const QString& fb)const
+double jfuzzyqt::JFuzzyQt::getValue(const QString& varName, const QString& fb)const
 {
     if( functionBlocks.size() > 0 )
     {
@@ -168,17 +168,17 @@ double JFuzzyQt::getValue(const QString& varName, const QString& fb)const
                 return i.value()->getValue( varName.toLower() );
             }
         }else{
-            qWarning("[JFuzzyQt::getValue]:There are no %s variable in %s function block",
+            qWarning("[jfuzzyqt::JFuzzyQt::getValue]:There are no %s variable in %s function block",
                      varName.toLocal8Bit().data(),
                      fb.toLocal8Bit().data());
         }
     }else{
-        qWarning("[JFuzzyQt::getValue]:There are no FunctionBlocks");
+        qWarning("[jfuzzyqt::JFuzzyQt::getValue]:There are no FunctionBlocks");
     }
     return 0;
 }
 
-void JFuzzyQt::debug() const
+void jfuzzyqt::JFuzzyQt::debug() const
 {
     for(QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.begin();
         i != functionBlocks.end();
@@ -187,11 +187,11 @@ void JFuzzyQt::debug() const
         i.value()->debug("");
     }
 }
-QStringList JFuzzyQt::functBlocks()const
+QStringList jfuzzyqt::JFuzzyQt::functBlocks()const
 {
     return functionBlocks.keys();
 }
-QStringList JFuzzyQt::inputs(const QString& fb)const
+QStringList jfuzzyqt::JFuzzyQt::inputs(const QString& fb)const
 {
     QStringList toReturn;
     QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(fb.isEmpty() ?
@@ -210,7 +210,7 @@ QStringList JFuzzyQt::inputs(const QString& fb)const
     }
     return toReturn;
 }
-QStringList JFuzzyQt::outputs(const QString& fb)const
+QStringList jfuzzyqt::JFuzzyQt::outputs(const QString& fb)const
 {
     QStringList toReturn;
     QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.find(fb.isEmpty() ?

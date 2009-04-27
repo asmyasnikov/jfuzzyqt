@@ -25,20 +25,20 @@ in file LICENSE along with this program.  If not, see
 #include "rule.h"
 #include <QDebug>
 
-Rule::Rule(QObject *parent)
+jfuzzyqt::Rule::Rule(QObject *parent)
     : QObject(parent)
 {
     name = "undefined";
     weight=1;
 }
 
-Rule::Rule(QObject *parent, const QString& name)
+jfuzzyqt::Rule::Rule(QObject *parent, const QString& name)
     : QObject(parent)
 {
     this->name = name;
     weight=1;
 }
-Rule::Rule(const Rule &rule)
+jfuzzyqt::Rule::Rule(const Rule &rule)
     : QObject(rule.parent())
 {
     name = rule.getName();
@@ -46,32 +46,32 @@ Rule::Rule(const Rule &rule)
     consequents = rule.getConsequents();
     weight= rule.getWeight();
 }
-Rule::~Rule()
+jfuzzyqt::Rule::~Rule()
 {
 }
-void Rule::addAntecedents(RuleExpression *antecedents)
+void jfuzzyqt::Rule::addAntecedents(RuleExpression *antecedents)
 {
     this->antecedents = antecedents;
     if(this->antecedents) this->antecedents->setParent(this);
 }
-void Rule::addConsequent(RuleTerm* rt)
+void jfuzzyqt::Rule::addConsequent(RuleTerm* rt)
 {
     rt->setParent(this);
     consequents.append(rt);
 }
-const QString& Rule::getName()const
+const QString& jfuzzyqt::Rule::getName()const
 {
     return name;
 }
-RuleExpression* Rule::getAntecedents()const
+RuleExpression* jfuzzyqt::Rule::getAntecedents()const
 {
     return antecedents;
 }
-const QList<RuleTerm*> Rule::getConsequents()const
+const QList<RuleTerm*> jfuzzyqt::Rule::getConsequents()const
 {
         return consequents;
 }
-QString Rule::toQString() const
+QString jfuzzyqt::Rule::toQString() const
 {
     QString str;
     str += "Rule (";
@@ -95,11 +95,11 @@ QString Rule::toQString() const
     str += "}";
     return str;
 }
-void Rule::setDegreeOfSupport(const double& degreeOfSupport)
+void jfuzzyqt::Rule::setDegreeOfSupport(const double& degreeOfSupport)
 {
     this->degreeOfSupport = degreeOfSupport;
 }
-void Rule::reset()
+void jfuzzyqt::Rule::reset()
 {
     for (int i = 0; i < consequents.size(); ++i)
     {
@@ -107,7 +107,7 @@ void Rule::reset()
     }
     if(antecedents) antecedents->reset();
 }
-void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
+void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 {
     double tmp = antecedents ? antecedents->evaluate() : 0.; ///< Evaluate antecedents
     degreeOfSupport = tmp;
@@ -119,7 +119,7 @@ void  Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
         act->imply(consequents.at(i),accu,degreeOfSupport);
     }
 }
-double Rule::getWeight()const
+double jfuzzyqt::Rule::getWeight()const
 {
     return weight;
 }

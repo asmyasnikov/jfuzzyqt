@@ -50,6 +50,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTIONPIECEWISELINEAR_H

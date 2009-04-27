@@ -42,6 +42,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULE_ACCUMULATION_METHOD_NORMALISED_SUM_H

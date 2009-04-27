@@ -75,6 +75,6 @@ private:
     QVariant latestDefuzzifiedValue;///<Latest defuzzified value
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // VARIABLE_H

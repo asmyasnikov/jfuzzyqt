@@ -63,6 +63,6 @@ private:
     double weight;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULE_H

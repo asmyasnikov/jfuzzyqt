@@ -59,6 +59,6 @@ private:
     void insertLeaveValues(QList<QString>&values);
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // FCLRULETREE_H

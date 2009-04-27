@@ -25,13 +25,13 @@ in file LICENSE along with this program.  If not, see
 #include "ruleterm.h"
 #include <QDebug>
 
-RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
+jfuzzyqt::RuleTerm::RuleTerm(QObject* parent) : QObject(parent)
 {
     variable = NULL;
     termName = "Undefined";
     negated = false;
 }
-RuleTerm::RuleTerm(QObject* parent, Variable* variable, const QString& term, bool negated)
+jfuzzyqt::RuleTerm::RuleTerm(QObject* parent, Variable* variable, const QString& term, bool negated)
     : QObject(parent)
 {
     this->variable = variable;
@@ -43,41 +43,41 @@ RuleTerm::RuleTerm(QObject* parent, Variable* variable, const QString& term, boo
     negated = negated;
     Q_ASSERT(this->variable);
 }
-RuleTerm::~RuleTerm()
+jfuzzyqt::RuleTerm::~RuleTerm()
 {
 }
-bool RuleTerm::isValid() const
+bool jfuzzyqt::RuleTerm::isValid() const
 {
     return (termName != "Undefined");
 }
-const MembershipFunction* RuleTerm::getMembershipFunction()
+const MembershipFunction* jfuzzyqt::RuleTerm::getMembershipFunction()
 {
     Q_ASSERT(variable);
     return variable->getMembershipFunction(termName);
 }
-const QString& RuleTerm::getName()const
+const QString& jfuzzyqt::RuleTerm::getName()const
 {
     return termName;
 }
-void RuleTerm::setName(const QString &name)
+void jfuzzyqt::RuleTerm::setName(const QString &name)
 {
     termName = name;
 }
-bool RuleTerm::isNegated() const
+bool jfuzzyqt::RuleTerm::isNegated() const
 {
     return negated;
 }
-void RuleTerm::setNegated(const bool& value)
+void jfuzzyqt::RuleTerm::setNegated(const bool& value)
 {
     negated = value;
 }
 
-Variable* RuleTerm::getVariable()const
+Variable* jfuzzyqt::RuleTerm::getVariable()const
 {
     Q_ASSERT(variable);
     return variable;
 }
-void RuleTerm::setVariable(Variable* variable)
+void jfuzzyqt::RuleTerm::setVariable(Variable* variable)
 {
     this->variable = variable;
     if(this->variable)
@@ -87,7 +87,7 @@ void RuleTerm::setVariable(Variable* variable)
     Q_ASSERT(this->variable);
 }
 
-QString RuleTerm::toQString()const
+QString jfuzzyqt::RuleTerm::toQString()const
 {
     QString str = "";
     if ( variable && !variable->getName().isEmpty() )
@@ -105,7 +105,7 @@ QString RuleTerm::toQString()const
     str += getName();
     return str;
 }
-double RuleTerm::getMembership()const
+double jfuzzyqt::RuleTerm::getMembership()const
 {
     Q_ASSERT(variable);
     double memb = variable->getMembership(termName);

@@ -25,20 +25,20 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodormax.h"
 #include <QtGlobal>
 
-RuleConnectionMethodOrMax::RuleConnectionMethodOrMax()
+jfuzzyqt::RuleConnectionMethodOrMax::RuleConnectionMethodOrMax()
     : RuleConnectionMethod("or")
 {
 }
 
-RuleConnectionMethodOrMax::~RuleConnectionMethodOrMax()
+jfuzzyqt::RuleConnectionMethodOrMax::~RuleConnectionMethodOrMax()
 {
 }
-double RuleConnectionMethodOrMax::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodOrMax::connect(double antecedent1, double antecedent2)const
 {
     return qMax(antecedent1, antecedent2);
 }
 
-QString RuleConnectionMethodOrMax::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrMax::toQString()const
 {
     return "or: max";
 }

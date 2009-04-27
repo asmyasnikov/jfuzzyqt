@@ -41,6 +41,6 @@ public:
 private:
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULE_ACCUMULATION_METHOD_BROBOR_H

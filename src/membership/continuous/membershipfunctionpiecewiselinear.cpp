@@ -35,7 +35,7 @@ in file LICENSE along with this program.  If not, see
 * ordered by x[] (increasing)
 * See also 'membership()' for a precise definition.
 */
-MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* parent, const QList<double>& x,const QList<double>& y)
+jfuzzyqt::MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* parent, const QList<double>& x,const QList<double>& y)
     : MembershipFunctionContinuous(parent, FunctionPieceWiseLinear)
 {
     if ( x.count()<1 )
@@ -58,11 +58,11 @@ MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(QObject* pa
     estimateUniverse();
 }
 
-MembershipFunctionPieceWiseLinear::~MembershipFunctionPieceWiseLinear()
+jfuzzyqt::MembershipFunctionPieceWiseLinear::~MembershipFunctionPieceWiseLinear()
 {
 }
 
-void MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
 {
     QString str = "{";
     for (int i = 0; i < x.size(); ++i)
@@ -76,7 +76,7 @@ void MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
     str.append("}");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionPieceWiseLinear::getName() const
+QString jfuzzyqt::MembershipFunctionPieceWiseLinear::getName() const
 {
     return "PieceWiseLinear";
 }
@@ -93,7 +93,7 @@ QString MembershipFunctionPieceWiseLinear::getName() const
  * \see net.sourceforge.jFuzzyLogic.membership.MembershipFunction#membership(double)
  *
  */
-double MembershipFunctionPieceWiseLinear::membership(double index) const
+double jfuzzyqt::MembershipFunctionPieceWiseLinear::membership(double index) const
 {
     int i, len = x.size();
     double toReturn = 0;
@@ -115,7 +115,7 @@ double MembershipFunctionPieceWiseLinear::membership(double index) const
     }
     return toReturn;
 }
-bool MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
 {
     bool toReturn = true;
 
@@ -136,7 +136,7 @@ bool MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionPieceWiseLinear::estimateUniverse()
+void jfuzzyqt::MembershipFunctionPieceWiseLinear::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

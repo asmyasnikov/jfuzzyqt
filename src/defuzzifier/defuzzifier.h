@@ -56,6 +56,6 @@ protected:
     double max;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // DEFUZZIFIER_H

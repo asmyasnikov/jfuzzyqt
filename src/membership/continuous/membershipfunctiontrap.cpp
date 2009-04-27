@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right)
+jfuzzyqt::MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
     parameters = new Value*[4];
@@ -36,12 +36,12 @@ MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, dou
     estimateUniverse();
 }
 
-MembershipFunctionTrap::~MembershipFunctionTrap()
+jfuzzyqt::MembershipFunctionTrap::~MembershipFunctionTrap()
 {
 
 }
 
-void MembershipFunctionTrap::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionTrap::debug(const QString& tbs)const
 {
     QString str = "{ trap ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
@@ -55,19 +55,19 @@ void MembershipFunctionTrap::debug(const QString& tbs)const
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionTrap::getName() const
+QString jfuzzyqt::MembershipFunctionTrap::getName() const
 {
     return "Trapetziodal";
 }
 
-double MembershipFunctionTrap::membership(double index) const
+double jfuzzyqt::MembershipFunctionTrap::membership(double index) const
 {
     if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;
     else if( index >= index-parameters[1]->getValue() && index <= index-parameters[1]->getValue() ) return 1.;
     else if( index <= parameters[1]->getValue() ) return ((index - parameters[0]->getValue()) / (parameters[1]->getValue() - parameters[0]->getValue()));
     else return 1.-((index-parameters[1]->getValue())/(parameters[2]->getValue()-parameters[1]->getValue()));
 }
-bool MembershipFunctionTrap::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionTrap::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[0]->getValue() > parameters[1]->getValue() )
@@ -87,7 +87,7 @@ bool MembershipFunctionTrap::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionTrap::estimateUniverse()
+void jfuzzyqt::MembershipFunctionTrap::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

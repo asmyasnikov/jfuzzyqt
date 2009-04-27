@@ -24,20 +24,20 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodorbsum.h"
 #include <QtGlobal>
 
-RuleConnectionMethodOrBoundedSum::RuleConnectionMethodOrBoundedSum()
+jfuzzyqt::RuleConnectionMethodOrBoundedSum::RuleConnectionMethodOrBoundedSum()
     : RuleConnectionMethod("or")
 {
 }
 
-RuleConnectionMethodOrBoundedSum::~RuleConnectionMethodOrBoundedSum()
+jfuzzyqt::RuleConnectionMethodOrBoundedSum::~RuleConnectionMethodOrBoundedSum()
 {
 }
-double RuleConnectionMethodOrBoundedSum::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodOrBoundedSum::connect(double antecedent1, double antecedent2)const
 {
     return qMin(1., antecedent1+antecedent2);
 }
 
-QString RuleConnectionMethodOrBoundedSum::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrBoundedSum::toQString()const
 {
     return "or: bsum";
 }

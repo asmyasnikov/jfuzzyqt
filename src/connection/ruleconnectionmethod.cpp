@@ -25,19 +25,19 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethod.h"
 #include <QDebug>
 
-RuleConnectionMethod::RuleConnectionMethod(const QString& name)
+jfuzzyqt::RuleConnectionMethod::RuleConnectionMethod(const QString& name)
     :QObject()
 {
     this->name = name;
 }
-RuleConnectionMethod::~RuleConnectionMethod()
+jfuzzyqt::RuleConnectionMethod::~RuleConnectionMethod()
 {
 }
-const QString& RuleConnectionMethod::getName() const
+const QString& jfuzzyqt::RuleConnectionMethod::getName() const
 {
     return name;
 }
-void RuleConnectionMethod::setName(const QString& name)
+void jfuzzyqt::RuleConnectionMethod::setName(const QString& name)
 {
     this->name = name;
 }

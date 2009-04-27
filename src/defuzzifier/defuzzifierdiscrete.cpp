@@ -24,17 +24,17 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifierdiscrete.h"
 #include <QDebug>
 
-DefuzzifierDiscrete::DefuzzifierDiscrete()
+jfuzzyqt::DefuzzifierDiscrete::DefuzzifierDiscrete()
     : Defuzzifier()
 {
     setDiscrete(true);
 }
 
-DefuzzifierDiscrete::~DefuzzifierDiscrete()
+jfuzzyqt::DefuzzifierDiscrete::~DefuzzifierDiscrete()
 {
 }
 
-QList<double> DefuzzifierDiscrete::values()const
+QList<double> jfuzzyqt::DefuzzifierDiscrete::values()const
 {
     QList<double> toReturn;
     QList<QString> list = discreteValues.keys();
@@ -45,7 +45,7 @@ QList<double> DefuzzifierDiscrete::values()const
 }
 
 /** Get a point's 'y' value */
-double DefuzzifierDiscrete::getDiscreteValue(double x) const
+double jfuzzyqt::DefuzzifierDiscrete::getDiscreteValue(double x) const
 {
     double toReturn = 0;
     if ( discreteValues.contains( QString::number(x) ) )
@@ -56,12 +56,12 @@ double DefuzzifierDiscrete::getDiscreteValue(double x) const
 }
 
 /** Set a point */
-void DefuzzifierDiscrete::setPoint(double x, double y)
+void jfuzzyqt::DefuzzifierDiscrete::setPoint(double x, double y)
 {
     discreteValues.insert(QString::number(x), y);
 }
 
-void DefuzzifierDiscrete::reset()
+void jfuzzyqt::DefuzzifierDiscrete::reset()
 {
     discreteValues.clear();
 }

@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, double dx)
+jfuzzyqt::MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
     parameters = new Value*[2];
@@ -34,12 +34,12 @@ MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, dou
     estimateUniverse();
 }
 
-MembershipFunctionGauss::~MembershipFunctionGauss()
+jfuzzyqt::MembershipFunctionGauss::~MembershipFunctionGauss()
 {
 
 }
 
-void MembershipFunctionGauss::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionGauss::debug(const QString& tbs)const
 {
     QString str = "{ gauss ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
@@ -49,19 +49,19 @@ void MembershipFunctionGauss::debug(const QString& tbs)const
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionGauss::getName() const
+QString jfuzzyqt::MembershipFunctionGauss::getName() const
 {
     return "Gauss";
 }
 
-double MembershipFunctionGauss::membership(double index) const
+double jfuzzyqt::MembershipFunctionGauss::membership(double index) const
 {
     return (1. / parameters[1]->getValue() / sqrt(2. * M_PI) *
             exp(-(index - parameters[0]->getValue()) *
                  (index - parameters[0]->getValue()) /
                  (2 * parameters[1]->getValue() * parameters[1]->getValue())));
 }
-bool MembershipFunctionGauss::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGauss::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[1]->getValue() < 0 )
@@ -71,7 +71,7 @@ bool MembershipFunctionGauss::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionGauss::estimateUniverse()
+void jfuzzyqt::MembershipFunctionGauss::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

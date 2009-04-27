@@ -48,7 +48,7 @@ private:
     QList<Value*> y;///<Piece wise linear function values y
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTION_GENERIC_SINGLETON_H
 

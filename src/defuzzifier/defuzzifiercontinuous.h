@@ -64,6 +64,6 @@ protected:
     double values[DEFAULT_NUMBER_OF_POINTS];
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // DEFUZZIFIERCONTINUOUS_H

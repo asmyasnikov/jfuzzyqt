@@ -26,33 +26,33 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifier/defuzzifiercenterofgravity.h"
 #include "defuzzifier/defuzzifiercenterofgravitysingletons.h"
 
-FunctBlock::FunctBlock(QObject* parent) : QObject (parent)
+jfuzzyqt::FunctBlock::FunctBlock(QObject* parent) : QObject (parent)
 {
 }
-FunctBlock::FunctBlock(QObject* parent,const QString& name) : QObject (parent)
+jfuzzyqt::FunctBlock::FunctBlock(QObject* parent,const QString& name) : QObject (parent)
 {
     this->name = name;
 }
-FunctBlock::FunctBlock(const FunctBlock &fb) : QObject (fb.parent())
+jfuzzyqt::FunctBlock::FunctBlock(const FunctBlock &fb) : QObject (fb.parent())
 {
     name = fb.getName();
     ruleBlocks = fb.getRuleBlocks();
     variables = fb.getVariables();
 }
-FunctBlock::~FunctBlock()
+jfuzzyqt::FunctBlock::~FunctBlock()
 {
 
 }
-const QString& FunctBlock::getName()const
+const QString& jfuzzyqt::FunctBlock::getName()const
 {
     return name;
 }
-void FunctBlock::setName(const QString& name)
+void jfuzzyqt::FunctBlock::setName(const QString& name)
 {
     this->name = name;
 }
 
-bool FunctBlock::addVariable(const QString& varName, Variable* variable)
+bool jfuzzyqt::FunctBlock::addVariable(const QString& varName, Variable* variable)
 {
     bool toReturn = false;
     if ( !variables.contains(varName) )
@@ -64,7 +64,7 @@ bool FunctBlock::addVariable(const QString& varName, Variable* variable)
     return toReturn;
 }
 
-bool FunctBlock::setVariable(const QString& varName, LinguisticTerm* lt)
+bool jfuzzyqt::FunctBlock::setVariable(const QString& varName, LinguisticTerm* lt)
 {
     QHash<QString, Variable*>::iterator i = variables.find(varName);
     if ( i != variables.end() )
@@ -73,22 +73,22 @@ bool FunctBlock::setVariable(const QString& varName, LinguisticTerm* lt)
         return true;
     }else
     {
-        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
-Variable* FunctBlock::getVariable(const QString& varName)
+Variable* jfuzzyqt::FunctBlock::getVariable(const QString& varName)
 {
     QHash<QString, Variable*>::iterator i = variables.find(varName);
     if ( i!= variables.end() )
     {
         return i.value();
     }else{
-        qWarning() << "[FunctBlock::getVariable]:Unknwon variable";
+        qWarning() << "[jfuzzyqt::FunctBlock::getVariable]:Unknwon variable";
         return NULL;
     }
 }
-bool FunctBlock::setDefaultValue(const QString& varName,const double value)
+bool jfuzzyqt::FunctBlock::setDefaultValue(const QString& varName,const double value)
 {
     QHash<QString, Variable*>::iterator i = variables.find(varName);
     if ( i != variables.end() )
@@ -97,11 +97,11 @@ bool FunctBlock::setDefaultValue(const QString& varName,const double value)
         return true;
     }else
     {
-        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
-bool FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d)
+bool jfuzzyqt::FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d)
 {
     QHash<QString, Variable*>::iterator i = variables.find(varName);
     if ( i != variables.end() )
@@ -114,11 +114,11 @@ bool FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d)
         }
         return true;
     }else{
-        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
-Defuzzifier* FunctBlock::createDefuzzifier(const QString& defuzzType)
+Defuzzifier* jfuzzyqt::FunctBlock::createDefuzzifier(const QString& defuzzType)
 {
     Defuzzifier* defuzzifier = NULL;
     if( defuzzType == "cog" )
@@ -176,7 +176,7 @@ Defuzzifier* FunctBlock::createDefuzzifier(const QString& defuzzType)
     return defuzzifier;
 }
 
-bool FunctBlock::setValue(const QString& varName, const double& value)
+bool jfuzzyqt::FunctBlock::setValue(const QString& varName, const double& value)
 {
     bool toReturn = false;
     QHash<QString, Variable*>::iterator i = variables.find(varName);
@@ -184,14 +184,14 @@ bool FunctBlock::setValue(const QString& varName, const double& value)
     {
         i.value()->setValue(value);
     }else{
-        qCritical() << "[FunctBlock::setValue]:no variable found";
+        qCritical() << "[jfuzzyqt::FunctBlock::setValue]:no variable found";
     }
     return toReturn;
 }
 
 /*! \brief Evaluate fuzzy rules in this function block
 */
-void FunctBlock::evaluate()
+void jfuzzyqt::FunctBlock::evaluate()
 {
     ///<First: Reset defuzzifiers, variables, etc.
     QHashIterator<QString, RuleBlock*> i(ruleBlocks);
@@ -217,7 +217,7 @@ void FunctBlock::evaluate()
     }
 }
 
-double FunctBlock::getValue(const QString& varName)const
+double jfuzzyqt::FunctBlock::getValue(const QString& varName)const
 {
     double toReturn = 0.;
     if ( variables.contains( varName ) )
@@ -227,7 +227,7 @@ double FunctBlock::getValue(const QString& varName)const
     return toReturn;
 }
 
-bool FunctBlock::addRuleBlock(RuleBlock* rl)
+bool jfuzzyqt::FunctBlock::addRuleBlock(RuleBlock* rl)
 {
     bool toReturn = false;
     if ( !ruleBlocks.contains(rl->getName()) )
@@ -236,12 +236,12 @@ bool FunctBlock::addRuleBlock(RuleBlock* rl)
         rl->setParent(this);
         toReturn = true;
     }else{
-        qWarning() << "[FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl->getName();
+        qWarning() << "[jfuzzyqt::FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl->getName();
     }
     return toReturn;
 }
 
-void FunctBlock::debug(const QString& tbs)const
+void jfuzzyqt::FunctBlock::debug(const QString& tbs)const
 {
     QString nxTbs = tbs;
     nxTbs.append("\t");
@@ -265,16 +265,16 @@ void FunctBlock::debug(const QString& tbs)const
     qDebug() << tbs << "}";
 }
 
-/*FunctBlock FunctBlock::operator=(const FunctBlock &fb)
+/*FunctBlock jfuzzyqt::FunctBlock::operator=(const FunctBlock &fb)
 {
     FunctBlock tmp(fb);
     return tmp;
 }*/
-QHash<QString, RuleBlock*> FunctBlock::getRuleBlocks()const
+QHash<QString, RuleBlock*> jfuzzyqt::FunctBlock::getRuleBlocks()const
 {
     return ruleBlocks;
 }
-QHash<QString, Variable*> FunctBlock::getVariables()const
+QHash<QString, Variable*> jfuzzyqt::FunctBlock::getVariables()const
 {
     return variables;
 }

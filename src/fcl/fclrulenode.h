@@ -67,6 +67,6 @@ private:
     FCLRuleNode* right;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // FCLRULENODE_H

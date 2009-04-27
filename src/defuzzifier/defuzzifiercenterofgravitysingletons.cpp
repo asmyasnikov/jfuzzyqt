@@ -24,20 +24,20 @@ in file LICENSE along with this program.  If not, see
 #include "defuzzifiercenterofgravitysingletons.h"
 #include <QDebug>
 
-DefuzzifierCenterOfGravitySingletons::DefuzzifierCenterOfGravitySingletons()
+jfuzzyqt::DefuzzifierCenterOfGravitySingletons::DefuzzifierCenterOfGravitySingletons()
     : DefuzzifierDiscrete()
 {
 }
 
-DefuzzifierCenterOfGravitySingletons::~DefuzzifierCenterOfGravitySingletons()
+jfuzzyqt::DefuzzifierCenterOfGravitySingletons::~DefuzzifierCenterOfGravitySingletons()
 {
 }
 
-QString DefuzzifierCenterOfGravitySingletons::getName()const
+QString jfuzzyqt::DefuzzifierCenterOfGravitySingletons::getName()const
 {
     return "CenterOfGravitySingletons";
 }
-QVariant DefuzzifierCenterOfGravitySingletons::defuzzify()const
+QVariant jfuzzyqt::DefuzzifierCenterOfGravitySingletons::defuzzify()const
 {
     double x, y, sum = 0, sumWeight = 0;
     QList<double> list = values();
@@ -55,7 +55,7 @@ QVariant DefuzzifierCenterOfGravitySingletons::defuzzify()const
     return toReturn;
 }
 
-void DefuzzifierCenterOfGravitySingletons::debug(const QString& tbs) const
+void jfuzzyqt::DefuzzifierCenterOfGravitySingletons::debug(const QString& tbs) const
 {
     qDebug() << tbs << "defuzzifier method = cogs;";
 }

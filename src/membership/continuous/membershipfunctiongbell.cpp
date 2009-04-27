@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <math.h>
 #include <QDebug>
 
-MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
+jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
     parameters = new Value*[3];
@@ -35,12 +35,12 @@ MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, doub
     estimateUniverse();
 }
 
-MembershipFunctionGBell::~MembershipFunctionGBell()
+jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()
 {
 
 }
 
-void MembershipFunctionGBell::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionGBell::debug(const QString& tbs)const
 {
     QString str = "{ gbell ( ";
     str.append ( QString::number( parameters[0]->getValue() ) );
@@ -52,18 +52,18 @@ void MembershipFunctionGBell::debug(const QString& tbs)const
     str.append(" }");
     qDebug() << tbs << str;
 }
-QString MembershipFunctionGBell::getName() const
+QString jfuzzyqt::MembershipFunctionGBell::getName() const
 {
     return "GBell";
 }
 
-double MembershipFunctionGBell::membership(double index) const
+double jfuzzyqt::MembershipFunctionGBell::membership(double index) const
 {
     double t = qAbs((index - parameters[0]->getValue()) / parameters[1]->getValue());
     t = pow(t, 2.0 * parameters[2]->getValue());
     return 1.0 / (1.0 + t);
 }
-bool MembershipFunctionGBell::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGBell::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[2]->getValue() < 0.)
@@ -73,7 +73,7 @@ bool MembershipFunctionGBell::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionGBell::estimateUniverse()
+void jfuzzyqt::MembershipFunctionGBell::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;

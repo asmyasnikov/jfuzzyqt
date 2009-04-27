@@ -26,39 +26,39 @@ in file LICENSE along with this program.  If not, see
 #include <QString>
 #include <QDebug>
 
-DefuzzifierContinuous::DefuzzifierContinuous()
+jfuzzyqt::DefuzzifierContinuous::DefuzzifierContinuous()
     : Defuzzifier()
 {
     setDiscrete(false);
 }
 
-DefuzzifierContinuous::~DefuzzifierContinuous()
+jfuzzyqt::DefuzzifierContinuous::~DefuzzifierContinuous()
 {
 }
-double DefuzzifierContinuous::getStepSize()const
+double jfuzzyqt::DefuzzifierContinuous::getStepSize()const
 {
     return stepSize;
 }
-void DefuzzifierContinuous::setMin(double min)
+void jfuzzyqt::DefuzzifierContinuous::setMin(double min)
 {
     Defuzzifier::setMin(min);
     stepSize = (max-min)/double(DEFAULT_NUMBER_OF_POINTS);
 }
-void DefuzzifierContinuous::setMax(double max)
+void jfuzzyqt::DefuzzifierContinuous::setMax(double max)
 {
     Defuzzifier::setMax(max);
     stepSize = (max-min)/double(DEFAULT_NUMBER_OF_POINTS);
 }
-int DefuzzifierContinuous::getLength()const
+int jfuzzyqt::DefuzzifierContinuous::getLength()const
 {
     return DEFAULT_NUMBER_OF_POINTS;
 }
-void DefuzzifierContinuous::setValue(double valueX, double valueY)
+void jfuzzyqt::DefuzzifierContinuous::setValue(double valueX, double valueY)
 {
     values[getIndex(valueX)] = valueY;
 }
 /** Get 'values[]' index */
-int DefuzzifierContinuous::getIndex(double d)const
+int jfuzzyqt::DefuzzifierContinuous::getIndex(double d)const
 {
     if( (d < min) || (d > max) ){
         QString error = "Value out of range: ";
@@ -68,11 +68,11 @@ int DefuzzifierContinuous::getIndex(double d)const
     return (int) ((d - min) / double(stepSize));
 }
 /** Get a value from 'values[]' using a double as index */
-double DefuzzifierContinuous::getValue(double x)const
+double jfuzzyqt::DefuzzifierContinuous::getValue(double x)const
 {
     return values[getIndex(x)];
 }
-void DefuzzifierContinuous::reset()
+void jfuzzyqt::DefuzzifierContinuous::reset()
 {
     for(int i = 0; i < DEFAULT_NUMBER_OF_POINTS; i++)
     {

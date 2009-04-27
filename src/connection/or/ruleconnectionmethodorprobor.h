@@ -41,6 +41,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULECONNECTIONMETHODORPROBOR_H

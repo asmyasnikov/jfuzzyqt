@@ -42,6 +42,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULEACTIVATIONMETHODPRODUCT_H

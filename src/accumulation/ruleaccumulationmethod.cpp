@@ -25,36 +25,36 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethod.h"
 #include <QDebug>
 
-RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent)
+jfuzzyqt::RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent)
     : QObject(parent)
 {
     name = "Undefined";
 }
-RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent, const QString& name)
+jfuzzyqt::RuleAccumulationMethod::RuleAccumulationMethod(QObject* parent, const QString& name)
 : QObject(parent)
 {
     this->name = name;
 }
-RuleAccumulationMethod::RuleAccumulationMethod(const RuleAccumulationMethod &ram)
+jfuzzyqt::RuleAccumulationMethod::RuleAccumulationMethod(const RuleAccumulationMethod &ram)
 : QObject()
 {
     name=ram.getName();
 }
 
-RuleAccumulationMethod::~RuleAccumulationMethod()
+jfuzzyqt::RuleAccumulationMethod::~RuleAccumulationMethod()
 {
 }
 
-const QString& RuleAccumulationMethod::getName()const
+const QString& jfuzzyqt::RuleAccumulationMethod::getName()const
 {
     return name;
 }
-void RuleAccumulationMethod::setName(const QString &name)
+void jfuzzyqt::RuleAccumulationMethod::setName(const QString &name)
 {
     this->name = name;
 }
 
-QString RuleAccumulationMethod::toQString()const
+QString jfuzzyqt::RuleAccumulationMethod::toQString()const
 {
     return QString("accu : %1").arg(name);
 }

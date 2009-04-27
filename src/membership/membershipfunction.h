@@ -66,6 +66,6 @@ protected:
     MembershipType type;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTION_H

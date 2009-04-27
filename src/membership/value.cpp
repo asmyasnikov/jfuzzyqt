@@ -25,14 +25,14 @@ in file LICENSE along with this program.  If not, see
 #include "value.h"
 #include <QDebug>
 
-Value::Value(QObject* parent)
+jfuzzyqt::Value::Value(QObject* parent)
     :QObject(parent)
 {
     type = UNDEFINED;
     valReal = 0;
 }
 
-Value::Value(QObject* parent, const double& value)
+jfuzzyqt::Value::Value(QObject* parent, const double& value)
     :QObject(parent)
 {
     type = REAL;
@@ -40,15 +40,15 @@ Value::Value(QObject* parent, const double& value)
     varRef=NULL;
 }
 
-Value::~Value()
+jfuzzyqt::Value::~Value()
 {
 }
 
-double Value::getValue()const
+double jfuzzyqt::Value::getValue()const
 {
     if( type == UNDEFINED )
     {
-        qWarning() << "[Value::getValue]: Value type not defined!";
+        qWarning() << "[jfuzzyqt::Value::getValue]: Value type not defined!";
         return 0;
     }
 
@@ -59,18 +59,18 @@ double Value::getValue()const
         case VAR_REFERENCE:
             if( varRef == NULL )
             {
-                qWarning() << "[Value::getValue]: Undefined variable reference!";
+                qWarning() << "[jfuzzyqt::Value::getValue]: Undefined variable reference!";
                 return 0;
             }
             return varRef->getValue();
         default:
-            qWarning() << "[Value::getValue]: type '" << type << "' not implemented!";
+            qWarning() << "[jfuzzyqt::Value::getValue]: type '" << type << "' not implemented!";
     }
-    qWarning() << "[Value::getValue]: shouldnt not happen";
+    qWarning() << "[jfuzzyqt::Value::getValue]: shouldnt not happen";
     return 0;
 }
 
-void Value::debug(const QString& tbs)const
+void jfuzzyqt::Value::debug(const QString& tbs)const
 {
     switch (type)
     {
@@ -81,7 +81,7 @@ void Value::debug(const QString& tbs)const
                     qDebug() << tbs << "reference:";
                     break;
         default:
-            qDebug() << tbs << "[Value::debug]:UNDEFINED";
+            qDebug() << tbs << "[jfuzzyqt::Value::debug]:UNDEFINED";
             break;
     }
 }

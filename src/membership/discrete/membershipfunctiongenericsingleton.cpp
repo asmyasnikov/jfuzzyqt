@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include "../../membership/value.h"
 #include <QDebug>
 
-MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton(QObject* parent,
+jfuzzyqt::MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton(QObject* parent,
                                                                        const QList<double>& x,
                                                                        const QList<double>& y)
     :MembershipFunctionDiscrete(parent, FunctionSingleton)
@@ -41,16 +41,16 @@ MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton(QObject* 
     }
 }
 
-MembershipFunctionGenericSingleton::~MembershipFunctionGenericSingleton()
+jfuzzyqt::MembershipFunctionGenericSingleton::~MembershipFunctionGenericSingleton()
 {
 }
 
-QString MembershipFunctionGenericSingleton::getName() const
+QString jfuzzyqt::MembershipFunctionGenericSingleton::getName() const
 {
     return "Singletons";
 }
 
-void MembershipFunctionGenericSingleton::debug(const QString& tbs)const
+void jfuzzyqt::MembershipFunctionGenericSingleton::debug(const QString& tbs)const
 {
     QString nxtTbs = tbs;
     qDebug() << tbs << "\tDiscrete:" << discrete;
@@ -62,12 +62,12 @@ void MembershipFunctionGenericSingleton::debug(const QString& tbs)const
     }
 }
 
-int MembershipFunctionGenericSingleton::size()const
+int jfuzzyqt::MembershipFunctionGenericSingleton::size()const
 {
     return x.size();
 }
 
-double MembershipFunctionGenericSingleton::membership(double index) const
+double jfuzzyqt::MembershipFunctionGenericSingleton::membership(double index) const
 {
     double toReturn = 0.;
     for(int i = 0; i < x.size(); i++)
@@ -80,7 +80,7 @@ double MembershipFunctionGenericSingleton::membership(double index) const
     }
     return toReturn;
 }
-bool MembershipFunctionGenericSingleton::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGenericSingleton::checkParamters(QString&errors)const
 {
     bool toReturn = true;
     for(int i = 0; i < x.size(); i++)
@@ -98,7 +98,7 @@ bool MembershipFunctionGenericSingleton::checkParamters(QString&errors)const
     }
     return toReturn;
 }
-void MembershipFunctionGenericSingleton::estimateUniverse()
+void jfuzzyqt::MembershipFunctionGenericSingleton::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
@@ -110,7 +110,7 @@ void MembershipFunctionGenericSingleton::estimateUniverse()
         *universeMin = qMin(*universeMin, x.at(i)->getValue());
     }
 }
-double MembershipFunctionGenericSingleton::valueX(int index)const
+double jfuzzyqt::MembershipFunctionGenericSingleton::valueX(int index)const
 {
     Q_ASSERT(index < x.size());
     return x.at(index)->getValue();

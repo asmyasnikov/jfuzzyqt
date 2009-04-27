@@ -27,7 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include <QDebug>
 #include <QVariant>
 
-Variable::Variable(QObject* parent)
+jfuzzyqt::Variable::Variable(QObject* parent)
     : QObject (parent),
       name    (QString::null)
 {
@@ -35,7 +35,7 @@ Variable::Variable(QObject* parent)
     value=0;
 }
 
-Variable::Variable(QObject* parent,const QString& name)
+jfuzzyqt::Variable::Variable(QObject* parent,const QString& name)
     : QObject (parent),
       name(name)
 {
@@ -43,7 +43,7 @@ Variable::Variable(QObject* parent,const QString& name)
     value=0;
 }
 
-Variable::~Variable()
+jfuzzyqt::Variable::~Variable()
 {
     if (deffuzifier)
     {
@@ -51,42 +51,42 @@ Variable::~Variable()
     }
 }
 
-const QString& Variable::getName()const
+const QString& jfuzzyqt::Variable::getName()const
 {
     return name;
 }
 
-void Variable::setName(const QString& name)
+void jfuzzyqt::Variable::setName(const QString& name)
 {
     this->name = name;
 }
 
-void Variable::addLinguisticTerm(LinguisticTerm* lt)
+void jfuzzyqt::Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
     lt->setParent(this);
     linguisticTerms.insert(lt->getTermName(), lt);
 }
 
-MembershipFunction* Variable::getMembershipFunction(const QString& termName)
+MembershipFunction* jfuzzyqt::Variable::getMembershipFunction(const QString& termName)
 {
     return getLinguisticTerm(termName)->getMembershipFunction();
 }
 
-Defuzzifier* Variable::getDefuzzifier()const
+Defuzzifier* jfuzzyqt::Variable::getDefuzzifier()const
 {
     return deffuzifier;
 }
 
-void Variable::setValue(const double& value)
+void jfuzzyqt::Variable::setValue(const double& value)
 {
     this->value = value;
 }
 
-double Variable::getValue()const
+double jfuzzyqt::Variable::getValue()const
 {
     return value;
 }
-double Variable::getAbsoluteMinimum()const
+double jfuzzyqt::Variable::getAbsoluteMinimum()const
 {
     double toReturn = 1.e304;
     Q_ASSERT(linguisticTerms.size());
@@ -97,7 +97,7 @@ double Variable::getAbsoluteMinimum()const
     }
     return toReturn;
 }
-double Variable::getAbsoluteMaximum()const
+double jfuzzyqt::Variable::getAbsoluteMaximum()const
 {
     double toReturn = -1.e304;
     Q_ASSERT(linguisticTerms.size());
@@ -110,12 +110,12 @@ double Variable::getAbsoluteMaximum()const
 }
 
 /** Return 'true' if this is an output variable */
-bool Variable::isOutputVariable() const
+bool jfuzzyqt::Variable::isOutputVariable() const
 {
     return deffuzifier;
 }
 
-QVariant Variable::defuzzify()
+QVariant jfuzzyqt::Variable::defuzzify()
 {
     if(deffuzifier)
     {
@@ -132,21 +132,21 @@ QVariant Variable::defuzzify()
 /*!
 \brief Get 'termName' linguistic term
 */
-LinguisticTerm* Variable::getLinguisticTerm(const QString& termName)
+LinguisticTerm* jfuzzyqt::Variable::getLinguisticTerm(const QString& termName)
 {
     if( !linguisticTerms.contains(termName))
     {
-        qCritical("[Variable::getLinguisticTerm]:No such linguistic term: '%s'", termName.toLocal8Bit().data());
+        qCritical("[jfuzzyqt::Variable::getLinguisticTerm]:No such linguistic term: '%s'", termName.toLocal8Bit().data());
         return NULL;
     }
     return linguisticTerms.value(termName);
 }
 
-void Variable::setDefaultValue(const double& )
+void jfuzzyqt::Variable::setDefaultValue(const double& )
 {
 }
 
-void Variable::setDefuzzifier(Defuzzifier* deffuzifier)
+void jfuzzyqt::Variable::setDefuzzifier(Defuzzifier* deffuzifier)
 {
     if (this->deffuzifier)
     {
@@ -159,7 +159,7 @@ void Variable::setDefuzzifier(Defuzzifier* deffuzifier)
     }
 }
 
-void Variable::debug(const QString& tbs) const
+void jfuzzyqt::Variable::debug(const QString& tbs) const
 {
     QString nxTbs = tbs;
     nxTbs.append("\t");
@@ -183,7 +183,7 @@ void Variable::debug(const QString& tbs) const
     qDebug() << tbs << "}";
 }
 
-void Variable::reset()
+void jfuzzyqt::Variable::reset()
 {
     if (deffuzifier)
     {
@@ -198,16 +198,16 @@ void Variable::reset()
 }
 
 /** Evaluate 'termName' membershipfunction at 'value' */
-double Variable::getMembership(const QString& termName)
+double jfuzzyqt::Variable::getMembership(const QString& termName)
 {
     MembershipFunction* mf = getMembershipFunction(termName);
     if( mf == NULL )
     {
-        qCritical() << "[Variable::getMembership]:No membership function";
+        qCritical() << "[jfuzzyqt::Variable::getMembership]:No membership function";
     }
     return mf->membership(value);
 }
-QList<QString> Variable::getLinguisticTermNames()const
+QList<QString> jfuzzyqt::Variable::getLinguisticTermNames()const
 {
     return linguisticTerms.keys();
 }

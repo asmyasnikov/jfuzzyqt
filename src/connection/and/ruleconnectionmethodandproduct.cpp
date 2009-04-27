@@ -24,18 +24,18 @@ in file LICENSE along with this program.  If not, see
 #include "ruleconnectionmethodandproduct.h"
 #include <QtGlobal>
 
-RuleConnectionMethodAndProduct::RuleConnectionMethodAndProduct()
+jfuzzyqt::RuleConnectionMethodAndProduct::RuleConnectionMethodAndProduct()
     : RuleConnectionMethod("and")
 {
 }
-RuleConnectionMethodAndProduct::~RuleConnectionMethodAndProduct()
+jfuzzyqt::RuleConnectionMethodAndProduct::~RuleConnectionMethodAndProduct()
 {
 }
-double RuleConnectionMethodAndProduct::connect(double antecedent1, double antecedent2)const
+double jfuzzyqt::RuleConnectionMethodAndProduct::connect(double antecedent1, double antecedent2)const
 {
     return antecedent1*antecedent2;
 }
-QString RuleConnectionMethodAndProduct::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndProduct::toQString() const
 {
     return "and : prod";
 }

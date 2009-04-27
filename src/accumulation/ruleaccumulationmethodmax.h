@@ -43,6 +43,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULEACCUMULATIONMETHODMAX_H

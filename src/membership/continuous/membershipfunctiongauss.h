@@ -46,6 +46,6 @@ public:
 private:
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTION_GAUSS_H

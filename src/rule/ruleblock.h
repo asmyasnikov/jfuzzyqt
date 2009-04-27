@@ -76,6 +76,6 @@ private:
     RuleConnectionMethod *OR;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULEBLOCK_H

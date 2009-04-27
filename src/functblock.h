@@ -69,6 +69,6 @@ private:
     QHash<QString, Variable*> variables; ///<Every variable is here (key: VariableName)
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // FUNCTBLOCK_H

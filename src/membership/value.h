@@ -51,6 +51,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // VALUE_H

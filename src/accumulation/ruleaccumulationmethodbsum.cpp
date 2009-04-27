@@ -24,12 +24,12 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethodbsum.h"
 #include <QtGlobal>
 
-RuleAccumulationMethodBoundedSum::RuleAccumulationMethodBoundedSum(QObject *parent)
+jfuzzyqt::RuleAccumulationMethodBoundedSum::RuleAccumulationMethodBoundedSum(QObject *parent)
     : RuleAccumulationMethod(parent,"max")
 {
 }
 
-RuleAccumulationMethodBoundedSum::~RuleAccumulationMethodBoundedSum()
+jfuzzyqt::RuleAccumulationMethodBoundedSum::~RuleAccumulationMethodBoundedSum()
 {
 }
 /**
@@ -38,12 +38,12 @@ RuleAccumulationMethodBoundedSum::~RuleAccumulationMethodBoundedSum()
 * @param valueToAggregate : value to aggregate
 * @return new defuzzifier's value
 */
-double RuleAccumulationMethodBoundedSum::aggregate(double defuzzifierValue, double valueToAggregate) const
+double jfuzzyqt::RuleAccumulationMethodBoundedSum::aggregate(double defuzzifierValue, double valueToAggregate) const
 {
     return qMin(1.,defuzzifierValue+valueToAggregate);
 }
 
-QString RuleAccumulationMethodBoundedSum::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodBoundedSum::toQString()const
 {
     return "accu : bsum;";
 }

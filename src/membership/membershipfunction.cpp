@@ -26,7 +26,7 @@ in file LICENSE along with this program.  If not, see
 #include "value.h"
 #include <QDebug>
 
-MembershipFunction::MembershipFunction(QObject* parent, MembershipType type)
+jfuzzyqt::MembershipFunction::MembershipFunction(QObject* parent, MembershipType type)
     : QObject (parent)
 {
     this->type = type;
@@ -34,23 +34,23 @@ MembershipFunction::MembershipFunction(QObject* parent, MembershipType type)
     universeMin = NULL;
     parameters = NULL;
 }
-MembershipFunction::~MembershipFunction()
+jfuzzyqt::MembershipFunction::~MembershipFunction()
 {
     if(universeMax) delete universeMax;
     if(universeMin) delete universeMin;
     if(parameters)  delete parameters;
 }
-double MembershipFunction::getUniverseMax()
+double jfuzzyqt::MembershipFunction::getUniverseMax()
 {
     Q_ASSERT(universeMax);
     return *universeMax;
 }
-double MembershipFunction::getUniverseMin()
+double jfuzzyqt::MembershipFunction::getUniverseMin()
 {
     Q_ASSERT(universeMin);
     return *universeMin;
 }
-bool MembershipFunction::isDiscrete() const
+bool jfuzzyqt::MembershipFunction::isDiscrete() const
 {
     return discrete;
 }

@@ -48,7 +48,7 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // MEMBERSHIPFUNCTIONSINGLETON_H
 

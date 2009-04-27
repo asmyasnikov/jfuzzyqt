@@ -49,6 +49,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // DEFUZZIFIERDISCRETE_H

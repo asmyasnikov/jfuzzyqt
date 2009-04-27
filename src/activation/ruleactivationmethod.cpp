@@ -30,20 +30,20 @@ in file LICENSE along with this program.  If not, see
 #include "../defuzzifier/defuzzifiercontinuous.h"
 #include <QDebug>
 
-RuleActivationMethod::RuleActivationMethod(QObject *parent, const QString& name)
+jfuzzyqt::RuleActivationMethod::RuleActivationMethod(QObject *parent, const QString& name)
     : QObject(parent)
 {
     this->name=name;
 }
-RuleActivationMethod::RuleActivationMethod(const RuleActivationMethod &ram)
+jfuzzyqt::RuleActivationMethod::RuleActivationMethod(const RuleActivationMethod &ram)
     : QObject(ram.parent())
 {
     name = ram.getName();
 }
-RuleActivationMethod::~RuleActivationMethod()
+jfuzzyqt::RuleActivationMethod::~RuleActivationMethod()
 {
 }
-void RuleActivationMethod::setName(const QString& name)
+void jfuzzyqt::RuleActivationMethod::setName(const QString& name)
 {
     this->name = name;
 }
@@ -52,7 +52,7 @@ void RuleActivationMethod::setName(const QString& name)
 * \brief Inference method
 * Add membershipfunction to deffuzifier (using 'min' as inference)
 */
-void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod* ruleAccumulationMethod, double degreeOfSupport)
+void jfuzzyqt::RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod* ruleAccumulationMethod, double degreeOfSupport)
 {
     Variable* variable = fuzzyRuleTerm->getVariable();
     Defuzzifier* defuzzifier = variable->getDefuzzifier();
@@ -138,11 +138,11 @@ void RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumulationMethod
         }
     }
 }
-const QString& RuleActivationMethod::getName()const
+const QString& jfuzzyqt::RuleActivationMethod::getName()const
 {
     return name;
 }
-QString RuleActivationMethod::toQString()const
+QString jfuzzyqt::RuleActivationMethod::toQString()const
 {
     return QString("act : %1").arg(name);
 }

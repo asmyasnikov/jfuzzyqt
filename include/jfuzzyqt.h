@@ -131,6 +131,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // JFUZZYQT_H

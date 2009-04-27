@@ -24,15 +24,15 @@ in file LICENSE along with this program.  If not, see
  */
 #include "ruleactivationmethodproduct.h"
 
-RuleActivationMethodProduct::RuleActivationMethodProduct(QObject *parent)
+jfuzzyqt::RuleActivationMethodProduct::RuleActivationMethodProduct(QObject *parent)
     : RuleActivationMethod(parent,"product")
 {
 }
 
-RuleActivationMethodProduct::~RuleActivationMethodProduct()
+jfuzzyqt::RuleActivationMethodProduct::~RuleActivationMethodProduct()
 {
 }
-double RuleActivationMethodProduct::imply(double degreeOfSupport, double membership)const
+double jfuzzyqt::RuleActivationMethodProduct::imply(double degreeOfSupport, double membership)const
 {
     return degreeOfSupport * membership;
 }

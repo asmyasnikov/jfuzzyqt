@@ -43,6 +43,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULECONNECTIONMETHODORMAX_H

@@ -61,6 +61,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULETERM_H

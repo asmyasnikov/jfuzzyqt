@@ -44,6 +44,6 @@ private:
 
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULECONNECTIONMETHODANDMIN_H

@@ -40,23 +40,23 @@ in file LICENSE along with this program.  If not, see
 #include "../accumulation/ruleaccumulationmethodprobor.h"
 #include <QRegExp>
 
-FCLParser::FCLParser() : QObject ()
+jfuzzyqt::FCLParser::FCLParser() : QObject ()
 {
 }
 
-FCLParser::FCLParser(QObject* parent) : QObject (parent)
+jfuzzyqt::FCLParser::FCLParser(QObject* parent) : QObject (parent)
 {
 }
 
-FCLParser::FCLParser(const FCLParser& parser) : QObject (parser.parent())
+jfuzzyqt::FCLParser::FCLParser(const FCLParser& parser) : QObject (parser.parent())
 {
 }
 
-FCLParser::~FCLParser()
+jfuzzyqt::FCLParser::~FCLParser()
 {
 }
 
-QString FCLParser::readLine(QTextStream &in)
+QString jfuzzyqt::FCLParser::readLine(QTextStream &in)
 {
     QRegExp rxIndent("^\\s+");///< empty line
     QString str = in.readLine();
@@ -77,7 +77,7 @@ QString FCLParser::readLine(QTextStream &in)
     return str;
 }
 
-void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
+void jfuzzyqt::FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
 {
     QRegExp rxVar("(\\w+)\\s*:\\s*(\\w+)");
     QRegExp rxOut("end_var");
@@ -94,7 +94,7 @@ void FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
     }
 }
 
-void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
+void jfuzzyqt::FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
 {
     QRegExp rxVar("(\\w+)\\s*:\\s*(\\w+)");
     QRegExp rxOut("end_var");
@@ -112,7 +112,7 @@ void FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
     }
 }
 
-void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, const QString& varName)
+void jfuzzyqt::FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, const QString& varName)
 {
     QString defuzzificationMethodType = "cog";
 
@@ -147,7 +147,7 @@ void FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, const QStr
     }
 }
 
-void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, const QString& name)
+void jfuzzyqt::FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, const QString& name)
 {
     QRegExp rxOut("end_fuzzify");
     QRegExp rxExtra("term\\s+(\\w+)\\s*:=(.+);");
@@ -168,13 +168,13 @@ void FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, const QStrin
         }else if (rxOut.indexIn(line) > -1){
             break;
         }else{
-            qWarning() << "[FCLParser::loadFuzzify] term unimplemented : " << line;
+            qWarning() << "[jfuzzyqt::FCLParser::loadFuzzify] term unimplemented : " << line;
         }
         line = readLine(in);
     }
 }
 
-RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, const QString& name)
+RuleBlock* jfuzzyqt::FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, const QString& name)
 {
     QRegExp rxRule("(rule\\s+(\\w+)\\s*:\\s*)(if\\s+.*\\s+then\\s+.*\\s*;)?");
     QRegExp rxOut ("end_ruleblock");
@@ -221,7 +221,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
             Rule *r = loadRule(funcBlock, rxRule.cap(3), rxRule.cap(2),AND,OR);
             if ( r == NULL )
             {
-                qWarning() << "[FCLParser::loadRuleBlock]: Error loading rule" << rxRule.cap(2);
+                qWarning() << "[jfuzzyqt::FCLParser::loadRuleBlock]: Error loading rule" << rxRule.cap(2);
             }else{
                 ruleBlock->addRule( *r );
             }
@@ -229,7 +229,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
             RuleAccumulationMethod* ram = createAccumulationMethod(ruleAccumulationMethodType);
             if ( ram == NULL )
             {
-                qWarning() << "[FCLParser::loadRuleBlock]: No rule acumulation method created.";
+                qWarning() << "[jfuzzyqt::FCLParser::loadRuleBlock]: No rule acumulation method created.";
             }else{
                 ruleBlock->addRuleAccumulationMethod( ram );
                 ruleBlock->setRuleConnectionMethodAnd(AND);
@@ -278,7 +278,7 @@ RuleBlock* FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcBlock, cons
     return ruleBlock;
 }
 
-Rule* FCLParser::loadRule( FunctBlock& funcBlock,
+Rule* jfuzzyqt::FCLParser::loadRule( FunctBlock& funcBlock,
                            const QString &rule,
                            const QString &name,
                            const RuleConnectionMethod *AND,
@@ -292,20 +292,20 @@ Rule* FCLParser::loadRule( FunctBlock& funcBlock,
         RuleExpression *antecedents = loadRuleIf(funcBlock,rxIF.cap(1),AND,OR);
         if (!antecedents)
         {
-            qWarning() << "[FCLParser::loadRule]:antecedents are NULL.";
+            qWarning() << "[jfuzzyqt::FCLParser::loadRule]:antecedents are NULL.";
         }
         fuzzyRule->addAntecedents( antecedents );
         Variable *v = funcBlock.getVariable(rxTHEN.cap(2));
         RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(3), false);
         fuzzyRule->addConsequent(rt);
     }else{
-        qWarning()<<"[FCLParser::loadRule]:Unknown rule " << rule;
+        qWarning()<<"[jfuzzyqt::FCLParser::loadRule]:Unknown rule " << rule;
         return NULL;
     }
     return fuzzyRule;
 }
 
-RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
+RuleExpression* jfuzzyqt::FCLParser::loadRuleIf( FunctBlock& funcBlock,
                                        QString ruleif,
                                        const RuleConnectionMethod *AND,
                                        const RuleConnectionMethod *OR )
@@ -315,7 +315,7 @@ RuleExpression* FCLParser::loadRuleIf( FunctBlock& funcBlock,
     return tree.getRuleExpression(funcBlock, AND, OR);
 }
 
-void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
+void jfuzzyqt::FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
 {
     QRegExp rxFunctionBlockEnd("end_function_block");
     QRegExp rxVarInput("var_input");
@@ -348,7 +348,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
             RuleBlock *rb = loadRuleBlock(in, funcBlock, rxRulleBlock.cap(1));
             if ( rb == NULL )
             {
-                qWarning() << "[FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
+                qWarning() << "[jfuzzyqt::FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
             }else{
                     funcBlock.addRuleBlock ( rb );///< Rule block
             }
@@ -359,7 +359,7 @@ void FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
     }
 }
 
-RuleAccumulationMethod* FCLParser::createAccumulationMethod(const QString& type)
+RuleAccumulationMethod* jfuzzyqt::FCLParser::createAccumulationMethod(const QString& type)
 {
     RuleAccumulationMethod* ruleAccumulationMethod = NULL;
     if( type == "max" )

@@ -25,12 +25,12 @@ in file LICENSE along with this program.  If not, see
 #include "ruleaccumulationmethodmax.h"
 #include <QtGlobal>
 
-RuleAccumulationMethodMax::RuleAccumulationMethodMax(QObject *parent)
+jfuzzyqt::RuleAccumulationMethodMax::RuleAccumulationMethodMax(QObject *parent)
     : RuleAccumulationMethod(parent,"max")
 {
 }
 
-RuleAccumulationMethodMax::~RuleAccumulationMethodMax()
+jfuzzyqt::RuleAccumulationMethodMax::~RuleAccumulationMethodMax()
 {
 }
 
@@ -40,12 +40,12 @@ RuleAccumulationMethodMax::~RuleAccumulationMethodMax()
 * @param valueToAggregate : value to aggregate
 * @return new defuzzifier's value
 */
-double RuleAccumulationMethodMax::aggregate(double defuzzifierValue, double valueToAggregate) const
+double jfuzzyqt::RuleAccumulationMethodMax::aggregate(double defuzzifierValue, double valueToAggregate) const
 {
     return qMax(defuzzifierValue,valueToAggregate);
 }
 
-QString RuleAccumulationMethodMax::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodMax::toQString()const
 {
     return "accu : max;";
 }

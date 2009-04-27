@@ -59,6 +59,6 @@ private:
     QString name;
 };
 
-}using namespace jfuzzyqt;
+};
 
 #endif // RULEACCUMULATIONMETHOD_H
