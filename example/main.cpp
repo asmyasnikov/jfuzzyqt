@@ -2,6 +2,8 @@
 #include <iostream>
 #include <QDir>
 
+using namespace jfuzzyqt;
+
 int main(int, char**)
 {
     std::cout.setf(std::ios::fixed);
