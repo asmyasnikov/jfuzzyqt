@@ -55,7 +55,7 @@ jfuzzyqt::LinguisticTerm::~LinguisticTerm()
     /*
     if( membershipFunction!=NULL )
     {
-            qWarning()<<"jfuzzyqt::LinguisticTerm::~LinguisticTerm";
+            qWarning()<<"LinguisticTerm::~LinguisticTerm";
             //delete membershipFunction;
     }*/
 }
@@ -88,14 +88,14 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         {
             mx = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             dx = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of gauss membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if( membershipFunction ) delete membershipFunction;
@@ -103,7 +103,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         toReturn = true;
     }else if(qString.contains("dsigm")){
         qDebug() << "dsigm " << qString;
-        qCritical("jfuzzyqt::LinguisticTerm::loadFrom : dsigm membersip function not implemeted : %s",
+        qCritical("LinguisticTerm::loadFrom : dsigm membersip function not implemeted : %s",
                   qString.toLocal8Bit().data());
         Q_ASSERT(0);
     }else if(qString.contains("sigm")){
@@ -113,14 +113,14 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         {
             d1 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d2 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of sigm membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if( membershipFunction ) delete membershipFunction;
@@ -133,21 +133,21 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         {
             d1 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d2 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d3 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trian membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if( membershipFunction ) delete membershipFunction;
@@ -160,28 +160,28 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         {
             d1 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d2 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d3 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d4 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of trape membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if( membershipFunction ) delete membershipFunction;
@@ -194,21 +194,21 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         {
             d1 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d2 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if((pos = rxSingleValue.indexIn(qString, pos+rxSingleValue.matchedLength())) != -1)
         {
             d3 = rxSingleValue.cap(1).toDouble();
         }else{
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
+            qCritical("LinguisticTerm::loadFrom : no matched value of gbell membersip function : %s",
                       qString.toLocal8Bit().data());
         }
         if( membershipFunction ) delete membershipFunction;
@@ -228,8 +228,9 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         membershipFunction = new MembershipFunctionGenericSingleton(this, x, y);
         toReturn = true;
     }else if ( rxUnknown.indexIn(qString) > -1){///<Unknown
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : unknown membersip function : %s",
-                      qString.toLocal8Bit().data());
+            qCritical("LinguisticTerm::loadFrom : unknown membersip function '%s' in term '%s'",
+                      qString.toLocal8Bit().data(),
+                      termName.toLocal8Bit().data());
     }else if ( rxDoubleValue.indexIn(qString) > -1){///<Point
         QList<double> x;
         QList<double> y;
@@ -249,8 +250,8 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         membershipFunction = new MembershipFunctionSingleton(this, singleTonValueX);
         toReturn = true;
     }else{
-        qCritical("jfuzzyqt::LinguisticTerm::loadFrom : unknown linguistic term : %s",
-                  qString.toLocal8Bit().data());
+        qCritical("LinguisticTerm::loadFrom : unknown term '%s'",
+                  termName.toLocal8Bit().data());
     }
     QString errors;
     if(membershipFunction)
@@ -258,7 +259,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         if(!membershipFunction->checkParamters(errors))
         {
             toReturn = false;
-            qCritical("jfuzzyqt::LinguisticTerm::loadFrom : linguistic term '%s' is invalid : %s",
+            qCritical("LinguisticTerm::loadFrom : linguistic term '%s' is invalid : %s",
                       qString.toLocal8Bit().data(),
                       errors.toLocal8Bit().data());
         }else{

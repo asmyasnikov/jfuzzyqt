@@ -85,13 +85,10 @@ void jfuzzyqt::RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumula
         for( i = 0; i < size; i++ ) {
             // Get 'x' value
             x = mfd->valueX(i);
-
             // Is term negated?
             if( fuzzyRuleTerm->isNegated() ) membership = 1 - mf->membership(x);
             else membership = mf->membership(x);
-
             y = imply(degreeOfSupport, membership); // Call to abstract implication method described above
-
             // Aggregate value
             aggregated = ruleAccumulationMethod->aggregate(defuzzifierDiscrete->getDiscreteValue(x), y);
             defuzzifierDiscrete->setPoint(x, aggregated);
@@ -113,8 +110,7 @@ void jfuzzyqt::RuleActivationMethod::imply(RuleTerm* fuzzyRuleTerm, RuleAccumula
                 aggregated = ruleAccumulationMethod->aggregate(defuzzifierContinuous->getValue(x), y);
                 defuzzifierContinuous->setValue(x, aggregated);
             }
-        }else{
-            // Continuous memberfunction and discrete defuzzification - algorithm Tsukamoto
+        }else{// Continuous memberfunction and discrete defuzzification - Tsukamoto algorithm
             int i, size ;
             size = 1000;
             x = defuzzifier->getMin();

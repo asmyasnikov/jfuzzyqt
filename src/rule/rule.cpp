@@ -29,14 +29,14 @@ jfuzzyqt::Rule::Rule(QObject *parent)
     : QObject(parent)
 {
     name = "undefined";
-    weight=1;
+    weight=1.;
 }
 
 jfuzzyqt::Rule::Rule(QObject *parent, const QString& name)
     : QObject(parent)
 {
     this->name = name;
-    weight=1;
+    weight=1.;
 }
 jfuzzyqt::Rule::Rule(const Rule &rule)
     : QObject(rule.parent())
@@ -109,11 +109,11 @@ void jfuzzyqt::Rule::reset()
 }
 void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod* accu)
 {
-    double tmp = antecedents ? antecedents->evaluate() : 0.; ///< Evaluate antecedents
-    degreeOfSupport = tmp;
+    Q_ASSERT(antecedents);
+    Q_ASSERT(consequents.size());
+    degreeOfSupport = antecedents->evaluate(); ///< Evaluate antecedents
     ///< Apply weight
     degreeOfSupport *= weight;
-
     ///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
     for (int i = 0; i < consequents.size(); ++i) {
         act->imply(consequents.at(i),accu,degreeOfSupport);

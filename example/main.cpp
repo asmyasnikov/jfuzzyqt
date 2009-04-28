@@ -4,7 +4,7 @@
 
 using namespace jfuzzyqt;
 
-int main(int, char**)
+int main(int argc, char**argv)
 {
     std::cout.setf(std::ios::fixed);
     std::cout.precision(2); // only display 2 decimal places

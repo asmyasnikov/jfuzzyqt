@@ -50,7 +50,7 @@ namespace jfuzzyqt{
 
 class FunctBlock;
 
-Q_DECL_EXPORT class JFuzzyQt : public QObject
+class Q_DECL_EXPORT JFuzzyQt : public QObject
 {
     Q_OBJECT
 
