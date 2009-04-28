@@ -15,12 +15,18 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctiongauss.cpp
  * \class MembershipFunctionGauss
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.84
  * \brief Implementation Gaussian membership function
  */
+
+#ifndef M_PI
+#define M_PI 3.1415926535897932384626433832795
+#endif
+
 #include "membershipfunctiongauss.h"
 #include <math.h>
 #include <QDebug>
