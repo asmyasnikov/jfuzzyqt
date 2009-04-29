@@ -9,7 +9,11 @@ DESTDIR = ../build
 TARGET = jfuzzyqt
 DEPENDPATH += .
 INCLUDEPATH += ../include
-TEMPLATE = app
+win32-msvc|win32-msvc.net|win32-msvc2002|win32-msvc2003|win32-msvc2005|win32-msvc2008 {
+    TEMPLATE = vcapp
+} else {
+    TEMPLATE = app
+}
 DEPENDPATH += .
 INCLUDEPATH += .
 SOURCES += main.cpp
