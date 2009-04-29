@@ -80,7 +80,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
 
     QRegExp rxSingleValue("(-?\\d+(\\.\\d+)?)");
     QRegExp rxDoubleValue("\\s*((-?\\d+(.\\d+)*)\\s*,\\s*(-?\\d+(.\\d+)*))");
-    QRegExp rxUnknown("(\\w+)\\s+");
+    QRegExp rxUnknown("(\\w+)\\s+(\\()?\\d+");
     if(qString.contains("gauss")){
         int pos = 0;
         double mx, dx;
