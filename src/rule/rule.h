@@ -54,6 +54,7 @@ public:
     void reset();
     void evaluate (RuleActivationMethod* act,RuleAccumulationMethod* accu);
     double getWeight()const;
+    void setWeight(double weight);
 
 private:
     QString name;

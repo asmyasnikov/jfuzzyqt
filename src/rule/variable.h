@@ -59,6 +59,7 @@ public:
     bool isOutputVariable() const;
     QVariant defuzzify();
     LinguisticTerm* getLinguisticTerm(const QString& termName);
+    bool linguisticTermExist(const QString& termName)const;
     QList<QString> getLinguisticTermNames()const;
     void setDefaultValue(const double& value);
     void setDefuzzifier(Defuzzifier* deffuzifier);

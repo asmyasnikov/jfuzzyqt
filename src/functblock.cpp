@@ -25,6 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include "functblock.h"
 #include "defuzzifier/defuzzifiercenterofgravity.h"
 #include "defuzzifier/defuzzifiercenterofgravitysingletons.h"
+#include <QStringList>
 
 jfuzzyqt::FunctBlock::FunctBlock(QObject* parent) : QObject (parent)
 {
@@ -71,9 +72,8 @@ bool jfuzzyqt::FunctBlock::setVariable(const QString& varName, LinguisticTerm* l
     {
         i.value()->addLinguisticTerm(lt);
         return true;
-    }else
-    {
-        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+    }else{
+        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
@@ -84,7 +84,7 @@ Variable* jfuzzyqt::FunctBlock::getVariable(const QString& varName)
     {
         return i.value();
     }else{
-        qWarning() << "[jfuzzyqt::FunctBlock::getVariable]:Unknwon variable";
+        qWarning() << "[FunctBlock::getVariable]:Unknwon variable";
         return NULL;
     }
 }
@@ -97,7 +97,7 @@ bool jfuzzyqt::FunctBlock::setDefaultValue(const QString& varName,const double v
         return true;
     }else
     {
-        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
@@ -114,7 +114,7 @@ bool jfuzzyqt::FunctBlock::setDefuzzifier(const QString& varName, Defuzzifier* d
         }
         return true;
     }else{
-        qWarning() << "[jfuzzyqt::FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
     }
     return false;
 }
@@ -126,48 +126,19 @@ Defuzzifier* jfuzzyqt::FunctBlock::createDefuzzifier(const QString& defuzzType)
         defuzzifier = new DefuzzifierCenterOfGravity();
     }else if( defuzzType == "cogs" ){
         defuzzifier = new DefuzzifierCenterOfGravitySingletons();
-    }
-    else if( defuzzType == "cogf" )
-    {
+    }else if( defuzzType == "cogf" ){
         //defuzzifier = new DefuzzifierCenterOfGravityFunctions(variable);
-        QString error = "Unknown/Unimplemented Rule defuzzification method '";
-        error.append( defuzzType );
-        error.append( "\'" );
-        qCritical() << error.toLocal8Bit().data();
-    }
-    else if( defuzzType == "coa" )
-    {
+    }else if( defuzzType == "coa" ){
         //defuzzifier = new DefuzzifierCenterOfArea(variable);
-        QString error = "Unknown/Unimplemented Rule defuzzification method '";
-        error.append( defuzzType );
-        error.append( "\'" );
-        qCritical() << error.toLocal8Bit().data();
-    }
-    else if( defuzzType =="lm" )
-    {
+    }else if( defuzzType =="lm" ){
         //defuzzifier = new DefuzzifierLeftMostMax(variable);
-        QString error = "Unknown/Unimplemented Rule defuzzification method '";
-        error.append( defuzzType );
-        error.append( "\'" );
-        qCritical() << error.toLocal8Bit().data();
-    }
-    else if( defuzzType == "rm" )
-    {
+    }else if( defuzzType == "rm" ){
         //defuzzifier = new DefuzzifierRightMostMax(variable);
-        QString error = "Unknown/Unimplemented Rule defuzzification method '";
-        error.append( defuzzType );
-        error.append( "\'" );
-        qCritical() << error.toLocal8Bit().data();
-    }
-    else if( defuzzType == "mm" )
-    {
+    }else if( defuzzType == "mm" ){
         //defuzzifier = new DefuzzifierMeanMax(variable);
-        QString error = "Unknown/Unimplemented Rule defuzzification method '";
-        error.append( defuzzType );
-        error.append( "\'" );
-        qCritical() << error.toLocal8Bit().data();
     }
-    else {
+    if(!defuzzifier)
+    {
         QString error = "Unknown/Unimplemented Rule defuzzification method ";
         error.append( defuzzType );
         error.append( "\'" );
@@ -184,7 +155,7 @@ bool jfuzzyqt::FunctBlock::setValue(const QString& varName, const double& value)
     {
         i.value()->setValue(value);
     }else{
-        qCritical() << "[jfuzzyqt::FunctBlock::setValue]:no variable found";
+        qCritical() << "[FunctBlock::setValue]:no variable found";
     }
     return toReturn;
 }
@@ -227,16 +198,17 @@ double jfuzzyqt::FunctBlock::getValue(const QString& varName)const
     return toReturn;
 }
 
-bool jfuzzyqt::FunctBlock::addRuleBlock(RuleBlock* rl)
+bool jfuzzyqt::FunctBlock::addRuleBlock(RuleBlock* rb)
 {
     bool toReturn = false;
-    if ( !ruleBlocks.contains(rl->getName()) )
+    if ( !ruleBlocks.contains(rb->getName()) )
     {
-        ruleBlocks.insert( rl->getName(), rl );
-        rl->setParent(this);
+        ruleBlocks.insert( rb->getName(), rb );
+        rb->setParent(this);
         toReturn = true;
     }else{
-        qWarning() << "[jfuzzyqt::FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rl->getName();
+        qWarning() << "[FunctBlock::addRuleBlock]:Duplicated RuleBlock wasn't added"<< rb->getName();
+        delete rb;
     }
     return toReturn;
 }
@@ -265,11 +237,6 @@ void jfuzzyqt::FunctBlock::debug(const QString& tbs)const
     qDebug() << tbs << "}";
 }
 
-/*FunctBlock jfuzzyqt::FunctBlock::operator=(const FunctBlock &fb)
-{
-    FunctBlock tmp(fb);
-    return tmp;
-}*/
 QHash<QString, RuleBlock*> jfuzzyqt::FunctBlock::getRuleBlocks()const
 {
     return ruleBlocks;
@@ -277,4 +244,40 @@ QHash<QString, RuleBlock*> jfuzzyqt::FunctBlock::getRuleBlocks()const
 QHash<QString, Variable*> jfuzzyqt::FunctBlock::getVariables()const
 {
     return variables;
+}
+bool jfuzzyqt::FunctBlock::variableExist(const QString& varName)const
+{
+    return variables.contains(varName);
+}
+bool jfuzzyqt::FunctBlock::checkHierarchy()const
+{
+    for(QHash<QString, RuleBlock*>::const_iterator i = ruleBlocks.begin();
+        i != ruleBlocks.end(); i++)
+    {
+        for(QHash<QString, RuleBlock*>::const_iterator j = ruleBlocks.begin();
+            j != ruleBlocks.end(); j++)
+        {
+            if((*i)!=(*j))
+            {
+                QSet<QString>inputs  = i.value()->getInputVariables();
+                QSet<QString>outputs = j.value()->getOutputVariables();
+                QSet<QString>intersects = inputs.intersect(outputs);
+                bool intersect = intersects.size();
+                if(intersect)
+                {
+                    i.value()->addDependOfBlock(j.value());
+                }
+            }
+        }
+    }
+    for(QHash<QString, RuleBlock*>::const_iterator j = ruleBlocks.begin(); j != ruleBlocks.end(); j++)
+    {
+        if(!j.value()->checkDependences())
+        {
+            qWarning("[FunctBlock::addRuleBlock]:RuleBlock '%s' wasn't added. Error parsing of hierarchy.",
+                     j.value()->getName().toLocal8Bit().data());
+            return false;
+        }
+    }
+    return true;
 }

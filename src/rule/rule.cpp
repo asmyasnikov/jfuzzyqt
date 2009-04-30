@@ -92,6 +92,9 @@ QString jfuzzyqt::Rule::toQString() const
          str += consequents.at(i)->toQString();
          str += "\n";
     }
+    str += "weight: ";
+    str += QString::number(weight, 'f', 3);
+    str += "\n";
     str += "}";
     return str;
 }
@@ -122,4 +125,9 @@ void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod*
 double jfuzzyqt::Rule::getWeight()const
 {
     return weight;
+}
+void jfuzzyqt::Rule::setWeight(double weight)
+{
+    Q_ASSERT((weight >= 0.) && (weight <= 1.0));
+    this->weight = weight;
 }

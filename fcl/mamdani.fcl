@@ -36,6 +36,7 @@ RULEBLOCK No1 // Many rule blocks supported. This need if used different AND, OR
     RULE 1 : IF service IS excellent THEN tip IS generous;
     RULE 2 : IF service IS poor OR food IS rancid THEN tip IS cheap;
     RULE 3 : IF service IS good THEN tip IS average;
+    RULE 3 : IF tip IS average THEN tip IS average;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

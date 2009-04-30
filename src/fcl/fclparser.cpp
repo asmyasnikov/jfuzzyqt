@@ -39,6 +39,7 @@ in file LICENSE along with this program.  If not, see
 #include "../accumulation/ruleaccumulationmethodsum.h"
 #include "../accumulation/ruleaccumulationmethodprobor.h"
 #include <QRegExp>
+#include <QStringList>
 
 jfuzzyqt::FCLParser::FCLParser() : QObject ()
 {
@@ -85,8 +86,11 @@ void jfuzzyqt::FCLParser::loadVarInput(QTextStream& in, FunctBlock& funcBlock)
     while (!line.isNull()) {
         if (rxVar.indexIn(line) > -1)
         {
-            Variable *v = new Variable(this, rxVar.cap(1) );
-            funcBlock.addVariable(v->getName(),v);
+            if(!funcBlock.variableExist(rxVar.cap(1)))
+            {
+                Variable *v = new Variable(this, rxVar.cap(1) );
+                funcBlock.addVariable(v->getName(),v);
+            }
         }else if (rxOut.indexIn(line) > -1){
             break;
         }
@@ -103,8 +107,11 @@ void jfuzzyqt::FCLParser::loadVarOutput(QTextStream& in, FunctBlock& funcBlock)
     while (!line.isNull()) {
         if (rxVar.indexIn(line) > -1)
         {
-            Variable *v = new Variable(this, rxVar.cap(1) );
-            funcBlock.addVariable(v->getName(),v);
+            if(!funcBlock.variableExist(rxVar.cap(1)))
+            {
+                Variable *v = new Variable(this, rxVar.cap(1) );
+                funcBlock.addVariable(v->getName(),v);
+            }
         }else if (rxOut.indexIn(line) > -1){
             break;
         }
@@ -127,13 +134,25 @@ void jfuzzyqt::FCLParser::loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, 
     {
         if ( rxExtra.indexIn(line) > -1)
         {
-            Variable *v = new Variable(this, varName );
-            funcBlock.addVariable( v->getName() , v );
-
-            LinguisticTerm* lt = new LinguisticTerm(this);
-            lt->setTermName( rxExtra.cap(1) );
-            lt->loadFrom( rxExtra.cap(2) );
-            funcBlock.setVariable( varName , lt );
+            Variable *v = NULL;
+            if(!funcBlock.variableExist(varName))
+            {
+                v = new Variable(this, varName );
+                funcBlock.addVariable(v->getName(),v);
+            }else{
+                v = funcBlock.getVariable(varName);
+            }
+            if(!v->linguisticTermExist(rxExtra.cap(1)))
+            {
+                LinguisticTerm* lt = new LinguisticTerm(this);
+                lt->setTermName( rxExtra.cap(1) );
+                lt->loadFrom( rxExtra.cap(2) );
+                funcBlock.setVariable( varName , lt );
+            }else{
+                qWarning("Term '%s' of variable '%s' already exist",
+                         rxExtra.cap(1).toLocal8Bit().data(),
+                         varName.toLocal8Bit().data());
+            }
         }else if (rxOut.indexIn(line) > -1){
             break;
         }else if ( rxMethod.indexIn(line) > -1){
@@ -168,7 +187,7 @@ void jfuzzyqt::FCLParser::loadFuzzify(QTextStream& in, FunctBlock& funcBlock, co
         }else if (rxOut.indexIn(line) > -1){
             break;
         }else{
-            qWarning() << "[jfuzzyqt::FCLParser::loadFuzzify] term unimplemented : " << line;
+            qWarning() << "[FCLParser::loadFuzzify] term unimplemented : " << line;
         }
         line = readLine(in);
     }
@@ -221,7 +240,7 @@ RuleBlock* jfuzzyqt::FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcB
             Rule *r = loadRule(funcBlock, rxRule.cap(3), rxRule.cap(2),AND,OR);
             if ( r == NULL )
             {
-                qWarning() << "[jfuzzyqt::FCLParser::loadRuleBlock]: Error loading rule" << rxRule.cap(2);
+                qWarning() << "[FCLParser::loadRuleBlock]: Error loading rule" << rxRule.cap(2);
             }else{
                 ruleBlock->addRule( *r );
             }
@@ -229,7 +248,7 @@ RuleBlock* jfuzzyqt::FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcB
             RuleAccumulationMethod* ram = createAccumulationMethod(ruleAccumulationMethodType);
             if ( ram == NULL )
             {
-                qWarning() << "[jfuzzyqt::FCLParser::loadRuleBlock]: No rule acumulation method created.";
+                qWarning() << "[FCLParser::loadRuleBlock]: No rule acumulation method created.";
             }else{
                 ruleBlock->addRuleAccumulationMethod( ram );
                 ruleBlock->setRuleConnectionMethodAnd(AND);
@@ -275,6 +294,14 @@ RuleBlock* jfuzzyqt::FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcB
         }
         line = readLine(in);
     }
+    QSet<QString>inputs     = ruleBlock->getInputVariables();
+    QSet<QString>outputs    = ruleBlock->getOutputVariables();
+    QSet<QString>intersects = inputs.intersect(outputs);
+    if(intersects.size())
+    {
+        qWarning("Following inputs intersects with outputs: %s",
+                 QStringList(intersects.toList()).join(",").toLocal8Bit().data());
+    }
     return ruleBlock;
 }
 
@@ -285,22 +312,35 @@ Rule* jfuzzyqt::FCLParser::loadRule( FunctBlock& funcBlock,
                            const RuleConnectionMethod *OR )
 {
     QRegExp rxIF("if\\s+(.*)?\\s+then");
-    QRegExp rxTHEN ("then\\s+((\\w+)?.*)?\\s+is\\s+((\\w+)?.*)?\\s*;");
+    QRegExp rxTHEN("then\\s+(\\w+)?\\s+is\\s+(\\w+)?\\s*");
+    QRegExp rxWITH("with\\s+(\\d+\\.\\d+)?");
+    rxWITH.indexIn(rule);
     Rule* fuzzyRule = new Rule(NULL,name);
     if ( rxIF.indexIn(rule) > -1 && rxTHEN.indexIn(rule) > -1)
     {
         RuleExpression *antecedents = loadRuleIf(funcBlock,rxIF.cap(1),AND,OR);
         if (!antecedents)
         {
-            qWarning() << "[jfuzzyqt::FCLParser::loadRule]:antecedents are NULL.";
+            qWarning() << "[FCLParser::loadRule]:antecedents are NULL.";
         }
         fuzzyRule->addAntecedents( antecedents );
-        Variable *v = funcBlock.getVariable(rxTHEN.cap(2));
-        RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(3), false);
+        Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
+        RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(2), false);
         fuzzyRule->addConsequent(rt);
     }else{
-        qWarning()<<"[jfuzzyqt::FCLParser::loadRule]:Unknown rule " << rule;
+        qWarning()<<"[FCLParser::loadRule]:Unknown rule " << rule;
+        delete fuzzyRule;
         return NULL;
+    }
+    if(rxWITH.indexIn(rule) > -1)
+    {
+        double weight = rxWITH.cap(1).toDouble();
+        if((weight >= 0.) && (weight <= 1.0))
+        {
+            fuzzyRule->setWeight(weight);
+        }else{
+            qWarning()<<"[FCLParser::loadRule]: weight is out of range [0;1] : " << rule;
+        }
     }
     return fuzzyRule;
 }
@@ -348,7 +388,7 @@ void jfuzzyqt::FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
             RuleBlock *rb = loadRuleBlock(in, funcBlock, rxRulleBlock.cap(1));
             if ( rb == NULL )
             {
-                qWarning() << "[jfuzzyqt::FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
+                qWarning() << "[FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
             }else{
                     funcBlock.addRuleBlock ( rb );///< Rule block
             }

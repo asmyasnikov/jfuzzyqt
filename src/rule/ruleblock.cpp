@@ -27,6 +27,7 @@ in file LICENSE along with this program.  If not, see
 #include "../connection/and/ruleconnectionmethodandmin.h"
 #include "../connection/or/ruleconnectionmethodormax.h"
 #include <QDebug>
+#include <QStringList>
 
 jfuzzyqt::RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
 {
@@ -188,4 +189,53 @@ RuleConnectionMethod* jfuzzyqt::RuleBlock::getRuleConnectionMethodOr()const
 int jfuzzyqt::RuleBlock::getRulesCount()const
 {
     return rules.size();
+}
+QSet<QString> jfuzzyqt::RuleBlock::getInputVariables()const
+{
+    QStringList variableList;
+    for (QLinkedList<Rule>::const_iterator i = rules.begin(); i != rules.end(); ++i)
+    {
+        variableList << i->getAntecedents()->getVariableList();
+    }
+    return variableList.toSet();
+}
+QSet<QString> jfuzzyqt::RuleBlock::getOutputVariables()const
+{
+    QStringList variableList;
+    for (QLinkedList<Rule>::const_iterator i = rules.begin(); i != rules.end(); ++i)
+    {
+        const QList<RuleTerm*> ruleTerms = i->getConsequents();
+        for(QList<RuleTerm*>::const_iterator j = ruleTerms.begin(); j != ruleTerms.end(); j++ )
+        {
+            variableList << (*j)->getVariable()->getName();
+        }
+    }
+    return variableList.toSet();
+}
+void jfuzzyqt::RuleBlock::addDependOfBlock(RuleBlock*block)
+{
+    //Simple check
+    Q_ASSERT(block != this);
+    dependOfBlocks.insert(block);
+}
+bool jfuzzyqt::RuleBlock::checkDependences()const
+{
+    // Check depend from oneself (infinity cycle checking)
+    QSet<QString>inputs  = getInputVariables();
+    QSet<QString>outputs = getOutputVariables();
+    if(QSet<QString>(inputs).intersect(outputs).size())return false;
+    QSet<RuleBlock*>blocks = dependOfBlocks;
+    int depth = 0;
+    while(blocks.size() && (++depth < 512))
+    {
+        QSet<RuleBlock*>current;
+        for(QSet<RuleBlock*>::const_iterator i = blocks.begin(); i != blocks.end(); i++)
+        {
+            current.unite((*i)->dependOfBlocks);
+            inputs.unite((*i)->getInputVariables());
+        }
+        if(inputs.intersect(outputs).size())return false;
+        blocks = current;
+    }
+    return true;
 }

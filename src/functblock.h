@@ -53,6 +53,7 @@ public:
     void evaluate();
     double getValue(const QString& varName)const;
     bool addVariable(const QString& varName, Variable* variable);
+    bool variableExist(const QString& varName)const;
     bool setVariable(const QString& varName, LinguisticTerm* lt);
     Variable* getVariable(const QString& varName);
     bool setDefaultValue(const QString& varName,const double value);
@@ -61,8 +62,8 @@ public:
     void debug(const QString& tbs) const;
     QHash<QString, RuleBlock*> getRuleBlocks()const;
     QHash<QString, Variable*> getVariables()const;
+    bool checkHierarchy()const;
 
-    //FunctBlock operator=(const FunctBlock &fb);
 private:
     QString name; ///<Function block name
     QHash<QString, RuleBlock*> ruleBlocks; ///<Several RuleBlocks indexed by name

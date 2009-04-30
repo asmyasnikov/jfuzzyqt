@@ -26,6 +26,7 @@ in file LICENSE along with this program.  If not, see
 #include "../connection/ruleconnectionmethod.h"
 #include "ruleterm.h"
 #include <QDebug>
+#include <QStringList>
 
 jfuzzyqt::RuleExpression::RuleExpression(QObject *parent)
     : QObject(parent)
@@ -240,4 +241,39 @@ double jfuzzyqt::RuleExpression::evaluate()
         result = 1 - result;
     }
     return result;
+}
+QStringList jfuzzyqt::RuleExpression::getVariableList()const
+{
+    QStringList variableList;
+    switch (term1Type)
+    {
+        case RULETERM:
+            if(term1.ruleTerm->isValid())
+            {
+                variableList << term1.ruleTerm->getVariable()->getName();
+            }
+            break;
+        case RULEEXPRESSION:
+            variableList << term1.ruleExpression->getVariableList();
+            break;
+        case UNDEF:
+            qWarning() << "[jfuzzyqt::RuleExpression::reset]:Error reseting term1";
+            break;
+    }
+    switch (term2Type)
+    {
+        case RULETERM:
+            if(term2.ruleTerm->isValid())
+            {
+                variableList << term2.ruleTerm->getVariable()->getName();
+            }
+            break;
+        case RULEEXPRESSION:
+            variableList << term2.ruleExpression->getVariableList();
+            break;
+        case UNDEF:
+            qWarning() << "[jfuzzyqt::RuleExpression::reset]:Error reseting term2";
+            break;
+    }
+    return variableList;
 }

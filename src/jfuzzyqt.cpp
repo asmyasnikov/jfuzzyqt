@@ -64,7 +64,8 @@ bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
     QTextStream in(&file);
     FCLParser fclParser;
     QString line = fclParser.readLine(in);
-    while (!line.isNull()) { ///<File Cycle (only works for one function block
+    while (!line.isNull())
+    { ///<File Cycle (only works for one function block
         if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
         {
             FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
@@ -94,6 +95,7 @@ bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
                 qWarning("Rules in function block '%s' was not found",
                          rxFunctionBlock.cap(1).toLocal8Bit().data());
             }
+            Q_ASSERT(functionBlock->checkHierarchy());
             addFunctionBlock(functionBlock);
         }///<END If Function Block
         line = fclParser.readLine(in);
@@ -108,11 +110,15 @@ bool jfuzzyqt::JFuzzyQt::addFunctionBlock(FunctBlock* functionBlock)
     if ( !functionBlocks.contains( functionBlock->getName() ))
     {
         functionBlocks.insert(functionBlock->getName(),functionBlock);
+        if ( defaultBlockName.isEmpty() )
+        {
+            defaultBlockName = functionBlock->getName();
+        }
         toReturn = true;
-    }
-    if ( defaultBlockName == "" )
-    {
-        defaultBlockName = functionBlock->getName();
+    }else{
+        qWarning("Function block '%s' already exist",
+                 functionBlock->getName().toLocal8Bit().data());
+        delete functionBlock;
     }
     return toReturn;
 }

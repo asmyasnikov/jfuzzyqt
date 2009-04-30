@@ -30,7 +30,7 @@ in file LICENSE along with this program.  If not, see
 #include "rule.h"
 #include "../connection/ruleconnectionmethod.h"
 #include <QString>
-#include <QLinkedList>
+#include <QSet>
 #include <QObject>
 
 namespace jfuzzyqt{
@@ -59,6 +59,10 @@ public:
     void setRuleConnectionMethodAnd(RuleConnectionMethod *_and_);
     RuleConnectionMethod* getRuleConnectionMethodOr()const;
     void setRuleConnectionMethodOr(RuleConnectionMethod *_or_);
+    QSet<QString> getInputVariables()const;
+    QSet<QString> getOutputVariables()const;
+    void addDependOfBlock(RuleBlock*block);
+    bool checkDependences()const;
 
 private:
     QString name;
@@ -74,6 +78,10 @@ private:
 
     RuleConnectionMethod *AND;
     RuleConnectionMethod *OR;
+
+    ///<
+    QSet<RuleBlock*> dependOfBlocks;
+;
 };
 
 };

@@ -63,6 +63,7 @@ void jfuzzyqt::Variable::setName(const QString& name)
 
 void jfuzzyqt::Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
+    Q_ASSERT(!linguisticTermExist(lt->getTermName()));
     lt->setParent(this);
     linguisticTerms.insert(lt->getTermName(), lt);
 }
@@ -210,4 +211,8 @@ double jfuzzyqt::Variable::getMembership(const QString& termName)
 QList<QString> jfuzzyqt::Variable::getLinguisticTermNames()const
 {
     return linguisticTerms.keys();
+}
+bool jfuzzyqt::Variable::linguisticTermExist(const QString& termName)const
+{
+    return linguisticTerms.contains(termName);
 }
