@@ -23,22 +23,19 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "membershipfunction.h"
-#include "value.h"
 #include <QDebug>
 
 jfuzzyqt::MembershipFunction::MembershipFunction(QObject* parent, MembershipType type)
-    : QObject (parent)
+    : OptimizationParameters (parent)
 {
     this->type = type;
     universeMax = NULL;
     universeMin = NULL;
-    parameters = NULL;
 }
 jfuzzyqt::MembershipFunction::~MembershipFunction()
 {
     if(universeMax) delete universeMax;
     if(universeMin) delete universeMin;
-    if(parameters)  delete parameters;
 }
 double jfuzzyqt::MembershipFunction::getUniverseMax()
 {

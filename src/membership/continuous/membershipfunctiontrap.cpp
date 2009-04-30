@@ -15,11 +15,11 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctiontrap.cpp
  * \class MembershipFunctionTrap
- * \author Aleksey Myasnikov
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.83
- * \brief Implementation Triangular membership function
+ * \brief Implementation Trapetziodal membership function
  */
 #include "membershipfunctiontrap.h"
 #include <math.h>
@@ -28,11 +28,10 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
-    parameters = new Value*[4];
-    parameters[0] = new Value(this, left);
-    parameters[1] = new Value(this, lmid);
-    parameters[2] = new Value(this, rmid);
-    parameters[3] = new Value(this, right);
+    parameters.append(new Value(this, left));
+    parameters.append(new Value(this, lmid));
+    parameters.append(new Value(this, rmid));
+    parameters.append(new Value(this, right));
     estimateUniverse();
 }
 

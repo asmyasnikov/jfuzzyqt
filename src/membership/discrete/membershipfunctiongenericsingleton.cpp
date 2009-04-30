@@ -22,7 +22,7 @@ in file LICENSE along with this program.  If not, see
  * \brief Implementation of generic singletone
  */
 #include "membershipfunctiongenericsingleton.h"
-#include "../../membership/value.h"
+#include "../../optimization/value.h"
 #include <QDebug>
 
 jfuzzyqt::MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton(QObject* parent,

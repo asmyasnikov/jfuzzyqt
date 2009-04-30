@@ -15,7 +15,7 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctionsigm.h
  * \class MembershipFunctionSigm
- * \author Aleksey Myasnikov
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.83
@@ -26,7 +26,7 @@ in file LICENSE along with this program.  If not, see
 
 #include <QList>
 #include "membershipfunctioncontinuous.h"
-#include "../value.h"
+#include "../../optimization/value.h"
 
 namespace jfuzzyqt{
 

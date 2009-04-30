@@ -36,7 +36,7 @@ class Value : public QObject
     Q_OBJECT
 public:
     enum Type {
-            REAL, VAR_REFERENCE, UNDEFINED
+        REAL, VAR_REFERENCE, UNDEFINED
     };
 
     Value(QObject* parent=NULL);
@@ -44,6 +44,7 @@ public:
     ~Value();
     void debug(const QString& tbs)const;
     double getValue()const;
+    void setValue(double value);
 private:
     Type type;
     double valReal;

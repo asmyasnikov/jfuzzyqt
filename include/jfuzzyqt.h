@@ -13,26 +13,36 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file jfuzzyqt.h
+ * \file jfuzzyqt.cpp
  * \class JFuzzyQt
+ * \brief Class JFuzzyQt is main class of fuzzy model.
+ *
+ * Application instructions:
+ *
+ * 1) Construct JFuzzyQt object:
+ *
+ *    JFuzzyQt model;
+ *
+ * 2) Set path of fcl-file:
+ *
+ *    model.load("./example.fcl");
+ *
+ * 3) Sets variable values:
+ *
+ *    model.setVariable("var1", var1);
+ *
+ * 4) Evalute model:
+ *
+ *    model.evalute();
+ *
+ * 5) Getting result:
+ *
+ *    double result = model.getValue("res")
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.83
- * \brief Class JFuzzyQt is main class of fuzzy model.
- *
- * Application instructions:
- * 1) Construct JFuzzyQt object:
- *    JFuzzyQt model;
- * 2) Set path of fcl-file:
- *    model.load("./example.fcl");
- * 3) Sets variable values:
- *    model.setVariable("var1", var1);
- * 4) Evalute model:
- *    model.evalute();
- * 5) Getting result:
- *    double result = model.getValue("res")
  */
 #ifndef JFUZZYQT_H
 #define JFUZZYQT_H

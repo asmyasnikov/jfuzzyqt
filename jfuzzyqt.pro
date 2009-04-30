@@ -60,7 +60,6 @@ HEADERS += include/jfuzzyqt.h \
     src/fcl/fclrulenode.h \
     src/fcl/fclruletree.h \
     src/membership/membershipfunction.h \
-    src/membership/value.h \
     src/rule/rule.h \
     src/rule/ruleblock.h \
     src/rule/ruleexpression.h \
@@ -82,7 +81,9 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/continuous/membershipfunctiontrian.h \
     src/membership/continuous/membershipfunctiontrap.h \
     src/membership/discrete/membershipfunctiongenericsingleton.h \
-    src/membership/continuous/membershipfunctiongbell.h
+    src/membership/continuous/membershipfunctiongbell.h \
+    src/optimization/optimizationparameters.h \
+    src/optimization/value.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -104,7 +105,6 @@ SOURCES += src/jfuzzyqt.cpp \
     src/fcl/fclrulenode.cpp \
     src/fcl/fclruletree.cpp \
     src/membership/membershipfunction.cpp \
-    src/membership/value.cpp \
     src/rule/rule.cpp \
     src/rule/ruleblock.cpp \
     src/rule/ruleexpression.cpp \
@@ -126,7 +126,9 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/continuous/membershipfunctiontrian.cpp \
     src/membership/continuous/membershipfunctiontrap.cpp \
     src/membership/discrete/membershipfunctiongenericsingleton.cpp \
-    src/membership/continuous/membershipfunctiongbell.cpp
+    src/membership/continuous/membershipfunctiongbell.cpp \
+    src/optimization/optimizationparameters.cpp \
+    src/optimization/value.cpp
 OTHER_FILES += fcl/tipper.fcl \
     fcl/singletone.fcl \
     fcl/mamdani.fcl \

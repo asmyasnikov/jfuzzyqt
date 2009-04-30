@@ -15,7 +15,7 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctionsigm.cpp
  * \class MembershipFunctionSigm
- * \author Aleksey Myasnikov
+ * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.83
@@ -28,9 +28,8 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters = new Value*[2];
-    parameters[0] = new Value(this, mx);
-    parameters[1] = new Value(this, dx);
+    parameters.append(new Value(this, mx));
+    parameters.append(new Value(this, dx));
     estimateUniverse();
 }
 

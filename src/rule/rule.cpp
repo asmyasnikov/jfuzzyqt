@@ -23,28 +23,29 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "rule.h"
+#include "../optimization/value.h"
 #include <QDebug>
 
 jfuzzyqt::Rule::Rule(QObject *parent)
-    : QObject(parent)
+    : OptimizationParameters(parent)
 {
     name = "undefined";
-    weight=1.;
+    parameters.append(new Value(this, 1.0));
 }
 
 jfuzzyqt::Rule::Rule(QObject *parent, const QString& name)
-    : QObject(parent)
+    : OptimizationParameters(parent)
 {
     this->name = name;
-    weight=1.;
+    parameters.append(new Value(this, 1.0));
 }
 jfuzzyqt::Rule::Rule(const Rule &rule)
-    : QObject(rule.parent())
+    : OptimizationParameters(rule.parent())
 {
     name = rule.getName();
     addAntecedents(rule.getAntecedents());
     consequents = rule.getConsequents();
-    weight= rule.getWeight();
+    parameters.append(new Value(this, rule.getWeight()));
 }
 jfuzzyqt::Rule::~Rule()
 {
@@ -102,7 +103,7 @@ QString jfuzzyqt::Rule::toQString() const
          str += "\n";
     }
     str += "weight: ";
-    str += QString::number(weight, 'f', 3);
+    str += QString::number(parameters.at(0)->getValue(), 'f', 3);
     str += "\n";
     str += "}";
     return str;
@@ -125,7 +126,7 @@ void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod*
     Q_ASSERT(consequents.size());
     degreeOfSupport = antecedents->evaluate(); ///< Evaluate antecedents
     ///< Apply weight
-    degreeOfSupport *= weight;
+    degreeOfSupport *= parameters.at(0)->getValue();
     ///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
     for (int i = 0; i < consequents.size(); ++i) {
         act->imply(consequents.at(i),accu,degreeOfSupport);
@@ -133,10 +134,10 @@ void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod*
 }
 double jfuzzyqt::Rule::getWeight()const
 {
-    return weight;
+    return parameters.at(0)->getValue();
 }
 void jfuzzyqt::Rule::setWeight(double weight)
 {
     Q_ASSERT((weight >= 0.) && (weight <= 1.0));
-    this->weight = weight;
+    parameters.at(0)->setValue(weight);
 }

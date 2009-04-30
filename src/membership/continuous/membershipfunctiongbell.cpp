@@ -28,10 +28,9 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters = new Value*[3];
-    parameters[0] = new Value(this, mean);
-    parameters[1] = new Value(this, a);
-    parameters[2] = new Value(this, b);
+    parameters.append(new Value(this, mean));
+    parameters.append(new Value(this, a));
+    parameters.append(new Value(this, b));
     estimateUniverse();
 }
 

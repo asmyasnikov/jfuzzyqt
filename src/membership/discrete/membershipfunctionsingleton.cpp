@@ -23,15 +23,14 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "membershipfunctionsingleton.h"
-#include "../../membership/value.h"
+#include "../../optimization/value.h"
 #include <QDebug>
 
 jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
-    parameters = new Value*[2];
-    parameters[0] = new Value(this, valueX);
-    parameters[1] = new Value(this, 1.);
+    parameters.append(new Value(this, valueX));
+    parameters.append(new Value(this, 1.));
     if(universeMax) delete universeMax;
     if(universeMin) delete universeMin;
     universeMax = new double;

@@ -15,7 +15,7 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file rule.h
  * \class Rule
- * \author Marco Estanqueiro <estanqueiro.marco@gmail.com> <estanqueiro.marco@gmail.com>
+ * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
@@ -29,13 +29,14 @@ in file LICENSE along with this program.  If not, see
 #include "ruleterm.h"
 #include "../accumulation/ruleaccumulationmethod.h"
 #include "../activation/ruleactivationmethod.h"
+#include "../optimization/optimizationparameters.h"
 #include <QObject>
 #include <QString>
 #include <QLinkedList>
 
 namespace jfuzzyqt{
 
-class Rule : public QObject
+class Rule : public OptimizationParameters
 {
     Q_OBJECT
 
@@ -61,7 +62,6 @@ private:
     RuleExpression* antecedents;
     QList<RuleTerm*> consequents;
     double degreeOfSupport;
-    double weight;
 };
 
 };

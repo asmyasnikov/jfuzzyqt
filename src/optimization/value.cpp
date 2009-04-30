@@ -85,3 +85,10 @@ void jfuzzyqt::Value::debug(const QString& tbs)const
             break;
     }
 }
+void jfuzzyqt::Value::setValue(double value)
+{
+    if(type == REAL)
+    {
+        valReal = value;
+    }
+}

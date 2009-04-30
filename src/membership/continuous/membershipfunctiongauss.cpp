@@ -34,9 +34,8 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters = new Value*[2];
-    parameters[0] = new Value(this, mx);
-    parameters[1] = new Value(this, dx);
+    parameters.append(new Value(this, mx));
+    parameters.append(new Value(this, dx));
     estimateUniverse();
 }
 

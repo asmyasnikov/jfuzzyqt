@@ -24,6 +24,7 @@ in file LICENSE along with this program.  If not, see
 #ifndef MEMBERSHIPFUNCTION_H
 #define MEMBERSHIPFUNCTION_H
 
+#include "../optimization/optimizationparameters.h"
 #include <QString>
 #include <QObject>
 
@@ -31,7 +32,7 @@ namespace jfuzzyqt{
 
 class Value;
 
-class MembershipFunction : public QObject
+class MembershipFunction : public OptimizationParameters
 {
     Q_OBJECT
 
@@ -62,7 +63,7 @@ protected:
     double* universeMax; ///< Universe max (range max)
     double* universeMin; ///< Universe min (range min)
     bool discrete;
-    Value** parameters;
+    QList<Value*> parameters;
     MembershipType type;
 };
 

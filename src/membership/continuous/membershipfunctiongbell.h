@@ -19,14 +19,14 @@ in file LICENSE along with this program.  If not, see
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
  * \version 0.83
- * \brief Implementation Gaussian membership function
+ * \brief Implementation GenBell membership function
  */
 #ifndef MEMBERSHIPFUNCTION_GBELL_H
 #define MEMBERSHIPFUNCTION_GBELL_H
 
 #include <QList>
 #include "membershipfunctioncontinuous.h"
-#include "../value.h"
+#include "../../optimization/value.h"
 
 namespace jfuzzyqt{
 

@@ -27,7 +27,7 @@ in file LICENSE along with this program.  If not, see
 
 #include <QList>
 #include "membershipfunctioncontinuous.h"
-#include "../value.h"
+#include "../../optimization/value.h"
 
 namespace jfuzzyqt{
 
