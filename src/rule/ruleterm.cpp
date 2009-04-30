@@ -35,10 +35,6 @@ jfuzzyqt::RuleTerm::RuleTerm(QObject* parent, Variable* variable, const QString&
     : QObject(parent)
 {
     this->variable = variable;
-    if(this->variable)
-    {
-        this->variable->setParent(this);
-    }
     termName = term;
     negated = negated;
     Q_ASSERT(this->variable);

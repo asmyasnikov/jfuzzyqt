@@ -56,6 +56,15 @@ void jfuzzyqt::Rule::addAntecedents(RuleExpression *antecedents)
 }
 void jfuzzyqt::Rule::addConsequent(RuleTerm* rt)
 {
+    for (int i = 0; i < consequents.size(); ++i)
+    {
+        if((consequents.at(i)->getVariable()->getName() == rt->getVariable()->getName())&&
+           (consequents.at(i)->getName() == rt->getName()))
+        {
+            delete rt;
+            return;
+        }
+    }
     rt->setParent(this);
     consequents.append(rt);
 }
@@ -69,7 +78,7 @@ RuleExpression* jfuzzyqt::Rule::getAntecedents()const
 }
 const QList<RuleTerm*> jfuzzyqt::Rule::getConsequents()const
 {
-        return consequents;
+    return consequents;
 }
 QString jfuzzyqt::Rule::toQString() const
 {

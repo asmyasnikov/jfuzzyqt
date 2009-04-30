@@ -6,7 +6,7 @@
    where b consist of values b1, b2, b3 (divisible group of exclusive values).
    In fuzzy logic this expressions is not equal.
    See examples: decomposition1.fcl and decomposition2.fcl.
-2) Not impliment following operaors:
+2) Not impliment following operators:
       defuzzifier: COA, COGF, LeftMostMax, RightMostMax, MeanMax;
       fuzzifier  : Cosine, DSigm, Function
 3) Not implement optimization of knowledge base.

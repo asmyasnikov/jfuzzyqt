@@ -312,7 +312,7 @@ Rule* jfuzzyqt::FCLParser::loadRule( FunctBlock& funcBlock,
                            const RuleConnectionMethod *OR )
 {
     QRegExp rxIF("if\\s+(.*)?\\s+then");
-    QRegExp rxTHEN("then\\s+(\\w+)?\\s+is\\s+(\\w+)?\\s*");
+    QRegExp rxTHEN("(?:then\\s+|\\,\\s*)(\\w+)?\\s+is\\s+(\\w+)?\\s*");
     QRegExp rxWITH("with\\s+(\\d+\\.\\d+)?");
     rxWITH.indexIn(rule);
     Rule* fuzzyRule = new Rule(NULL,name);
@@ -324,9 +324,14 @@ Rule* jfuzzyqt::FCLParser::loadRule( FunctBlock& funcBlock,
             qWarning() << "[FCLParser::loadRule]:antecedents are NULL.";
         }
         fuzzyRule->addAntecedents( antecedents );
-        Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
-        RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(2), false);
-        fuzzyRule->addConsequent(rt);
+        int pos = 0;
+        while(rxTHEN.indexIn(rule,pos) > -1)
+        {
+            Variable *v = funcBlock.getVariable(rxTHEN.cap(1));
+            RuleTerm* rt = new RuleTerm(NULL, v, rxTHEN.cap(2), false);
+            fuzzyRule->addConsequent(rt);
+            pos += rxTHEN.matchedLength();
+        }
     }else{
         qWarning()<<"[FCLParser::loadRule]:Unknown rule " << rule;
         delete fuzzyRule;

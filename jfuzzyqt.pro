@@ -142,4 +142,5 @@ OTHER_FILES += fcl/tipper.fcl \
     fcl/membership_functions_demo.fcl \
     fcl/rule_weight.fcl \
     fcl/hierarchy.fcl \
-    fcl/hierarchy_infinity.fcl
+    fcl/hierarchy_infinity.fcl \
+    fcl/multi_consequents.fcl
