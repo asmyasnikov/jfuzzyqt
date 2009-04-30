@@ -36,6 +36,7 @@ jfuzzyqt::RuleBlock::RuleBlock(QObject *parent) : QObject (parent)
     ruleAccumulationMethod = NULL;
     AND=NULL;
     OR=NULL;
+    evaluateState = false;
 }
 
 jfuzzyqt::RuleBlock::RuleBlock(const QString& name) : QObject ()
@@ -45,6 +46,7 @@ jfuzzyqt::RuleBlock::RuleBlock(const QString& name) : QObject ()
     ruleAccumulationMethod = NULL;
     AND=NULL;
     OR=NULL;
+    evaluateState = false;
 }
 jfuzzyqt::RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
 {
@@ -58,6 +60,7 @@ jfuzzyqt::RuleBlock::RuleBlock(const RuleBlock &rb) : QObject ()
     OR=NULL;
     setRuleConnectionMethodAnd( rb.getRuleConnectionMethodAnd() );
     setRuleConnectionMethodOr( rb.getRuleConnectionMethodOr() );
+    evaluateState = false;
 }
 jfuzzyqt::RuleBlock::~RuleBlock()
 {
@@ -72,6 +75,7 @@ void jfuzzyqt::RuleBlock::reset()
         fr++;
         i++;
     }
+    evaluateState = false;
 }
 
 /*!
@@ -79,11 +83,18 @@ void jfuzzyqt::RuleBlock::reset()
  */
 void jfuzzyqt::RuleBlock::evaluate()
 {
-    ///< Apply each rule
-    QLinkedList<Rule>::iterator i;
-    for (i = rules.begin(); i != rules.end(); ++i)
+    if(!evaluateState)
     {
-        i->evaluate(ruleActivationMethod, ruleAccumulationMethod);
+        for(QSet<RuleBlock*>::const_iterator i = dependOfBlocks.begin(); i != dependOfBlocks.end(); i++)
+        {
+            (*i)->evaluate();
+        }
+        ///< Apply each rule
+        for (QLinkedList<Rule>::iterator i = rules.begin(); i != rules.end(); ++i)
+        {
+            i->evaluate(ruleActivationMethod, ruleAccumulationMethod);
+        }
+        evaluateState = true;
     }
 }
 const QString& jfuzzyqt::RuleBlock::getName()const

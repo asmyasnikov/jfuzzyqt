@@ -79,9 +79,11 @@ private:
     RuleConnectionMethod *AND;
     RuleConnectionMethod *OR;
 
-    ///<
+    ///< dependent of blocks
     QSet<RuleBlock*> dependOfBlocks;
-;
+
+    ///< evaluate state
+    bool evaluateState;
 };
 
 };
