@@ -19,16 +19,17 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "defuzzifier.h"
 #include <QDebug>
+#include <math.h>
 
 jfuzzyqt::Defuzzifier::Defuzzifier()
 {
-    min = 1.e304;
-    max = -1.e304;
+    min = HUGE_VAL;
+    max = -HUGE_VAL;
 }
 void jfuzzyqt::Defuzzifier::setMin(double min)
 {

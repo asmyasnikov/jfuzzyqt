@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief A linguistic term is an asociation between a termName and a membership function
  */
 #ifndef LINGUISTICTERM_H
@@ -40,12 +40,10 @@ public:
     LinguisticTerm(QObject* parent=NULL);
     LinguisticTerm(QObject* parent,const QString& termName, MembershipFunction* membershipFunction);
     ~LinguisticTerm();
-
     const QString& getTermName() const;
     void setTermName(const QString& name);
     MembershipFunction* getMembershipFunction();
     bool loadFrom(const QString& qString);
-    void debug(const QString& tbs) const;
 
 private:
     QString termName;///<Terms's name

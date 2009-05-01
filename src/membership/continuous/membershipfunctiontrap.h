@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation Trapetziodal membership function
  */
 #ifndef MEMBERSHIPFUNCTION_TRAP_H
@@ -37,11 +37,11 @@ class MembershipFunctionTrap : public MembershipFunctionContinuous
 public:
     MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right);
     ~MembershipFunctionTrap();
-    void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
+    QString toQString()const;
 
 private:
 };

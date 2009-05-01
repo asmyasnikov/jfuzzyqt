@@ -36,27 +36,19 @@ jfuzzyqt::MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, doub
 {
     parameters.append(new Value(this, mx));
     parameters.append(new Value(this, dx));
-    estimateUniverse();
 }
-
 jfuzzyqt::MembershipFunctionGauss::~MembershipFunctionGauss()
 {
-
 }
-
-void jfuzzyqt::MembershipFunctionGauss::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionGauss::toQString()const
 {
-    QString str = "{ gauss ( ";
-    str.append ( QString::number( parameters[0]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[1]->getValue() ) );
-    str.append(" ) ");
-    str.append(" }");
-    qDebug() << tbs << str;
+    return QString("GAUSS %1 %2")
+           .arg(parameters[0]->getValue())
+           .arg(parameters[1]->getValue());
 }
 QString jfuzzyqt::MembershipFunctionGauss::getName() const
 {
-    return "Gauss";
+    return "GAUSS";
 }
 
 double jfuzzyqt::MembershipFunctionGauss::membership(double index) const

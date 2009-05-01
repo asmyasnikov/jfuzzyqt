@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation Sigmoidal membership function
  */
 #include "membershipfunctionsigm.h"
@@ -30,27 +30,20 @@ jfuzzyqt::MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double
 {
     parameters.append(new Value(this, mx));
     parameters.append(new Value(this, dx));
-    estimateUniverse();
 }
 
 jfuzzyqt::MembershipFunctionSigm::~MembershipFunctionSigm()
 {
-
 }
-
-void jfuzzyqt::MembershipFunctionSigm::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionSigm::toQString()const
 {
-    QString str = "{ sigm ( ";
-    str.append ( QString::number( parameters[0]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[1]->getValue() ) );
-    str.append(" ) ");
-    str.append(" }");
-    qDebug() << tbs << str;
+    return QString("SIGM %1 %2")
+           .arg(parameters[0]->getValue())
+           .arg(parameters[1]->getValue());
 }
 QString jfuzzyqt::MembershipFunctionSigm::getName() const
 {
-    return "Sigm";
+    return "SIGM";
 }
 
 double jfuzzyqt::MembershipFunctionSigm::membership(double index) const

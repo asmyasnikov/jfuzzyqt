@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "linguisticterm.h"
@@ -267,15 +267,4 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         }
     }
     return toReturn;
-}
-void jfuzzyqt::LinguisticTerm::debug(const QString& tbs) const
-{
-    QString nxtTbs=tbs;
-    nxtTbs.append("\t");
-    qDebug() << tbs <<"TERM"<<termName<<"{";
-    if(membershipFunction)
-    {
-        membershipFunction->debug(nxtTbs);
-    }
-    qDebug() << tbs <<"}";
 }

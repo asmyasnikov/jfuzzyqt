@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "membershipfunctionsingleton.h"
@@ -31,36 +31,23 @@ jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* pare
 {
     parameters.append(new Value(this, valueX));
     parameters.append(new Value(this, 1.));
-    if(universeMax) delete universeMax;
-    if(universeMin) delete universeMin;
-    universeMax = new double;
-    universeMin = new double;
-    *universeMax = valueX+1.e-10;
-    *universeMin = valueX-1.e-10;
 }
 
 jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
 {
 }
-
+QString jfuzzyqt::MembershipFunctionSingleton::toQString()const
+{
+    return QString::number(parameters[0]->getValue());
+}
 QString jfuzzyqt::MembershipFunctionSingleton::getName() const
 {
     return "Singleton";
 }
-
-void jfuzzyqt::MembershipFunctionSingleton::debug(const QString& tbs)const
-{
-    QString nxtTbs = tbs;
-    qDebug() << tbs << "\tDiscrete:" << discrete;
-    qDebug() << tbs <<"\tParameters";
-    parameters[0]->debug(nxtTbs);
-}
-
 int jfuzzyqt::MembershipFunctionSingleton::size()const
 {
     return 1;
 }
-
 double jfuzzyqt::MembershipFunctionSingleton::membership(double index) const
 {
     double toReturn = 0.;

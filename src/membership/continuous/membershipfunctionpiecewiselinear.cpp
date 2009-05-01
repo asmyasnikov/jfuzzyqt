@@ -15,15 +15,17 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctionpiecewiselinear.cpp
  * \class MembershipFunctionPieceWiseLinear
+ * \brief Class implement piece wise linear membership function.
+ *        Parameters of this function will be not optimized.
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
- * \brief FIXME
+ * \version 0.95
  */
 #include "membershipfunctionpiecewiselinear.h"
 #include <QDebug>
+#include <math.h>
 
 /*! \brief Default constructor
 *         Brief description continued.
@@ -55,26 +57,21 @@ jfuzzyqt::MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(Q
         this->x.append( new Value(this,x.at(i)) );
         this->y.append( new Value(this,y.at(i)) );
     }
-    estimateUniverse();
 }
 
 jfuzzyqt::MembershipFunctionPieceWiseLinear::~MembershipFunctionPieceWiseLinear()
 {
 }
-
-void jfuzzyqt::MembershipFunctionPieceWiseLinear::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionPieceWiseLinear::toQString()const
 {
-    QString str = "{";
+    QString toReturn;
     for (int i = 0; i < x.size(); ++i)
     {
-        str.append("(");
-        str.append ( QString::number( x.at(i)->getValue() ) );
-        str.append(" , ");
-        str.append ( QString::number( y.at(i)->getValue() ) );
-        str.append(")");
+        toReturn.append(QString("(%1, %2) ")
+                        .arg(x.at(i)->getValue())
+                        .arg(y.at(i)->getValue()));
     }
-    str.append("}");
-    qDebug() << tbs << str;
+    return toReturn;
 }
 QString jfuzzyqt::MembershipFunctionPieceWiseLinear::getName() const
 {
@@ -140,8 +137,8 @@ void jfuzzyqt::MembershipFunctionPieceWiseLinear::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
-    *universeMax = -1.e304;
-    *universeMin =  1.e304;
+    *universeMax = -HUGE_VAL;
+    *universeMin =  HUGE_VAL;
     for (int i = 0; i < x.size(); ++i)
     {
         *universeMax = qMax(*universeMax, x.at(i)->getValue());

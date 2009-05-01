@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation Triangular membership function
  */
 #ifndef MEMBERSHIPFUNCTION_TRIAN_H
@@ -37,11 +37,11 @@ class MembershipFunctionTrian : public MembershipFunctionContinuous
 public:
     MembershipFunctionTrian(QObject* parent, double left, double mid, double right);
     ~MembershipFunctionTrian();
-    void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
+    QString toQString()const;
 
 private:
 };

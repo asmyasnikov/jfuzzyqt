@@ -15,7 +15,7 @@ VAR_INPUT				// Define input variables
 	inVar5 : REAL;
 	inVar6 : REAL;
 	inVar7 : REAL;
-	inVar8 : REAL;
+        outVar : REAL;
 END_VAR
 
 VAR_OUTPUT				// Define output variable
@@ -58,12 +58,6 @@ FUZZIFY inVar6
 	TERM good := sigm 4 7;
 END_FUZZIFY
 
-FUZZIFY inVar7
-	TERM poor := 2;
-	TERM good := 5;
-	TERM excellent := 8;
-END_FUZZIFY
-
 // GENERALIZED SINGLETON !!!
 /*
 FUZZIFY inVar7
@@ -74,7 +68,7 @@ END_FUZZIFY
 */
 
 // Mixed types
-FUZZIFY inVar8
+DEFUZZIFY outVar
         TERM t1 := (1, 0) (2, 0.5) (3, 0.7) (4,1) (4.5, 1) (5, 0.6) (6, 0.3) (7, 0.3) (8, 0.8) (9, 0.8) (10,0);
         TERM t2 := trian 12 14 16;
         TERM t3 := trape 18 20 24 28;
@@ -82,7 +76,9 @@ FUZZIFY inVar8
 	TERM t5 := gauss 35 2;
 	TERM t6 := sigm 4 40;
         TERM t7 := singletons (1, 0.1) (2, 0.5) (3, 0.7) (4,1) (4.5, 1) (5, 0.6) (6, 0.3) (7, 0.3) (8, 0.8) (9, 0.8) (10,0);
-END_FUZZIFY
+    METHOD : COG; // [COG|COGS]
+    DEFAULT := 0;
+END_DEFUZZIFY
 
 END_FUNCTION_BLOCK
 

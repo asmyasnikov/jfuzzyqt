@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef MEMBERSHIPFUNCTIONSINGLETON_H
@@ -36,13 +36,13 @@ class MembershipFunctionSingleton : public MembershipFunctionDiscrete
 public:
     MembershipFunctionSingleton(QObject* parent, const double& valueX);
     ~MembershipFunctionSingleton();
-    void debug(const QString& tbs)const;
     int size() const;
     double membership(double index) const;
     double valueX(int index)const;
     QString getName()const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
+    QString toQString()const;
 
 private:
 

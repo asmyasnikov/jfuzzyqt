@@ -42,7 +42,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  */
 #include "../include/jfuzzyqt.h"
 #include "rule/ruleexpression.h"
@@ -205,16 +205,6 @@ double jfuzzyqt::JFuzzyQt::getValue(const QString& varName, const QString& fb)co
     }
     return 0;
 }
-
-void jfuzzyqt::JFuzzyQt::debug() const
-{
-    for(QHash<QString, FunctBlock*>::const_iterator i = functionBlocks.begin();
-        i != functionBlocks.end();
-        i++ )
-    {
-        i.value()->debug("");
-    }
-}
 QStringList jfuzzyqt::JFuzzyQt::functBlocks()const
 {
     return functionBlocks.keys();
@@ -254,6 +244,27 @@ QStringList jfuzzyqt::JFuzzyQt::outputs(const QString& fb)const
                 toReturn.append(j.key());
             }
         }
+    }
+    return toReturn;
+}
+bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
+{
+    qDebug() << "Implement saving to file only variables without ruleblocks now";
+    bool toReturn = false;
+    QFile file(fileUri);
+    if(file.open(QIODevice::WriteOnly))
+    {
+        for(QHash<QString, FunctBlock*>::iterator i = i = functionBlocks.begin();
+            i != functionBlocks.end();
+            i++ )
+        {
+            QString functBlock = i.value()->toQString();
+            file.write(functBlock.toLocal8Bit(), functBlock.toLocal8Bit().size());
+        }
+        file.close();
+        toReturn = true;
+    }else{
+        qDebug() << "Error opening file to writing " << fileUri;
     }
     return toReturn;
 }

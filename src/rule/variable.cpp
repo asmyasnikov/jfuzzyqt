@@ -19,13 +19,14 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "variable.h"
 #include "../defuzzifier/defuzzifier.h"
 #include <QDebug>
 #include <QVariant>
+#include <math.h>
 
 jfuzzyqt::Variable::Variable(QObject* parent)
     : QObject (parent),
@@ -89,7 +90,7 @@ double jfuzzyqt::Variable::getValue()const
 }
 double jfuzzyqt::Variable::getAbsoluteMinimum()const
 {
-    double toReturn = 1.e304;
+    double toReturn = HUGE_VAL;
     Q_ASSERT(linguisticTerms.size());
     for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
         i != linguisticTerms.end(); i++)
@@ -100,7 +101,7 @@ double jfuzzyqt::Variable::getAbsoluteMinimum()const
 }
 double jfuzzyqt::Variable::getAbsoluteMaximum()const
 {
-    double toReturn = -1.e304;
+    double toReturn = -HUGE_VAL;
     Q_ASSERT(linguisticTerms.size());
     for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
         i != linguisticTerms.end(); i++)
@@ -143,10 +144,14 @@ LinguisticTerm* jfuzzyqt::Variable::getLinguisticTerm(const QString& termName)
     return linguisticTerms.value(termName);
 }
 
-void jfuzzyqt::Variable::setDefaultValue(const double& )
+void jfuzzyqt::Variable::setDefaultValue(const double& value)
 {
+    defaultValue = value;
 }
-
+double jfuzzyqt::Variable::getDefaultValue()const
+{
+    return defaultValue.toDouble();
+}
 void jfuzzyqt::Variable::setDefuzzifier(Defuzzifier* deffuzifier)
 {
     if (this->deffuzifier)
@@ -158,30 +163,6 @@ void jfuzzyqt::Variable::setDefuzzifier(Defuzzifier* deffuzifier)
     {
         this->deffuzifier->setParent(this);
     }
-}
-
-void jfuzzyqt::Variable::debug(const QString& tbs) const
-{
-    QString nxTbs = tbs;
-    nxTbs.append("\t");
-    qDebug() << tbs << "Variable " << name.toLocal8Bit().data() << "{";
-    if(deffuzifier)
-    {
-        deffuzifier->debug(nxTbs);
-    }else{
-        qDebug() << tbs << "No deffuzifier";
-    }
-    qDebug() << tbs << "Value(" << value << ")";
-    QHashIterator<QString, LinguisticTerm*> var(linguisticTerms);
-    while ( var.hasNext() ) {
-        var.next();
-        var.value()->debug(tbs);
-    }
-    if(linguisticTerms.count()<1)
-    {
-        qDebug() << tbs << "No Linguitic Terms";
-    }
-    qDebug() << tbs << "}";
 }
 
 void jfuzzyqt::Variable::reset()

@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef MEMBERSHIPFUNCTION_H
@@ -57,7 +57,7 @@ public:
     double getUniverseMin();
     bool isDiscrete()const;
     virtual QString getName()const = 0;
-    virtual void debug(const QString& tbs)const = 0;
+    virtual QString toQString()const = 0;
 
 protected:
     double* universeMax; ///< Universe max (range max)

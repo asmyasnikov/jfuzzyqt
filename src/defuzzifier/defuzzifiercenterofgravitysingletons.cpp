@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "defuzzifiercenterofgravitysingletons.h"
@@ -35,7 +35,7 @@ jfuzzyqt::DefuzzifierCenterOfGravitySingletons::~DefuzzifierCenterOfGravitySingl
 
 QString jfuzzyqt::DefuzzifierCenterOfGravitySingletons::getName()const
 {
-    return "CenterOfGravitySingletons";
+    return "COGS";
 }
 QVariant jfuzzyqt::DefuzzifierCenterOfGravitySingletons::defuzzify()const
 {
@@ -53,9 +53,4 @@ QVariant jfuzzyqt::DefuzzifierCenterOfGravitySingletons::defuzzify()const
         toReturn = (sumWeight / sum);
     }
     return toReturn;
-}
-
-void jfuzzyqt::DefuzzifierCenterOfGravitySingletons::debug(const QString& tbs) const
-{
-    qDebug() << tbs << "defuzzifier method = cogs;";
 }

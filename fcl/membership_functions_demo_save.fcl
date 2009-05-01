@@ -1,0 +1,70 @@
+FUNCTION_BLOCK testvariables
+
+VAR_INPUT
+	invar1 : REAL
+	invar2 : REAL
+	invar3 : REAL
+	invar4 : REAL
+	invar5 : REAL
+	invar6 : REAL
+	invar7 : REAL
+END_VAR
+
+VAR_OUTPUT
+	outvar : REAL
+END_VAR
+
+FUZZYFY invar1
+	TERM poor := (0, 1) (2, 1) (4, 0) 
+	TERM excellent := (6, 0) (9, 1) (10, 1) 
+	TERM good := (1, 0) (2, 0.5) (3, 0.7) (4, 1) (4.5, 1) (5, 0.6) (6, 0.3) (7, 0.3) (8, 0.8) (9, 0.8) (10, 0) 
+END_FUZZIFY
+
+FUZZYFY invar2
+	TERM poor := TRIAN 0 2.5 5
+	TERM excellent := TRIAN 5 7.5 10
+	TERM good := TRIAN 2.5 5 7.5
+END_FUZZIFY
+
+FUZZYFY invar3
+	TERM poor := TRAPE 0 2 3 4
+	TERM excellent := TRAPE 5 6 7 8
+	TERM good := TRAPE 3 4 5 6
+END_FUZZIFY
+
+FUZZYFY invar4
+	TERM poor := GBELL 2 4 2
+	TERM excellent := GBELL 2 4 8
+	TERM good := GBELL 2 4 5
+END_FUZZIFY
+
+FUZZYFY invar5
+	TERM poor := GAUSS 2 2
+	TERM excellent := GAUSS 8 2
+	TERM good := GAUSS 5 2
+END_FUZZIFY
+
+FUZZYFY invar6
+	TERM poor := SIGM -4 3
+	TERM good := SIGM 4 7
+END_FUZZIFY
+
+FUZZYFY invar7
+	TERM poor := 2
+	TERM excellent := 8
+	TERM good := 5
+END_FUZZIFY
+
+DEFUZZYFY outvar
+	TERM t1 := (1, 0) (2, 0.5) (3, 0.7) (4, 1) (4.5, 1) (5, 0.6) (6, 0.3) (7, 0.3) (8, 0.8) (9, 0.8) (10, 0) 
+	TERM t2 := TRIAN 12 14 16
+	TERM t3 := TRAPE 18 20 24 28
+	TERM t4 := GBELL 2 4 30
+	TERM t5 := GAUSS 35 2
+	TERM t6 := SIGM 4 40
+	TERM t7 := SINGLETONS (1, 0.1) (2, 0.5) (3, 0.7) (4, 1) (4.5, 1) (5, 0.6) (6, 0.3) (7, 0.3) (8, 0.8) (9, 0.8) (10, 0) 
+	METHOD : COG
+	DEFAULT := 0
+END_DEFUZZIFY
+
+END_FUNCTION_BLOCK

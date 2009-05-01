@@ -15,11 +15,12 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctiongenericsingleton.h
  * \class MembershipFunctionGenericSingleton
+ * \brief Class implement membership function of generic singleton.
+ *        Parameters of this function will be not optimized.
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
- * \brief FIXME
+ * \version 0.95
  */
 #ifndef MEMBERSHIPFUNCTION_GENERIC_SINGLETON_H
 #define MEMBERSHIPFUNCTION_GENERIC_SINGLETON_H
@@ -35,13 +36,13 @@ class MembershipFunctionGenericSingleton : public MembershipFunctionDiscrete
 public:
     MembershipFunctionGenericSingleton(QObject* parent, const QList<double>& x, const QList<double>& y);
     ~MembershipFunctionGenericSingleton();
-    void debug(const QString& tbs)const;
     int size() const;
     double membership(double index) const;
     QString getName()const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
     double valueX(int index)const;
+    QString toQString()const;
 
 private:
     QList<Value*> x;///<Piece wise linear function values x

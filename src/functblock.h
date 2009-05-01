@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef FUNCTBLOCK_H
@@ -59,10 +59,10 @@ public:
     bool setDefaultValue(const QString& varName,const double value);
     bool setDefuzzifier(const QString& varName, Defuzzifier* d);
     bool addRuleBlock(RuleBlock* rl);
-    void debug(const QString& tbs) const;
     QHash<QString, RuleBlock*> getRuleBlocks()const;
     QHash<QString, Variable*> getVariables()const;
     bool checkHierarchy()const;
+    QString toQString()const;
 
 private:
     QString name; ///<Function block name

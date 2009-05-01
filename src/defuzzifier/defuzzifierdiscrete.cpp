@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "defuzzifierdiscrete.h"

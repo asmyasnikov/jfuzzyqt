@@ -15,12 +15,13 @@ in file LICENSE along with this program.  If not, see
 /*!
  * \file membershipfunctionpiecewiselinear.h
  * \class MembershipFunctionPieceWiseLinear
+ * \brief Class implement piece wise linear membership function.
+ *        Parameters of this function will be not optimized.
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
- * \brief FIXME
+ * \version 0.95
  */
 #ifndef MEMBERSHIPFUNCTIONPIECEWISELINEAR_H
 #define MEMBERSHIPFUNCTIONPIECEWISELINEAR_H
@@ -38,11 +39,11 @@ class MembershipFunctionPieceWiseLinear : public MembershipFunctionContinuous
 public:
     MembershipFunctionPieceWiseLinear(QObject* parent, const QList<double>& x,const QList<double>& y);
     ~MembershipFunctionPieceWiseLinear();
-    void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
+    QString toQString()const;
 
 private:
     QList<Value*> x;///<Piece wise linear function values x

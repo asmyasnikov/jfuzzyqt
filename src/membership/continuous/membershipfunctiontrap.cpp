@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation Trapetziodal membership function
  */
 #include "membershipfunctiontrap.h"
@@ -32,33 +32,24 @@ jfuzzyqt::MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double
     parameters.append(new Value(this, lmid));
     parameters.append(new Value(this, rmid));
     parameters.append(new Value(this, right));
-    estimateUniverse();
 }
 
 jfuzzyqt::MembershipFunctionTrap::~MembershipFunctionTrap()
 {
-
 }
 
-void jfuzzyqt::MembershipFunctionTrap::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionTrap::toQString()const
 {
-    QString str = "{ trap ( ";
-    str.append ( QString::number( parameters[0]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[1]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[2]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[3]->getValue() ) );
-    str.append(" ) ");
-    str.append(" }");
-    qDebug() << tbs << str;
+    return QString("TRAPE %1 %2 %3 %4")
+           .arg(parameters[0]->getValue())
+           .arg(parameters[1]->getValue())
+           .arg(parameters[2]->getValue())
+           .arg(parameters[3]->getValue());
 }
 QString jfuzzyqt::MembershipFunctionTrap::getName() const
 {
-    return "Trapetziodal";
+    return "TRAPE";
 }
-
 double jfuzzyqt::MembershipFunctionTrap::membership(double index) const
 {
     if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;

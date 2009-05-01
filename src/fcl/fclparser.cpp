@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "fclparser.h"
@@ -395,7 +395,7 @@ void jfuzzyqt::FCLParser::loadFunctBlock(QTextStream &in,FunctBlock& funcBlock)
             {
                 qWarning() << "[FCLParser::loadFunctBlock]: Error loading RuleBlock" << rxRulleBlock.cap(1);
             }else{
-                    funcBlock.addRuleBlock ( rb );///< Rule block
+                funcBlock.addRuleBlock ( rb );///< Rule block
             }
         }else if (rxFunctionBlockEnd.indexIn(line) > -1){
             return;///< End of Function block

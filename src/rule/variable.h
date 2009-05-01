@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef VARIABLE_H
@@ -62,8 +62,8 @@ public:
     bool linguisticTermExist(const QString& termName)const;
     QList<QString> getLinguisticTermNames()const;
     void setDefaultValue(const double& value);
+    double getDefaultValue()const;
     void setDefuzzifier(Defuzzifier* deffuzifier);
-    void debug(const QString& tbs) const;
     void reset();
     double getMembership(const QString& termName);
 

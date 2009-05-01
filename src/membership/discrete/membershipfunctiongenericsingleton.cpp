@@ -13,53 +13,50 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file membershipfunctiongenericsingleton.cpp
+ * \file membershipfunctiongenericsingleton.h
  * \class MembershipFunctionGenericSingleton
+ * \brief Class implement membership function of generic singleton.
+ *        Parameters of this function will be not optimized.
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
- * \brief Implementation of generic singletone
+ * \version 0.95
  */
 #include "membershipfunctiongenericsingleton.h"
 #include "../../optimization/value.h"
 #include <QDebug>
+#include <math.h>
 
 jfuzzyqt::MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton(QObject* parent,
                                                                        const QList<double>& x,
                                                                        const QList<double>& y)
-    :MembershipFunctionDiscrete(parent, FunctionSingleton)
+    : MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
-    if(!universeMax) universeMax = new double(-1.e304);
-    if(!universeMin) universeMin = new double( 1.e304);
     for(int i = 0; i < x.size(); i++)
     {
         this->x.append(new Value(this, x.at(i)));
         this->y.append(new Value(this, y.at(i)));
-        *universeMax = qMax(*universeMax, x.at(i));
-        *universeMin = qMin(*universeMin, x.at(i));
     }
 }
 
 jfuzzyqt::MembershipFunctionGenericSingleton::~MembershipFunctionGenericSingleton()
 {
 }
+QString jfuzzyqt::MembershipFunctionGenericSingleton::toQString()const
+{
+    QString toReturn("SINGLETONS ");
+    for (int i = 0; i < x.size(); ++i)
+    {
+        toReturn.append(QString("(%1, %2) ")
+                        .arg(x.at(i)->getValue())
+                        .arg(y.at(i)->getValue()));
+    }
+    return toReturn;
+}
 
 QString jfuzzyqt::MembershipFunctionGenericSingleton::getName() const
 {
-    return "Singletons";
-}
-
-void jfuzzyqt::MembershipFunctionGenericSingleton::debug(const QString& tbs)const
-{
-    QString nxtTbs = tbs;
-    qDebug() << tbs << "\tDiscrete:" << discrete;
-    qDebug() << tbs <<"\tParameters";
-    for(int i = 0; i < x.size(); i++)
-    {
-        x.at(i)->debug(nxtTbs);
-        y.at(i)->debug(nxtTbs);
-    }
+    return "SINGLETONS";
 }
 
 int jfuzzyqt::MembershipFunctionGenericSingleton::size()const
@@ -102,8 +99,8 @@ void jfuzzyqt::MembershipFunctionGenericSingleton::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
-    *universeMax = (-1.e304);
-    *universeMin = ( 1.e304);
+    *universeMax = (-HUGE_VAL);
+    *universeMin = ( HUGE_VAL);
     for(int i = 0; i < x.size(); i++)
     {
         *universeMax = qMax(*universeMax, x.at(i)->getValue());

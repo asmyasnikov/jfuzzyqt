@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "value.h"
@@ -68,22 +68,6 @@ double jfuzzyqt::Value::getValue()const
     }
     qWarning() << "[jfuzzyqt::Value::getValue]: shouldnt not happen";
     return 0;
-}
-
-void jfuzzyqt::Value::debug(const QString& tbs)const
-{
-    switch (type)
-    {
-        case REAL:
-            qDebug() << tbs << "valReal:" << QString::number(valReal);
-            break;
-        case VAR_REFERENCE:
-                    qDebug() << tbs << "reference:";
-                    break;
-        default:
-            qDebug() << tbs << "[jfuzzyqt::Value::debug]:UNDEFINED";
-            break;
-    }
 }
 void jfuzzyqt::Value::setValue(double value)
 {

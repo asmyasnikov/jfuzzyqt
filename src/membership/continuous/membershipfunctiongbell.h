@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation GenBell membership function
  */
 #ifndef MEMBERSHIPFUNCTION_GBELL_H
@@ -37,11 +37,11 @@ class MembershipFunctionGBell : public MembershipFunctionContinuous
 public:
     MembershipFunctionGBell(QObject* parent, double a, double b, double mean);
     ~MembershipFunctionGBell();
-    void debug(const QString& tbs)const;
     QString getName()const;
     double membership(double index) const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
+    QString toQString()const;
 
 private:
 };

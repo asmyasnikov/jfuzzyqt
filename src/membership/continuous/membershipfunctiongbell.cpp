@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation GenBell membership function
  */
 #include "membershipfunctiongbell.h"
@@ -31,31 +31,22 @@ jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, doub
     parameters.append(new Value(this, mean));
     parameters.append(new Value(this, a));
     parameters.append(new Value(this, b));
-    estimateUniverse();
 }
 
 jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()
 {
-
 }
-
-void jfuzzyqt::MembershipFunctionGBell::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionGBell::toQString()const
 {
-    QString str = "{ gbell ( ";
-    str.append ( QString::number( parameters[0]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[1]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[2]->getValue() ) );
-    str.append(" ) ");
-    str.append(" }");
-    qDebug() << tbs << str;
+    return QString("GBELL %1 %2 %3")
+           .arg(parameters[1]->getValue())
+           .arg(parameters[2]->getValue())
+           .arg(parameters[0]->getValue());
 }
 QString jfuzzyqt::MembershipFunctionGBell::getName() const
 {
-    return "GBell";
+    return "GBELL";
 }
-
 double jfuzzyqt::MembershipFunctionGBell::membership(double index) const
 {
     double t = qAbs((index - parameters[0]->getValue()) / parameters[1]->getValue());

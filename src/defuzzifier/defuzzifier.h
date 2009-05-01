@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef DEFUZZIFIER_H
@@ -46,7 +46,6 @@ public:
     double getMin()const;
     virtual void setMax(double max);
     double getMax()const;
-    virtual void debug(const QString& tbs) const = 0;
 
 private:
     bool discrete;

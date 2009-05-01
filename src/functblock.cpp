@@ -19,7 +19,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #include "functblock.h"
@@ -95,9 +95,8 @@ bool jfuzzyqt::FunctBlock::setDefaultValue(const QString& varName,const double v
     {
         i.value()->setDefaultValue(value);
         return true;
-    }else
-    {
-        qWarning() << "[FunctBlock::setVariable]: Variable '" << varName << "' does not exist";
+    }else{
+        qWarning() << "[FunctBlock::setVariable]: Variable " << varName << " does not exist";
     }
     return false;
 }
@@ -212,31 +211,73 @@ bool jfuzzyqt::FunctBlock::addRuleBlock(RuleBlock* rb)
     }
     return toReturn;
 }
-
-void jfuzzyqt::FunctBlock::debug(const QString& tbs)const
+QString jfuzzyqt::FunctBlock::toQString()const
 {
-    QString nxTbs = tbs;
-    nxTbs.append("\t");
-
-    qDebug() << tbs << "Debuging" << name;
-
-    qDebug() << tbs << "VARIABLES{";
+    QString FUNCTION_BLOCK;
+    FUNCTION_BLOCK.append(QString("FUNCTION_BLOCK %1\n\n").arg(getName()));
+    FUNCTION_BLOCK.append(QString("VAR_INPUT\n"));
     QHashIterator<QString, Variable*> var(variables);
     while ( var.hasNext() ) {
         var.next();
-        var.value()->debug(nxTbs);
+        if(!var.value()->isOutputVariable())
+        {
+            FUNCTION_BLOCK.append(QString("\t%1 : REAL\n").arg(var.value()->getName()));
+        }
     }
-    qDebug() << tbs << "}";
-
-    qDebug() << tbs << "RULE BLOCK{";
-    QHashIterator<QString, RuleBlock*> j(ruleBlocks);
-    while (j.hasNext()) {
-        j.next();
-        j.value()->debug(nxTbs);
+    FUNCTION_BLOCK.append(QString("END_VAR\n\n"));
+    FUNCTION_BLOCK.append(QString("VAR_OUTPUT\n"));
+    var = QHashIterator<QString, Variable*>(variables);
+    while ( var.hasNext() ) {
+        var.next();
+        if(var.value()->isOutputVariable())
+        {
+            FUNCTION_BLOCK.append(QString("\t%1 : REAL\n").arg(var.value()->getName()));
+        }
     }
-    qDebug() << tbs << "}";
+    FUNCTION_BLOCK.append(QString("END_VAR\n\n"));
+    var = QHashIterator<QString, Variable*>(variables);
+    while ( var.hasNext() ) {
+        var.next();
+        if(!var.value()->isOutputVariable())
+        {
+            FUNCTION_BLOCK.append(QString("FUZZYFY %1\n").arg(var.value()->getName()));
+            QList<QString> linguisticTermNames = var.value()->getLinguisticTermNames();
+            for(QList<QString>::const_iterator lt = linguisticTermNames.begin();
+                lt != linguisticTermNames.end(); lt++ )
+            {
+                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2\n")
+                                      .arg(*lt)
+                                      .arg(var.value()->
+                                           getLinguisticTerm(*lt)->
+                                           getMembershipFunction()->toQString()));
+            }
+            FUNCTION_BLOCK.append(QString("END_FUZZIFY\n\n"));
+        }
+    }
+    var = QHashIterator<QString, Variable*>(variables);
+    while ( var.hasNext() ) {
+        var.next();
+        if(var.value()->isOutputVariable())
+        {
+            FUNCTION_BLOCK.append(QString("DEFUZZYFY %1\n").arg(var.value()->getName()));
+            QList<QString> linguisticTermNames = var.value()->getLinguisticTermNames();
+            for(QList<QString>::const_iterator lt = linguisticTermNames.begin();
+                lt != linguisticTermNames.end(); lt++ )
+            {
+                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2\n")
+                                      .arg(*lt)
+                                      .arg(var.value()->
+                                           getLinguisticTerm(*lt)->
+                                           getMembershipFunction()->toQString()));
+            }
+            FUNCTION_BLOCK.append(QString("\tMETHOD : %1\n").arg(var.value()->getDefuzzifier()->getName()));
+            FUNCTION_BLOCK.append(QString("\tDEFAULT := %1\n").arg(var.value()->getDefaultValue()));
+            FUNCTION_BLOCK.append(QString("END_DEFUZZIFY\n\n"));
+        }
+    }
+    FUNCTION_BLOCK.append(QString("END_FUNCTION_BLOCK\n"));
+    return FUNCTION_BLOCK;
 }
-
 QHash<QString, RuleBlock*> jfuzzyqt::FunctBlock::getRuleBlocks()const
 {
     return ruleBlocks;

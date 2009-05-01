@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief Implementation Triangular membership function
  */
 #include "membershipfunctiontrian.h"
@@ -31,31 +31,23 @@ jfuzzyqt::MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, doub
     parameters.append(new Value(this, left));
     parameters.append(new Value(this, mid));
     parameters.append(new Value(this, right));
-    estimateUniverse();
 }
 
 jfuzzyqt::MembershipFunctionTrian::~MembershipFunctionTrian()
 {
-
 }
 
-void jfuzzyqt::MembershipFunctionTrian::debug(const QString& tbs)const
+QString jfuzzyqt::MembershipFunctionTrian::toQString()const
 {
-    QString str = "{ trian ( ";
-    str.append ( QString::number( parameters[0]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[1]->getValue() ) );
-    str.append(" , ");
-    str.append ( QString::number( parameters[2]->getValue() ) );
-    str.append(" ) ");
-    str.append(" }");
-    qDebug() << tbs << str;
+    return QString("TRIAN %1 %2 %3")
+           .arg(parameters[0]->getValue())
+           .arg(parameters[1]->getValue())
+           .arg(parameters[2]->getValue());
 }
 QString jfuzzyqt::MembershipFunctionTrian::getName() const
 {
-    return "Trian";
+    return "TRIAN";
 }
-
 double jfuzzyqt::MembershipFunctionTrian::membership(double index) const
 {
     if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;

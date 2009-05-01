@@ -18,7 +18,7 @@ in file LICENSE along with this program.  If not, see
  * \author Marco Estanqueiro <estanqueiro.marco@gmail.com>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  * \brief FIXME
  */
 #ifndef DEFUZZIFIERDISCRETE_H
@@ -41,7 +41,6 @@ public:
     QList<double> values()const;
     double getDiscreteValue(double x)const;
     void setPoint(double x, double y);
-    virtual void debug(const QString& tbs) const = 0;
     void reset();
 
 private:

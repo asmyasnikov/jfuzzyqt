@@ -17,7 +17,7 @@ in file LICENSE along with this program.  If not, see
  * \class OptimizationParameters
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \date 2009/04
- * \version 0.94
+ * \version 0.95
  * \brief Class OptimizationParameters provide access to values
  */
 #ifndef OPTIMIZATION_PARAMETERS_H

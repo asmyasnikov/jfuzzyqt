@@ -42,7 +42,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.83
+ * \version 0.95
  */
 #ifndef JFUZZYQT_H
 #define JFUZZYQT_H
@@ -88,6 +88,13 @@ public:
      **/
     bool load(const QString& fileUri);
     /**
+      * \brief Saving fcl-model to file
+      * \param fleUri - path of fcl file
+      * \return true  - if saving was finished
+      * \return false - if saving was not finished
+     **/
+    bool save(const QString& fileUri);
+    /**
       * \brief Setting variable value
       * \param varName - variable name
       * \param value   - variable value
@@ -109,10 +116,6 @@ public:
       * \return variable value
      **/
     double getValue(const QString& varName, const QString& fb = QString::null)const;
-    /**
-      * \brief Show in console debugging messages
-     **/
-    void debug() const;
     /**
       * \brief Getting names of function blocks
       * \return names of function blocks
