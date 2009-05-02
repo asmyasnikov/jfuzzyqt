@@ -40,7 +40,7 @@ jfuzzyqt::MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, doub
 jfuzzyqt::MembershipFunctionGauss::~MembershipFunctionGauss()
 {
 }
-QString jfuzzyqt::MembershipFunctionGauss::toQString()const
+QString jfuzzyqt::MembershipFunctionGauss::toString()const
 {
     return QString("GAUSS %1 %2")
            .arg(parameters[0]->getValue())

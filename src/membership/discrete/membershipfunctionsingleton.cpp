@@ -23,7 +23,6 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "membershipfunctionsingleton.h"
-#include "../../optimization/value.h"
 #include <QDebug>
 
 jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
@@ -36,7 +35,7 @@ jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* pare
 jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
 {
 }
-QString jfuzzyqt::MembershipFunctionSingleton::toQString()const
+QString jfuzzyqt::MembershipFunctionSingleton::toString()const
 {
     return QString::number(parameters[0]->getValue());
 }

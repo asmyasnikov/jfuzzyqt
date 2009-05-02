@@ -30,8 +30,6 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class Value;
-
 class MembershipFunction : public OptimizationParameters
 {
     Q_OBJECT
@@ -57,7 +55,7 @@ public:
     double getUniverseMin();
     bool isDiscrete()const;
     virtual QString getName()const = 0;
-    virtual QString toQString()const = 0;
+    virtual QString toString()const = 0;
 
 protected:
     double* universeMax; ///< Universe max (range max)

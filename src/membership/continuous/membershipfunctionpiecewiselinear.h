@@ -28,7 +28,6 @@ in file LICENSE along with this program.  If not, see
 
 #include <QList>
 #include "membershipfunctioncontinuous.h"
-#include "../../optimization/value.h"
 
 namespace jfuzzyqt{
 
@@ -43,7 +42,7 @@ public:
     double membership(double index) const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
-    QString toQString()const;
+    QString toString()const;
 
 private:
     QList<Value*> x;///<Piece wise linear function values x

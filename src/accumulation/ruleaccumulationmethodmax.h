@@ -38,7 +38,7 @@ public:
     RuleAccumulationMethodMax(QObject *parent=NULL);
     ~RuleAccumulationMethodMax();
     double aggregate(double defuzzifierValue, double valueToAggregate) const;
-    QString toQString()const;
+    QString toString()const;
 private:
 
 };

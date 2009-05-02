@@ -62,7 +62,7 @@ jfuzzyqt::MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(Q
 jfuzzyqt::MembershipFunctionPieceWiseLinear::~MembershipFunctionPieceWiseLinear()
 {
 }
-QString jfuzzyqt::MembershipFunctionPieceWiseLinear::toQString()const
+QString jfuzzyqt::MembershipFunctionPieceWiseLinear::toString()const
 {
     QString toReturn;
     for (int i = 0; i < x.size(); ++i)

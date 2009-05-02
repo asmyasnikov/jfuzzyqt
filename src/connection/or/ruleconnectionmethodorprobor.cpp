@@ -36,7 +36,7 @@ double jfuzzyqt::RuleConnectionMethodOrProbOr::connect(double antecedent1, doubl
 {
     return (antecedent1+antecedent2-antecedent1*antecedent2);
 }
-QString jfuzzyqt::RuleConnectionMethodOrProbOr::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrProbOr::toString()const
 {
     return "or: asum";
 }

@@ -38,7 +38,7 @@ double jfuzzyqt::RuleConnectionMethodOrMax::connect(double antecedent1, double a
     return qMax(antecedent1, antecedent2);
 }
 
-QString jfuzzyqt::RuleConnectionMethodOrMax::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrMax::toString()const
 {
     return "or: max";
 }

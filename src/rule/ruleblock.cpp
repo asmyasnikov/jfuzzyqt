@@ -101,10 +101,6 @@ const QString& jfuzzyqt::RuleBlock::getName()const
 {
     return name;
 }
-void jfuzzyqt::RuleBlock::debug(const QString& tbs) const
-{
-    qDebug() << tbs << toQString();
-}
 void jfuzzyqt::RuleBlock::addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod)
 {
     if (this->ruleActivationMethod!=NULL)
@@ -136,47 +132,40 @@ void jfuzzyqt::RuleBlock::addRule(const Rule &fuzzyRule)
 {
     rules.append(fuzzyRule);
 }
-QString jfuzzyqt::RuleBlock::toQString()const
+QString jfuzzyqt::RuleBlock::toString()const
 {
-    QString tmp;
-    tmp += "RuleBlock(";
-    tmp += name;
-    tmp += ")\n{\n";
-    tmp += "ruleAccumulationMethod: ";
-    if ( ruleAccumulationMethod != NULL )
+    QString RULEBLOCK;
+    RULEBLOCK.append(QString("RULEBLOCK %1\n").arg(getName()));
+    if ( ruleAccumulationMethod )
     {
-        tmp += ruleAccumulationMethod->toQString();
-        tmp += "\n";
+        RULEBLOCK.append(QString("\t%1;\n").arg(ruleAccumulationMethod->toString()).toUpper());
     }
-    else
+    if ( ruleActivationMethod )
     {
-        tmp += "NULL\n";
+        RULEBLOCK.append(QString("\t%1;\n").arg(ruleActivationMethod->toString()).toUpper());
     }
-
-    tmp += "ruleActivationMethod: ";
-    if ( ruleActivationMethod != NULL )
+    if ( AND )
     {
-        tmp += ruleActivationMethod->toQString();
-        tmp += "\n";
+        RULEBLOCK.append(QString("\t%1;\n").arg(AND->toString()).toUpper());
     }
-    else
+    if ( OR )
     {
-            tmp += " NULL\n";
+        RULEBLOCK.append(QString("\t%1;\n").arg(OR->toString()).toUpper());
     }
-
+    RULEBLOCK.append("\n");
     QLinkedList<Rule>::const_iterator i = rules.begin();
-    while (i != rules.end()) {
-        tmp += i->toQString();
-        tmp += "\n";
+    while (i != rules.end())
+    {
+        RULEBLOCK.append(QString("\t%1;\n").arg(i->toString()));
         i++;
     }
-    tmp += "}";
-    return tmp;
+    RULEBLOCK.append("END_RULEBLOCK\n");
+    return RULEBLOCK;
 }
 
 void jfuzzyqt::RuleBlock::setRuleConnectionMethodAnd(RuleConnectionMethod *AND)
 {
-    if( this->AND != NULL)
+    if( this->AND)
     {
         delete (this->AND);
     }

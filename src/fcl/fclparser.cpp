@@ -215,25 +215,25 @@ RuleBlock* jfuzzyqt::FCLParser::loadRuleBlock(QTextStream& in, FunctBlock& funcB
             if(AND && !OR)
             {
                 // Which 'OR' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
-                if(AND->toQString().contains(QRegExp(" : min$"))){
+                if(AND->toString().contains(QRegExp(" : min$"))){
                     OR = new RuleConnectionMethodOrMax();
-                }else if(AND->toQString().contains(QRegExp(" : prod$"))){
+                }else if(AND->toString().contains(QRegExp(" : prod$"))){
                     OR = new RuleConnectionMethodOrProbOr();
-                }else if(AND->toQString().contains(QRegExp(" : bdif$"))){
+                }else if(AND->toString().contains(QRegExp(" : bdif$"))){
                     OR = new RuleConnectionMethodOrBoundedSum();
                 }else{
-                    qWarning()<<"Unknown (or unimplemented) 'AND' method: " << AND->toQString();
+                    qWarning()<<"Unknown (or unimplemented) 'AND' method: " << AND->toString();
                 }
             }else if(!AND && OR){
                 // Which 'AND' method to use? (Note: We also set 'OR' method accordingly to fulfill DeMorgan's law
-                if(OR->toQString().contains(QRegExp(" : max$"))){
+                if(OR->toString().contains(QRegExp(" : max$"))){
                     AND = new RuleConnectionMethodAndMin();
-                }else if(OR->toQString().contains(QRegExp(" : asum$"))){
+                }else if(OR->toString().contains(QRegExp(" : asum$"))){
                     AND = new RuleConnectionMethodAndProduct();
-                }else if(OR->toQString().contains(QRegExp(" : bsum$"))){
+                }else if(OR->toString().contains(QRegExp(" : bsum$"))){
                     AND = new RuleConnectionMethodAndBoundedDif();
                 }else{
-                    qWarning()<<"Unknown (or unimplemented) 'OR' method: " << OR->toQString();
+                    qWarning()<<"Unknown (or unimplemented) 'OR' method: " << OR->toString();
                 }
             }
             Q_ASSERT(AND && OR);

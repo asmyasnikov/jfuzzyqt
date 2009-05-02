@@ -24,10 +24,9 @@ in file LICENSE along with this program.  If not, see
 #define OPTIMIZATION_PARAMETERS_H
 
 #include <QObject>
+#include "value.h"
 
 namespace jfuzzyqt{
-
-class Value;
 
 class OptimizationParameters : public QObject
 {

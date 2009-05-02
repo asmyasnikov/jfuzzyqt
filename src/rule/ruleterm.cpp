@@ -83,23 +83,21 @@ void jfuzzyqt::RuleTerm::setVariable(Variable* variable)
     Q_ASSERT(this->variable);
 }
 
-QString jfuzzyqt::RuleTerm::toQString()const
+QString jfuzzyqt::RuleTerm::toString()const
 {
-    QString str = "";
+    QString RULETERM;
     if ( variable && !variable->getName().isEmpty() )
     {
-        str += variable->getName();
-    }else{
-        str += "Null variable";
+        RULETERM.append(variable->getName());
     }
     if ( negated )
     {
-        str += " is not ";
+        RULETERM.append(" IS NOT ");
     }else{
-        str += " is ";
+        RULETERM.append(" IS ");
     }
-    str += getName();
-    return str;
+    RULETERM.append(getName());
+    return RULETERM;
 }
 double jfuzzyqt::RuleTerm::getMembership()const
 {

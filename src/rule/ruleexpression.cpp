@@ -137,47 +137,51 @@ void jfuzzyqt::RuleExpression::setRuleConnectionMethod(const RuleConnectionMetho
     this->ruleConnectionMethod = ruleConnectionMethod;
 }
 
-QString jfuzzyqt::RuleExpression::toQString()const
+QString jfuzzyqt::RuleExpression::toString()const
 {
-    QString str = "(";
+    QString EXPRESSION;
+    QString LEFT;
+    QString RIGHT;
     switch (term1Type)
     {
         case RULETERM:
-            str += term1.ruleTerm->toQString();
+            if(term1.ruleTerm->isValid())
+            {
+                LEFT.append(term1.ruleTerm->toString());
+            }
             break;
         case RULEEXPRESSION:
-            str += term1.ruleExpression->toQString();
+            LEFT.append(QString("(%1)").arg(term1.ruleExpression->toString()));
             break;
         case UNDEF:
-            str += "UNDEFINED";
             break;
     }
-
-    str += " (" ;
-    if (ruleConnectionMethod != NULL )
-    {
-        str += ruleConnectionMethod->toQString();
-    }
-    else
-    {
-        str += "Invalid Rule Connection Method";
-    }
-    str += ") " ;
-
     switch (term2Type)
     {
         case RULETERM:
-            str += term2.ruleTerm->toQString();
+            if(term2.ruleTerm->isValid())
+            {
+                RIGHT.append(term2.ruleTerm->toString());
+            }
             break;
         case RULEEXPRESSION:
-            str += term2.ruleExpression->toQString();
+            RIGHT.append(QString("(%1)").arg(term2.ruleExpression->toString()));
             break;
         case UNDEF:
-            str += "UNDEFINED";
             break;
     }
-    str += ")" ;
-    return str;
+    if((ruleConnectionMethod)&&(LEFT.length() && RIGHT.length()))
+    {
+        EXPRESSION.append(QString("%1 %2 %3")
+                          .arg(LEFT)
+                          .arg(ruleConnectionMethod->getName().toUpper())
+                          .arg(RIGHT));
+    }else if(LEFT.length()){
+        EXPRESSION.append(LEFT);
+    }else if(RIGHT.length()){
+        EXPRESSION.append(RIGHT);
+    }
+    return EXPRESSION;
 }
 
 void jfuzzyqt::RuleExpression::reset()

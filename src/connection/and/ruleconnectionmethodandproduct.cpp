@@ -35,7 +35,7 @@ double jfuzzyqt::RuleConnectionMethodAndProduct::connect(double antecedent1, dou
 {
     return antecedent1*antecedent2;
 }
-QString jfuzzyqt::RuleConnectionMethodAndProduct::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndProduct::toString() const
 {
     return "and : prod";
 }

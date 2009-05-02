@@ -55,7 +55,7 @@ public:
     void addTerm1Expression(RuleExpression *ruleExpression);
     void addTerm2Expression(RuleExpression *ruleExpression);
     void setRuleConnectionMethod(const RuleConnectionMethod* ruleConnectionMethod);
-    QString toQString()const;
+    QString toString()const;
     RuleExpression::term_t getTerm1Type()const;
     RuleExpression::term_t getTerm2Type()const;
     void reset();

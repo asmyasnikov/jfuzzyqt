@@ -138,7 +138,7 @@ const QString& jfuzzyqt::RuleActivationMethod::getName()const
 {
     return name;
 }
-QString jfuzzyqt::RuleActivationMethod::toQString()const
+QString jfuzzyqt::RuleActivationMethod::toString()const
 {
     return QString("act : %1").arg(name);
 }

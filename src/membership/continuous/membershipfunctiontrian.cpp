@@ -37,7 +37,7 @@ jfuzzyqt::MembershipFunctionTrian::~MembershipFunctionTrian()
 {
 }
 
-QString jfuzzyqt::MembershipFunctionTrian::toQString()const
+QString jfuzzyqt::MembershipFunctionTrian::toString()const
 {
     return QString("TRIAN %1 %2 %3")
            .arg(parameters[0]->getValue())

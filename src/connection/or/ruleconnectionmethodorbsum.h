@@ -37,7 +37,7 @@ public:
     RuleConnectionMethodOrBoundedSum();
     ~RuleConnectionMethodOrBoundedSum();
     double connect(double antecedent1, double antecedent2)const;
-    QString toQString()const;
+    QString toString()const;
 private:
 
 };

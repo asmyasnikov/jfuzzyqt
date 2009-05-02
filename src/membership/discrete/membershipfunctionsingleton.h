@@ -42,7 +42,7 @@ public:
     QString getName()const;
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
-    QString toQString()const;
+    QString toString()const;
 
 private:
 

@@ -23,7 +23,6 @@ in file LICENSE along with this program.  If not, see
  * \version 0.95
  */
 #include "membershipfunctiongenericsingleton.h"
-#include "../../optimization/value.h"
 #include <QDebug>
 #include <math.h>
 
@@ -42,7 +41,7 @@ jfuzzyqt::MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton
 jfuzzyqt::MembershipFunctionGenericSingleton::~MembershipFunctionGenericSingleton()
 {
 }
-QString jfuzzyqt::MembershipFunctionGenericSingleton::toQString()const
+QString jfuzzyqt::MembershipFunctionGenericSingleton::toString()const
 {
     QString toReturn("SINGLETONS ");
     for (int i = 0; i < x.size(); ++i)

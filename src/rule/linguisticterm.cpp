@@ -23,7 +23,6 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "linguisticterm.h"
-#include "../optimization/value.h"
 #include "../membership/membershipfunction.h"
 #include "../membership/continuous/membershipfunctionpiecewiselinear.h"
 #include "../membership/continuous/membershipfunctiongauss.h"

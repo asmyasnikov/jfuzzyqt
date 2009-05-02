@@ -25,11 +25,12 @@ in file LICENSE along with this program.  If not, see
 #ifndef VALUE_H
 #define VALUE_H
 
-#include "../rule/variable.h"
 #include <QObject>
 #include <QString>
 
 namespace jfuzzyqt{
+
+class Variable;
 
 class Value : public QObject
 {

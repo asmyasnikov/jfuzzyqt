@@ -37,7 +37,7 @@ double jfuzzyqt::RuleConnectionMethodOrBoundedSum::connect(double antecedent1, d
     return qMin(1., antecedent1+antecedent2);
 }
 
-QString jfuzzyqt::RuleConnectionMethodOrBoundedSum::toQString()const
+QString jfuzzyqt::RuleConnectionMethodOrBoundedSum::toString()const
 {
     return "or: bsum";
 }

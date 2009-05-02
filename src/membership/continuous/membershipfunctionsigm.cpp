@@ -35,7 +35,7 @@ jfuzzyqt::MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double
 jfuzzyqt::MembershipFunctionSigm::~MembershipFunctionSigm()
 {
 }
-QString jfuzzyqt::MembershipFunctionSigm::toQString()const
+QString jfuzzyqt::MembershipFunctionSigm::toString()const
 {
     return QString("SIGM %1 %2")
            .arg(parameters[0]->getValue())

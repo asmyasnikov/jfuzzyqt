@@ -46,8 +46,8 @@ RULEBLOCK No1
 	ACCU : MAX;			// Use 'max' accumulation method
 
         RULE 1 : IF service IS poor OR food is rancid THEN tip IS cheap;
-        RULE 2 : IF service IS good THEN tip IS average WITH 0.19367688;
-        RULE 3 : IF service IS excellent AND food IS delicious THEN tip is generous WITH 0.98798789732 ;
+        RULE 2 : IF service IS good THEN tip IS average WITH 0.19367654;
+        RULE 3 : IF service IS excellent AND food IS delicious THEN tip is generous WITH 0.987987349732 ;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

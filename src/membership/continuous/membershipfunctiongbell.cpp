@@ -36,7 +36,7 @@ jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, doub
 jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()
 {
 }
-QString jfuzzyqt::MembershipFunctionGBell::toQString()const
+QString jfuzzyqt::MembershipFunctionGBell::toString()const
 {
     return QString("GBELL %1 %2 %3")
            .arg(parameters[1]->getValue())

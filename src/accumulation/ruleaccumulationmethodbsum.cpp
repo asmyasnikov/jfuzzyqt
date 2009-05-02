@@ -43,7 +43,7 @@ double jfuzzyqt::RuleAccumulationMethodBoundedSum::aggregate(double defuzzifierV
     return qMin(1.,defuzzifierValue+valueToAggregate);
 }
 
-QString jfuzzyqt::RuleAccumulationMethodBoundedSum::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodBoundedSum::toString()const
 {
     return "accu : bsum;";
 }

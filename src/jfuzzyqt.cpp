@@ -44,9 +44,9 @@ in file LICENSE along with this program.  If not, see
  * \date 2009/04
  * \version 0.95
  */
+#include "functblock.h"
 #include "../include/jfuzzyqt.h"
 #include "rule/ruleexpression.h"
-#include "functblock.h"
 #include "fcl/fclparser.h"
 #include "connection/ruleconnectionmethod.h"
 #include "connection/and/ruleconnectionmethodandmin.h"
@@ -249,7 +249,6 @@ QStringList jfuzzyqt::JFuzzyQt::outputs(const QString& fb)const
 }
 bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
 {
-    qDebug() << "Implement saving to file only variables without ruleblocks now";
     bool toReturn = false;
     QFile file(fileUri);
     if(file.open(QIODevice::WriteOnly))
@@ -258,7 +257,7 @@ bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
             i != functionBlocks.end();
             i++ )
         {
-            QString functBlock = i.value()->toQString();
+            QString functBlock = i.value()->toString();
             file.write(functBlock.toLocal8Bit(), functBlock.toLocal8Bit().size());
         }
         file.close();

@@ -48,7 +48,7 @@ public:
     bool isNegated() const;
     bool isValid() const;
     void setNegated(const bool& value);
-    QString toQString()const;
+    QString toString()const;
     double getMembership()const;
 
 private:

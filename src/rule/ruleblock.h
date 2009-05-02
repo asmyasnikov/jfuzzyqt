@@ -47,14 +47,13 @@ public:
     void reset();
     void evaluate();
     const QString& getName()const;
-    void debug(const QString& tbs) const;
     void addRuleActivationMethod(RuleActivationMethod* ruleActivationMethod);
     void addRuleAccumulationMethod(RuleAccumulationMethod* ruleAccumulationMethod);
     RuleActivationMethod* getRuleActivationMethod()const;
     RuleAccumulationMethod* getRuleAccumulationMethod()const;
     void addRule(const Rule &fuzzyRule);
     int getRulesCount()const;
-    QString toQString()const;
+    QString toString()const;
     RuleConnectionMethod* getRuleConnectionMethodAnd()const;
     void setRuleConnectionMethodAnd(RuleConnectionMethod *_and_);
     RuleConnectionMethod* getRuleConnectionMethodOr()const;

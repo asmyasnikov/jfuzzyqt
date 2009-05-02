@@ -44,7 +44,7 @@ double jfuzzyqt::RuleAccumulationMethodProbOr::aggregate(double defuzzifierValue
     return defuzzifierValue+valueToAggregate-defuzzifierValue*valueToAggregate;
 }
 
-QString jfuzzyqt::RuleAccumulationMethodProbOr::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodProbOr::toString()const
 {
     return "accu : probor;";
 }

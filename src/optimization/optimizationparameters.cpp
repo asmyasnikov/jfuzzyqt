@@ -21,7 +21,6 @@ in file LICENSE along with this program.  If not, see
  * \brief Class OptimizationParameters provide access to values
  */
 #include "optimizationparameters.h"
-#include "value.h"
 
 jfuzzyqt::OptimizationParameters::OptimizationParameters(QObject* parent) :
     QObject(parent)
@@ -35,7 +34,7 @@ jfuzzyqt::OptimizationParameters::~OptimizationParameters()
     }
 }
 
-Value* jfuzzyqt::OptimizationParameters::getValue(int index)
+jfuzzyqt::Value* jfuzzyqt::OptimizationParameters::getValue(int index)
 {
     Q_ASSERT(index < parameters.size());
     return parameters.at(index);

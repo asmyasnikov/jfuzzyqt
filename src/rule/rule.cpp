@@ -23,7 +23,6 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "rule.h"
-#include "../optimization/value.h"
 #include <QDebug>
 
 jfuzzyqt::Rule::Rule(QObject *parent)
@@ -81,32 +80,29 @@ const QList<RuleTerm*> jfuzzyqt::Rule::getConsequents()const
 {
     return consequents;
 }
-QString jfuzzyqt::Rule::toQString() const
+QString jfuzzyqt::Rule::toString() const
 {
-    QString str;
-    str += "Rule (";
-    str += getName();
-    str += ")\n{\n";
-    str += "antecedents: ";
-    if ( !antecedents )
+    QString RULE;
+    RULE.append(QString("RULE %1 : IF ").arg(getName()));
+    if ( antecedents )
     {
-        str += "NULL\n";
-    }else{
-        str += antecedents ?
-               antecedents->toQString() :
-               QString::null; ///< antecedents problem!!
-        str += "\n";
+        RULE.append(antecedents->toString());
     }
-    str += "consequents: ";
-    for (int i = 0; i < consequents.size(); ++i) {
-         str += consequents.at(i)->toQString();
-         str += "\n";
+    for (int i = 0; i < consequents.size(); ++i)
+    {
+        if(!i)
+        {
+            RULE.append(" THEN ");
+        }else{
+            RULE.append(", ");
+        }
+        RULE.append(consequents.at(i)->toString());
     }
-    str += "weight: ";
-    str += QString::number(parameters.at(0)->getValue(), 'f', 3);
-    str += "\n";
-    str += "}";
-    return str;
+    if(qAbs(parameters.at(0)->getValue()-1.) > 1.e-10)
+    {
+        RULE.append(QString(" WITH %1").arg(QString::number(parameters.at(0)->getValue(), 'f', 10)));
+    }
+    return RULE;
 }
 void jfuzzyqt::Rule::setDegreeOfSupport(const double& degreeOfSupport)
 {

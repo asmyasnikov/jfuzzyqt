@@ -54,7 +54,7 @@ public:
     virtual double aggregate(double defuzzifierValue, double valueToAggregate) const = 0;
     const QString& getName()const;
     void setName(const QString &name);
-    QString toQString()const;
+    QString toString()const;
 private:
     QString name;
 };

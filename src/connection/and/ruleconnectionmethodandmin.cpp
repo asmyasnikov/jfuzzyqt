@@ -39,7 +39,7 @@ double jfuzzyqt::RuleConnectionMethodAndMin::connect(double antecedent1, double 
 {
     return qMin(antecedent1, antecedent2);
 }
-QString jfuzzyqt::RuleConnectionMethodAndMin::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndMin::toString() const
 {
     return "and : min";
 }

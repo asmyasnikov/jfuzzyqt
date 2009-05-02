@@ -47,7 +47,7 @@ public:
     const QString& getName() const;
     void setName(const QString& name);
     virtual double connect(double antecedent1, double antecedent2)const = 0;
-    virtual QString toQString() const = 0;
+    virtual QString toString() const = 0;
 
 private:
     QString name;

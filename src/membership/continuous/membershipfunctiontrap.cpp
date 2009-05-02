@@ -38,7 +38,7 @@ jfuzzyqt::MembershipFunctionTrap::~MembershipFunctionTrap()
 {
 }
 
-QString jfuzzyqt::MembershipFunctionTrap::toQString()const
+QString jfuzzyqt::MembershipFunctionTrap::toString()const
 {
     return QString("TRAPE %1 %2 %3 %4")
            .arg(parameters[0]->getValue())

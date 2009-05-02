@@ -62,7 +62,7 @@ public:
     QHash<QString, RuleBlock*> getRuleBlocks()const;
     QHash<QString, Variable*> getVariables()const;
     bool checkHierarchy()const;
-    QString toQString()const;
+    QString toString()const;
 
 private:
     QString name; ///<Function block name

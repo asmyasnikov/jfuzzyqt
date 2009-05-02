@@ -44,7 +44,7 @@ double jfuzzyqt::RuleAccumulationMethodSum::aggregate(double defuzzifierValue, d
     return (defuzzifierValue+valueToAggregate);
 }
 
-QString jfuzzyqt::RuleAccumulationMethodSum::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodSum::toString()const
 {
     return "accu : sum;";
 }

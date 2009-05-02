@@ -23,6 +23,7 @@ in file LICENSE along with this program.  If not, see
  * \brief FIXME
  */
 #include "value.h"
+#include "../rule/variable.h"
 #include <QDebug>
 
 jfuzzyqt::Value::Value(QObject* parent)

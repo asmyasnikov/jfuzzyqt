@@ -34,7 +34,7 @@ int main(int argc, char**argv)
         return 0;
     }
     int option = 0;
-    std::cout << "Select option [1-optimize, 2-calc] : ";
+    std::cout << "Select option [1-resave, 2-calc] : ";
     std::cin >> option;
     if(option==1)
     {

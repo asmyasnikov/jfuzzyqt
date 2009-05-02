@@ -42,7 +42,7 @@ public:
     bool checkParamters(QString& errors)const;
     void estimateUniverse();
     double valueX(int index)const;
-    QString toQString()const;
+    QString toString()const;
 
 private:
     QList<Value*> x;///<Piece wise linear function values x

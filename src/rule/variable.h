@@ -25,8 +25,8 @@ in file LICENSE along with this program.  If not, see
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "linguisticterm.h"
 #include "../membership/membershipfunction.h"
+#include "linguisticterm.h"
 #include <QObject>
 #include <QString>
 #include <QHash>

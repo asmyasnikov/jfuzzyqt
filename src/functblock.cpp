@@ -211,7 +211,7 @@ bool jfuzzyqt::FunctBlock::addRuleBlock(RuleBlock* rb)
     }
     return toReturn;
 }
-QString jfuzzyqt::FunctBlock::toQString()const
+QString jfuzzyqt::FunctBlock::toString()const
 {
     QString FUNCTION_BLOCK;
     FUNCTION_BLOCK.append(QString("FUNCTION_BLOCK %1\n\n").arg(getName()));
@@ -221,7 +221,7 @@ QString jfuzzyqt::FunctBlock::toQString()const
         var.next();
         if(!var.value()->isOutputVariable())
         {
-            FUNCTION_BLOCK.append(QString("\t%1 : REAL\n").arg(var.value()->getName()));
+            FUNCTION_BLOCK.append(QString("\t%1 : REAL;\n").arg(var.value()->getName()));
         }
     }
     FUNCTION_BLOCK.append(QString("END_VAR\n\n"));
@@ -231,7 +231,7 @@ QString jfuzzyqt::FunctBlock::toQString()const
         var.next();
         if(var.value()->isOutputVariable())
         {
-            FUNCTION_BLOCK.append(QString("\t%1 : REAL\n").arg(var.value()->getName()));
+            FUNCTION_BLOCK.append(QString("\t%1 : REAL;\n").arg(var.value()->getName()));
         }
     }
     FUNCTION_BLOCK.append(QString("END_VAR\n\n"));
@@ -240,16 +240,16 @@ QString jfuzzyqt::FunctBlock::toQString()const
         var.next();
         if(!var.value()->isOutputVariable())
         {
-            FUNCTION_BLOCK.append(QString("FUZZYFY %1\n").arg(var.value()->getName()));
+            FUNCTION_BLOCK.append(QString("FUZZIFY %1\n").arg(var.value()->getName()));
             QList<QString> linguisticTermNames = var.value()->getLinguisticTermNames();
             for(QList<QString>::const_iterator lt = linguisticTermNames.begin();
                 lt != linguisticTermNames.end(); lt++ )
             {
-                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2\n")
+                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2;\n")
                                       .arg(*lt)
                                       .arg(var.value()->
                                            getLinguisticTerm(*lt)->
-                                           getMembershipFunction()->toQString()));
+                                           getMembershipFunction()->toString()));
             }
             FUNCTION_BLOCK.append(QString("END_FUZZIFY\n\n"));
         }
@@ -259,21 +259,27 @@ QString jfuzzyqt::FunctBlock::toQString()const
         var.next();
         if(var.value()->isOutputVariable())
         {
-            FUNCTION_BLOCK.append(QString("DEFUZZYFY %1\n").arg(var.value()->getName()));
+            FUNCTION_BLOCK.append(QString("DEFUZZIFY %1\n").arg(var.value()->getName()));
             QList<QString> linguisticTermNames = var.value()->getLinguisticTermNames();
             for(QList<QString>::const_iterator lt = linguisticTermNames.begin();
                 lt != linguisticTermNames.end(); lt++ )
             {
-                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2\n")
+                FUNCTION_BLOCK.append(QString("\tTERM %1 := %2;\n")
                                       .arg(*lt)
                                       .arg(var.value()->
                                            getLinguisticTerm(*lt)->
-                                           getMembershipFunction()->toQString()));
+                                           getMembershipFunction()->toString()));
             }
-            FUNCTION_BLOCK.append(QString("\tMETHOD : %1\n").arg(var.value()->getDefuzzifier()->getName()));
-            FUNCTION_BLOCK.append(QString("\tDEFAULT := %1\n").arg(var.value()->getDefaultValue()));
+            FUNCTION_BLOCK.append(QString("\tMETHOD : %1;\n").arg(var.value()->getDefuzzifier()->getName()));
+            FUNCTION_BLOCK.append(QString("\tDEFAULT := %1;\n").arg(var.value()->getDefaultValue()));
             FUNCTION_BLOCK.append(QString("END_DEFUZZIFY\n\n"));
         }
+    }
+    QHashIterator<QString, RuleBlock*> rb(ruleBlocks);
+    while ( rb.hasNext() ) {
+        rb.next();
+        FUNCTION_BLOCK.append(rb.value()->toString());
+        FUNCTION_BLOCK.append("\n");
     }
     FUNCTION_BLOCK.append(QString("END_FUNCTION_BLOCK\n"));
     return FUNCTION_BLOCK;

@@ -44,7 +44,7 @@ double jfuzzyqt::RuleAccumulationMethodNormalisedSum::aggregate(double defuzzifi
     return (defuzzifierValue+valueToAggregate)/qMax(1.,defuzzifierValue+valueToAggregate);
 }
 
-QString jfuzzyqt::RuleAccumulationMethodNormalisedSum::toQString()const
+QString jfuzzyqt::RuleAccumulationMethodNormalisedSum::toString()const
 {
     return "accu : nsum;";
 }

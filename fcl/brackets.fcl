@@ -34,7 +34,7 @@ RULEBLOCK No1
     ACCU : MAX;
     RULE 1 : IF ((service IS excellent) AND (food IS delicious)) THEN tip IS generous;
     RULE 2 : IF (service IS poor) OR (food IS rancid) THEN tip IS cheap;
-    RULE 3 : IF ((service IS good) AND (food IS NOT rancid)) OR ((service IS NOT poor) AND (food IS delicious)) THEN tip IS average;
+    RULE 3 : IF ((service IS good) OR (food IS NOT rancid)) AND ((service IS NOT poor) OR (food IS delicious)) THEN tip IS average;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

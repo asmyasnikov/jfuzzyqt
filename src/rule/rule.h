@@ -50,7 +50,7 @@ public:
     const QString& getName()const;
     RuleExpression* getAntecedents()const;
     const QList<RuleTerm*> getConsequents()const ;
-    QString toQString() const;
+    QString toString() const;
     void setDegreeOfSupport(const double& degreeOfSupport);
     void reset();
     void evaluate (RuleActivationMethod* act,RuleAccumulationMethod* accu);

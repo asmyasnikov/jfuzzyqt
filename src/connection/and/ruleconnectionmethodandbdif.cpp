@@ -36,7 +36,7 @@ double jfuzzyqt::RuleConnectionMethodAndBoundedDif::connect(double antecedent1, 
 {
     return qMax(0.,antecedent1+antecedent2-1);
 }
-QString jfuzzyqt::RuleConnectionMethodAndBoundedDif::toQString() const
+QString jfuzzyqt::RuleConnectionMethodAndBoundedDif::toString() const
 {
     return "and : bdif";
 }
