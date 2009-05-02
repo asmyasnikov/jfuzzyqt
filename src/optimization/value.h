@@ -41,15 +41,21 @@ public:
     };
 
     Value(QObject* parent=NULL);
-    Value(QObject* parent, const double& value);
+    Value(QObject* parent, double value, double min, double max);
+    Value(QObject* parent, double value, Value* min, Value* max);
+    Value(QObject* parent, double value, Value* min, double max);
+    Value(QObject* parent, double value, double min, Value* max);
     ~Value();
     double getValue()const;
-    void setValue(double value);
+    bool setValue(double value);
 private:
     Type type;
     double valReal;
     Variable* varRef;
-
+    Value*vmin;
+    Value*vmax;
+    double min;
+    double max;
 };
 
 };

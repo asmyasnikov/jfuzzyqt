@@ -28,10 +28,10 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionTrap::MembershipFunctionTrap(QObject* parent, double left, double lmid, double rmid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
-    parameters.append(new Value(this, left));
-    parameters.append(new Value(this, lmid));
-    parameters.append(new Value(this, rmid));
-    parameters.append(new Value(this, right));
+    parameters.append(new Value(this, left,-HUGE_VAL,HUGE_VAL));
+    parameters.append(new Value(this, lmid,parameters.at(0),HUGE_VAL));
+    parameters.append(new Value(this, rmid,parameters.at(1),HUGE_VAL));
+    parameters.append(new Value(this, right,parameters.at(2),HUGE_VAL));
 }
 
 jfuzzyqt::MembershipFunctionTrap::~MembershipFunctionTrap()

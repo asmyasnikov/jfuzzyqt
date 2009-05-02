@@ -24,12 +24,12 @@ in file LICENSE along with this program.  If not, see
  */
 #include "membershipfunctionsingleton.h"
 #include <QDebug>
+#include <math.h>
 
 jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
-    parameters.append(new Value(this, valueX));
-    parameters.append(new Value(this, 1.));
+    parameters.append(new Value(this, valueX, -HUGE_VAL, HUGE_VAL));
 }
 
 jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
@@ -69,18 +69,12 @@ double jfuzzyqt::MembershipFunctionSingleton::valueX(int index)const
 }
 bool jfuzzyqt::MembershipFunctionSingleton::checkParamters(QString&errors)const
 {
-    bool toReturn = true;
-    if( parameters[1]->getValue() < 0. || parameters[1]->getValue() > 1.)
-    {
-        toReturn = false;
-        errors.append(QString("Parameter 'membership of singletone' should be between 0 and 1 : %1\n").arg(parameters[1]->getValue()));
-    }
-    return toReturn;
+   return true;
 }
 void jfuzzyqt::MembershipFunctionSingleton::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
-    *universeMax = parameters[1]->getValue()+1.e10;
-    *universeMin = parameters[1]->getValue()-1.e10;
+    *universeMax = parameters[0]->getValue()+1.e10;
+    *universeMin = parameters[0]->getValue()-1.e10;
 }

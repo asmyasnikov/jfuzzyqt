@@ -33,24 +33,6 @@ int main(int argc, char**argv)
         // is set to the executable's directory if running from the MSVC IDE
         return 0;
     }
-    int option = 0;
-    std::cout << "Select option [1-resave, 2-calc] : ";
-    std::cin >> option;
-    if(option==1)
-    {
-        char*filename = new char[256];
-        for(int i = 0; i < 255; i++)
-        {
-            filename[i] = ' ';
-        }
-        filename[256] = '\0';
-        std::cout << "Enter file name for saving : ";
-        std::cin >> filename;
-        if(!model.save(QString(filename)))
-        {
-            std::cout << "fault" << std::endl;
-        }
-    }else if(option==2){
         QStringList funct_blocks = model.functBlocks();
         int funct_block = 0;
         if(funct_blocks.size() > 1)
@@ -118,6 +100,5 @@ int main(int argc, char**argv)
                 std::cout << outputs.at(i).toLocal8Bit().data() << " = " << model.getValue(outputs.at(i), funct_blocks.at(funct_block)) << std::endl;
             }
         }
-    }
     return 0;
 }

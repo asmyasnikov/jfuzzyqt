@@ -28,9 +28,9 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, double mid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
-    parameters.append(new Value(this, left));
-    parameters.append(new Value(this, mid));
-    parameters.append(new Value(this, right));
+    parameters.append(new Value(this, left,-HUGE_VAL,HUGE_VAL));
+    parameters.append(new Value(this, mid,parameters.at(0),HUGE_VAL));
+    parameters.append(new Value(this, right,parameters.at(1),HUGE_VAL));
 }
 
 jfuzzyqt::MembershipFunctionTrian::~MembershipFunctionTrian()

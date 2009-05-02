@@ -28,9 +28,9 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters.append(new Value(this, mean));
-    parameters.append(new Value(this, a));
-    parameters.append(new Value(this, b));
+    parameters.append(new Value(this, mean,-HUGE_VAL,HUGE_VAL));
+    parameters.append(new Value(this, a,-HUGE_VAL,HUGE_VAL));
+    parameters.append(new Value(this, b,0.,HUGE_VAL));
 }
 
 jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()

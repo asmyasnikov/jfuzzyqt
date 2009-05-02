@@ -76,10 +76,7 @@ bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
     QFile file(fileUri);
     if (!file.open(QIODevice::ReadOnly))
     {
-        QString str = "Unable to open the file (";
-        str.append( fileUri );
-        str.append( ")" );
-        qFatal("%s", str.toLocal8Bit().data());
+        qFatal("Unable to open the file '%s'", fileUri.toLocal8Bit().data());
         return false;
     }
     QRegExp rxFunctionBlock("function_block\\s+(\\w+)");

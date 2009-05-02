@@ -30,15 +30,55 @@ jfuzzyqt::Value::Value(QObject* parent)
     :QObject(parent)
 {
     type = UNDEFINED;
-    valReal = 0;
+    valReal = 0.;
+    min = 0.;
+    max = 0.;
+    vmin = NULL;
+    vmax = NULL;
 }
-
-jfuzzyqt::Value::Value(QObject* parent, const double& value)
+jfuzzyqt::Value::Value(QObject* parent, double value, double min, double max)
     :QObject(parent)
 {
     type = REAL;
-    valReal = value;
     varRef=NULL;
+    this->min = min;
+    this->max = max;
+    vmin = NULL;
+    vmax = NULL;
+    setValue(value);
+}
+jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, Value* vmax)
+    :QObject(parent)
+{
+    type = REAL;
+    varRef=NULL;
+    min = value;
+    max = value;
+    this->vmin = vmin;
+    this->vmax = vmax;
+    setValue(value);
+}
+jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, double max)
+    :QObject(parent)
+{
+    type = REAL;
+    varRef=NULL;
+    min = value;
+    this->max = max;
+    this->vmin = vmin;
+    vmax = NULL;
+    setValue(value);
+}
+jfuzzyqt::Value::Value(QObject* parent, double value, double min, Value* vmax)
+    :QObject(parent)
+{
+    type = REAL;
+    varRef=NULL;
+    this->min = min;
+    max = value;
+    vmin = NULL;
+    this->vmax = vmax;
+    setValue(value);
 }
 
 jfuzzyqt::Value::~Value()
@@ -52,13 +92,12 @@ double jfuzzyqt::Value::getValue()const
         qWarning() << "[jfuzzyqt::Value::getValue]: Value type not defined!";
         return 0;
     }
-
     switch(type)
     {
         case REAL:
             return valReal;
         case VAR_REFERENCE:
-            if( varRef == NULL )
+            if( varRef )
             {
                 qWarning() << "[jfuzzyqt::Value::getValue]: Undefined variable reference!";
                 return 0;
@@ -70,10 +109,20 @@ double jfuzzyqt::Value::getValue()const
     qWarning() << "[jfuzzyqt::Value::getValue]: shouldnt not happen";
     return 0;
 }
-void jfuzzyqt::Value::setValue(double value)
+bool jfuzzyqt::Value::setValue(double value)
 {
+    bool toReturn = false;
     if(type == REAL)
     {
-        valReal = value;
+        if(vmin) min = vmin->getValue();
+        if(vmax) max = vmax->getValue();
+        if(value < min) valReal = min;
+        if(value > max) valReal = max;
+        if((value >= min) && (value <= max))
+        {
+            valReal = value;
+            toReturn = true;
+        }
     }
+    return toReturn;
 }

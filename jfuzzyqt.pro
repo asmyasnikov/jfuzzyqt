@@ -83,7 +83,8 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/discrete/membershipfunctiongenericsingleton.h \
     src/membership/continuous/membershipfunctiongbell.h \
     src/optimization/optimizationparameters.h \
-    src/optimization/value.h
+    src/optimization/value.h \
+    src/optimization/errorfunction.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -128,21 +129,5 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/discrete/membershipfunctiongenericsingleton.cpp \
     src/membership/continuous/membershipfunctiongbell.cpp \
     src/optimization/optimizationparameters.cpp \
-    src/optimization/value.cpp
-OTHER_FILES += fcl/tipper.fcl \
-    fcl/singletone.fcl \
-    fcl/mamdani.fcl \
-    fcl/tsukamoto.fcl \
-    TODO \
-    LICENSE \
-    PROBLEMS \
-    fcl/gauss.fcl \
-    fcl/brackets.fcl \
-    fcl/sigm.fcl \
-    fcl/decomposition1.fcl \
-    fcl/decomposition2.fcl \
-    fcl/membership_functions_demo.fcl \
-    fcl/rule_weight.fcl \
-    fcl/hierarchy.fcl \
-    fcl/hierarchy_infinity.fcl \
-    fcl/multi_consequents.fcl
+    src/optimization/value.cpp \
+    src/optimization/errorfunction.cpp
