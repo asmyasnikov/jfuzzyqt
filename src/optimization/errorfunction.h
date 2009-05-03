@@ -37,6 +37,7 @@ public:
     ErrorFunction(QObject*parent,const QString& fileUri);
     void append(QHash<QString, double>sample);
     double evaluate(JFuzzyQt&model)const;
+    int samplesSize()const;
 private:
     QList<QHash<QString, double> > samples;
 };

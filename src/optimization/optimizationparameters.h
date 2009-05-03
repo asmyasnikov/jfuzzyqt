@@ -37,7 +37,7 @@ public:
     OptimizationParameters(QObject* parent);
     ~OptimizationParameters();
 
-    Value* getValue(int index);
+    Value* getValue(int index)const;
     int size()const;
 
 protected:

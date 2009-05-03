@@ -328,3 +328,25 @@ bool jfuzzyqt::FunctBlock::checkHierarchy()const
     }
     return true;
 }
+QList<Value*> jfuzzyqt::FunctBlock::getOptimizationParameters()const
+{
+    QList<Value*>toReturn;
+    for(QHash<QString, Variable*>::const_iterator var = variables.begin(); var != variables.end(); var++)
+    {
+        QList<QString> linguisticTermNames = var.value()->getLinguisticTermNames();
+        for(QList<QString>::const_iterator lt = linguisticTermNames.begin();
+            lt != linguisticTermNames.end(); lt++ )
+        {
+            OptimizationParameters*op = var.value()->getLinguisticTerm(*lt)->getMembershipFunction();
+            for(int i = 0; i < op->size(); i++)
+            {
+                toReturn.append(op->getValue(i));
+            }
+        }
+    }
+    for(QHash<QString, RuleBlock*>::const_iterator j = ruleBlocks.begin(); j != ruleBlocks.end(); j++)
+    {
+        toReturn.append((*j)->getOptimizationParameters());
+    }
+    return toReturn;
+}

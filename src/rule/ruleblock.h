@@ -62,6 +62,7 @@ public:
     QSet<QString> getOutputVariables()const;
     void addDependOfBlock(RuleBlock*block);
     bool checkDependences()const;
+    QList<Value*>getOptimizationParameters()const;
 
 private:
     QString name;

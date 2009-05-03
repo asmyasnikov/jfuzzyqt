@@ -1,0 +1,19 @@
+LANGUAGE = C++
+QT -= gui
+CONFIG += release console
+LIBS += -L../../build/ -ljfuzzyqt -L../../../insulargenetica/build -linsulargenetica
+UI_DIR = ./src.gen/ui
+MOC_DIR = ./src.gen/moc
+OBJECTS_DIR = ./src.gen/obj
+DESTDIR = ../../build
+TARGET = optimization
+DEPENDPATH += .
+INCLUDEPATH += ../../include
+win32-msvc|win32-msvc.net|win32-msvc2002|win32-msvc2003|win32-msvc2005|win32-msvc2008 {
+    TEMPLATE = vcapp
+} else {
+    TEMPLATE = app
+}
+DEPENDPATH += .
+INCLUDEPATH += .
+SOURCES += main.cpp

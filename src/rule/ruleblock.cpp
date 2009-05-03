@@ -239,3 +239,12 @@ bool jfuzzyqt::RuleBlock::checkDependences()const
     }
     return true;
 }
+QList<Value*>jfuzzyqt::RuleBlock::getOptimizationParameters()const
+{
+    QList<Value*> toReturn;
+    for (QLinkedList<Rule>::const_iterator i = rules.begin(); i != rules.end(); ++i)
+    {
+        toReturn.append(i->getValue(0));
+    }
+    return toReturn;
+}

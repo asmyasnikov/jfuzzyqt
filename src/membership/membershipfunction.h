@@ -61,7 +61,6 @@ protected:
     double* universeMax; ///< Universe max (range max)
     double* universeMin; ///< Universe min (range min)
     bool discrete;
-    QList<Value*> parameters;
     MembershipType type;
 };
 

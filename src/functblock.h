@@ -63,6 +63,7 @@ public:
     QHash<QString, Variable*> getVariables()const;
     bool checkHierarchy()const;
     QString toString()const;
+    QList<Value*>getOptimizationParameters()const;
 
 private:
     QString name; ///<Function block name

@@ -52,6 +52,7 @@ in file LICENSE along with this program.  If not, see
 #include "connection/and/ruleconnectionmethodandmin.h"
 #include "connection/or/ruleconnectionmethodormax.h"
 #include "fcl/fclruletree.h"
+#include "optimization/errorfunction.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>
@@ -68,57 +69,65 @@ jfuzzyqt::JFuzzyQt::JFuzzyQt(const QString& fileUri, QObject *parent) : QObject(
 
 jfuzzyqt::JFuzzyQt::~JFuzzyQt()
 {
+    for(QHash<QString, FunctBlock*>::iterator i = functionBlocks.begin();
+        i != functionBlocks.end();
+        i++ )
+    {
+        delete i.value();
+    }
 }
 
 bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
 {
     bool toReturn = false;
     QFile file(fileUri);
-    if (!file.open(QIODevice::ReadOnly))
+    if (file.open(QIODevice::ReadOnly))
     {
+        QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
+        QTextStream in(&file);
+        FCLParser fclParser;
+        QString line = fclParser.readLine(in);
+        while (!line.isNull())
+        { ///<File Cycle (only works for one function block
+            if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
+            {
+                FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
+                fclParser.loadFunctBlock(in,*functionBlock);
+                QHash<QString, Variable*> variables = functionBlock->getVariables();
+                for(QHash<QString, Variable*>::const_iterator i = variables.begin(); i != variables.end(); i++)
+                {
+                    if(!i.value()->getLinguisticTermNames().size())
+                    {
+                        qWarning("Variable '%s' in function block '%s' not contain terms",
+                                 i.key().toLocal8Bit().data(),
+                                 rxFunctionBlock.cap(1).toLocal8Bit().data());
+                    }
+                }
+                bool rules = false;
+                QHash<QString, RuleBlock*> ruleblocks = functionBlock->getRuleBlocks();
+                for(QHash<QString, RuleBlock*>::const_iterator i = ruleblocks.begin(); i != ruleblocks.end(); i++)
+                {
+                    if(i.value()->getRulesCount())
+                    {
+                        rules = true;
+                        break;
+                    }
+                }
+                if(!rules)
+                {
+                    qWarning("Rules in function block '%s' was not found",
+                             rxFunctionBlock.cap(1).toLocal8Bit().data());
+                }
+                Q_ASSERT(functionBlock->checkHierarchy());
+                addFunctionBlock(functionBlock);
+            }///<END If Function Block
+            line = fclParser.readLine(in);
+        } ///<END File Cycle
+        file.close();
+    }else{
         qFatal("Unable to open the file '%s'", fileUri.toLocal8Bit().data());
         return false;
     }
-    QRegExp rxFunctionBlock("function_block\\s+(\\w+)");
-    QTextStream in(&file);
-    FCLParser fclParser;
-    QString line = fclParser.readLine(in);
-    while (!line.isNull())
-    { ///<File Cycle (only works for one function block
-        if (rxFunctionBlock.indexIn(line) > -1) //If Function Block
-        {
-            FunctBlock* functionBlock = new FunctBlock(this,rxFunctionBlock.cap(1));
-            fclParser.loadFunctBlock(in,*functionBlock);
-            QHash<QString, Variable*> variables = functionBlock->getVariables();
-            for(QHash<QString, Variable*>::const_iterator i = variables.begin(); i != variables.end(); i++)
-            {
-                if(!i.value()->getLinguisticTermNames().size())
-                {
-                    qWarning("Variable '%s' in function block '%s' not contain terms",
-                             i.key().toLocal8Bit().data(),
-                             rxFunctionBlock.cap(1).toLocal8Bit().data());
-                }
-            }
-            bool rules = false;
-            QHash<QString, RuleBlock*> ruleblocks = functionBlock->getRuleBlocks();
-            for(QHash<QString, RuleBlock*>::const_iterator i = ruleblocks.begin(); i != ruleblocks.end(); i++)
-            {
-                if(i.value()->getRulesCount())
-                {
-                    rules = true;
-                    break;
-                }
-            }
-            if(!rules)
-            {
-                qWarning("Rules in function block '%s' was not found",
-                         rxFunctionBlock.cap(1).toLocal8Bit().data());
-            }
-            Q_ASSERT(functionBlock->checkHierarchy());
-            addFunctionBlock(functionBlock);
-        }///<END If Function Block
-        line = fclParser.readLine(in);
-    } ///<END File Cycle
     return toReturn;
 }
 
@@ -250,7 +259,7 @@ bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
     QFile file(fileUri);
     if(file.open(QIODevice::WriteOnly))
     {
-        for(QHash<QString, FunctBlock*>::iterator i = i = functionBlocks.begin();
+        for(QHash<QString, FunctBlock*>::iterator i = functionBlocks.begin();
             i != functionBlocks.end();
             i++ )
         {
@@ -261,6 +270,26 @@ bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
         toReturn = true;
     }else{
         qDebug() << "Error opening file to writing " << fileUri;
+    }
+    return toReturn;
+}
+bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri)
+{
+    qDebug() << "Implementation of optimize functionality are not finished";
+    bool toReturn = false;
+    QList<Value*> optimizationParameters;
+    for(QHash<QString, FunctBlock*>::iterator i = functionBlocks.begin();
+        i != functionBlocks.end();
+        i++ )
+    {
+        optimizationParameters.append(i.value()->getOptimizationParameters());
+    }
+    qDebug() << "Found " << optimizationParameters.size() << " optimization parameters";
+    ErrorFunction erf(this, fileUri);
+    if(erf.samplesSize())
+    {
+        qDebug() << "Error is " << erf.evaluate(*this);
+        toReturn = true;
     }
     return toReturn;
 }

@@ -10,13 +10,13 @@ You need Qt library 4.* version installed in your system
 
 4a)In Windows
 
-   cd ..\example
+   cd ..\examples
    qmake
    make
 
 4b)In Linux
 
-   cd ../example
+   cd ../examples
    qmake
    make
 
@@ -25,11 +25,11 @@ You need Qt library 4.* version installed in your system
 5a)In Windows
    
    cd ..\build
-   .\jfuzzyqt.exe
+   .\calculation.exe
    
 5b)In Linux
    
    cd ../build
    export LD_LIBRARY_PATH=`pwd`
-   ./jfuzzyqt
+   ./calculation
 

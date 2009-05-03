@@ -1,2 +1,3 @@
 1) Implement fuzzyfy methods: COSINE, DSIGM, FUNCTION
 2) Implement defuzzyfy methods: COA, etc.
+3) Implement optimization support

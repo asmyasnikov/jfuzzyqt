@@ -34,7 +34,7 @@ jfuzzyqt::OptimizationParameters::~OptimizationParameters()
     }
 }
 
-jfuzzyqt::Value* jfuzzyqt::OptimizationParameters::getValue(int index)
+jfuzzyqt::Value* jfuzzyqt::OptimizationParameters::getValue(int index)const
 {
     Q_ASSERT(index < parameters.size());
     return parameters.at(index);

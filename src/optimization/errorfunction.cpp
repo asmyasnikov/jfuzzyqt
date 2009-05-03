@@ -23,6 +23,7 @@ in file LICENSE along with this program.  If not, see
 #include "errorfunction.h"
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 #include <math.h>
 
 jfuzzyqt::ErrorFunction::ErrorFunction(QObject*parent)
@@ -40,14 +41,24 @@ jfuzzyqt::ErrorFunction::ErrorFunction(QObject*parent, const QString& fileUri)
         QStringList names = line.replace("\t"," ").split(" ",QString::SkipEmptyParts);
         do{
             line = in.readLine();
-            QHash<QString, double>sample;
-            QStringList values = line.replace("\t"," ").split(" ",QString::SkipEmptyParts);
-            for(int i = 0; i < values.size(); i++)
+            if(!line.isEmpty())
             {
-                Q_ASSERT(names.size() < values.size());
-                sample[names.at(i)] = values.at(i).toDouble();
+                QHash<QString, double>sample;
+                QStringList values = line.replace("\t"," ").split(" ");
+                for(int i = 0; i < values.size(); i++)
+                {
+                    if(!values.at(i).isEmpty())
+                    {
+                        if(names.size() >= values.size())
+                        {
+                            sample[names.at(i)] = values.at(i).toDouble();
+                        }else{
+                            qDebug() << "Error reading line " << line;
+                        }
+                    }
+                }
+                samples.append(sample);
             }
-            samples.append(sample);
         }while(!line.isNull());
         file.close();
     }
@@ -81,4 +92,8 @@ double jfuzzyqt::ErrorFunction::evaluate(JFuzzyQt&model)const
 void jfuzzyqt::ErrorFunction::append(QHash<QString, double>sample)
 {
     samples.append(sample);
+}
+int jfuzzyqt::ErrorFunction::samplesSize()const
+{
+    return samples.size();
 }

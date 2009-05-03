@@ -95,6 +95,13 @@ public:
      **/
     bool save(const QString& fileUri);
     /**
+      * \brief Optimize parameters of fcl-model
+      * \param fleUri - path of samples file (simple text format)
+      * \return true  - if optimizing was finished
+      * \return false - if optimizing was not finished
+     **/
+    bool optimize(const QString& fileUri);
+    /**
       * \brief Setting variable value
       * \param varName - variable name
       * \param value   - variable value
