@@ -28,8 +28,8 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionSigm::MembershipFunctionSigm(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters.append(new Value(this, mx,-HUGE_VAL,HUGE_VAL));
-    parameters.append(new Value(this, dx,0.,HUGE_VAL));
+    parameters.append(new Value(this, mx,-HUGE_VAL,HUGE_VAL, false));
+    parameters.append(new Value(this, dx,0.,HUGE_VAL, false));
 }
 
 jfuzzyqt::MembershipFunctionSigm::~MembershipFunctionSigm()
@@ -50,7 +50,7 @@ double jfuzzyqt::MembershipFunctionSigm::membership(double index) const
 {
     return 1./(1.+exp(-parameters[0]->getValue()*(index-parameters[1]->getValue())));
 }
-bool jfuzzyqt::MembershipFunctionSigm::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSigm::checkParameters(QString&errors)const
 {
     return true;
 }

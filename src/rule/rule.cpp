@@ -29,14 +29,14 @@ jfuzzyqt::Rule::Rule(QObject *parent)
     : OptimizationParameters(parent)
 {
     name = "undefined";
-    parameters.append(new Value(this, 1.0, 0., 1.));
+    parameters.append(new Value(this, 1.0, 0., 1., false));
 }
 
 jfuzzyqt::Rule::Rule(QObject *parent, const QString& name)
     : OptimizationParameters(parent)
 {
     this->name = name;
-    parameters.append(new Value(this, 1.0, 0., 1.));
+    parameters.append(new Value(this, 1.0, 0., 1., false));
 }
 jfuzzyqt::Rule::Rule(const Rule &rule)
     : OptimizationParameters(rule.parent())
@@ -44,7 +44,7 @@ jfuzzyqt::Rule::Rule(const Rule &rule)
     name = rule.getName();
     addAntecedents(rule.getAntecedents());
     consequents = rule.getConsequents();
-    parameters.append(new Value(this, rule.getWeight(), 0., 1.));
+    parameters.append(new Value(this, rule.getWeight(), 0., 1., false));
 }
 jfuzzyqt::Rule::~Rule()
 {

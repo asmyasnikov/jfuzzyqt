@@ -53,6 +53,8 @@ in file LICENSE along with this program.  If not, see
 #include "connection/or/ruleconnectionmethodormax.h"
 #include "fcl/fclruletree.h"
 #include "optimization/errorfunction.h"
+#include "optimization/optimizationdeltajump.h"
+#include "optimization/optimizationgradient.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>
@@ -275,7 +277,6 @@ bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
 }
 bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri)
 {
-    qDebug() << "Implementation of optimize functionality are not finished";
     bool toReturn = false;
     QList<Value*> optimizationParameters;
     for(QHash<QString, FunctBlock*>::iterator i = functionBlocks.begin();
@@ -284,11 +285,13 @@ bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri)
     {
         optimizationParameters.append(i.value()->getOptimizationParameters());
     }
-    qDebug() << "Found " << optimizationParameters.size() << " optimization parameters";
     ErrorFunction erf(this, fileUri);
     if(erf.samplesSize())
     {
-        qDebug() << "Error is " << erf.evaluate(*this);
+        qDebug() << "Error before optimization " << erf.evaluate(*this);
+        OptimizationDeltaJump optimization(this, &erf, optimizationParameters);
+        optimization.optimize(true);
+        qDebug() << "Error after optimization " << erf.evaluate(*this);
         toReturn = true;
     }
     return toReturn;

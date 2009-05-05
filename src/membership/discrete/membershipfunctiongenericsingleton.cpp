@@ -33,8 +33,8 @@ jfuzzyqt::MembershipFunctionGenericSingleton::MembershipFunctionGenericSingleton
 {
     for(int i = 0; i < x.size(); i++)
     {
-        this->x.append(new Value(this, x.at(i),-HUGE_VAL,HUGE_VAL));
-        this->y.append(new Value(this, y.at(i),0.,1.));
+        this->x.append(new Value(this, x.at(i),-HUGE_VAL,HUGE_VAL,true));
+        this->y.append(new Value(this, y.at(i),0.,1.,false));
     }
 }
 
@@ -76,7 +76,7 @@ double jfuzzyqt::MembershipFunctionGenericSingleton::membership(double index) co
     }
     return toReturn;
 }
-bool jfuzzyqt::MembershipFunctionGenericSingleton::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGenericSingleton::checkParameters(QString&errors)const
 {
     bool toReturn = true;
     for(int i = 0; i < x.size(); i++)

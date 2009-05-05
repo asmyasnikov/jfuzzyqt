@@ -84,7 +84,9 @@ HEADERS += include/jfuzzyqt.h \
     src/membership/continuous/membershipfunctiongbell.h \
     src/optimization/optimizationparameters.h \
     src/optimization/value.h \
-    src/optimization/errorfunction.h
+    src/optimization/errorfunction.h \
+    src/optimization/optimizationdeltajump.h \
+    src/optimization/optimizationgradient.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -130,4 +132,6 @@ SOURCES += src/jfuzzyqt.cpp \
     src/membership/continuous/membershipfunctiongbell.cpp \
     src/optimization/optimizationparameters.cpp \
     src/optimization/value.cpp \
-    src/optimization/errorfunction.cpp
+    src/optimization/errorfunction.cpp \
+    src/optimization/optimizationdeltajump.cpp \
+    src/optimization/optimizationgradient.cpp

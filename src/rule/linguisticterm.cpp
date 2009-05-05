@@ -255,7 +255,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
     QString errors;
     if(membershipFunction)
     {
-        if(!membershipFunction->checkParamters(errors))
+        if(!membershipFunction->checkParameters(errors))
         {
             toReturn = false;
             qCritical("LinguisticTerm::loadFrom : linguistic term '%s' is invalid : %s",

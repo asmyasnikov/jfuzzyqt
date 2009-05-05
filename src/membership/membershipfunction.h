@@ -45,10 +45,9 @@ public:
     };
 
     MembershipFunction(QObject* parent, MembershipType type);
-    MembershipFunction(MembershipType type, MembershipFunction& membership);
     ~MembershipFunction();
 
-    virtual bool checkParamters(QString& errors) const = 0;
+    virtual bool checkParameters(QString& errors) const = 0;
     virtual void estimateUniverse() = 0;
     virtual double membership(double index) const = 0;
     double getUniverseMax();

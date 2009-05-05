@@ -54,8 +54,8 @@ jfuzzyqt::MembershipFunctionPieceWiseLinear::MembershipFunctionPieceWiseLinear(Q
     }
     for (int i = 0; i < x.size(); ++i)
     {
-        this->x.append( new Value(this,x.at(i),-HUGE_VAL,HUGE_VAL) );
-        this->y.append( new Value(this,y.at(i),0., 1.) );
+        this->x.append( new Value(this,x.at(i),-HUGE_VAL,HUGE_VAL, true) );
+        this->y.append( new Value(this,y.at(i),0., 1., false) );
     }
 }
 
@@ -112,7 +112,7 @@ double jfuzzyqt::MembershipFunctionPieceWiseLinear::membership(double index) con
     }
     return toReturn;
 }
-bool jfuzzyqt::MembershipFunctionPieceWiseLinear::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionPieceWiseLinear::checkParameters(QString&errors)const
 {
     bool toReturn = true;
 

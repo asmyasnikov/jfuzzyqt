@@ -41,21 +41,26 @@ public:
     };
 
     Value(QObject* parent=NULL);
-    Value(QObject* parent, double value, double min, double max);
-    Value(QObject* parent, double value, Value* min, Value* max);
-    Value(QObject* parent, double value, Value* min, double max);
-    Value(QObject* parent, double value, double min, Value* max);
+    Value(QObject* parent, double value, double min, double max, bool abs);
+    Value(QObject* parent, double value, Value* min, Value* max, bool abs);
+    Value(QObject* parent, double value, Value* min, double max, bool abs);
+    Value(QObject* parent, double value, double min, Value* max, bool abs);
     ~Value();
     double getValue()const;
     bool setValue(double value);
+    double getEpsilon()const;
+    void setVariableReference(Variable*varRef);
+    QString getVarName()const;
 private:
     Type type;
     double valReal;
     Variable* varRef;
     Value*vmin;
     Value*vmax;
-    double min;
-    double max;
+    bool abs;
+    mutable double min;
+    mutable double max;
+    mutable double epsilon;
 };
 
 };

@@ -38,7 +38,7 @@ public:
     ~MembershipFunctionSigm();
     QString getName()const;
     double membership(double index) const;
-    bool checkParamters(QString& errors)const;
+    bool checkParameters(QString& errors)const;
     void estimateUniverse();
     QString toString()const;
 

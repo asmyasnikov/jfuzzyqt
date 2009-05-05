@@ -39,7 +39,7 @@ public:
     int size() const;
     double membership(double index) const;
     QString getName()const;
-    bool checkParamters(QString& errors)const;
+    bool checkParameters(QString& errors)const;
     void estimateUniverse();
     double valueX(int index)const;
     QString toString()const;

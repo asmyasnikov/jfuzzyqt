@@ -24,6 +24,7 @@ in file LICENSE along with this program.  If not, see
  */
 #include "value.h"
 #include "../rule/variable.h"
+//#include "../membership/membershipfunction.h"
 #include <QDebug>
 
 jfuzzyqt::Value::Value(QObject* parent)
@@ -31,23 +32,25 @@ jfuzzyqt::Value::Value(QObject* parent)
 {
     type = UNDEFINED;
     valReal = 0.;
+    varRef=NULL;
     min = 0.;
     max = 0.;
     vmin = NULL;
     vmax = NULL;
 }
-jfuzzyqt::Value::Value(QObject* parent, double value, double min, double max)
+jfuzzyqt::Value::Value(QObject* parent, double value, double min, double max, bool abs)
     :QObject(parent)
 {
     type = REAL;
     varRef=NULL;
     this->min = min;
     this->max = max;
+    this->abs = abs;
     vmin = NULL;
     vmax = NULL;
     setValue(value);
 }
-jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, Value* vmax)
+jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, Value* vmax, bool abs)
     :QObject(parent)
 {
     type = REAL;
@@ -56,9 +59,10 @@ jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, Value* vmax)
     max = value;
     this->vmin = vmin;
     this->vmax = vmax;
+    this->abs = abs;
     setValue(value);
 }
-jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, double max)
+jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, double max, bool abs)
     :QObject(parent)
 {
     type = REAL;
@@ -66,15 +70,17 @@ jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, double max)
     min = value;
     this->max = max;
     this->vmin = vmin;
+    this->abs = abs;
     vmax = NULL;
     setValue(value);
 }
-jfuzzyqt::Value::Value(QObject* parent, double value, double min, Value* vmax)
+jfuzzyqt::Value::Value(QObject* parent, double value, double min, Value* vmax, bool abs)
     :QObject(parent)
 {
     type = REAL;
     varRef=NULL;
     this->min = min;
+    this->abs = abs;
     max = value;
     vmin = NULL;
     this->vmax = vmax;
@@ -114,15 +120,51 @@ bool jfuzzyqt::Value::setValue(double value)
     bool toReturn = false;
     if(type == REAL)
     {
-        if(vmin) min = vmin->getValue();
-        if(vmax) max = vmax->getValue();
+        if(varRef) min = varRef->getAbsoluteMinimum();
+        if(varRef) max = varRef->getAbsoluteMaximum();
+        if(vmin) min = qMax(min, vmin->getValue());
+        if(vmax) max = qMin(max, vmax->getValue());
         if(value < min) valReal = min;
         if(value > max) valReal = max;
         if((value >= min) && (value <= max))
         {
-            valReal = value;
-            toReturn = true;
+//            double temp = valReal;
+//            QString errors;
+//            valReal = value;
+//            if(dynamic_cast<MembershipFunction*>(parent()))
+//            {
+//                if(dynamic_cast<MembershipFunction*>(parent())->checkParameters(errors))
+//                {
+                    toReturn = true;
+//                }
+//            }
+//            valReal = temp;
         }
     }
+    if(toReturn)
+    {
+        valReal = value;
+    }
     return toReturn;
+}
+double jfuzzyqt::Value::getEpsilon()const
+{
+    if(varRef) min = varRef->getAbsoluteMinimum();
+    if(varRef) max = varRef->getAbsoluteMaximum();
+    if(vmin) min = qMax(min, vmin->getValue());
+    if(vmax) max = qMin(max, vmax->getValue());
+    epsilon = (max-min) / (varRef?1000.:100.);
+    return epsilon;
+}
+void jfuzzyqt::Value::setVariableReference(Variable*varRef)
+{
+    if(abs) this->varRef = varRef;
+}
+QString jfuzzyqt::Value::getVarName()const
+{
+    if(dynamic_cast<MembershipFunction*>(parent()))
+    {
+        return dynamic_cast<MembershipFunction*>(parent())->toString();
+    }
+    return QString::null;
 }

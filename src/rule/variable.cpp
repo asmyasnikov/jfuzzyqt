@@ -66,6 +66,14 @@ void jfuzzyqt::Variable::addLinguisticTerm(LinguisticTerm* lt)
 {
     Q_ASSERT(!linguisticTermExist(lt->getTermName()));
     lt->setParent(this);
+    OptimizationParameters*op = lt->getMembershipFunction();
+    if(op)
+    {
+        for(int i = 0; i < op->size(); i++)
+        {
+            op->getValue(i)->setVariableReference(this);
+        }
+    }
     linguisticTerms.insert(lt->getTermName(), lt);
 }
 
@@ -90,25 +98,33 @@ double jfuzzyqt::Variable::getValue()const
 }
 double jfuzzyqt::Variable::getAbsoluteMinimum()const
 {
-    double toReturn = HUGE_VAL;
-    Q_ASSERT(linguisticTerms.size());
-    for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
-        i != linguisticTerms.end(); i++)
+    if(linguisticTerms.size())
     {
-        toReturn = qMin(toReturn, i.value()->getMembershipFunction()->getUniverseMin());
+        double toReturn = HUGE_VAL;
+        for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
+            i != linguisticTerms.end(); i++)
+        {
+            toReturn = qMin(toReturn, i.value()->getMembershipFunction()->getUniverseMin());
+        }
+        return toReturn;
+    }else{
+        return -HUGE_VAL;
     }
-    return toReturn;
 }
 double jfuzzyqt::Variable::getAbsoluteMaximum()const
 {
-    double toReturn = -HUGE_VAL;
-    Q_ASSERT(linguisticTerms.size());
-    for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
-        i != linguisticTerms.end(); i++)
+    if(linguisticTerms.size())
     {
-        toReturn = qMax(toReturn, i.value()->getMembershipFunction()->getUniverseMax());
+        double toReturn = -HUGE_VAL;
+        for(QHash<QString, LinguisticTerm*>::const_iterator i = linguisticTerms.begin();
+            i != linguisticTerms.end(); i++)
+        {
+            toReturn = qMax(toReturn, i.value()->getMembershipFunction()->getUniverseMax());
+        }
+        return toReturn;
+    }else{
+        return HUGE_VAL;
     }
-    return toReturn;
 }
 
 /** Return 'true' if this is an output variable */

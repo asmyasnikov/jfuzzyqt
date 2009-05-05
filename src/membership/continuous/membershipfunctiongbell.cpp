@@ -28,9 +28,9 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, double a, double b, double mean)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters.append(new Value(this, mean,-HUGE_VAL,HUGE_VAL));
-    parameters.append(new Value(this, a,-HUGE_VAL,HUGE_VAL));
-    parameters.append(new Value(this, b,0.,HUGE_VAL));
+    parameters.append(new Value(this, mean,-HUGE_VAL,HUGE_VAL, true));
+    parameters.append(new Value(this, a,-HUGE_VAL,HUGE_VAL, true));
+    parameters.append(new Value(this, b,0.,HUGE_VAL,false));
 }
 
 jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()
@@ -53,7 +53,7 @@ double jfuzzyqt::MembershipFunctionGBell::membership(double index) const
     t = pow(t, 2.0 * parameters[2]->getValue());
     return 1.0 / (1.0 + t);
 }
-bool jfuzzyqt::MembershipFunctionGBell::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGBell::checkParameters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[2]->getValue() < 0.)

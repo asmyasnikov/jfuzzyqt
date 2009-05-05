@@ -34,8 +34,8 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionGauss::MembershipFunctionGauss(QObject* parent, double mx, double dx)
     : MembershipFunctionContinuous(parent, FunctionGaussian)
 {
-    parameters.append(new Value(this, mx,-HUGE_VAL,HUGE_VAL));
-    parameters.append(new Value(this, dx,0.,HUGE_VAL));
+    parameters.append(new Value(this, mx,-HUGE_VAL,HUGE_VAL,true));
+    parameters.append(new Value(this, dx,0.,HUGE_VAL,false));
 }
 jfuzzyqt::MembershipFunctionGauss::~MembershipFunctionGauss()
 {
@@ -50,7 +50,6 @@ QString jfuzzyqt::MembershipFunctionGauss::getName() const
 {
     return "GAUSS";
 }
-
 double jfuzzyqt::MembershipFunctionGauss::membership(double index) const
 {
     return (1. / parameters[1]->getValue() / sqrt(2. * M_PI) *
@@ -58,7 +57,7 @@ double jfuzzyqt::MembershipFunctionGauss::membership(double index) const
                  (index - parameters[0]->getValue()) /
                  (2 * parameters[1]->getValue() * parameters[1]->getValue())));
 }
-bool jfuzzyqt::MembershipFunctionGauss::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionGauss::checkParameters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[1]->getValue() < 0 )

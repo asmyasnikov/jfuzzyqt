@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
-    parameters.append(new Value(this, valueX, -HUGE_VAL, HUGE_VAL));
+    parameters.append(new Value(this, valueX, -HUGE_VAL, HUGE_VAL, true));
 }
 
 jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
@@ -67,7 +67,7 @@ double jfuzzyqt::MembershipFunctionSingleton::valueX(int index)const
         return 0.;
     }
 }
-bool jfuzzyqt::MembershipFunctionSingleton::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSingleton::checkParameters(QString&errors)const
 {
    return true;
 }

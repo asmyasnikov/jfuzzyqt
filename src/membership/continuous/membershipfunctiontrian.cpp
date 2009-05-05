@@ -28,9 +28,9 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionTrian::MembershipFunctionTrian(QObject* parent, double left, double mid, double right)
     : MembershipFunctionContinuous(parent, FunctionTriangular)
 {
-    parameters.append(new Value(this, left,-HUGE_VAL,HUGE_VAL));
-    parameters.append(new Value(this, mid,parameters.at(0),HUGE_VAL));
-    parameters.append(new Value(this, right,parameters.at(1),HUGE_VAL));
+    parameters.append(new Value(this, left,-HUGE_VAL,HUGE_VAL, true));
+    parameters.append(new Value(this, mid,parameters.at(0),HUGE_VAL, true));
+    parameters.append(new Value(this, right,parameters.at(1),HUGE_VAL, true));
 }
 
 jfuzzyqt::MembershipFunctionTrian::~MembershipFunctionTrian()
@@ -55,7 +55,7 @@ double jfuzzyqt::MembershipFunctionTrian::membership(double index) const
     else if( index <= parameters[1]->getValue() ) return ((index - parameters[0]->getValue()) / (parameters[1]->getValue() - parameters[0]->getValue()));
     else return 1.-((index-parameters[1]->getValue())/(parameters[2]->getValue()-parameters[1]->getValue()));
 }
-bool jfuzzyqt::MembershipFunctionTrian::checkParamters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionTrian::checkParameters(QString&errors)const
 {
     bool toReturn = true;
     if( parameters[0]->getValue() > parameters[1]->getValue() )

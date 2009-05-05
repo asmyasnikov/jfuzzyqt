@@ -40,7 +40,7 @@ public:
     double membership(double index) const;
     double valueX(int index)const;
     QString getName()const;
-    bool checkParamters(QString& errors)const;
+    bool checkParameters(QString& errors)const;
     void estimateUniverse();
     QString toString()const;
 
