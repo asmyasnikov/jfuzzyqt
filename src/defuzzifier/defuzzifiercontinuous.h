@@ -34,7 +34,7 @@ class DefuzzifierContinuous : public Defuzzifier
     Q_OBJECT
 
 public:
-    const static int DEFAULT_NUMBER_OF_POINTS = 1000;
+    const static int DEFAULT_NUMBER_OF_POINTS = 100;
 
     DefuzzifierContinuous();
     ~DefuzzifierContinuous();

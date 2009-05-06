@@ -42,7 +42,7 @@ double jfuzzyqt::OptimizationDeltaJump::jump(int parameterNumber, double error0)
     double epsilon = param->getEpsilon();
     double paramValue = param->getValue();
     double error1;
-    if( param->setValue(paramValue + epsilon) )
+    if( param->setValue(paramValue+epsilon) )
     {
         error1 = erf->evaluate(*model);
         param->setValue(paramValue);
@@ -105,6 +105,8 @@ void jfuzzyqt::OptimizationDeltaJump::optimize(bool verbose)
         if(qAbs(prevError-error0) < 1.e-10)
         {
             countDeadEndIterations++;
+        }else{
+            countDeadEndIterations = 0;
         }
         if(countDeadEndIterations > 10)
         {

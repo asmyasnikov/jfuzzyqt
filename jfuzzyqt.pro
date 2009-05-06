@@ -86,7 +86,8 @@ HEADERS += include/jfuzzyqt.h \
     src/optimization/value.h \
     src/optimization/errorfunction.h \
     src/optimization/optimizationdeltajump.h \
-    src/optimization/optimizationgradient.h
+    src/optimization/optimizationgradient.h \
+    src/optimization/optimizationpartialderivate.h
 SOURCES += src/jfuzzyqt.cpp \
     src/functblock.cpp \
     src/accumulation/ruleaccumulationmethod.cpp \
@@ -134,4 +135,5 @@ SOURCES += src/jfuzzyqt.cpp \
     src/optimization/value.cpp \
     src/optimization/errorfunction.cpp \
     src/optimization/optimizationdeltajump.cpp \
-    src/optimization/optimizationgradient.cpp
+    src/optimization/optimizationgradient.cpp \
+    src/optimization/optimizationpartialderivate.cpp

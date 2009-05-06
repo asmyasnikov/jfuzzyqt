@@ -30,7 +30,7 @@ jfuzzyqt::MembershipFunctionGBell::MembershipFunctionGBell(QObject* parent, doub
 {
     parameters.append(new Value(this, mean,-HUGE_VAL,HUGE_VAL, true));
     parameters.append(new Value(this, a,-HUGE_VAL,HUGE_VAL, true));
-    parameters.append(new Value(this, b,0.,HUGE_VAL,false));
+    parameters.append(new Value(this, b,0.,qAbs(2.*a),false));
 }
 
 jfuzzyqt::MembershipFunctionGBell::~MembershipFunctionGBell()

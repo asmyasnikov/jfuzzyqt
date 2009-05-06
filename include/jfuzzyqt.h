@@ -65,6 +65,14 @@ class Q_DECL_EXPORT JFuzzyQt : public QObject
     Q_OBJECT
 
 public:
+
+    enum OptimizationMethod
+    {
+        DeltaJump,
+        Gradient,
+        PartialDerivate,
+        InsularGenetica
+    };
     /**
       * \brief Default constructor
       * \param parent - Qt parent object
@@ -100,7 +108,7 @@ public:
       * \return true  - if optimizing was finished
       * \return false - if optimizing was not finished
      **/
-    bool optimize(const QString& fileUri);
+    bool optimize(const QString& fileUri, OptimizationMethod method = DeltaJump);
     /**
       * \brief Setting variable value
       * \param varName - variable name

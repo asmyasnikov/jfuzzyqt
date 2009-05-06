@@ -43,48 +43,48 @@ jfuzzyqt::Value::Value(QObject* parent, double value, double min, double max, bo
 {
     type = REAL;
     varRef=NULL;
+    valReal = value;
     this->min = min;
     this->max = max;
     this->abs = abs;
     vmin = NULL;
     vmax = NULL;
-    setValue(value);
 }
 jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, Value* vmax, bool abs)
     :QObject(parent)
 {
     type = REAL;
     varRef=NULL;
+    valReal = value;
     min = value;
     max = value;
     this->vmin = vmin;
     this->vmax = vmax;
     this->abs = abs;
-    setValue(value);
 }
 jfuzzyqt::Value::Value(QObject* parent, double value, Value* vmin, double max, bool abs)
     :QObject(parent)
 {
     type = REAL;
     varRef=NULL;
+    valReal = value;
     min = value;
     this->max = max;
     this->vmin = vmin;
     this->abs = abs;
     vmax = NULL;
-    setValue(value);
 }
 jfuzzyqt::Value::Value(QObject* parent, double value, double min, Value* vmax, bool abs)
     :QObject(parent)
 {
     type = REAL;
     varRef=NULL;
+    valReal = value;
     this->min = min;
     this->abs = abs;
     max = value;
     vmin = NULL;
     this->vmax = vmax;
-    setValue(value);
 }
 
 jfuzzyqt::Value::~Value()
@@ -128,17 +128,18 @@ bool jfuzzyqt::Value::setValue(double value)
         if(value > max) valReal = max;
         if((value >= min) && (value <= max))
         {
-//            double temp = valReal;
-//            QString errors;
-//            valReal = value;
-//            if(dynamic_cast<MembershipFunction*>(parent()))
-//            {
-//                if(dynamic_cast<MembershipFunction*>(parent())->checkParameters(errors))
-//                {
-                    toReturn = true;
-//                }
-//            }
-//            valReal = temp;
+            toReturn = true;
+            if(parent()->inherits("jfuzzyqt::MembershipFunction"))
+            {
+                double temp = valReal;
+                valReal = value;
+                QString errors;
+                if(!dynamic_cast<MembershipFunction*>(parent())->checkParameters(errors))
+                {
+                    toReturn = false;
+                }
+                valReal = temp;
+            }
         }
     }
     if(toReturn)
@@ -153,7 +154,7 @@ double jfuzzyqt::Value::getEpsilon()const
     if(varRef) max = varRef->getAbsoluteMaximum();
     if(vmin) min = qMax(min, vmin->getValue());
     if(vmax) max = qMin(max, vmax->getValue());
-    epsilon = (max-min) / (varRef?1000.:100.);
+    epsilon = qMin((max-min) / (varRef?1000.:100.),100.);
     return epsilon;
 }
 void jfuzzyqt::Value::setVariableReference(Variable*varRef)

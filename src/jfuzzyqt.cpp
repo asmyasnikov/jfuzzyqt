@@ -55,6 +55,7 @@ in file LICENSE along with this program.  If not, see
 #include "optimization/errorfunction.h"
 #include "optimization/optimizationdeltajump.h"
 #include "optimization/optimizationgradient.h"
+#include "optimization/optimizationpartialderivate.h"
 #include <QDebug>
 #include <QRegExp>
 #include <QFile>
@@ -275,7 +276,7 @@ bool jfuzzyqt::JFuzzyQt::save(const QString& fileUri)
     }
     return toReturn;
 }
-bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri)
+bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri, OptimizationMethod method)
 {
     bool toReturn = false;
     QList<Value*> optimizationParameters;
@@ -289,8 +290,34 @@ bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri)
     if(erf.samplesSize())
     {
         qDebug() << "Error before optimization " << erf.evaluate(*this);
-        OptimizationDeltaJump optimization(this, &erf, optimizationParameters);
-        optimization.optimize(true);
+        switch(method)
+        {
+            case DeltaJump :
+            {
+                OptimizationDeltaJump optimization(this, &erf, optimizationParameters);
+                optimization.optimize(true);
+                break;
+            }
+            case Gradient :
+            {
+                OptimizationGradient optimization(this, &erf, optimizationParameters);
+                optimization.optimize(true);
+                break;
+            }
+            case PartialDerivate :
+            {
+                OptimizationPartialDerivate optimization(this, &erf, optimizationParameters);
+                optimization.optimize(true);
+                break;
+            }
+            case InsularGenetica :
+            {
+                qDebug() << "InsularGenetica method not implacated or need libraries not found";
+//                OptimizationInsualrGenetica optimization(this, &erf, optimizationParameters);
+//                optimization.optimize(true);
+                break;
+            }
+        }
         qDebug() << "Error after optimization " << erf.evaluate(*this);
         toReturn = true;
     }

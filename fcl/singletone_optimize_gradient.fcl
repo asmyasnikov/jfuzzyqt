@@ -1,0 +1,42 @@
+FUNCTION_BLOCK tipper
+
+VAR_INPUT
+	service : REAL;
+	food : REAL;
+END_VAR
+
+VAR_OUTPUT
+	tip : REAL;
+END_VAR
+
+FUZZIFY service
+	TERM poor := SIGM -3.95925 2.1294;
+	TERM excellent := SIGM 4.00022 7.00615;
+	TERM good := GAUSS 4.78624 1.50838;
+END_FUZZIFY
+
+FUZZIFY food
+	TERM rancid := SIGM -5.08109 3.0294;
+	TERM delicious := SIGM 5.00041 6.00615;
+END_FUZZIFY
+
+DEFUZZIFY tip
+	TERM generous := 26.072;
+	TERM cheap := 9.53532;
+	TERM average := 17.49;
+	METHOD : COGS;
+	DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK no1
+	ACCU : MAX;
+	ACT : MIN;
+	AND : MIN;
+	OR: MAX;
+
+	RULE 1 : IF service IS excellent AND food IS delicious THEN tip IS generous;
+	RULE 2 : IF (service IS poor OR food IS rancid) THEN tip IS cheap;
+	RULE 3 : IF service IS good THEN tip IS average WITH 0.6171368835;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

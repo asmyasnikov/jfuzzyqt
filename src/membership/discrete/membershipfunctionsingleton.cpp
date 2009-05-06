@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 jfuzzyqt::MembershipFunctionSingleton::MembershipFunctionSingleton(QObject* parent, const double& valueX)
 :MembershipFunctionDiscrete(parent, FunctionSingleton)
 {
-    parameters.append(new Value(this, valueX, -HUGE_VAL, HUGE_VAL, true));
+    parameters.append(new Value(this, valueX, valueX-1.e-10, valueX+1.e-10, true));
 }
 
 jfuzzyqt::MembershipFunctionSingleton::~MembershipFunctionSingleton()
@@ -50,7 +50,7 @@ int jfuzzyqt::MembershipFunctionSingleton::size()const
 double jfuzzyqt::MembershipFunctionSingleton::membership(double index) const
 {
     double toReturn = 0.;
-    if( qAbs(index-parameters[0]->getValue()) < 1.e-10 )
+    if( qAbs(index-parameters[0]->getValue()) < 1.e-5 )
     {
         toReturn = 1.;
     }
@@ -75,6 +75,6 @@ void jfuzzyqt::MembershipFunctionSingleton::estimateUniverse()
 {
     if(!universeMax) universeMax = new double;
     if(!universeMin) universeMin = new double;
-    *universeMax = parameters[0]->getValue()+1.e10;
-    *universeMin = parameters[0]->getValue()-1.e10;
+    *universeMax = parameters[0]->getValue()+1.e-5;
+    *universeMin = parameters[0]->getValue()-1.e-5;
 }
