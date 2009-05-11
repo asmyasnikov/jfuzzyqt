@@ -1,0 +1,128 @@
+FUNCTION_BLOCK behaviorper	// Block definition (there may be more than one block per file)
+
+VAR_INPUT				// Define input variables
+	event           : REAL;
+	joy   			: REAL;
+	sad   			: REAL;
+	hope  		   	: REAL;
+	fear           	: REAL; 
+	disappointment 	: REAL;
+	relief			: REAL;
+END_VAR
+
+VAR_OUTPUT				// Define output variable
+	behavior : REAL;
+END_VAR
+
+FUZZIFY event			// Fuzzify input variable 'event': {'e00', 'e01' , 'e02'}
+	TERM e00 := 0 ; 
+	TERM e01 := 1 ;
+	TERM e02 := 2 ;
+	TERM e03 := 3 ;
+	TERM e04 := 4 ;
+	TERM e05 := 5 ;
+	TERM e06 := 6 ;
+	TERM e07 := 7 ;
+	TERM e08 := 8 ;
+	TERM e09 := 9 ;
+	TERM e10 := 10 ;
+	TERM e11 := 11 ;
+	TERM e12 := 12 ;
+	TERM e13 := 13 ;
+	TERM e14 := 14 ;
+	TERM e15 := 15 ;
+	TERM e16 := 16 ;
+	TERM e17 := 17 ;
+	TERM e18 := 18 ;
+	TERM e19 := 19 ;
+	TERM e20 := 20 ;
+	TERM e21 := 21 ;
+	TERM e22 := 22 ;
+	TERM e23 := 23 ;
+END_FUZZIFY
+
+FUZZIFY joy	 // Fuzzify input variable 'joy': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+FUZZIFY sad	 // Fuzzify input variable 'sad': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+FUZZIFY hope	 // Fuzzify input variable 'hope': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+FUZZIFY fear	 // Fuzzify input variable 'fear': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+FUZZIFY disappointment	 // Fuzzify input variable 'disappointment': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+FUZZIFY relief	 // Fuzzify input variable 'relief': {'low', 'med' , 'high'}
+    TERM low := (0, 0) (0, 1) (0.25, 1) (0.5,0);
+	TERM med := (0.25, 0) (0.5, 1) (0.75, 0) ;
+	TERM high := (0.5, 0) (0.75, 1) (1, 1) (1, 0) ;
+END_FUZZIFY
+
+DEFUZZIFY behavior			// Defzzzify output variable 'behavior' : {'b001', 'b002', 'b003', etc. }
+	TERM b000 := 0;
+	TERM b001 := 1;
+    TERM b002 := 2;
+    TERM b003 := 3;
+	TERM b004 := 4 ;
+	TERM b005 := 5 ;
+	TERM b006 := 6 ;
+	TERM b007 := 7 ;
+	TERM b008 := 8 ;
+	TERM b009 := 9 ;
+	TERM b010 := 10 ;
+	TERM b011 := 11 ;
+	TERM b012 := 12 ;
+	TERM b013 := 13 ;
+	TERM b014 := 14 ;
+
+	METHOD : COGS;		// Use 'Center Of Area' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+
+	RULE 0: IF event IS e00 AND joy IS low AND sad IS med AND hope IS low AND fear IS low AND disappointment IS high AND relief IS low THEN behavior IS b000;
+	RULE 1: IF event IS e00 AND joy IS low AND sad IS high AND hope IS low AND fear IS med AND disappointment IS low AND relief IS low THEN behavior IS b001;
+	
+	RULE 2: IF event IS e01 AND joy IS high AND sad IS low AND hope IS high AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b002;
+	RULE 3: IF event IS e01 AND joy IS med AND sad IS low AND hope IS high AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b002;
+	RULE 4: IF event IS e01 AND joy IS med AND sad IS low AND hope IS med AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b003;
+	
+	RULE 5: IF event IS e03 AND joy IS high AND sad IS low AND hope IS med AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b004;
+	RULE 6: IF event IS e03 AND joy IS high AND sad IS low AND hope IS low AND fear IS med AND disappointment IS low AND relief IS high THEN behavior IS b005;
+	RULE 7: IF event IS e03 AND joy IS high AND sad IS low AND hope IS med AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b006;
+	
+	RULE 8: IF event IS e04 AND joy IS low AND sad IS med AND hope IS low AND fear IS high AND disappointment IS med AND relief IS low THEN behavior IS b007;
+	RULE 9: IF event IS e04 AND joy IS low AND sad IS med AND hope IS low AND fear IS low AND disappointment IS low AND relief IS low THEN behavior IS b008;
+	RULE 10: IF event IS e04 AND joy IS low AND sad IS med AND hope IS low AND fear IS low AND disappointment IS high AND relief IS low THEN behavior IS b009;
+	
+	RULE 11: IF event IS e05 AND joy IS high AND sad IS low AND hope IS low AND fear IS low AND disappointment IS low AND relief IS med THEN behavior IS b010;
+	
+	RULE 12: IF event IS e17 AND joy IS high AND sad IS low AND hope IS high AND disappointment IS low AND relief IS low THEN behavior IS b002;
+	
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
