@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS += calculate optimization
+SUBDIRS += calculate optimization calcdialog

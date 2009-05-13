@@ -127,6 +127,7 @@ bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
             line = fclParser.readLine(in);
         } ///<END File Cycle
         file.close();
+        toReturn = true;
     }else{
         qFatal("Unable to open the file '%s'", fileUri.toLocal8Bit().data());
         return false;
