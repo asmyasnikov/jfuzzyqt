@@ -1,6 +1,7 @@
 #include "calculationdialog.h"
 #include "ui_calculationdialog.h"
 #include <QtGui/QMessageBox>
+#include <QtGui/QDoubleSpinBox>
 #include <QtCore/QDir>
 
 CalculationDialog::CalculationDialog(QWidget *parent)
@@ -61,7 +62,14 @@ void CalculationDialog::initFuzzyModel(QString fileUri)
         {
             ui->tbl_inputs->setRowCount(ui->tbl_inputs->rowCount()+1);
             ui->tbl_inputs->setItem(ui->tbl_inputs->rowCount()-1, 0, new QTableWidgetItem(inputs.at(j)));
-            ui->tbl_inputs->setItem(ui->tbl_inputs->rowCount()-1, 1, new QTableWidgetItem("0"));
+            QDoubleSpinBox* sb = new QDoubleSpinBox(this);
+            sb->setRange(-10000.,10000.);
+            sb->setDecimals(3);
+            sb->setSingleStep(0.1);
+            sb->setValue(0);
+            sb->setReadOnly(false);
+            QObject::connect(sb, SIGNAL(valueChanged(double)), this, SLOT(changeInputData()));
+            ui->tbl_inputs->setCellWidget(ui->tbl_inputs->rowCount()-1, 1, sb);
         }
 
     }
@@ -81,7 +89,10 @@ void CalculationDialog::initFuzzyModel(QString fileUri)
         {
             ui->tbl_outputs->setRowCount(ui->tbl_outputs->rowCount()+1);
             ui->tbl_outputs->setItem(ui->tbl_outputs->rowCount()-1, 0, new QTableWidgetItem(outputs.at(j)));
-            ui->tbl_outputs->setItem(ui->tbl_outputs->rowCount()-1, 1, new QTableWidgetItem("0"));
+            ui->tbl_outputs->setItem(ui->tbl_outputs->rowCount()-1, 1,
+                                     new QTableWidgetItem(QString("%1")
+                                                          .arg(model->getValue(outputs.at(j),funct_blocks.at(i)),
+                                                               0, 'f', 3)));
         }
 
     }
@@ -105,7 +116,7 @@ void CalculationDialog::evaluate()
                 funct_block = ui->tbl_inputs->item(i, 0)->text();
             }else{
                 model->setVariable(ui->tbl_inputs->item(i, 0)->text(),
-                                   ui->tbl_inputs->item(i, 1)->text().toDouble());
+                                   dynamic_cast<QDoubleSpinBox*>(ui->tbl_inputs->cellWidget(i, 1))->value());
             }
         }
         model->evaluate();
@@ -129,8 +140,7 @@ void CalculationDialog::evaluate()
                                          new QTableWidgetItem(outputs.at(j)));
                 ui->tbl_outputs->setItem(ui->tbl_outputs->rowCount()-1, 1,
                                          new QTableWidgetItem(QString("%1")
-                                                              .arg(model->getValue(outputs.at(j),
-                                                                                   funct_blocks.at(i)),
+                                                              .arg(model->getValue(outputs.at(j),funct_blocks.at(i)),
                                                                    0, 'f', 3)));
             }
 

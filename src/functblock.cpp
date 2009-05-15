@@ -340,13 +340,13 @@ QList<Value*> jfuzzyqt::FunctBlock::getOptimizationParameters()const
             OptimizationParameters*op = var.value()->getLinguisticTerm(*lt)->getMembershipFunction();
             for(int i = 0; i < op->size(); i++)
             {
-                toReturn.append(op->getValue(i));
+                toReturn += op->getValue(i);
             }
         }
     }
     for(QHash<QString, RuleBlock*>::const_iterator j = ruleBlocks.begin(); j != ruleBlocks.end(); j++)
     {
-        toReturn.append((*j)->getOptimizationParameters());
+        toReturn += (*j)->getOptimizationParameters();
     }
     return toReturn;
 }

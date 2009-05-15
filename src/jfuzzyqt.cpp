@@ -232,7 +232,7 @@ QStringList jfuzzyqt::JFuzzyQt::inputs(const QString& fb)const
         {
             if(!j.value()->isOutputVariable())
             {
-                toReturn.append(j.key());
+                toReturn += j.key();
             }
         }
     }
@@ -251,7 +251,7 @@ QStringList jfuzzyqt::JFuzzyQt::outputs(const QString& fb)const
         {
             if(j.value()->isOutputVariable())
             {
-                toReturn.append(j.key());
+                toReturn += j.key();
             }
         }
     }
@@ -285,7 +285,7 @@ bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri, OptimizationMethod met
         i != functionBlocks.end();
         i++ )
     {
-        optimizationParameters.append(i.value()->getOptimizationParameters());
+        optimizationParameters += i.value()->getOptimizationParameters();
     }
     ErrorFunction erf(this, fileUri);
     if(erf.samplesSize())
@@ -313,7 +313,7 @@ bool jfuzzyqt::JFuzzyQt::optimize(const QString& fileUri, OptimizationMethod met
             }
             case InsularGenetica :
             {
-                qDebug() << "InsularGenetica method not implacated or need libraries not found";
+                qDebug() << "InsularGenetica method not implimented or need libraries not found";
 //                OptimizationInsualrGenetica optimization(this, &erf, optimizationParameters);
 //                optimization.optimize(true);
                 break;
