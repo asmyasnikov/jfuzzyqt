@@ -82,7 +82,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
     QRegExp rxUnknown("(\\w+)\\s+(\\()?\\d+");
     if(qString.contains("gauss")){
         int pos = 0;
-        double mx, dx;
+        double mx = 0., dx = 0.;
         if((pos = rxSingleValue.indexIn(qString)) != -1)
         {
             mx = rxSingleValue.cap(1).toDouble();
@@ -107,7 +107,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         Q_ASSERT(0);
     }else if(qString.contains("sigm")){
         int pos = 0;
-        double d1, d2;
+        double d1 = 0., d2 = 0.;
         if((pos = rxSingleValue.indexIn(qString)) != -1)
         {
             d1 = rxSingleValue.cap(1).toDouble();
@@ -127,7 +127,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         toReturn = true;
     }else if(qString.contains("trian")){
         int pos = 0;
-        double d1, d2, d3;
+        double d1 = 0., d2 = 0., d3 = 0.;
         if((pos = rxSingleValue.indexIn(qString)) != -1)
         {
             d1 = rxSingleValue.cap(1).toDouble();
@@ -154,7 +154,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         toReturn = true;
     }else if(qString.contains("trape")){
         int pos = 0;
-        double d1, d2, d3, d4;
+        double d1 = 0., d2 = 0., d3 = 0., d4 = 0.;
         if((pos = rxSingleValue.indexIn(qString)) != -1)
         {
             d1 = rxSingleValue.cap(1).toDouble();
@@ -188,7 +188,7 @@ bool jfuzzyqt::LinguisticTerm::loadFrom(const QString& qString)
         toReturn = true;
     }else if(qString.contains("gbell")){
         int pos = 0;
-        double d1, d2, d3;
+        double d1 = 0., d2 = 0., d3 = 0.;
         if((pos = rxSingleValue.indexIn(qString)) != -1)
         {
             d1 = rxSingleValue.cap(1).toDouble();

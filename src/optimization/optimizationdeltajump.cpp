@@ -59,7 +59,7 @@ double jfuzzyqt::OptimizationDeltaJump::jump(int parameterNumber, double error0)
 }
 void jfuzzyqt::OptimizationDeltaJump::optimize(bool verbose)
 {
-    double prevError, error0;
+    double prevError = 0., error0 = 0.;
     int countDeadEndIterations = 0;
     for( int iterNum = 0; iterNum < maxIterations; iterNum++ )
     {
