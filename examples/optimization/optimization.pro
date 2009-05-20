@@ -1,7 +1,7 @@
 LANGUAGE = C++
 QT -= gui
 CONFIG += release console
-LIBS += -L../../build/ -ljfuzzyqt -L../../../insulargenetica/build -linsulargenetica
+LIBS += -L../../build/ -ljfuzzyqt
 UI_DIR = ./src.gen/ui
 MOC_DIR = ./src.gen/moc
 OBJECTS_DIR = ./src.gen/obj

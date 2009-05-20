@@ -17,7 +17,7 @@ in file LICENSE along with this program.  If not, see
  * \class ErrorFunction
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \date 2009/04
- * \version 1.07
+ * \version 1.08
  * \brief Class OptimizationParameters provide access to values
  */
 #include "errorfunction.h"

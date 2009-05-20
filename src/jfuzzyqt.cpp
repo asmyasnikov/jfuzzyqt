@@ -42,7 +42,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 1.07
+ * \version 1.08
  */
 #include "functblock.h"
 #include "../include/jfuzzyqt.h"
@@ -162,7 +162,7 @@ void jfuzzyqt::JFuzzyQt::setVariable(const QString& varName, const double& value
     if( functionBlocks.size() > 0 )
     {
         for(QHash<QString, FunctBlock*>::iterator i = fb.isEmpty() ?
-                                                      i = functionBlocks.begin() :
+                                                      functionBlocks.begin() :
                                                       functionBlocks.find(fb);
             i != functionBlocks.end();
             i++ )
@@ -179,7 +179,7 @@ void jfuzzyqt::JFuzzyQt::evaluate(const QString& fb)
     if( functionBlocks.size() > 0 )
     {
         for(QHash<QString, FunctBlock*>::iterator i = fb.isEmpty() ?
-                                                      i = functionBlocks.begin() :
+                                                      functionBlocks.begin() :
                                                       functionBlocks.find(fb);
             i != functionBlocks.end();
             i++ )
