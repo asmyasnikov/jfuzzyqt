@@ -17,7 +17,7 @@ in file LICENSE along with this program.  If not, see
  * \class OptimizationGradient
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \date 2009/05
- * \version 0.95
+ * \version 1.07
  * \brief Class OptimizationGradient implement delta jump optimization
  */
 #ifndef OPTIMIZATION_GRADIENT_H

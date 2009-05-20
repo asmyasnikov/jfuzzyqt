@@ -17,7 +17,7 @@ in file LICENSE along with this program.  If not, see
  * \class OptimizationPartialDerivate
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \date 2009/05
- * \version 0.95
+ * \version 1.07
  * \brief Class OptimizationDeltaJump implement delta jump optimization
  */
 #ifndef OPTIMIZATION_PARTIAL_DERIVATE_H

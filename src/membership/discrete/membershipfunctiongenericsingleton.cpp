@@ -20,7 +20,7 @@ in file LICENSE along with this program.  If not, see
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
  * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
  * \date 2009/04
- * \version 0.95
+ * \version 1.07
  */
 #include "membershipfunctiongenericsingleton.h"
 #include <QDebug>
