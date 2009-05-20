@@ -26,11 +26,9 @@ int main(int argc, char**argv)
         std::cout << "Select number of fcl file [1.." << fclfiles.size() << "] : ";
         std::cin >> example;
     }
-    if(model.load("../fcl/"+fclfiles.at(example-1)))
+    if(!model.load("../fcl/"+fclfiles.at(example-1)))
     {
-        std::cout << "Error Opening " << fclfiles.at(example).toLocal8Bit().data() << std::endl;
-        // make sure the "working directory" in "Project | Settings..."
-        // is set to the executable's directory if running from the MSVC IDE
+        std::cout << "Error opening " << fclfiles.at(example-1).toLocal8Bit().data() << std::endl;
         return 0;
     }
     char*filename = new char[256];
@@ -39,7 +37,7 @@ int main(int argc, char**argv)
         filename[i] = ' ';
     }
     filename[255] = '\0';
-    std::cout << "Enter file name with samples (for example, \"../examples/optimization/tipper.dat\") : ";
+    std::cout << "Enter file name with samples (for example, \"../fcl/tipper.dat\") : ";
     std::cin >> filename;
     if(!model.optimize(QString(filename)))
     {

@@ -130,7 +130,6 @@ bool jfuzzyqt::JFuzzyQt::load(const QString& fileUri)
         toReturn = true;
     }else{
         qFatal("Unable to open the file '%s'", fileUri.toLocal8Bit().data());
-        return false;
     }
     return toReturn;
 }

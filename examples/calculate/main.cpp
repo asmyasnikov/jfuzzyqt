@@ -26,7 +26,7 @@ int main(int argc, char**argv)
         std::cout << "Select number of fcl file [1.." << fclfiles.size() << "] : ";
         std::cin >> example;
     }
-    if(model.load("../fcl/"+fclfiles.at(example-1)))
+    if(!model.load("../fcl/"+fclfiles.at(example-1)))
     {
         std::cout << "Error Opening " << fclfiles.at(example).toLocal8Bit().data() << std::endl;
         // make sure the "working directory" in "Project | Settings..."
