@@ -52,10 +52,9 @@ QString jfuzzyqt::MembershipFunctionGauss::getName() const
 }
 double jfuzzyqt::MembershipFunctionGauss::membership(double index) const
 {
-    return (1. / parameters[1]->getValue() / sqrt(2. * M_PI) *
-            exp(-(index - parameters[0]->getValue()) *
+    return exp(-(index - parameters[0]->getValue()) *
                  (index - parameters[0]->getValue()) /
-                 (2 * parameters[1]->getValue() * parameters[1]->getValue())));
+                 (2 * parameters[1]->getValue() * parameters[1]->getValue()));
 }
 bool jfuzzyqt::MembershipFunctionGauss::checkParameters(QString&errors)const
 {

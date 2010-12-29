@@ -52,10 +52,10 @@ QString jfuzzyqt::MembershipFunctionTrap::getName() const
 }
 double jfuzzyqt::MembershipFunctionTrap::membership(double index) const
 {
-    if((index <= parameters[0]->getValue()) || (index > parameters[2]->getValue()) ) return 0.;
-    else if( index >= index-parameters[1]->getValue() && index <= index-parameters[1]->getValue() ) return 1.;
+	if((index < parameters[0]->getValue()) || (index > parameters[3]->getValue()) ) return 0.;
+    else if( index >= parameters[1]->getValue() && index <= parameters[2]->getValue() ) return 1.;
     else if( index <= parameters[1]->getValue() ) return ((index - parameters[0]->getValue()) / (parameters[1]->getValue() - parameters[0]->getValue()));
-    else return 1.-((index-parameters[1]->getValue())/(parameters[2]->getValue()-parameters[1]->getValue()));
+    else return 1.-((index-parameters[2]->getValue())/(parameters[3]->getValue()-parameters[2]->getValue()));
 }
 bool jfuzzyqt::MembershipFunctionTrap::checkParameters(QString&errors)const
 {
