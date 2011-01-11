@@ -51,10 +51,10 @@ in file LICENSE along with this program.  If not, see
 #ifndef Q_DECL_EXPORT
 #   define Q_DECL_EXPORT
 #endif
-#include <Qtcore/QString.h>
-#include <Qtcore/QObject.h>
-#include <Qtcore/QHash.h>
-#include <Qtcore/QStringList.h>
+#include <QtCore/QString>
+#include <QtCore/QObject>
+#include <QtCore/QHash>
+#include <QtCore/QStringList>
 
 namespace jfuzzyqt{
 
