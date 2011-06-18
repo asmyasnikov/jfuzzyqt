@@ -73,9 +73,6 @@ private:
     ///< Rule activation (implication) method: How the 'if' activates the 'then' (e.g. MIN: minimum, PROD: product)
     RuleActivationMethod* ruleActivationMethod;
 
-    ///< All the rules
-    QLinkedList<Rule> rules;
-
     RuleConnectionMethod *AND;
     RuleConnectionMethod *OR;
 
@@ -84,6 +81,11 @@ private:
 
     ///< evaluate state
     bool evaluateState;
+
+protected:
+    ///< All the rules
+    QLinkedList<Rule> rules;
+
 };
 
 };

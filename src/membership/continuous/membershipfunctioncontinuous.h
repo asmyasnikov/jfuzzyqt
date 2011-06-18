@@ -35,6 +35,7 @@ class MembershipFunctionContinuous : public MembershipFunction
 public:
     MembershipFunctionContinuous(QObject* parent, MembershipType type);
     ~MembershipFunctionContinuous();
+    virtual void estimateUniverse() = 0;
 
 private:
 

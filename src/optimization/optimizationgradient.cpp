@@ -89,7 +89,7 @@ void jfuzzyqt::OptimizationGradient::optimize(bool verbose)
         }
     }
 }
-double jfuzzyqt::OptimizationGradient::gradient(QVector<double> &gradient, double ev0)
+double jfuzzyqt::OptimizationGradient::gradient(QVector<double> &gradient, double /*ev0*/)
 {
     double norm = 0.;
     double e0 = erf->evaluate(*model);

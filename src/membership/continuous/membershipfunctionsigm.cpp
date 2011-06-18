@@ -50,7 +50,7 @@ double jfuzzyqt::MembershipFunctionSigm::membership(double index) const
 {
     return 1./(1.+exp(-parameters[0]->getValue()*(index-parameters[1]->getValue())));
 }
-bool jfuzzyqt::MembershipFunctionSigm::checkParameters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSigm::checkParameters(QString&/*errors*/)const
 {
     return true;
 }

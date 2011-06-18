@@ -36,6 +36,7 @@ class MembershipFunctionDiscrete : public MembershipFunction
 public:
     MembershipFunctionDiscrete(QObject* parent, MembershipType type);
     ~MembershipFunctionDiscrete();
+    virtual void estimateUniverse() = 0;
     virtual int size()const = 0;
     virtual double valueX(int index)const = 0;
 private:

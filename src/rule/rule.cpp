@@ -125,7 +125,10 @@ void  jfuzzyqt::Rule::evaluate(RuleActivationMethod* act,RuleAccumulationMethod*
     degreeOfSupport *= parameters.at(0)->getValue();
     ///< Imply rule consequents: Apply degreeOfSupport to consequent linguisticTerms
     for (int i = 0; i < consequents.size(); ++i) {
-        act->imply(consequents.at(i),accu,degreeOfSupport);
+        if (qAbs(degreeOfSupport) > 1.e-7)
+        {
+            act->imply(consequents.at(i),accu,degreeOfSupport);
+        }
     }
 }
 double jfuzzyqt::Rule::getWeight()const
@@ -136,4 +139,8 @@ void jfuzzyqt::Rule::setWeight(double weight)
 {
     Q_ASSERT((weight >= 0.) && (weight <= 1.0));
     parameters.at(0)->setValue(weight);
+}
+double jfuzzyqt::Rule::getDegreeOfSupport()
+{
+    return this->degreeOfSupport;
 }

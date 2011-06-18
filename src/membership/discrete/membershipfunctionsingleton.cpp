@@ -67,7 +67,7 @@ double jfuzzyqt::MembershipFunctionSingleton::valueX(int index)const
         return 0.;
     }
 }
-bool jfuzzyqt::MembershipFunctionSingleton::checkParameters(QString&errors)const
+bool jfuzzyqt::MembershipFunctionSingleton::checkParameters(QString&/*errors*/)const
 {
    return true;
 }

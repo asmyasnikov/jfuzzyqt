@@ -52,6 +52,7 @@ public:
     const QList<RuleTerm*> getConsequents()const ;
     QString toString() const;
     void setDegreeOfSupport(const double& degreeOfSupport);
+    double getDegreeOfSupport(void);
     void reset();
     void evaluate (RuleActivationMethod* act,RuleAccumulationMethod* accu);
     double getWeight()const;
