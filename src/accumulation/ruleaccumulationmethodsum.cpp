@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <QtGlobal>
 
 jfuzzyqt::RuleAccumulationMethodSum::RuleAccumulationMethodSum(QObject *parent)
-    : RuleAccumulationMethod(parent,"max")
+    : RuleAccumulationMethod(parent,"sum")
 {
 }
 
@@ -42,9 +42,4 @@ jfuzzyqt::RuleAccumulationMethodSum::~RuleAccumulationMethodSum()
 double jfuzzyqt::RuleAccumulationMethodSum::aggregate(double defuzzifierValue, double valueToAggregate) const
 {
     return (defuzzifierValue+valueToAggregate);
-}
-
-QString jfuzzyqt::RuleAccumulationMethodSum::toString()const
-{
-    return "accu : sum;";
 }

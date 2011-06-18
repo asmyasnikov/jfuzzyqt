@@ -56,5 +56,5 @@ void jfuzzyqt::RuleAccumulationMethod::setName(const QString &name)
 
 QString jfuzzyqt::RuleAccumulationMethod::toString()const
 {
-    return QString("accu : %1").arg(name);
+    return QString("accu : %1;").arg(name);
 }

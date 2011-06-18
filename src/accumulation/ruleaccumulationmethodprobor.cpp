@@ -25,7 +25,7 @@ in file LICENSE along with this program.  If not, see
 #include <QtGlobal>
 
 jfuzzyqt::RuleAccumulationMethodProbOr::RuleAccumulationMethodProbOr(QObject *parent)
-    : RuleAccumulationMethod(parent,"max")
+    : RuleAccumulationMethod(parent,"probor")
 {
 }
 
@@ -42,9 +42,4 @@ jfuzzyqt::RuleAccumulationMethodProbOr::~RuleAccumulationMethodProbOr()
 double jfuzzyqt::RuleAccumulationMethodProbOr::aggregate(double defuzzifierValue, double valueToAggregate) const
 {
     return defuzzifierValue+valueToAggregate-defuzzifierValue*valueToAggregate;
-}
-
-QString jfuzzyqt::RuleAccumulationMethodProbOr::toString()const
-{
-    return "accu : probor;";
 }

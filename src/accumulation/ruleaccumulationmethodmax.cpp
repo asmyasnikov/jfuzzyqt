@@ -44,8 +44,3 @@ double jfuzzyqt::RuleAccumulationMethodMax::aggregate(double defuzzifierValue, d
 {
     return qMax(defuzzifierValue,valueToAggregate);
 }
-
-QString jfuzzyqt::RuleAccumulationMethodMax::toString()const
-{
-    return "accu : max;";
-}

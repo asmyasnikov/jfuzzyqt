@@ -37,7 +37,6 @@ public:
     RuleAccumulationMethodBoundedSum(QObject *parent=NULL);
     ~RuleAccumulationMethodBoundedSum();
     double aggregate(double defuzzifierValue, double valueToAggregate) const;
-    QString toString()const;
 private:
 
 };
