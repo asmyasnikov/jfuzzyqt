@@ -45,7 +45,7 @@ public:
     QString readLine(QTextStream &in);
     void loadFunctBlock(QTextStream &in,FunctBlock& funcBlock);
 
-private:
+protected:
     void loadVarInput(QTextStream& in, FunctBlock& funcBlock);
     void loadVarOutput(QTextStream& in, FunctBlock& funcBlock);
     void loadDefuzzify(QTextStream& in, FunctBlock& funcBlock, const QString& varName);
