@@ -1,6 +1,10 @@
 You need Qt library 4.* version installed in your system
 
-1) qmake
+1a) To build dynamic library jfuzzyqt, you need:
+   qmake
+
+1b) To build dynamic library jfuzzyqt, you need:
+   qmake "CONFIG+=staticlib"
 
 2) make
 
