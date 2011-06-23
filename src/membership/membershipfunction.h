@@ -30,7 +30,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class MembershipFunction : public OptimizationParameters
+class Q_DECL_EXPORT MembershipFunction : public OptimizationParameters
 {
     Q_OBJECT
 

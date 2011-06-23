@@ -33,7 +33,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class FCLParser : public QObject
+class Q_DECL_EXPORT FCLParser : public QObject
 {
     Q_OBJECT
 

@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class DefuzzifierContinuous : public Defuzzifier
+class Q_DECL_EXPORT DefuzzifierContinuous : public Defuzzifier
 {
     Q_OBJECT
 

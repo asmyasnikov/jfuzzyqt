@@ -30,7 +30,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class Defuzzifier : public QObject
+class Q_DECL_EXPORT Defuzzifier : public QObject
 {
     Q_OBJECT
 
