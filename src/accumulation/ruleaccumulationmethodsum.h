@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class RuleAccumulationMethodSum : public RuleAccumulationMethod
+class J_FUZZY_QT_EXPORT RuleAccumulationMethodSum : public RuleAccumulationMethod
 {
     Q_OBJECT
 

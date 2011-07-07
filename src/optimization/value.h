@@ -27,12 +27,13 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QString>
+#include "common.h"
 
 namespace jfuzzyqt{
 
 class Variable;
 
-class Value : public QObject
+class J_FUZZY_QT_EXPORT Value : public QObject
 {
     Q_OBJECT
 public:

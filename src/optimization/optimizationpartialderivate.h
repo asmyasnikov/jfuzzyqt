@@ -30,7 +30,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class OptimizationPartialDerivate : public QObject
+class J_FUZZY_QT_EXPORT OptimizationPartialDerivate : public QObject
 {
     Q_OBJECT
 

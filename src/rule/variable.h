@@ -38,7 +38,7 @@ class Defuzzifier;
 class LinguisticTerm;
 class MembershipFunction;
 
-class Variable : public QObject
+class J_FUZZY_QT_EXPORT Variable : public QObject
 {
     Q_OBJECT
 

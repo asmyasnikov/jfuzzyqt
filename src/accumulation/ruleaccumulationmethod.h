@@ -39,10 +39,11 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QString>
+#include "common.h"
 
 namespace jfuzzyqt{
 
-class RuleAccumulationMethod : public QObject
+class J_FUZZY_QT_EXPORT RuleAccumulationMethod : public QObject
 {
     Q_OBJECT
 

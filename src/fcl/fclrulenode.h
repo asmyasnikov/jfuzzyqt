@@ -38,7 +38,7 @@ namespace jfuzzyqt{
 
 class FCLRuleTree;
 
-class FCLRuleNode : public QObject
+class J_FUZZY_QT_EXPORT FCLRuleNode : public QObject
 {
     Q_OBJECT
 

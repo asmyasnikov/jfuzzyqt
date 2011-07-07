@@ -27,10 +27,11 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QVariant>
+#include "common.h"
 
 namespace jfuzzyqt{
 
-class Q_DECL_EXPORT Defuzzifier : public QObject
+class J_FUZZY_QT_EXPORT Defuzzifier : public QObject
 {
     Q_OBJECT
 

@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class MembershipFunctionGauss : public MembershipFunctionContinuous
+class J_FUZZY_QT_EXPORT MembershipFunctionGauss : public MembershipFunctionContinuous
 {
     Q_OBJECT
 

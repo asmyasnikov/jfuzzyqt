@@ -35,7 +35,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class FCLRuleTree : public QObject
+class J_FUZZY_QT_EXPORT FCLRuleTree : public QObject
 {
     Q_OBJECT
 

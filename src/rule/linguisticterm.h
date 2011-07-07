@@ -27,12 +27,13 @@ in file LICENSE along with this program.  If not, see
 
 #include <QString>
 #include <QObject>
+#include "common.h"
 
 namespace jfuzzyqt {
 
 class MembershipFunction;
 
-class LinguisticTerm : public QObject
+class J_FUZZY_QT_EXPORT LinguisticTerm : public QObject
 {
     Q_OBJECT
 

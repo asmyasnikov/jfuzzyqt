@@ -28,6 +28,7 @@ in file LICENSE along with this program.  If not, see
 
 #include <QObject>
 #include <QVariant>
+#include "common.h"
 
 namespace jfuzzyqt{
 
@@ -35,7 +36,7 @@ using namespace jfuzzyqt;
 class RuleConnectionMethod;
 class RuleTerm;
 
-class RuleExpression : public QObject
+class J_FUZZY_QT_EXPORT RuleExpression : public QObject
 {
     Q_OBJECT
 

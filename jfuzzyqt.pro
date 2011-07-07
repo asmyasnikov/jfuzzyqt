@@ -1,7 +1,7 @@
 LANGUAGE = C++
 QT -= gui
-CONFIG += plugin \
-    release
+CONFIG += plugin release
+DEFINES += J_FUZZY_QT_LIBRARY
 UI_DIR = ./src.gen/ui
 MOC_DIR = ./src.gen/moc
 OBJECTS_DIR = ./src.gen/obj
@@ -40,6 +40,7 @@ DEPENDPATH += . \
 
 # Input
 HEADERS += include/jfuzzyqt.h \
+    src/common.h \
     src/functblock.h \
     src/accumulation/ruleaccumulationmethod.h \
     src/accumulation/ruleaccumulationmethodbsum.h \

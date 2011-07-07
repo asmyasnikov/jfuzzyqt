@@ -32,7 +32,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class DefuzzifierCenterOfGravitySingletons : public DefuzzifierDiscrete
+class J_FUZZY_QT_EXPORT DefuzzifierCenterOfGravitySingletons : public DefuzzifierDiscrete
 {
     Q_OBJECT
 

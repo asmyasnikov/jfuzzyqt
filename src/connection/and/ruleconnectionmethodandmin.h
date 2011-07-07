@@ -31,7 +31,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class RuleConnectionMethodAndMin : public RuleConnectionMethod
+class J_FUZZY_QT_EXPORT RuleConnectionMethodAndMin : public RuleConnectionMethod
 {
     Q_OBJECT
 

@@ -36,7 +36,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class FunctBlock : public QObject
+class J_FUZZY_QT_EXPORT FunctBlock : public QObject
 {
 	Q_OBJECT
 

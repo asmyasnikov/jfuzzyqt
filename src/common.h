@@ -1,5 +1,5 @@
 /****************************************************************
-Copyright (C) 2009 Aleksey Myasnikov
+Copyright (C) 2009 Marco Estanqueiro, Aleksey Myasnikov
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser GPL as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -13,38 +13,21 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file defuzzifiercenterofgravity.h
- * \class DefuzzifierCenterOfGravity
+ * \file common.h
+ * \brief Common defines of JFuzzyQt.
  * \author Aleksey Myasnikov <AlekseyMyasnikov@yandex.ru>
- * \author pcingola@users.sourceforge.net from Java jFuzzyLogic project
- * \date 2009/04
+ * \date 2011/07
  * \version 1.08
- * \brief FIXME
  */
-#ifndef DEFUZZIFIERCENTEROFGRAVITY_H
-#define DEFUZZIFIERCENTEROFGRAVITY_H
+#ifndef JFUZZYQT_H_COMMON
+#define JFUZZYQT_H_COMMON
 
-#include "defuzzifiercontinuous.h"
-#include "../rule/variable.h"
-#include <QString>
-#include <QList>
-#include <QVariant>
+#include <QtCore/QtGlobal>
 
-namespace jfuzzyqt{
+#if defined(J_FUZZY_QT_LIBRARY)
+#  define J_FUZZY_QT_EXPORT Q_DECL_EXPORT
+#else
+#  define J_FUZZY_QT_EXPORT Q_DECL_IMPORT
+#endif
 
-class J_FUZZY_QT_EXPORT DefuzzifierCenterOfGravity : public DefuzzifierContinuous
-{
-    Q_OBJECT
-
-public:
-    DefuzzifierCenterOfGravity();
-    ~DefuzzifierCenterOfGravity();
-    QVariant defuzzify()const;
-    QString getName()const;
-private:
-
-};
-
-};
-
-#endif // DEFUZZIFIERCENTEROFGRAVITYSINGLETONS_H
+#endif // JFUZZYQT_H_COMMON

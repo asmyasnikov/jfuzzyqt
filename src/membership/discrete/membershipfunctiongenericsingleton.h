@@ -29,7 +29,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class MembershipFunctionGenericSingleton : public MembershipFunctionDiscrete
+class J_FUZZY_QT_EXPORT MembershipFunctionGenericSingleton : public MembershipFunctionDiscrete
 {
     Q_OBJECT
 

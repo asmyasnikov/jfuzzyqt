@@ -36,7 +36,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class Rule : public OptimizationParameters
+class J_FUZZY_QT_EXPORT Rule : public OptimizationParameters
 {
     Q_OBJECT
 

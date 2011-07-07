@@ -32,7 +32,7 @@ in file LICENSE along with this program.  If not, see
 
 namespace jfuzzyqt{
 
-class RuleTerm : public QObject
+class J_FUZZY_QT_EXPORT RuleTerm : public QObject
 {
     Q_OBJECT
 

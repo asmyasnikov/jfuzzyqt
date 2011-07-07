@@ -13,7 +13,7 @@ in file LICENSE along with this program.  If not, see
 <http://www.gnu.org/licenses/>
 ****************************************************************/
 /*!
- * \file jfuzzyqt.cpp
+ * \file jfuzzyqt.h
  * \class JFuzzyQt
  * \brief Class JFuzzyQt is main class of fuzzy model.
  *
@@ -47,20 +47,17 @@ in file LICENSE along with this program.  If not, see
 #ifndef JFUZZYQT_H
 #define JFUZZYQT_H
 
-#include <Qt/qglobal.h>
-#ifndef Q_DECL_EXPORT
-#   define Q_DECL_EXPORT
-#endif
 #include <QtCore/QString>
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtCore/QStringList>
+#include "common.h"
 
 namespace jfuzzyqt{
 
 class FunctBlock;
 
-class Q_DECL_EXPORT JFuzzyQt : public QObject
+class J_FUZZY_QT_EXPORT JFuzzyQt : public QObject
 {
     Q_OBJECT
 
